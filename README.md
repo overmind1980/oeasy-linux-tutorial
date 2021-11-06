@@ -1,35 +1,57 @@
-# oeasylinux
-#### 介绍
-linux教程
-
-软件架构说明
-
-
-#### 安装教程
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 使用说明
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 参与贡献
-
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
-
-
-#### 特技
-
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+- [Github地址] (https://github.com/overmind1980/oeasylinux
+- [Gitee地址] (https://gitee.com/overmind1980/oeasylinux)
+- [蓝桥实验楼 邀请码:MPQYCAUU] (https://www.lanqiao.cn/courses/2712)
+- 从零开始
+    - 最初探索
+        - [什么是内核%20uname](./md/10-45529-000101%20什么是内核%20uname.sy.md)
+        - [什么是发行版%20distro](./md/20-45530-000102%20什么是发行版%20distro.sy.md)
+        - [我在哪%20pwd](./md/30-45531-000103%20我在哪%20pwd.sy.md)
+        - [灵魂之问%20whatis](./md/40-45532-000104%20灵魂之问%20whatis.sy.md)
+        - [详查手册%20man](./md/50-45533-000105%20详查手册%20man.sy.md)
+        - [这儿都有啥%20ls](./md/60-45534-000106%20这儿都有啥%20ls.sy.md)
+        - [那啥在哪%20whereis](./md/70-45535-000107%20那啥在哪%20whereis.sy.md)
+        - [到底哪个%20which](./md/80-45536-000108%20到底哪个%20which.sy.md)
+        - [清屏%20clear](./md/90-45537-000109%20清屏 clear.sy.md)
+        - [命令行总结%20summary](./md/100-48362-000110%20命令行总结%20summary.sy.md)
+        - [持续输出%20yes](./md/110-45538-000201%20持续输出%20yes.sy.md)
+    - 终端应用
+        - [软件包管理%20apt](./md/120-45541-000202%20软件包管理%20apt.sy.md)
+        - [标志%20linuxlogo](./md/130-45542-000203%20标志 linuxlogo.sy.md)
+        - [字符画%20figlet](./md/140-45568-000204%20字符画 figlet.sy.md)
+        - [风格文字%20toilet](./md/150-45569-000205%20风格文字%20toilet.sy.md)
+        - [蒸汽机车%20sl](./md/160-45571-000206%20蒸汽机车%20sl.sy.md)
+        - [黑客帝国%20cmatrix](./md/170-45574-000207%20黑客帝国%20cmatrix.sy.md)
+        - [满屏乱码%20bb](./md/180-45572-000208%20满屏乱码%20bb.sy.md)
+        - [装酷屏幕%20hollywood](./md/190-45570-000209%20装酷屏幕%20hollywood.sy.md)
+        - [应用管理%20aptitude](./md/200-45581-000210%20应用管理%20aptitude.sy.md)
+        - [牛说%20cowsay](./md/210-45575-000211%20牛说 cowsay.sy.md)
+        - [管道%20pipe](./md/220-45578-000212%20管道 pipe.sy.md)
+        - [中文输入%20fcitx](./md/230-45576-000213%20中文输入%20fcitx.sy.md)
+        - [字符图%20asciiview](./md/240-48588-000214%20字符图 asciiview.sy.md)
+        - [随机笑话%20fortune](./md/250-48590-000215%20随机笑话%20fortune.sy.md)
+        - [中文诗词%20fortune-zh](./md/260-45580-000216%20中文诗词%20fortune-zh.sy.md)
+    - 图形界面
+        - [桌面宠物%20pet](./md/270-45583-000301%20桌面宠物%20pet.sy.md)
+        - [火狐%20firefox](./md/280-45586-000302%20火狐 firefox.sy.md)
+        - [文件管理器%20nautilus](./md/290-45587-000303%20文件管理器%20nautilus.sy.md)
+        - [动态读写数据库%20tomcat + postgresql](./md/300-200308-000220%20动态读写数据库%20tomcat + postgresql.sy.md)
+        - [用户界面%20xfce](./md/300-45579-000304%20用户界面%20xfce.sy.md)
+        - [总结%20Summary](./md/310-45566-000305%20总结 Summary.sy.md)
+- 用户和用户组
+    - 文件和文件夹基本操作
+    - 用户
+    - 用户组
+    - ssh远程登录
+        - [远程登录%20ssh](./md/370-210191-000223%20远程登录%20ssh.sy.md)
+        - [Oh-My-Zsh](./md/380-250350-000223%20Oh-My-Zsh.sy.md)
+        - [远程拷贝%20scp](./md/360-210190-000222%20远程拷贝%20scp.sy.md)
+        - [远程拷贝%20scp](./md/360-210190-000222%20远程拷贝%20scp.sy.md)
+- 数据库服务器
+    - postgresql
+        - [数据库%20postgres](./md/330-199464-000218%20数据库 postgres.sy.md)
+- web服务器
+    - 静态
+        - [静态网站服务器%20nginx](./md/320-192426-000217%20静态网站服务器%20nginx.sy.md)
+    - 动态
+        - [动态服务器%20tomcat](./md/340-199465-000219%20动态服务器%20tomcat.sy.md)
+        - [分屏工具%20tmux](./md/350-209842-000221%20分屏工具%20tmux.sy.md)
