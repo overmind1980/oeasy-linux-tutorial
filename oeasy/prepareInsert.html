@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta http-equiv="content-Type" content="text/html;charset=utf-8"/>
+		<title>Login</title>
+		<style>
+form > span{
+	width: 120px;
+	display: inline-block;
+}
+		</style>
+	</head>
+	<body>
+		<h1>login</h1>
+		<form id="LoginForm" onsubmit="return doSubmit()" action="./insert" method="post">
+			<span>username</span><input id="username" name="username" type="text" />
+			<br/>
+			<span>password</span><input id="password" name="password" type="text" />
+			<br/>
+			<span>password2</span><input id="password" name="password" type="text" />
+			<br/>
+			<input type="submit" value="submit" >
+			<input type="reset" value="reset" >
+		</form>
+			<span id="errormsg" style="color:red;"></span>
+	</body>
+	<script>
+		function doSubmit(){
+			var username = document.getElementById("username");
+			var password = document.getElementById("password");
+			var password2 = document.getElementById("password2");
+			var re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^]{8,16}$/;
+			var errormsg = document.getElementById("errormsg");
+			var result=  re.test(password.value);
+			if(username.value.length>10){
+				errormsg.innerHTML = "username:"+username.value.length+"more than 10!";
+				return false;
+			}
+			else if(!result){
+				errormsg.innerHTML = "password must contain upper,lower and number,size in [8,16]";
+				return false;
+			}
+			else{
+				var form = document.getElementById("LoginForm");
+				form.submit();
+			}
+		}
+	</script>
+</html>
+
