@@ -1,4 +1,4 @@
-- [Github地址](https://github.com/overmind1980/oeasylinux)
+- [Github地址 ](https://github.com/overmind1980/oeasylinux)
 - [Gitee地址](https://gitee.com/overmind1980/oeasylinux)
 - [蓝桥实验楼](https://www.lanqiao.cn/courses/2712)
 - 从零开始
