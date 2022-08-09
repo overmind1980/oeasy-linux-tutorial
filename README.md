@@ -1,3 +1,6 @@
+# oeasy教您玩转linux教程，是系统讲解debian系的ubuntu系统的一套教程。从命令行零基础 入门。逐个介绍LINUX查看系统版本、常用命令、基础知识、涵盖多种命令与原理。带您玩转linux的世界。😄
+
+
 - [Github地址](https://github.com/overmind1980/oeasylinux)
 - [Gitee地址](https://gitee.com/overmind1980/oeasylinux)
 - [蓝桥实验楼](https://www.lanqiao.cn/courses/2712)
