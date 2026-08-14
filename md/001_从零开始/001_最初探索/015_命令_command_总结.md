@@ -1,0 +1,86 @@
+---
+show: step
+version: 1.0
+enable_checker: true
+---
+
+# 本章回顾
+
+## 我们来回顾一下 😌
+
+- 我们都讲了什么？🤔
+	- Linux 的历史 ⌨️
+	- 各种发行版的生生灭灭
+	- 系统运作的过程 🖥
+	- 程序运行的过程
+	- 各种命令 ⌨️
+	- 都有什么命令呢
+
+### 命令 Command🧐
+
+- 命令分两种
+- 一种是在硬盘上的
+	- 可以用apt 找到源码和帮助 
+	- 比如
+		- uname
+		- ls
+		- cat
+		- pwd
+		- 灵魂三问
+		  - whatis
+		  - whereis
+		  - which
+		- man
+		- clear
+
+- 另一种是在系统内置(builtin)的
+	- 可以在shell的源代码中找到实现过程
+	- 比如
+		- cd
+		- pwd
+‘
+- 还有一个比较特殊
+	- 特别有权限的`sudo` 
+
+- 命令行还有什么技巧？ 💡
+
+### 命令行快捷方式 💡
+
+- 记忆命令
+  - <kbd>⬆️</kbd> 上一条命令
+  - <kbd>⬇️️</kbd> 下一条命令
+  - <kbd>ctrl</kbd>+<kbd>r</kbd> 搜索历史命令
+- 快速移动
+  - <kbd>⬅️</kbd> 向左一格
+  - <kbd>➡️️</kbd> 向右一格
+  - <kbd>ctrl</kbd>+<kbd>⬅️</kbd> 向左一个单词
+  - <kbd>ctrl</kbd>+<kbd>➡</kbd> 向右一个单词
+  - <kbd>ctrl</kbd>+<kbd>a</kbd> 直接到头ahead
+  - <kbd>ctrl</kbd>+<kbd>e</kbd> 直接到尾end
+- 快捷键清屏
+  - <kbd>ctrl</kbd>+<kbd>l</kbd>清屏
+- 快速删除
+  - <kbd>ctrl</kbd>+<kbd>c</kbd> 忽略当前行
+  - <kbd>ctrl</kbd>+<kbd>u</kbd> 从光标位置开始，删除左方所有的字符，直到该行开始的位置
+  - <kbd>ctrl</kbd>+<kbd>k</kbd> 从光标位置开始，删除右方所有的字符，直到该行结束的位置
+- 登出系统
+  - <kbd>ctrl</kbd>+<kbd>d</kbd> 快快退出终端  
+  - <kbd>ctrl</kbd>+<kbd>w</kbd> 向前删除到词头
+  - 急急如律令
+  - 可以打印到一个鼠标垫上
+
+### 总结
+
+- 这就是我们最开始接触到的 
+	- Linux
+
+![图片描述](https://doc.shiyanlou.com/courses/uid1190679-20220901-1661996457116)
+
+- 严格的说
+	- 应该是基于linux内核的
+	- gnu的shell环境和各种命令
+- 很有趣
+- 准备进入更好玩的游乐场吧！！
+- 🎡
+
+![图片描述](https://doc.shiyanlou.com/courses/uid1190679-20220901-1661996596490)
