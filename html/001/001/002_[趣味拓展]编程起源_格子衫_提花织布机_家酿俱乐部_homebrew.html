@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：顺序执行，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解趣味拓展 编程起源 格子衫 提花织布机 家酿俱乐部 homebrew。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 趣味拓展, 编程起源, 格子衫, 提花织布机, 家酿俱乐部, 顺序执行">
+    <meta property="og:title" content="oeasy Linux系统教程：顺序执行，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解趣味拓展 编程起源 格子衫 提花织布机 家酿俱乐部 homebrew。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="_1">顺序执行 🥊</h1>
+<h2 id="_2">回忆上次内容</h2>
+<ul>
+<li>上次用 <code>uname -a</code> 查看了<ul>
+<li>内核版本</li>
+<li>cpu指令集</li>
+<li>发行版</li>
+</ul>
+</li>
+<li>这就是我们linux的初体验</li>
+</ul>
+<p><img alt="" src="images/tux.gif" /></p>
+<ul>
+<li>我们了解了linux内核</li>
+<li>但是linux究竟是如何从个人软件玩具</li>
+<li>发展成世界知名的操作系统内核的呢？？🤔</li>
+</ul>
+<h3 id="_3">行业起源</h3>
+<ul>
+<li>电子计算机 技术<ul>
+<li>起源于 织布机</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240211-1707616460446.png" /></p>
+<ul>
+<li>编程 来源于 编织<ul>
+<li>这挨着吗？😮‍💨</li>
+</ul>
+</li>
+</ul>
+<h3 id="_4">纯手工</h3>
+<ul>
+<li>我们先看一下 时代背景<ul>
+<li>原来 纺线 和 织布 </li>
+<li>都是 纯手工活儿</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20231021-1697851229939.png" /></p>
+<ul>
+<li>纺纱 用的是 纺锤</li>
+<li>织布 用的是 腰机</li>
+</ul>
+<h3 id="_5">工业化</h3>
+<ul>
+<li>珍妮 纺纱机<ul>
+<li>将 效率提高八倍 以上</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240310-1710069435378.png" /></p>
+<ul>
+<li>用机械化 <code>代替</code>了 纯手工<ul>
+<li>羊毛 不够用</li>
+</ul>
+</li>
+</ul>
+<h3 id="_6">工业化开始</h3>
+<ul>
+<li>毛纺织利润率 高于 小麦种植<ul>
+<li>领主 转型 企业家</li>
+<li>地 不租给 农奴 了</li>
+<li>改 养羊</li>
+</ul>
+</li>
+<li>羊 就这样 吃了人<ul>
+<li>圈地运动</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240211-1707616481609.png" /></p>
+<ul>
+<li>圈出的地 多了<ul>
+<li>羊 多了</li>
+<li>羊毛 多了</li>
+</ul>
+</li>
+<li>无产者 <code>也</code>多了<ul>
+<li>涌入 新出现的城市</li>
+<li>成为 纺织业和大航海的 基础</li>
+</ul>
+</li>
+</ul>
+<h3 id="_7">纺织之都</h3>
+<ul>
+<li>纱锭 过剩<ul>
+<li>织布 迅速 产业化</li>
+<li>毛纺基地 在<code>哪儿</code>呢？</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240322-1711112313506.png" /></p>
+<ul>
+<li>曼彻斯特<ul>
+<li>三河交汇河 </li>
+<li>可接入 利物浦来的 深海船舶</li>
+</ul>
+</li>
+</ul>
+<h3 id="_8">水力织布</h3>
+<ul>
+<li>水力丰富<ul>
+<li>由 人的肌肉力 改为 水力</li>
+<li>再从 水力 改到 蒸汽机</li>
+<li>引领 工业化  </li>
+<li>机械化 大生产</li>
+<li>成为 纺织之都</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240420-1713610109207.png" /></p>
+<ul>
+<li>纺织品 多了 <ul>
+<li>就 对外倾销</li>
+</ul>
+</li>
+</ul>
+<h3 id="_9">进一步工业化</h3>
+<ul>
+<li>工业化纺织品 配合 坚船利炮 和 鸦片贸易<ul>
+<li>向 印度 殖民</li>
+<li>再 低价获取 印度棉花</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240208-1707393542524.png" /></p>
+<ul>
+<li>棉花 替代 羊毛<ul>
+<li>棉纺 代替 毛纺</li>
+<li>工业化 再加速</li>
+<li>棉纺品 迅速 占领市场</li>
+<li>控制 经济</li>
+</ul>
+</li>
+<li>强迫 其他文明<ul>
+<li>放弃 男耕女织 </li>
+<li>接受 <code>工业标准</code> </li>
+<li>卷入 工业化、职业化</li>
+</ul>
+</li>
+<li>这也埋下了 <ul>
+<li>衰败的种子</li>
+</ul>
+</li>
+</ul>
+<h3 id="_10">早期编程</h3>
+<ul>
+<li>织布机<ul>
+<li>从 纯色 布</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240420-1713610674389.png" /></p>
+<ul>
+<li>过渡到 贾卡 提花织布机<ul>
+<li>通过 卡片</li>
+<li>生成 花纹</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240211-1707616507033.png" /></p>
+<ul>
+<li>卡片如何设置花纹呢？</li>
+</ul>
+<h3 id="_11">花纹</h3>
+<ul>
+<li>贾卡 提花织布机 <ul>
+<li>将 织物的图案 </li>
+<li>提前 编到 打孔卡片 上</li>
+</ul>
+</li>
+<li>有孔 就保持经线不动 </li>
+<li>无孔 就提起经线</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240420-1713610717403.gif" /></p>
+<ul>
+<li>这也 暗合 了 Program 这个单词<ul>
+<li>pro - 提前</li>
+<li>gram - 画好</li>
+</ul>
+</li>
+<li>用 打孔卡片 <ul>
+<li><code>提前画好</code> 花纹图案</li>
+<li>启发了 IBM</li>
+</ul>
+</li>
+</ul>
+<h3 id="_12">信息领域</h3>
+<ul>
+<li>IBM 人口统计<ul>
+<li>放弃了 纸笔填表</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240211-1707616540901.png" /></p>
+<ul>
+<li>使用打孔 卡片<ul>
+<li>将 人的姓名、籍贯、性别等信息</li>
+<li>编码为二进制 </li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240420-1713611640801.png" /></p>
+<h3 id="_13">记录在卡</h3>
+<ul>
+<li>进行记录 在卡上<ul>
+<li>统计起来就快多了</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240211-1707616554108.png" /></p>
+<ul>
+<li>有孔 代表 选择</li>
+<li>无孔 代表 不选择</li>
+</ul>
+<h3 id="_14">编程</h3>
+<ul>
+<li>后来 IBM<ul>
+<li>在打孔卡片上</li>
+<li>将需要执行的 机器指令 提前编好</li>
+<li>后续 批处理 执行</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240211-1707616582900.png" /></p>
+<ul>
+<li>程序 <ul>
+<li>有 物理实体</li>
+<li>可以执行</li>
+</ul>
+</li>
+<li>Program<ul>
+<li>pro 前面 、预先</li>
+<li>gram 刻画</li>
+<li>预先刻画</li>
+<li>提前编制</li>
+</ul>
+</li>
+<li>带动了 <ul>
+<li>产生了 IT(信息技术)产业</li>
+<li>诞生了 以编程为 职业的人</li>
+<li><code>程序员</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="_15">程序</h3>
+<ul>
+<li><code>程序员</code><ul>
+<li>programmer</li>
+<li>编写的程序</li>
+<li>源自 卡片</li>
+<li>卡片源自 织布机 </li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240211-1707616604508.png" /></p>
+<ul>
+<li>程序员 <ul>
+<li>职业诞生之时</li>
+<li>就与 格子衬衫 结下不解之缘</li>
+</ul>
+</li>
+</ul>
+<h3 id="_16">进化</h3>
+<ul>
+<li>存储设备<ul>
+<li>从 打孔卡片 </li>
+<li>变成了 磁带</li>
+</ul>
+</li>
+<li>使用 高级语言 写 源程序<ul>
+<li>再用 <code>编</code>译器(compiler)</li>
+<li>将 源代码 </li>
+<li><code>编</code>译成 机器语言</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240211-1707616634520.png" /></p>
+<ul>
+<li>IBM<ul>
+<li>销售的 是 硬件</li>
+<li>软件和源代码 附送</li>
+</ul>
+</li>
+<li>整个IT产业<ul>
+<li>起源于此</li>
+</ul>
+</li>
+</ul>
+<h3 id="_17">家酿俱乐部起源</h3>
+<ul>
+<li>1973年<ul>
+<li>Intel微处理器 持续进化</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240211-1707616666362.png" /></p>
+<ul>
+<li>爱好者 可以 <code>DIY</code><ul>
+<li>个人 计算机</li>
+<li>Personal Computer</li>
+</ul>
+</li>
+</ul>
+<h3 id="_18">家酿</h3>
+<ul>
+<li>计算机的 爱好者们 <ul>
+<li>自己 组织了起来</li>
+<li>成立了 家酿俱乐部</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240211-1707616694799.png" /></p>
+<ul>
+<li>家酿 HomeBrew 就是<ul>
+<li>自家酿 的酒</li>
+</ul>
+</li>
+</ul>
+<h3 id="_19">家酿计算机 俱乐部</h3>
+<ul>
+<li>家酿俱乐部 成员<ul>
+<li>有相同的 <code>业余爱好</code> </li>
+<li>制作、分享 软件 </li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20230107-1673065728012.jpg" /></p>
+<ul>
+<li>第一次 聚会<ul>
+<li>地点 在湾区</li>
+<li>乌托邦的 感觉</li>
+<li>各自分享 自己编写的软件</li>
+</ul>
+</li>
+<li>带走拷贝的 人<ul>
+<li>需要 下次带来 两个拷贝</li>
+<li>以便 更多的人 进行拷贝</li>
+</ul>
+</li>
+<li>这种分享文化从哪里来呢？</li>
+</ul>
+<h3 id="_20">历史背景</h3>
+<ul>
+<li>1970s <ul>
+<li>嬉皮士 运动 </li>
+<li>刚 过去不久</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240211-1707616714134.png" /></p>
+<ul>
+<li>反对 建制 <ul>
+<li>渴望 回归自然</li>
+</ul>
+</li>
+<li>最能够代表 其精神内核的<ul>
+<li>就是 杂志<code>《全球概览》</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="_21">全球概览</h3>
+<ul>
+<li>《全球概览》<ul>
+<li>践行 <code>DIY</code>精神</li>
+<li>建立 公社</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240211-1707616962065.png" /></p>
+<ul>
+<li>结尾语<ul>
+<li>影响了很多人</li>
+</ul>
+</li>
+</ul>
+<h3 id="_22">摇篮</h3>
+<ul>
+<li>结尾语 <ul>
+<li>通过 乔布斯 再次传播开来</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240211-1707617011640.png" /></p>
+<ul>
+<li>家酿 属于 <ul>
+<li>计算机方面的公社</li>
+<li>乔布斯 也在里面 学习</li>
+</ul>
+</li>
+</ul>
+<h3 id="_23">发现商业价值</h3>
+<ul>
+<li>很多人 受到感召 <ul>
+<li>来到家酿</li>
+<li>学习 分享</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240411-1712813722211.png" /></p>
+<ul>
+<li>这些人 <ul>
+<li>后来引领了it产业</li>
+</ul>
+</li>
+</ul>
+<h3 id="_24">企业家</h3>
+<ul>
+<li>虽然很多人把开发软件作为乐趣<ul>
+<li>但是从来没有人把写软件 </li>
+<li>专门做成一门生意</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240211-1707616996710.png" /></p>
+<ul>
+<li>有个叫 比尔盖茨<ul>
+<li>不但 在家酿俱乐部 学习编程</li>
+<li>更感知到了 软件的<code>商业</code>价值</li>
+</ul>
+</li>
+</ul>
+<h3 id="entrepreneur">Entrepreneur</h3>
+<ul>
+<li>Entrepreneur<ul>
+<li>[ˌɑːntrəprəˈnɜːr]</li>
+<li>企业家</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240411-1712813989519.png" /></p>
+<ul>
+<li>单词来自于法语<ul>
+<li>entre 在……之间</li>
+<li>Prendre 意为“拿、抓、接受”</li>
+<li>entrepreneur 在机会和风险之间抓住机会的人</li>
+</ul>
+</li>
+</ul>
+<h3 id="_25">大潮</h3>
+<ul>
+<li>比尔·盖茨<ul>
+<li>辍学 编写软件 </li>
+<li>发现 软件 可以直接卖钱</li>
+<li>成立了 微软公司</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240211-1707617027087.png" /></p>
+<ul>
+<li>他希望 将开发软件这个业余爱好<ul>
+<li><code>产业化</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="_26">产业化</h3>
+<ul>
+<li>农业 手工业 时代<ul>
+<li>产品 都是 独一无二的</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240211-1707617045812.png" /></p>
+<ul>
+<li>每一个 沙包、毽子、足球<ul>
+<li>都是 独一无二的</li>
+<li>玩着就做出来了</li>
+</ul>
+</li>
+<li>没有 职业足球制作者<ul>
+<li>更没有 职业足球工厂</li>
+</ul>
+</li>
+</ul>
+<h3 id="_27">运动起源</h3>
+<ul>
+<li>就像 职业足球联盟<ul>
+<li>最初 没有 职业球员</li>
+<li>踢球 完全是 业余爱好</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240310-1710074060560.png" /></p>
+<ul>
+<li>产业化后<ul>
+<li>可以 形成 商业俱乐部联盟</li>
+<li>吸引注意力 </li>
+<li>再尝试 引导消费</li>
+</ul>
+</li>
+<li>建立联赛 <ul>
+<li>先卖门票</li>
+<li>再卖广告</li>
+</ul>
+</li>
+<li>足球 成为 产业<ul>
+<li>球员 成为 职业</li>
+</ul>
+</li>
+</ul>
+<h3 id="_28">童子功</h3>
+<ul>
+<li>职业球员 <ul>
+<li>要从小 就开始职业化<ul>
+<li>练童子功</li>
+</ul>
+</li>
+<li>不但是 科班出身</li>
+<li>最好还得是 门里世家</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20250426-1745627936095.png" /></p>
+<ul>
+<li>要是 票友入的行<ul>
+<li>一般被嘲笑 为 外行、门外汉</li>
+</ul>
+</li>
+<li>本来 就是一踢球玩的游戏<ul>
+<li>越来越 讲究 规矩 </li>
+<li>按照阵型 踢某个位置</li>
+<li>做出标准动作</li>
+</ul>
+</li>
+</ul>
+<h3 id="_29">新时代</h3>
+<ul>
+<li>工业时代 讲究<ul>
+<li>提高效率、精度、利润</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20231116-1700142648456.png" /></p>
+<ul>
+<li>注重标准化、职业化</li>
+</ul>
+<h3 id="_30">三分手</h3>
+<ul>
+<li>职业球员 三分手<ul>
+<li>手感 高度依赖于 标准篮球、篮筐高度</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240320-1710904026034.png" /></p>
+<ul>
+<li>工业标准 <ul>
+<li>也是 一环扣一环 </li>
+<li>在高精度材料 的基础上 </li>
+<li>完成 更高精度的 产品</li>
+</ul>
+</li>
+</ul>
+<h3 id="_31">雇佣</h3>
+<ul>
+<li>
+<p>比尔·盖茨 </p>
+<ul>
+<li>发现了 软件的商业价值</li>
+<li>想做 软件领域 的企业家</li>
+</ul>
+</li>
+<li>
+<p>雇佣人 写程序</p>
+<ul>
+<li>把 爱好和乐趣 </li>
+<li>变成了雇佣关系</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240310-1710074435914.png" /></p>
+<ul>
+<li>软件<ul>
+<li>从 个人爱好 DIY产品</li>
+<li>逐渐 发展成 产业</li>
+</ul>
+</li>
+</ul>
+<h3 id="_32">异军突起</h3>
+<ul>
+<li>在传统的计算机路径之外</li>
+<li>出现了基于intel和dos的个人计算机(pc)</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220928-1664367143346.png" /></p>
+<ul>
+<li>这一脉人数众多</li>
+<li>但是没有自己diy的传统</li>
+<li>电脑是买来就能用的</li>
+<li>最多装一下系统</li>
+<li>没有自己折腾软件的文化</li>
+</ul>
+<h3 id="_33">更进一步</h3>
+<ul>
+<li>比尔·盖茨<ul>
+<li>想要更进一步</li>
+<li>杜绝 已经存在的 软件分享习惯</li>
+<li>把 软件的源代码 控制在自己手里</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240324-1711246466420.png" /></p>
+<ul>
+<li>这样 就可以提高软件的商业价值<ul>
+<li>挣更多的钱！</li>
+</ul>
+</li>
+</ul>
+<h3 id="_34">公开信</h3>
+<ul>
+<li>在 家酿俱乐部<ul>
+<li>比尔盖茨 给计算机爱好者 </li>
+<li>写了封 <code>公开信</code></li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240211-1707617106211.png" /></p>
+<ul>
+<li>
+<p>别 以写软件为乐 了 </p>
+<ul>
+<li>也不挣钱 图啥呢？</li>
+</ul>
+</li>
+<li>
+<p>并将 拷贝软件的 行为</p>
+<ul>
+<li>称作小偷</li>
+<li>还要起诉 </li>
+<li>自由分享的行为 </li>
+</ul>
+</li>
+</ul>
+<h2 id="_35">总结</h2>
+<ul>
+<li>软件行业 也和 各行各业一样<ul>
+<li>从 个人兴趣爱好</li>
+<li>发展为 产业</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240211-1707617118443.png" /></p>
+<ul>
+<li>比尔盖茨 将 公开信 <ul>
+<li>发到 家酿俱乐部</li>
+<li>冒 天下之大不韪 </li>
+<li>起诉 自由分享的行为 </li>
+<li>会有 <code>什么</code>结果 呢？</li>
+</ul>
+</li>
+<li>家酿的黑客群体<ul>
+<li>会 <code>如何</code> 反击呢？🤔</li>
+</ul>
+</li>
+<li>我们下次再说！👋  </li>
+</ul>
+    </div>
+</body>
+</html>

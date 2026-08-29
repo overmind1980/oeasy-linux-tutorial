@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：修改文件权限chmod，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解临时拥有文件所有组身份 sgid。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖|  mode   | 说明  | |  ----  | ----  | | S_IRWXU  | 用户所有者读、写、执行 | | S_IRUSR  | 用户所有者读 | | S_I...">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 临时拥有文件所有组身份, sgid, 修改文件权限chmod">
+    <meta property="og:title" content="oeasy Linux系统教程：修改文件权限chmod，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解临时拥有文件所有组身份 sgid。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖|  mode   | 说明  | |  ----  | ----  | | S_IRWXU  | 用户所有者读、写、执行 | | S_IRUSR  | 用户所有者读 | | S_I...">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="chmod">修改文件权限(chmod)</h1>
+<h2 id="_1">回忆</h2>
+<ul>
+<li>上次研究了suid<ul>
+<li>这种权限在文件所有者的执行权限上显示为s</li>
+<li>意味着执行的时候可以使用文件所有者的权限</li>
+<li>可是为什么要设置这样一种权限呢？</li>
+</ul>
+</li>
+</ul>
+<h3 id="_2">原因</h3>
+<ul>
+<li>我们如果要修改当前用户的密码</li>
+<li>需要调用passwd命令</li>
+<li>这个命令再去修改/etc/shadow</li>
+<li>而/etc/shadow的所有者是root</li>
+<li>只有所有者有写权限</li>
+<li>这就导致了想要修改密码必须使用root账号</li>
+<li>那么一般账号就无法修改自己的密码了</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221013-1665640084754.png" /></p>
+<ul>
+<li>我们使用uid的权限</li>
+<li>就可以让当前用户在执行passwd时</li>
+<li>拥有root权限</li>
+<li>从而可以修改/etc/shadow</li>
+<li>从而完成修改密码的操作</li>
+<li>可以设置g+s权限吗？</li>
+</ul>
+<h3 id="gs">g+s</h3>
+<ul>
+<li>用oeasy登录</li>
+<li>并为oeasy宿主文件夹设置<ul>
+<li>777权限</li>
+<li>g+s权限</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221013-1665640963272.png" /></p>
+<ul>
+<li>其他用户可以在里面添加文件和文件夹吗？</li>
+<li>用o2z去试试</li>
+</ul>
+<h3 id="o2z">o2z</h3>
+<ul>
+<li>可以新建文件和文件夹</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221013-1665641119742.jpg" /></p>
+<ul>
+<li>新建文件和文件夹的所属主还是oeasy而不是o2z</li>
+<li>新建文件夹的执行组权限还是s</li>
+<li>这目录将sgid继承了</li>
+<li>而且在下面再建文件和文件夹属组也是oeasy</li>
+<li>sgid具体来说有什么用呢？</li>
+</ul>
+<h3 id="gsid">gsid</h3>
+<ul>
+<li>
+<p>先准备好</p>
+</li>
+<li>
+<p>两个用户</p>
+<ul>
+<li>oeasy</li>
+<li>o2z</li>
+</ul>
+</li>
+<li>
+<p>一个组</p>
+<ul>
+<li>ogroup
+<img alt="图片描述" src="images/uid1190679-20221013-1665642414196.png" /></li>
+</ul>
+</li>
+<li>
+<p>并把oeasy和o2z的默认远程登录组设置为ogroup</p>
+</li>
+</ul>
+<h3 id="sgid">拥有sgid的文件</h3>
+<ul>
+<li>/usr/bin下面找到wall文件<ul>
+<li>这个文件sgid为s</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221013-1665642573189.png" /></p>
+<ul>
+<li>用ssh远程登录上oeasy和o2z<ul>
+<li>这个时候</li>
+<li>oeasy发消息可以发到o2z</li>
+</ul>
+</li>
+<li>因为他是以wall的tty组的权限来发的<ul>
+<li>而不是以oeasy组的权限来发的</li>
+<li>所有tty登录的终端都会收到这些信息</li>
+</ul>
+</li>
+<li>我们来总结一下各种标志位</li>
+</ul>
+<h3 id="_3">标志位总结</h3>
+<table>
+<thead>
+<tr>
+<th>mode</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S_IRWXU</td>
+<td>用户(所有者)读、写、执行</td>
+</tr>
+<tr>
+<td>S_IRUSR</td>
+<td>用户(所有者)读</td>
+</tr>
+<tr>
+<td>S_IRWUSR</td>
+<td>用户(所有者)写</td>
+</tr>
+<tr>
+<td>S_IRXUSR</td>
+<td>用户(所有者)执行</td>
+</tr>
+<tr>
+<td>S_IRWXG</td>
+<td>用户组读、写、执行</td>
+</tr>
+<tr>
+<td>S_IRGRP</td>
+<td>用户组读</td>
+</tr>
+<tr>
+<td>S_IWGRP</td>
+<td>用户组写</td>
+</tr>
+<tr>
+<td>S_IXGRP</td>
+<td>用户组执行</td>
+</tr>
+<tr>
+<td>S_IRWXO</td>
+<td>其他读、写、执行</td>
+</tr>
+<tr>
+<td>S_IROTH</td>
+<td>其他读</td>
+</tr>
+<tr>
+<td>S_IWOTH</td>
+<td>其他写</td>
+</tr>
+<tr>
+<td>S_IXOTH</td>
+<td>其他执行</td>
+</tr>
+<tr>
+<td>S_ISUID</td>
+<td>执行时设置用户id</td>
+</tr>
+<tr>
+<td>S_ISGID</td>
+<td>执行时设置用户组id</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_4">总结 🤨</h3>
+<ul>
+<li>我们现在可以<ul>
+<li>让进程获得文件所有者的权限suid</li>
+<li>让进程获得文件所属组的权限sgid</li>
+</ul>
+</li>
+<li>文件夹的sgid具有继承性</li>
+<li>理论上其他组(o)应该也有个临时设置的特殊位</li>
+<li>这个真的有吗？🤔</li>
+<li>下次再说👋</li>
+</ul>
+    </div>
+</body>
+</html>

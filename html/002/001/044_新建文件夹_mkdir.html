@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：目录基础，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解新建文件夹 mkdir。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 新建文件夹, mkdir, 目录基础">
+    <meta property="og:title" content="oeasy Linux系统教程：目录基础，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解新建文件夹 mkdir。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="_1">目录基础</h1>
+<h2 id="_2">回忆</h2>
+<ul>
+<li>我们熟悉了基本软件包的使用<ul>
+<li>本地的dpkg</li>
+<li>远程的apt</li>
+<li>安装、卸载、搜索、查看</li>
+</ul>
+</li>
+<li>了解了 gui 和 cli 的关系</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220913-1663059624264.png" /></p>
+<ul>
+<li>体会到命令行才是根本！!!</li>
+<li>后面讲什么呢？🤔</li>
+</ul>
+<h3 id="_3">进入用户文件夹</h3>
+<div class="highlight"><pre><span></span><code>ls
+</code></pre></div>
+
+<p><img alt="图片描述" src="images/uid1190679-20220913-1663064806749.png" /></p>
+<ul>
+<li>原本三个文件夹</li>
+<li>建立起一个year文件夹</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220913-1663060834741.png" /></p>
+<ul>
+<li>现在有4个文件夹了</li>
+<li>什么是mkdir呢？</li>
+</ul>
+<h3 id="_4">灵魂三问</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220913-1663063517097.png" /></p>
+<ul>
+<li>帮助手册怎么说的呢？</li>
+</ul>
+<h3 id="_5">查询帮助手册</h3>
+<ul>
+<li>man可以查询到详细帮助</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220913-1663060917435.png" /></p>
+<ul>
+<li>建立文件夹之后呢？</li>
+</ul>
+<div class="highlight"><pre><span></span><code>春有百花秋有月
+夏有凉风冬有雪
+若无闲事挂心头
+便是人间好时节
+-       《颂平常心是道》 【宋代】慧开禅师
+</code></pre></div>
+
+<h3 id="_6">继续建立</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220913-1663060949232.png" /></p>
+<ul>
+<li>在year中建立春夏秋三个子文件夹</li>
+</ul>
+<h3 id="_7">继续建立</h3>
+<ul>
+<li>在季节文件夹下建立月份文件夹</li>
+<li>使用{1..5} <ul>
+<li>可以建立1-5总共5个文件夹</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220913-1663061804227.png" /></p>
+<ul>
+<li>想要建立冬三月</li>
+</ul>
+<h3 id="_8">连带父级一起建立</h3>
+<ul>
+<li>使用参数-p</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220913-1663061879475.png" /></p>
+<ul>
+<li>如果父级不存在</li>
+<li>就先建立父级</li>
+<li>可以用更简单的写法么？</li>
+</ul>
+<h3 id="md">md</h3>
+<ul>
+<li>md 其实就是 mkdir -p的省略写法</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220914-1663122339974.png" /></p>
+<ul>
+<li>如果已经有了文件或者文件夹叫做这个名字了呢？</li>
+</ul>
+<h3 id="_9">重复</h3>
+<ul>
+<li>如果已经有了这个名字的文件或文件夹</li>
+<li>就不能重复</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220914-1663125379956.png" /></p>
+<ul>
+<li>为什么mkdir能判断是否重复？</li>
+<li>为什么mkdir能递归地建立多层的父级呢？</li>
+<li>去看看mkdir源代码</li>
+<li>源代码在哪呢？</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220913-1663063588088.png" /></p>
+<ul>
+<li>好像和yes是一个包里面的</li>
+</ul>
+<h3 id="_10">查询包详情</h3>
+<ul>
+<li>这个是由debian做的</li>
+<li>然后ubuntu作为debian下游</li>
+<li>用的是debian</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220913-1663063711400.png" /></p>
+<ul>
+<li>这里面有很多我们的老朋友<ul>
+<li>echo</li>
+<li>ls</li>
+<li>cp</li>
+<li>pwd</li>
+</ul>
+</li>
+<li>这个包太有用了</li>
+</ul>
+<h3 id="_11">下载源文件</h3>
+<div class="highlight"><pre><span></span><code>sudo vi /etc/apt/sources.list
+sudo apt update
+sudo apt source coreutils
+</code></pre></div>
+
+<p><img alt="图片描述" src="images/uid1190679-20220913-1663064302777.png" /></p>
+<h3 id="_12">找到源文件</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220913-1663064506069.png" /></p>
+<ul>
+<li>可以找到</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220913-1663064518199.png" /></p>
+<ul>
+<li>可以看到一些细节</li>
+<li>我们去总结一下</li>
+</ul>
+<h3 id="_13">总结</h3>
+<ul>
+<li>我们这次研究了新建文件夹</li>
+<li>mkdir<ul>
+<li>make directory</li>
+<li>可以加-p自动添加子文件夹</li>
+<li>可以在建文件夹的时候是用缩略形式<ul>
+<li>{1,2,4}</li>
+<li>{1..4}</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>建了文件夹就像建了可以装文件的容器</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220913-1663063314374.png" /></p>
+<ul>
+<li>我们可以在各种文件夹之间跳跃么？🤔</li>
+<li>下次再说👋</li>
+</ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：什么是内核 uname，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解什么是内核 uname。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖|中文|英文| |---|---| |图形用户界面|Graphic User Interface| |命令行界面|Command Line Interface|等内容，搜索oeasy即可学习。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 什么是内核, uname">
+    <meta property="og:title" content="oeasy Linux系统教程：什么是内核 uname，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解什么是内核 uname。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖|中文|英文| |---|---| |图形用户界面|Graphic User Interface| |命令行界面|Command Line Interface|等内容，搜索oeasy即可学习。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h2 id="_1">开门见山🤔</h2>
+<ul>
+<li>咱们这次讲点什么呢？<ul>
+<li>这次咱们讲讲这个 <strong>linux([ˈlɪnəks])</strong></li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20250425-1745546861332.png" /></p>
+<ul>
+<li>什么是 <strong>linux</strong> 呢？<ul>
+<li>听起来 就有点 <code>耳熟</code></li>
+<li>其实天天 和咱们打交道</li>
+</ul>
+</li>
+</ul>
+<h3 id="_2">服务器</h3>
+<ul>
+<li>咱们打车订餐玩游戏不都得访问服务器么？<ul>
+<li>服务器用的 都是 linux</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20250425-1745549792795.png" /></p>
+<ul>
+<li>单独的 <strong>linux</strong> <code>不是操作系统</code><ul>
+<li>那<strong>linux</strong>是什么呢？</li>
+</ul>
+</li>
+</ul>
+<h3 id="_3">内核</h3>
+<ul>
+<li>linux是操作系统的 <strong><a href="https://baike.baidu.com/item/内核">内核(kernel)</a></strong></li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20250425-1745547168143.png" /></p>
+<ul>
+<li>什么是内核呢？</li>
+</ul>
+<h3 id="_4">内核</h3>
+<ul>
+<li>内核 是 直接控制内存和其他硬件的一层</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20250425-1745547132158.png" /> </p>
+<ul>
+<li>听起来是不是很硬核？👊</li>
+</ul>
+<h3 id="_5">硬核</h3>
+<ul>
+<li>内核确实是很硬核的</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20250425-1745547100012.png" /> </p>
+<ul>
+<li>除了 linux 之外<ul>
+<li>还有啥别的内核么？🤔</li>
+</ul>
+</li>
+</ul>
+<h3 id="_6">其他内核</h3>
+<ul>
+<li>苹果的 ios 和 mac <ul>
+<li>xnu(xnu is not unix) </li>
+<li>一个混合内核</li>
+<li>奠基于卡耐基 · 梅隆大学开发的 Mach</li>
+</ul>
+</li>
+<li>微软公司 windows <ul>
+<li>内核不公开🤔</li>
+</ul>
+</li>
+<li>bsd 内核<ul>
+<li>索尼，任天堂都是用 bsd </li>
+</ul>
+</li>
+<li>不过内核我也接触不到啊<ul>
+<li>能看得见么？</li>
+</ul>
+</li>
+</ul>
+<h3 id="linux">linux 在哪？🤔</h3>
+<h4 id="linux_1">身边的linux</h4>
+<ul>
+<li>linux 其实就在我们身边</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20250425-1745548192633.png" /> </p>
+<ul>
+<li><a href="http://www.miwifi.com/">小米路由器</a> 使用的 <a href="https://openwrt.org/">OpenWrt</a> 的内核也是 linux</li>
+</ul>
+<h3 id="_7">天天接触着</h3>
+<ul>
+<li>安卓手机的内核就是 linux</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20250425-1745548241137.png" /> </p>
+<ul>
+<li>谷歌公司推出的 vr 系统 <a href="https://arvr.google.com/daydream/">daydream</a><ul>
+<li>物联网中的嵌入式设备</li>
+<li>智能汽车系统</li>
+</ul>
+</li>
+<li>这还没有提到最关键的领域<ul>
+<li>服务器</li>
+</ul>
+</li>
+</ul>
+<h3 id="_8">服务器</h3>
+<ul>
+<li>我们可以用idc (Internet Data Center) 观察公司<a href="https://searchdns.netcraft.com/">netcraft </a> </li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20250425-1745548325512.png" /> </p>
+<ul>
+<li>
+<p>搜索服务器所使用的系统</p>
+<ul>
+<li>原来谷歌、淘宝、腾讯服务器 </li>
+<li>基本都是 linux</li>
+</ul>
+</li>
+<li>
+<p>建立网站的话</p>
+<ul>
+<li>linux是基础</li>
+<li>甚至是微软的基础</li>
+<li>微软不是自己有windows么</li>
+</ul>
+</li>
+</ul>
+<h3 id="_9">微软</h3>
+<ul>
+<li>有意思的事<ul>
+<li>我们来检索一下 <a href="https://searchdns.netcraft.com/?restriction=site+contains&amp;host=microsoft.com&amp;position=limited">微软公司用服务器系统</a> </li>
+<li>发现大多数 <a href="http://microsoft.com">微软</a> 的服务器用的也是 linux</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20250425-1745548378216.png" /> </p>
+<ul>
+<li>微软公司 <ul>
+<li>曾指责 linux和开源 是 癌症</li>
+<li>恨不得 亲手 杀死 对手</li>
+</ul>
+</li>
+</ul>
+<h3 id="_10">现状</h3>
+<ul>
+<li>到现在<ul>
+<li>microsoft love linux</li>
+<li>积极加入linux基金会</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210909-1631154553350.png" /></p>
+<ul>
+<li>给人给钱<ul>
+<li>微软 这个转变 也不容易😮‍💨</li>
+</ul>
+</li>
+</ul>
+<h3 id="_11">下载</h3>
+<h4 id="linux_2">我在哪儿可以下载到 linux 呢</h4>
+<ul>
+<li>linux 这个内核<ul>
+<li>可以从 <a href="https://www.kernel.org/">kernel.org</a> 下载</li>
+<li>可以下载 linux 内核的 c 语言源代码😎</li>
+<li>还能把他编译成可运行的真正 <strong>内核</strong></li>
+<li>甚至把当前服务器的内核替换升级</li>
+</ul>
+</li>
+<li>真的很有意思<ul>
+<li>这个内核的源代码是开放的</li>
+<li>也就是开源opensource</li>
+<li>由各国的优秀程序员提交到 <a href="https://github.com/torvalds/linux">github 上的 linux 项目</a></li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20250425-1745548544539.png" /> </p>
+<ul>
+<li>除了 linux 之外<ul>
+<li>github 还有<code>啥</code> 开源项目?</li>
+</ul>
+</li>
+</ul>
+<h3 id="_12">开源</h3>
+<p><img alt="图片描述" src="images/uid1190679-20250425-1745548944936.png" /> </p>
+<ul>
+<li>python</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20250425-1745549644536.png" /> </p>
+<ul>
+<li>postgres</li>
+<li>blender</li>
+<li>vim</li>
+<li>...</li>
+</ul>
+<h3 id="linux_3">如何学习 linux 呢？🤔</h3>
+<h4 id="linux_4">关于 Linux 的学习路径，有两条</h4>
+<ul>
+<li>一种是从 <strong>图形界面 (GUI)</strong> 🖥 入手<ul>
+<li>Graphic User Interface</li>
+<li>快速</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220831-1661929591050.png" /></p>
+<ul>
+<li>但是很难深入<ul>
+<li>看上去很美</li>
+</ul>
+</li>
+</ul>
+<h3 id="_13">命令行</h3>
+<ul>
+<li>另一种方法则是从 <strong>命令行 (CLI)</strong> 入手<ul>
+<li>Command Line Interface</li>
+<li>Linux 中 <strong>命令</strong> ⌨️是才是精髓所在</li>
+<li>连接服务器 用的ssh 都是命令行</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20250425-1745550203781.png" /> </p>
+<ul>
+<li>但是 命令行的缺点 是 学习过程枯燥乏味<ul>
+<li>非常难走</li>
+<li>不过没关系</li>
+<li>路虽难走</li>
+<li>希望你能跟 oeasy 一起来！ 🤝</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20250425-1745549776413.png" /></p>
+<ul>
+<li>如何打开命令行呢？🤔</li>
+</ul>
+<h3 id="_14">打开命令行</h3>
+<ul>
+<li>各种系统 都有终端<ul>
+<li>比如win系统中的cmd、powershell、wezTerm</li>
+<li>mac的termimal、iterm2</li>
+<li>linux 终端</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220830-1661828357352.jpg" /></p>
+<ul>
+<li>我们 所学的这些<ul>
+<li>都可以 远程登录 到 linux云上</li>
+<li>玩的 云端的东西</li>
+</ul>
+</li>
+</ul>
+<h3 id="_15">酷😎</h3>
+<ul>
+<li>打开了 黑色的异世界<ul>
+<li>一切开始的地方！！！</li>
+<li>这也是很多人生活的地方！！！</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220830-1661822828451.png" /></p>
+<ul>
+<li>图形界面<ul>
+<li>只是对命令行封装</li>
+<li>命令行才是根本</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>中文</th>
+<th>英文</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>图形用户界面</td>
+<td><code>G</code>raphic <code>U</code>ser <code>I</code>nterface</td>
+</tr>
+<tr>
+<td>命令行界面</td>
+<td><code>C</code>ommand <code>L</code>ine <code>I</code>nterface</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>你有信心走到底么？？？</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220831-1661930018669.png" /></p>
+<ul>
+<li>具体 <code>咋查看</code> 本机内核 呢?</li>
+</ul>
+<h3 id="uname">uname</h3>
+<ul>
+<li>在终端上 使用命令 uname</li>
+</ul>
+<div class="highlight"><pre><span></span><code>uname<span class="w"> </span>-r
+</code></pre></div>
+
+<ul>
+<li>需要注意❗️<ul>
+<li>linux 的命令是 <strong>大小写敏感 (case sensitive)</strong> 的</li>
+<li>命令 一般是 <strong>小写</strong>。</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20250425-1745550637646.png" /> </p>
+<ul>
+<li>我们可以看到<ul>
+<li>内核的版本如 4/18.0-21-generic</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20250425-1745550800147.png" /> </p>
+<ul>
+<li>但这和企鹅🐧有什么关系？</li>
+</ul>
+<h3 id="_16">企鹅</h3>
+<ul>
+<li>1996 年 5 月 12 日<ul>
+<li>linux 内核 需要一个生动的形象</li>
+<li>linux 爱好者在 <a href="https://lkml.org/lkml/1996/5/12/136">邮件列表</a>  里面讨论用什么吉祥物代表 linux<ul>
+<li>有的说鲨鱼</li>
+<li>有的说精灵</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210909-1631181323873.png" /></p>
+<ul>
+<li>
+<p>后来 核心作者 <strong>托瓦尔兹 里努斯 (Torvalds Linus)</strong></p>
+<ul>
+<li>说他 曾在 澳大利亚被 <strong>企鹅</strong> 咬过</li>
+<li>觉得 这段经历 很有趣</li>
+<li>于是 决定用企鹅 作为吉祥物</li>
+</ul>
+</li>
+<li>
+<p>这企鹅是谁画的？</p>
+</li>
+</ul>
+<h3 id="tux">tux</h3>
+<ul>
+<li>这只企鹅 🐧 叫 <strong>tux([tʌks])</strong> <ul>
+<li>是 linux 的吉祥物</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20250425-1745550872652.png" /> </p>
+<ul>
+<li><a href="https://isc.tamu.edu/~lewing/">Larry Ewing</a> <ul>
+<li>用 Gimp 创作了这只可爱的企鹅</li>
+<li>源文件可以在 <a href="https://isc.tamu.edu/~lewing/linux/">作者的博客</a> 找到</li>
+<li>后来他还做了很多 <a href="https://isc.tamu.edu/~lewing/linux/test.html">tux 变种</a></li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210909-1631184284091.png" /></p>
+<ul>
+<li>而 Tux 这个名字则来自 James Hughes<ul>
+<li>意思是(T)orvalds (U)ni(X) </li>
+<li>意思是托瓦尔兹的 unix</li>
+</ul>
+</li>
+</ul>
+<h3 id="tux_1">tux</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220831-1661930291335.png" /></p>
+<ul>
+<li>这个东西看起来有点弱啊</li>
+</ul>
+<h3 id="_17">弱者</h3>
+<ul>
+<li>别小看这个弱弱的形象<ul>
+<li>在 和 巨头的搏斗 中</li>
+<li>慢慢的胜出</li>
+<li>那些看起来强大的 logo 都已谢幕</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210909-1631180308738.png" /></p>
+<ul>
+<li>这只 呆呆的企鹅<ul>
+<li>却 越来越有生命力</li>
+</ul>
+</li>
+<li>真应了 那句老话<ul>
+<li><strong>弱者道之用</strong></li>
+</ul>
+</li>
+<li>弱势 其实 更容易 让人虚心<ul>
+<li>不懂就问呗</li>
+<li>比如uname命令</li>
+<li>还有 啥细节？</li>
+</ul>
+</li>
+</ul>
+<h3 id="_18">查询</h3>
+<ul>
+<li>如果 想了解 命令<ul>
+<li>就输入选项 --help</li>
+<li>可以查询 uname这个命令的 帮助</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>uname<span class="w"> </span>--help
+</code></pre></div>
+
+<ul>
+<li>这里需要注意的是：<ul>
+<li>我们的命令还是小写的 <strong>uname</strong></li>
+<li>我们的参数是 --help</li>
+<li>在 <strong>命令 uname</strong> 和 <strong>参数 --help</strong> 之间有一个英文的 <strong>空格</strong> 隔开</li>
+</ul>
+</li>
+</ul>
+<p><img alt="" src="images/uname.png" /></p>
+<ul>
+<li>从帮助 我们知道 <ul>
+<li><strong>uname -a</strong> <ul>
+<li>可以得到全部信息</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>来试下一下？😯</li>
+</ul>
+<h3 id="_19">动手</h3>
+<div class="highlight"><pre><span></span><code>uname<span class="w"> </span>-a
+</code></pre></div>
+
+<ul>
+<li>当前的内核版本是 4.18.0-21-generic<ul>
+<li>cpu 架构指令集是 x86_64</li>
+<li>当前的发行版是 <strong>ubuntu</strong></li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220831-1661933677378.png" /></p>
+<ul>
+<li>查了架构有什么用呢？</li>
+</ul>
+<h3 id="_20">二进制</h3>
+<ul>
+<li>至少我们下载的时候<ul>
+<li>知道选哪个二进制版本的软件</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20250425-1745553412740.png" /> </p>
+<h3 id="_21">总结</h3>
+<ul>
+<li>这次用 <code>uname -a</code> 查看了<ul>
+<li>内核版本</li>
+<li>cpu指令集</li>
+<li>发行版</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210909-1631154204005.png" /></p>
+<ul>
+<li>这就是我们linux的初体验<ul>
+<li>了解了linux内核</li>
+</ul>
+</li>
+<li>但是 linux <ul>
+<li>如何 从个人软件</li>
+<li>发展 成世界知名系统内核的 呢？</li>
+</ul>
+</li>
+<li>我们下次再说！👋</li>
+</ul>
+    </div>
+</body>
+</html>

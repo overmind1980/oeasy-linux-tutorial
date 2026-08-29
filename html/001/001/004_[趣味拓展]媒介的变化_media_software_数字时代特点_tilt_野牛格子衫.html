@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：顺序执行，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解趣味拓展 媒介的变化 media software 数字时代特点 tilt 野牛格子衫。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖>「软件的自由就是人类的自由」等内容，搜索oeasy即可学习。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 趣味拓展, 媒介的变化, media, software, 数字时代特点, 顺序执行">
+    <meta property="og:title" content="oeasy Linux系统教程：顺序执行，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解趣味拓展 媒介的变化 media software 数字时代特点 tilt 野牛格子衫。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖>「软件的自由就是人类的自由」等内容，搜索oeasy即可学习。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="_1">顺序执行 🥊</h1>
+<h2 id="_2">回忆上次内容</h2>
+<ul>
+<li>软件产业 工业化<ul>
+<li>不可避免</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240320-1710904801980.png" /></p>
+<ul>
+<li>Stallman 发现了 软件行业<code>独特之处</code><ul>
+<li>不同于 以往所有的工业的 <code>特点</code></li>
+<li>具体 是 <code>什么特点</code> 呢？🤔</li>
+</ul>
+</li>
+</ul>
+<h3 id="_3">计算机时代</h3>
+<ul>
+<li>以前的内容 需要制作、存储、传输 <ul>
+<li>具体 的 分子物质</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240311-1710123367663.png" /></p>
+<ul>
+<li>计算机中 系统、软件和内容 都是<code>0101</code><ul>
+<li>不再需要 基于分子 构建媒介物 了</li>
+<li>也不需要 基于分子 进行运输 了</li>
+<li>更不需要 基于分子的 物理存储了 </li>
+</ul>
+</li>
+</ul>
+<h3 id="_4">彻底数字化</h3>
+<ul>
+<li>交付的 基本单位 <ul>
+<li>从分子原子 变成了电子和字节<ul>
+<li>就是 0101</li>
+</ul>
+</li>
+<li>打开 这些媒体的 软件<ul>
+<li>也一样 都是0101</li>
+</ul>
+</li>
+<li>这些 软件 所基于的 系统<ul>
+<li>还一样 还是0101</li>
+</ul>
+</li>
+<li>开发 这些软件、系统的 工具<ul>
+<li>都一样 都是0101</li>
+</ul>
+</li>
+<li>一切都是<ul>
+<li>010101</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240211-1707651317440.png" /></p>
+<ul>
+<li>会有 什么<code>变化</code> 呢？</li>
+</ul>
+<h3 id="_5">租赁行业的变化</h3>
+<ul>
+<li>原来<ul>
+<li>版权 由 租赁公司购买</li>
+<li>转租 给用户观看</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240317-1710645253688.png" /></p>
+<ul>
+<li>网飞公司<ul>
+<li>不开门店</li>
+<li>只有一个中心仓</li>
+<li>用户订阅网飞</li>
+<li>在线下单</li>
+<li>网飞直接邮寄DVD </li>
+</ul>
+</li>
+<li>信息化 <ul>
+<li>提高了周转率</li>
+</ul>
+</li>
+<li>网络普及 <ul>
+<li>带来 更<code>新</code>的 方式</li>
+</ul>
+</li>
+</ul>
+<h3 id="_6">网络化</h3>
+<ul>
+<li>由于可以<ul>
+<li>通过 网络 直接下载</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240317-1710645403617.png" /></p>
+<ul>
+<li>各种p2p应用 和 分享网站<ul>
+<li>层出不穷</li>
+</ul>
+</li>
+</ul>
+<h3 id="_7">成本</h3>
+<ul>
+<li>0101 存储复制传播的 成本 <ul>
+<li>几乎为 <code>零</code></li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240310-1710077231843.png" /></p>
+<ul>
+<li>试图 收取软件许可证的 思路<ul>
+<li>会 有所改变 吗？</li>
+</ul>
+</li>
+</ul>
+<h3 id="_8">自由软件</h3>
+<ul>
+<li>1983年<ul>
+<li>30+岁的时候rms辞了 MIT 的工作</li>
+<li>发表了著名的 GNU 宣言</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240404-1712196181395.png" /></p>
+<ul>
+<li>https://www.gnu.org/gnu/manifesto.en.html</li>
+</ul>
+<h3 id="_9">实践</h3>
+<ul>
+<li>1984年 9月<ul>
+<li>斯托曼开发 <ul>
+<li>文本处理器GNU Emacs</li>
+</ul>
+</li>
+<li>目标是 <ul>
+<li>创建 完全自由的 操作系统</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240311-1710123593908.png" /></p>
+<ul>
+<li>GNU (GNU's not unix)<ul>
+<li>是 <code>开源</code>的</li>
+<li>开放源代码 </li>
+<li>源代码 所有人都能看到</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20230531-1685515780436.png" /></p>
+<h3 id="_10">自由</h3>
+<ul>
+<li>当时他说</li>
+</ul>
+<blockquote>
+<p>「软件的自由就是人类的自由」</p>
+</blockquote>
+<p><img alt="图片描述" src="images/uid1190679-20220927-1664280793558.png" /></p>
+<ul>
+<li>这自由 包括 4个层面的 概念<ol>
+<li>无论用户出于何种目的，必须可以按照用户意愿，自由地运行该软件</li>
+<li>用户可以自由的学习与修改软件，那做为这个的前提，用户是要能自由的访问到软件的源码</li>
+<li>用户可以自由的分发软件给别人，以帮助他人</li>
+<li>用户可以自由的分发修改后的软件版本，以使整个社区从修改中受益</li>
+</ol>
+</li>
+<li>这 就是 自由软件运动<ul>
+<li>根据 这些原则 </li>
+<li>发布了 新的 许可证类型</li>
+</ul>
+</li>
+</ul>
+<h3 id="gpl">GPL</h3>
+<ul>
+<li>GPL 又称为 CopyLeft<ul>
+<li>和 CopyRight 相反的</li>
+</ul>
+</li>
+<li>GPL许可证<ul>
+<li>给 用户更多权利</li>
+<li>而不是 向用户索取利益</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20230221-1676937406312.png" /></p>
+<ul>
+<li>CopyRight 有多个含义<ul>
+<li>Copy 是 复制</li>
+<li>Right 是 权利</li>
+<li>CopyRight 指的是</li>
+<li>复制的权力</li>
+</ul>
+</li>
+<li>图书时代 复制<ul>
+<li>靠的是 雕版和活字版</li>
+<li>所以copyright </li>
+<li><code>版权</code></li>
+</ul>
+</li>
+<li>那 CopyLeft 是什么意思 呢?</li>
+</ul>
+<h3 id="copyleft">copyleft</h3>
+<ul>
+<li>CopyLeft <ul>
+<li>后面是 Left</li>
+<li>表示这是和 CopyRight 完全相反的</li>
+<li>著佐权</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220910-1662767467555.png" /></p>
+<ul>
+<li>赋予用户 更多权利</li>
+</ul>
+<h3 id="_11">许可证</h3>
+<ul>
+<li>新许可证 名字叫 GPL</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240211-1707651398865.png" /></p>
+<ul>
+<li>GPL 授权对被授权者 是有要求的，重点强调：</li>
+<li>和大部分开源软件一样</li>
+<li>作品放在这里</li>
+<li>你可以用</li>
+<li>作者不为 任何物理损失负责</li>
+<li>如果你 基于这个作品衍生了新的作品</li>
+<li>那么 这个新的“作品”</li>
+<li>必须 符合 GPL 协议</li>
+<li>否则 你就失去原作品的 授权</li>
+<li>符合 GPL 协议的作品</li>
+<li>在提供给它的使用者的时候</li>
+<li>必须同时提供该作品的 GPL 源代码</li>
+<li>不能对使用者做出限定</li>
+</ul>
+<h3 id="logo">野牛logo</h3>
+<p><img alt="图片描述" src="images/uid1190679-20241109-1731107879815.png" /> </p>
+<ul>
+<li>gpl 协议 所在的组织 <ul>
+<li>叫做gnu</li>
+<li>吉祥物 是 北美野牛</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240211-1707651380614.png" /></p>
+<ul>
+<li>野牛 <ul>
+<li>也是 一种经典配色</li>
+</ul>
+</li>
+</ul>
+<h3 id="_12">野牛</h3>
+<ul>
+<li>苏格兰 高地人 McCluskey<ul>
+<li>移民到 美国康涅狄格州</li>
+<li>以 猎捕美洲野牛为生</li>
+</ul>
+</li>
+<li>因为 自己的 苏格兰人祖先 <ul>
+<li>也曾像 美洲印第安人 一样</li>
+<li>遭受到迫害</li>
+<li>为印第安人 提供</li>
+<li>印有自己家族格子 的 毛毯和衬衫</li>
+<li>红与黑的配色 非常经典</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240211-1707651480587.png" /></p>
+<ul>
+<li>印第安人 被 这种红色格子吸引<ul>
+<li>他们认为 这是高地人的敌人的鲜血 染成的</li>
+<li>并坚信 在战斗中 穿着格子衬衫 可以免遭死亡</li>
+<li>他们 用野牛皮 进行交换</li>
+<li>并称这种格子为“野牛格子”</li>
+</ul>
+</li>
+</ul>
+<h3 id="_13">配色传统</h3>
+<ul>
+<li>格子风格来自于kilt<ul>
+<li>传统的 苏格兰服饰</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240211-1707651501187.png" /></p>
+<ul>
+<li>不列颠 以 工业革命 席卷世界<ul>
+<li>苏格兰、爱尔兰、非洲、印度、北美、澳洲等地土著等 农牧部落</li>
+<li>先后被 卷入 了 工业大生产的方式</li>
+</ul>
+</li>
+<li>这些 图案 和 配色<ul>
+<li>流传了下来</li>
+<li>成为 工业时代 之后的 </li>
+<li>一种 复古穿搭</li>
+<li>也萌芽了 复仇的种子</li>
+</ul>
+</li>
+</ul>
+<h3 id="_14">叛逆</h3>
+<p><img alt="图片描述" src="images/uid1190679-20240211-1707651518056.png" /></p>
+<ul>
+<li>作为 叛逆和不羁 的标记</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240211-1707651528841.png" /></p>
+<h3 id="_15">时尚</h3>
+<ul>
+<li>并非 只有无产阶级 <ul>
+<li>才喜欢 这个时尚</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240211-1707651542498.png" /></p>
+<ul>
+<li>顶级富豪 <ul>
+<li>也 对这个设定 </li>
+<li>趋之若鹜</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240211-1707651552560.png" /></p>
+<ul>
+<li>暗示着 工业时代 之后<ul>
+<li>应该 会产生<code>新</code>的变化</li>
+</ul>
+</li>
+</ul>
+<h2 id="_16">总结</h2>
+<ul>
+<li>计算机 本身特性 决定</li>
+<li>计算机中 保存传递的 是<code>电子</code></li>
+<li>而不用 借助 <code>原子</code> 实体</li>
+<li>存储和分发软件的成本 几乎为<code>零</code></li>
+<li>在 这样的物理基础上<ul>
+<li>出现了 自由软件运动</li>
+<li>从rms提出的 free software<ul>
+<li>软件的自由就是人的自由</li>
+</ul>
+</li>
+<li>到gnu研发 各种软件</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20231116-1700144455482.png" /></p>
+<ul>
+<li>自由软件运动 <ul>
+<li>理想旗帜 高扬</li>
+<li>但是否能在 现实中 落地呢？🤔</li>
+</ul>
+</li>
+<li>我们下次再说！👋</li>
+</ul>
+    </div>
+</body>
+</html>

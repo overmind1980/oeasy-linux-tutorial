@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：Session深入，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解Session深入。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, Session深入">
+    <meta property="og:title" content="oeasy Linux系统教程：Session深入，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解Session深入。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="session">Session深入</h1>
+<h2 id="_1">回忆</h2>
+<ul>
+<li>这次我们在登陆成功之后添加了Session</li>
+<li>往session里面添加了一个属性attribute<ul>
+<li>属性的key是"username"</li>
+<li>属性的value是当前的用户名</li>
+</ul>
+</li>
+<li>这个session会添加一个Cookie</li>
+<li>session是什么意思？怎么玩呢?🤔</li>
+</ul>
+<h3 id="session_1">session的作用</h3>
+<ul>
+<li>如果我们确认登陆之后</li>
+<li>重定向到另一个页面</li>
+<li>可以从session中得到当前登陆了的用户名么？</li>
+<li>我们重定向一下试试</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;servlet&gt;</span>
+<span class="w">    </span><span class="nt">&lt;servlet-name&gt;</span>logon<span class="nt">&lt;/servlet-name&gt;</span>
+<span class="w">    </span><span class="nt">&lt;servlet-class&gt;</span>logon<span class="nt">&lt;/servlet-class&gt;</span>
+<span class="nt">&lt;/servlet&gt;</span>
+<span class="nt">&lt;servlet-mapping&gt;</span>
+<span class="w">    </span><span class="nt">&lt;servlet-name&gt;</span>logon<span class="nt">&lt;/servlet-name&gt;</span>
+<span class="w">    </span><span class="nt">&lt;url-pattern&gt;</span>/logon<span class="nt">&lt;/url-pattern&gt;</span>
+<span class="nt">&lt;/servlet-mapping&gt;</span>
+</code></pre></div>
+
+<h3 id="logonjava">编写logon.java</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.PrintWriter</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.ServletException</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.http.HttpServlet</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.http.HttpServletRequest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.http.HttpServletResponse</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.http.HttpSession</span><span class="p">;</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">logon</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HttpServlet</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">serialVersionUID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1L</span><span class="p">;</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doGet</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span>
+<span class="w">            </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="p">,</span><span class="w"> </span><span class="n">ServletException</span><span class="p">{</span>
+<span class="w">        </span><span class="n">request</span><span class="p">.</span><span class="na">setCharacterEncoding</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">);</span>
+<span class="w">        </span><span class="n">response</span><span class="p">.</span><span class="na">setContentType</span><span class="p">(</span><span class="s">"text/html"</span><span class="p">);</span>
+<span class="w">        </span><span class="n">response</span><span class="p">.</span><span class="na">setCharacterEncoding</span><span class="p">(</span><span class="s">"UTF-8"</span><span class="p">);</span>
+<span class="w">        </span><span class="n">PrintWriter</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">response</span><span class="p">.</span><span class="na">getWriter</span><span class="p">();</span>
+<span class="w">        </span><span class="n">HttpSession</span><span class="w"> </span><span class="n">session</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getSession</span><span class="p">();</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">Username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="p">)</span><span class="n">session</span><span class="p">.</span><span class="na">getAttribute</span><span class="p">(</span><span class="s">"username"</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">Username</span><span class="o">!=</span><span class="kc">null</span><span class="p">){</span>
+<span class="w">            </span><span class="n">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">"Username is "</span><span class="o">+</span><span class="n">Username</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<ul>
+<li>如果session里面有这个attribute就把他输出出来</li>
+</ul>
+<h3 id="_2">登录后结果</h3>
+<p><img alt="图片描述" src="images/uid1190679-20211218-1639826839374.png" /></p>
+<ul>
+<li>这也就是说我们可以得到session中存储的各种attribute</li>
+<li>比如说用户名</li>
+<li>这样服务器就知道我是谁了</li>
+<li>这样我和服务器之间就建立起了对话</li>
+<li>这很不容易</li>
+<li>因为http协议是无状态的</li>
+<li>每个请求过来都是独立的</li>
+<li>但是现在不一样了</li>
+<li>服务器和我之间建立起了会话连接</li>
+<li>服务器知道我是谁了</li>
+<li>这个连接就是Session会话</li>
+</ul>
+<h3 id="session_2">Session会话</h3>
+<p><img alt="图片描述" src="images/uid1190679-20211209-1639019898088.png" /> </p>
+<ul>
+<li>session翻译为会话</li>
+<li>原来指的是法庭定期的开庭</li>
+<li>后来也指一段时间的活动，比如<ul>
+<li>音乐会</li>
+<li>学年</li>
+<li>摄影</li>
+<li>录音</li>
+</ul>
+</li>
+<li>这里的session会话指的是谁和谁的会话？</li>
+<li>浏览器和服务器之间的会话</li>
+<li>这会话怎么建立的呢？</li>
+<li>靠的是cookie</li>
+<li>我们来看看cookie</li>
+</ul>
+<h3 id="cookie">查看Cookie</h3>
+<p><img alt="图片描述" src="images/uid1190679-20211218-1639828032503.png" /></p>
+<ul>
+<li>我们可以看到这个Cookie</li>
+<li>他的过期时间是会话</li>
+<li>这是什么意思？</li>
+</ul>
+<h3 id="_3">会话</h3>
+<p><img alt="图片描述" src="images/uid1190679-20211218-1639828153071.png" /></p>
+<ul>
+<li>如果我们在新建一个标签页</li>
+<li>访问同样的logon的位置</li>
+<li>没有问题</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20211218-1639828178646.png" /></p>
+<ul>
+<li>但如果我们把整个浏览器关了</li>
+<li>再重开浏览器</li>
+<li>访问同样logon的位置</li>
+<li>就不行了</li>
+<li>那怎么办呢？</li>
+<li>搜索一下</li>
+</ul>
+<h3 id="_4">搜索</h3>
+<p><img alt="图片描述" src="images/uid1190679-20211218-1639830113569.png" /></p>
+<ul>
+<li>我们修改web.xml</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;session-config&gt;</span>
+<span class="w">    </span><span class="nt">&lt;session-timeout&gt;</span>30<span class="nt">&lt;/session-timeout&gt;</span>
+<span class="w">    </span><span class="nt">&lt;cookie-config&gt;</span>
+<span class="w">        </span><span class="nt">&lt;name&gt;</span>JSESSIONID<span class="nt">&lt;/name&gt;</span>
+<span class="w">        </span><span class="nt">&lt;path&gt;</span>/oeasy<span class="nt">&lt;/path&gt;</span>
+<span class="w">        </span><span class="nt">&lt;http-only&gt;</span>true<span class="nt">&lt;/http-only&gt;</span>
+<span class="w">        </span><span class="nt">&lt;max-age&gt;</span>1800<span class="nt">&lt;/max-age&gt;</span>
+<span class="w">        </span><span class="nt">&lt;secure&gt;</span>true<span class="nt">&lt;/secure&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/cookie-config&gt;</span>
+<span class="nt">&lt;/session-config&gt;</span>
+</code></pre></div>
+
+<ul>
+<li>max-age是session的生命周期</li>
+<li>以秒为单位</li>
+</ul>
+<h3 id="_5">重启服务器</h3>
+<ul>
+<li>我把重启tomcat和启动postgres写成了一个go.sh</li>
+<li>以后sh go.sh就可以了</li>
+</ul>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>/opt/apache-tomcat-8.5.54/bin/shutdown.sh
+sudo<span class="w"> </span>/opt/apache-tomcat-8.5.54/bin/startup.sh
+sudo<span class="w"> </span>/etc/init.d/postgresql<span class="w"> </span>start
+</code></pre></div>
+
+<h3 id="_6">重启之后</h3>
+<p><img alt="图片描述" src="images/uid1190679-20211218-1639830370176.png" /></p>
+<ul>
+<li>session时间可以延长了</li>
+<li>而且关闭浏览器之后再开</li>
+<li>session还可以续上</li>
+<li>这也就意味着可以保存登录状态了</li>
+<li>这也就是我们可以保持登录状态的原因</li>
+<li>因为cookie还没有过期</li>
+<li>我可以看看cookie在哪吗？</li>
+</ul>
+<h3 id="cookie_1">观察cookie</h3>
+<p><img alt="图片描述" src="images/uid1190679-20211218-1639833291641.png" /></p>
+<ul>
+<li>如果我们删除了localhost的Cookie</li>
+<li>那登录状态就没有了</li>
+<li>这个东西具体存在硬盘什么地方</li>
+<li>可以看看么？</li>
+</ul>
+<h3 id="_7">搜索</h3>
+<p><img alt="图片描述" src="images/uid1190679-20211218-1639833799119.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20211218-1639833858954.png" /></p>
+<ul>
+<li>还真的找到了</li>
+<li>现在需要打开sqlite文件</li>
+</ul>
+<h3 id="cookies">打开cookies</h3>
+<ul>
+<li>首先关闭浏览器</li>
+<li>然后用管理员权限打开cookie.sqlite</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20211218-1639834131939.png" /></p>
+<ul>
+<li>确实可以看到localhost上面有一个cookie存在</li>
+<li>这个JSESSIONID就是我们能够登录的Cookie的原因</li>
+<li>谁先开始做这个Cookie的呢？</li>
+</ul>
+<h3 id="lou-montulli">Lou Montulli</h3>
+<p><img alt="图片描述" src="images/uid1190679-20211219-1639888123029.png" /></p>
+<ul>
+<li>Montulli小时候在堪萨斯的劳伦斯附近的一个军事基地成长</li>
+<li>大学上的是堪萨斯大学</li>
+<li>Montulli监控着磁带和点阵打印机</li>
+<li>并被提升到学校的I.T.服务台</li>
+<li>Montulli就是在那里参与了原始网络</li>
+</ul>
+<h3 id="_8">动机</h3>
+<ul>
+<li>Montulli在学校里学习一般</li>
+<li>可是喜欢unix</li>
+<li>当时有一种电子邮件登录系统ELM</li>
+<li>登出的时候</li>
+<li>会显示制作者的信息</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20211219-1639889983999.png" /></p>
+<ul>
+<li>Montulli觉得这很酷</li>
+<li>于是也想做点自己的署名的的东西</li>
+</ul>
+<h3 id="lynx">制作Lynx</h3>
+<ul>
+<li>当时主流的通信方式还是在终端上</li>
+<li>收发电子邮件</li>
+<li>或者使用远程登录的bbs</li>
+<li>或者玩mud游戏</li>
+<li>Gopher可以联网</li>
+<li>但是图形用户界面不行</li>
+<li>于是Montulli想要做一个基于文本的浏览器</li>
+<li>他是制作lynx三人中的一人</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20211219-1639890266093.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20211219-1639890274042.png" /></p>
+<h3 id="_9">合流</h3>
+<ul>
+<li>由于那个时候人们用终端的比用gui的要多</li>
+<li>当时文本型浏览器还居于主流</li>
+<li>虽然是lynx当时最流行的浏览器</li>
+<li>但是随着图形用户界面用户数量的增加</li>
+<li>mosiac成为了当时浏览器中的新星</li>
+<li>http成为了主要的超文本传输协议</li>
+<li>html成为主要的超文本链接语言</li>
+<li>lynx也加入了http和html这股潮流</li>
+<li>web生态阵营就这样起来了</li>
+<li>Mosaic 、Cello 、Lynx三个浏览器开发者最终合流</li>
+<li>于是netcape公司开始在网络上发力</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20211219-1639904143855.png" /></p>
+<h3 id="_10">贡献</h3>
+<ul>
+<li>以下这些都是Montulli的贡献<ul>
+<li>HTTPS</li>
+<li>server push and client pull</li>
+<li>HTTP proxying and proxy authentication</li>
+<li>the cookie</li>
+<li>web forms</li>
+<li>“about:” URL</li>
+<li><br>line break</br> tag</li>
+<li><blink>blink</blink> tag</li>
+<li>animated GIFs</li>
+</ul>
+</li>
+<li>最后这个很有意思</li>
+<li>他做了当时最早的直播</li>
+<li>直播鱼缸</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20211219-1639904330911.png" /> </p>
+<ul>
+<li>我们说回到主题<ul>
+<li>session</li>
+<li>cookie</li>
+</ul>
+</li>
+</ul>
+<h3 id="_11">由来</h3>
+<ul>
+<li>http是无状态的</li>
+<li>或者说请求是匿名的</li>
+<li>无时无刻从世界上各个地方而来</li>
+<li>服务器是不知道你是谁的</li>
+<li>但是服务器有一个需求</li>
+<li>就是希望知道你是谁</li>
+<li>当时的Web来自于大学和研究机构</li>
+<li>这些先锋大都是自由主义者</li>
+<li>不希望任何人被跟踪</li>
+</ul>
+<p><img alt="" src="images/giphy.gif" /></p>
+<ul>
+<li>可是也有一些实际的需求</li>
+<li>比如下面这个</li>
+</ul>
+<h3 id="_12">购物车</h3>
+<p><img alt="图片描述" src="images/uid1190679-20211219-1639904316955.png" /></p>
+<ul>
+<li>购物车这种东西</li>
+<li>服务必须知道谁是谁</li>
+<li>Cookie是一个很好的机制</li>
+<li>让人们可以自由地管理自己的Cookie</li>
+<li>但是也有一些副作用</li>
+</ul>
+<h3 id="_13">广告</h3>
+<ul>
+<li>百度搜索引擎的搜索记录放在用户的硬盘上</li>
+<li>视频网站可以读取这些记录</li>
+<li>然后推荐相关的视频</li>
+<li>通过视频或者链接</li>
+<li>实现商业目的</li>
+<li>为了避免用户隐私被泄露</li>
+<li>就需要让Cookie的使用方式进一步要被细化</li>
+<li>这就是ietf和浏览器开发者</li>
+<li>共同让规则细化明确</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20211219-1639905085380.png" /></p>
+<ul>
+<li>不过这都是后来的事情了</li>
+<li>Montulli进入了Web的名人堂</li>
+</ul>
+<h3 id="_14">名人堂</h3>
+<p><img alt="图片描述" src="images/uid1190679-20211219-1639887817957.png" /></p>
+<ul>
+<li>这就是Cookie发明的故事</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20211219-1639905207062.png" /></p>
+<h3 id="_15">总结</h3>
+<ul>
+<li>这次我们把上次在session里面添加的属性attribute取了出来<ul>
+<li>属性的key是"username"</li>
+<li>属性的value是当前的用户名</li>
+</ul>
+</li>
+<li>而且想到了延长session时间的方式</li>
+<li>这样就是可以避免反复登陆了</li>
+<li>这功能主要靠的是cookie</li>
+<li>除了session相关的cookie之外</li>
+<li>我们还可以做点自己的cookie么？🤔</li>
+<li>下次再说！👋</li>
+</ul>
+    </div>
+</body>
+</html>

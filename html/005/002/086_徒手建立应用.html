@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：配置servlet，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解徒手建立应用。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 徒手建立应用, 配置servlet">
+    <meta property="og:title" content="oeasy Linux系统教程：配置servlet，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解徒手建立应用。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="servlet">配置servlet</h1>
+<h2 id="_1">回顾</h2>
+<ul>
+<li>上次搭建了tomcat</li>
+<li>在tomcat根下找到bin<ul>
+<li>让tomcat运行了起来</li>
+</ul>
+</li>
+<li>回到tomcat根下找到webapps<ul>
+<li>web是网</li>
+<li>apps是应用程序</li>
+</ul>
+</li>
+<li>具体这个app应该如何搭建呢？🤔</li>
+</ul>
+<h3 id="_2">帮助</h3>
+<ul>
+<li>第一个webApplication</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210911-1631367640234.png" /></p>
+<h3 id="_3">结构</h3>
+<p><img alt="图片描述" src="images/uid1190679-20210911-1631367850913.png" /></p>
+<ul>
+<li>这个需要一些基本的结构</li>
+<li>首先是有个WEB-INF文件夹</li>
+<li>WEB-INF里面有<ul>
+<li>web.xml</li>
+<li>classes文件夹</li>
+<li>lib文件夹</li>
+</ul>
+</li>
+<li>我们先建立这个app</li>
+</ul>
+<h3 id="app">建立app文件夹</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220716-1657937384329.png" /></p>
+<ul>
+<li>这样我们就有了自己建立的app</li>
+<li>app叫做oeasy</li>
+<li>然后进入oeasy这个app</li>
+</ul>
+<h3 id="_4">建立结构</h3>
+<ul>
+<li>建立相应的文件和文件夹</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210911-1631368309506.png" /></p>
+<ul>
+<li>web这个词出现好多次啊</li>
+<li>web是什么意思呢？</li>
+</ul>
+<h3 id="web">web</h3>
+<ul>
+<li>wave最早来自于海浪</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220511-1652236289352.png" /></p>
+<ul>
+<li>weave 编织一上一下很像浪</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220511-1652236366474.png" /></p>
+<ul>
+<li>编织出来的织物叫做web</li>
+<li>也指蜘蛛网</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220511-1652236399543.png" /></p>
+<ul>
+<li>但是web.xml具体是什么呢？</li>
+</ul>
+<h3 id="_5">搜索</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220426-1650949618805.png" /></p>
+<ul>
+<li>在tomcat中查找已经存在的web.xml</li>
+<li>每个webapps的目录的WEB-INF下面都有这个文件</li>
+<li>把一个现成的web.xml拷到我们app的WEB-INF下面</li>
+</ul>
+<h3 id="_6">复制</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220426-1650949762878.png" /></p>
+<ul>
+<li>把找到的web.xml复制到放到WEB-INF下面</li>
+<li>整个app是什么结构呢？</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220716-1657937652136.png" /></p>
+<ul>
+<li>打开web.xml</li>
+</ul>
+<h3 id="_7">配置</h3>
+<p><img alt="图片描述" src="images/uid1190679-20210911-1631368695991.png" /></p>
+<ul>
+<li>把注释去掉</li>
+<li>把同类项合并</li>
+</ul>
+<h3 id="_8">简化</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220716-1657939457104.png" /></p>
+<ul>
+<li>这里面有app的描述<ul>
+<li>description 描述信息</li>
+<li>display-name 显示名称</li>
+<li>request-character-encoding 请求字符编码格式</li>
+</ul>
+</li>
+<li>13,20行好像配置了一个url</li>
+<li>叫做/hello<ul>
+<li>应该指的是当前应用oeasy根下的/hello</li>
+<li>url的路径是/hello</li>
+<li>/指的是应用url的根下</li>
+</ul>
+</li>
+<li>配置好了保存一下</li>
+<li>去浏览器里看看</li>
+</ul>
+<h3 id="_9">找不到</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220425-1650878371481.png" /></p>
+<ul>
+<li>修改了服务器配置</li>
+<li>还需要重启一下服务器</li>
+</ul>
+<h3 id="_10">重启</h3>
+<ul>
+<li>当前的位置是/tomcat/webapps/oeasy/WEB-INF</li>
+<li>关闭、启动服务器的命令在/tomcat/bin</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220716-1657939540359.png" /></p>
+<ul>
+<li>向上3层找到bin</li>
+<li>然后把tomcat搞down</li>
+<li>同样的位置找到命令把tomcat启动起来 </li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220716-1657939569439.png" /></p>
+<h3 id="_11">浏览</h3>
+<p><img alt="图片描述" src="images/uid1190679-20210911-1631368828011.png" /></p>
+<ul>
+<li>这次和上次的错误提示不同了！！！</li>
+<li>这就是巨大的进步！！！</li>
+<li>虽然访问还是失败了</li>
+<li>但是错误信息里面提示</li>
+<li>要找mypackage.Hello</li>
+<li>这好像是我们配置在web.xml中的东西</li>
+</ul>
+<h3 id="_12">对应关系</h3>
+<p><img alt="图片描述" src="images/uid1190679-20210912-1631406260957.png" /></p>
+<ul>
+<li>对应关系找到了<ul>
+<li>对应关系就是mapping映射关系</li>
+<li>红色的是网页对应的地址url路径名</li>
+<li>绿色的是具体的类名</li>
+<li>紫色的是url和类名之间的对应关系<ul>
+<li>路径和类对应着同一个servlet-class</li>
+</ul>
+</li>
+<li>这种映射(mapping)关系其实是一种路由(routing)</li>
+</ul>
+</li>
+<li>现在只要我们有mypackage.Hello就好了</li>
+<li>不过这个名字好长好麻烦</li>
+<li>把他简化成Hello</li>
+</ul>
+<h3 id="webxml">修改web.xml</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220716-1657939887324.png" /></p>
+<ul>
+<li>保存后刷新网页</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220716-1657939914946.png" /></p>
+<ul>
+<li>直接404了</li>
+<li>再去重启一下tomcat</li>
+</ul>
+<h3 id="_13">重启并刷新</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220716-1657939981866.png" /></p>
+<ul>
+<li>重启后刷新</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220716-1657940039353.png" /></p>
+<ul>
+<li>这次找不到的类变了<ul>
+<li>不是mypackage.Hello</li>
+<li>而是Hello</li>
+</ul>
+</li>
+<li>怎么才能有这个Hello.class呢？</li>
+</ul>
+<h3 id="java">寻找java源文件</h3>
+<ul>
+<li>把他拷贝到自己的应用(oeasy)的<ul>
+<li>(WEB-INF/classes)下</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220716-1657937959458.png" /></p>
+<ul>
+<li>然后再编辑他</li>
+<li>可以么？</li>
+</ul>
+<h3 id="_14">简化</h3>
+<ul>
+<li>把程序简化到最简单的状态</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220716-1657940389285.png" /></p>
+<ul>
+<li>保存并退回到shell</li>
+<li>尝试编译</li>
+</ul>
+<h3 id="_15">编译发现错误</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220716-1657940692537.png" /></p>
+<ul>
+<li>编译失败找不到jakarta.servlet</li>
+</ul>
+<h3 id="_16">搜索</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220716-1657940934333.png" /></p>
+<ul>
+<li>这个jar包在哪呢？</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220716-1657941017922.png" /></p>
+<h3 id="_17">重新编译</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220716-1657941127884.png" /></p>
+<ul>
+<li>设置本次的classpath<ul>
+<li>javac -cp ../../..lib/servlet-api.jar HelloWorldExample.java<ul>
+<li>javac <ul>
+<li>java Compile</li>
+</ul>
+</li>
+<li>-cp /XX/Xxx/lib/servlet-api.jar<ul>
+<li>设置classpath</li>
+<li>包含/XX/Xxx/lib/servlet-api.jar 中的classes</li>
+</ul>
+</li>
+<li>编译对象还是HelloWorldExample.java</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220425-1650880396748.png" /></p>
+<ul>
+<li>只要带着cp(classpath)进行编译</li>
+<li>就可以成功了</li>
+</ul>
+<h3 id="_18">浏览器中观察</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220716-1657941153944.png" /></p>
+<ul>
+<li>显然tomcat还没有加载新编译好的Hello.class</li>
+<li>重启服务器</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220425-1650880502954.png" /></p>
+<ul>
+<li>在浏览器中访问</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210912-1631429077495.png" /></p>
+<ul>
+<li>可以输出中文么？</li>
+</ul>
+<h3 id="_19">尝试</h3>
+<ul>
+<li>修改文件</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220716-1657941343853.png" /></p>
+<ul>
+<li>保存并退出</li>
+</ul>
+<h3 id="_20">重新编译重启</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220716-1657941355903.png" /></p>
+<ul>
+<li>重新编译</li>
+<li>重启tomcat</li>
+<li>浏览器中显示</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210912-1631429232764.png" /></p>
+<ul>
+<li>顺利成功</li>
+<li>把这个成功的结构记住</li>
+<li>这个就是一个<ul>
+<li>javaweb容器中应用的最小结构</li>
+</ul>
+</li>
+</ul>
+<h3 id="_21">复习结构</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220716-1657941452141.png" /></p>
+<ul>
+<li>我们先总结一下</li>
+</ul>
+<h2 id="_22">总结 🤨</h2>
+<ul>
+<li>这次从零开始徒手搭建自己app</li>
+<li>在里面建立了自己的web application<ul>
+<li>oeasy</li>
+</ul>
+</li>
+<li>设置好了WEB-INF<ul>
+<li>web.xml</li>
+<li>classes</li>
+</ul>
+</li>
+<li>然后就可以在浏览器中动态的显示信息了</li>
+<li>那我能做一个自己的servlet</li>
+<li>然后映射到自己url么？🤔</li>
+<li>下次再说！👋</li>
+</ul>
+    </div>
+</body>
+</html>

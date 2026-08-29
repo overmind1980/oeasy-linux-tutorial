@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：拷贝粘贴文件内容_pbcopy_pbpaste，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解拷贝粘贴文件内容 pbcopy pbpaste。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 拷贝粘贴文件内容, pbcopy, pbpaste">
+    <meta property="og:title" content="oeasy Linux系统教程：拷贝粘贴文件内容_pbcopy_pbpaste，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解拷贝粘贴文件内容 pbcopy pbpaste。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="_pbcopy_pbpaste">拷贝粘贴文件内容_pbcopy_pbpaste</h1>
+<h2 id="_1">回忆</h2>
+<ul>
+<li>上次我们研究了ln</li>
+<li>ln指的是链接(link)</li>
+<li>可以建立硬链接、软链接</li>
+<li>硬链接<ul>
+<li>直接指向原来文件所在的硬盘位置</li>
+<li>指向索引节点(inode)</li>
+<li>索引节点被引用数量+1</li>
+<li>如果源文件被删除</li>
+<li>硬链接仍然指向索引节点(inode)</li>
+</ul>
+</li>
+<li>软链接<ul>
+<li>指向原来的文件而不是索引节点</li>
+<li>所以如果源文件被删除</li>
+<li>软链接指向目标消失</li>
+<li>也就失效了</li>
+</ul>
+</li>
+<li>cp -l 拷贝的是一个硬链接</li>
+<li>如果我只想拷贝文件中的内容<ul>
+<li>而不关心文件的各种信息</li>
+</ul>
+</li>
+<li>有什么好方法吗？</li>
+</ul>
+<h3 id="_2">准备环境</h3>
+<ul>
+<li>首先制作一个oeasy.txt</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221119-1668822114721.png" /></p>
+<ul>
+<li>有什么方法<ul>
+<li>可以把这个文件的内容</li>
+<li>复制到剪贴板吗？</li>
+</ul>
+</li>
+</ul>
+<h3 id="xclip">安装xclip</h3>
+<ul>
+<li>首先是安装xclip</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221119-1668864441724.png" /></p>
+<ul>
+<li>安装之后尝试使用</li>
+</ul>
+<h3 id="xclip_1">使用xclip</h3>
+<p><img alt="图片描述" src="images/uid1190679-20221119-1668864585050.png" /></p>
+<ul>
+<li>可是这样就真的输出到哪里了呢？</li>
+<li>man xclip</li>
+</ul>
+<h3 id="xclip_2">xclip文档</h3>
+<p><img alt="图片描述" src="images/uid1190679-20221119-1668864658983.png" /></p>
+<ul>
+<li>确实xclip将cat oeasy.txt的结果<ul>
+<li>复制进入进入了xclip内部</li>
+</ul>
+</li>
+<li>然后需要用-o 进行输出</li>
+</ul>
+<h3 id="xclip_3">xclip 输出</h3>
+<p><img alt="图片描述" src="images/uid1190679-20221119-1668864771921.png" /></p>
+<ul>
+<li>确实可以进行输出</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221119-1668864786616.png" /></p>
+<ul>
+<li>甚至可以进行输出重定向</li>
+<li>但是进入系统剪贴板了么？</li>
+</ul>
+<h3 id="_3">尝试输出</h3>
+<ul>
+<li>鼠标右键</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221119-1668864832712.png" /></p>
+<ul>
+<li>这个内容没有进入系统剪贴板</li>
+<li>如何进入呢？</li>
+</ul>
+<h3 id="_4">搜索帮助</h3>
+<ul>
+<li>在帮助文件中搜索clipboard</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221119-1668864985558.jpg" /></p>
+<ul>
+<li>找到方法</li>
+</ul>
+<h3 id="_5">剪贴板</h3>
+<ul>
+<li>cat oeasy.txt | xclip -selection clipboard</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221119-1668865097383.png" /></p>
+<ul>
+<li>就可以用了</li>
+</ul>
+<h3 id="_6">总结</h3>
+<ul>
+<li>这次研究了xclip<ul>
+<li>xclip 可以将文件内容输出到剪贴板<ul>
+<li>cat oeasy.txt | xclip -selection clipboard</li>
+<li>然后再粘贴到合适的地方</li>
+<li>纯键盘操作还是很方便的</li>
+<li>文件内容就这样被提取到了内存    </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221119-1668865319023.png" /></p>
+<ul>
+<li>文件内容之外<ul>
+<li>文件还包括什么呢？<ul>
+<li>文件本质是一个索引节点</li>
+</ul>
+</li>
+<li>这个索引节点究竟长什么样子？🤔</li>
+</ul>
+</li>
+<li>背后又是什么原理？🤔</li>
+<li>下次再说👋</li>
+</ul>
+    </div>
+</body>
+</html>

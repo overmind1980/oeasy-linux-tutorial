@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：本章回顾，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解牛说 cowsay。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 牛说, cowsay, 本章回顾">
+    <meta property="og:title" content="oeasy Linux系统教程：本章回顾，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解牛说 cowsay。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="_1">本章回顾</h1>
+<h2 id="_2">我们来回顾一下 😌</h2>
+<ul>
+<li>软件包工具 🔧 是 <ul>
+<li>dpkg</li>
+<li>apt </li>
+</ul>
+</li>
+<li>dpkg<ul>
+<li>查看<ul>
+<li>dpkg --list | grep cmatrix</li>
+</ul>
+</li>
+<li>卸载<ul>
+<li>dpkg -r cmatrix</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>apt<ul>
+<li>查询 <ul>
+<li>search</li>
+</ul>
+</li>
+<li>详细查询<ul>
+<li>show</li>
+</ul>
+</li>
+<li>下载 <ul>
+<li>install</li>
+</ul>
+</li>
+<li>更新源 <ul>
+<li>update </li>
+</ul>
+</li>
+<li>升级软件 <ul>
+<li>upgrade</li>
+</ul>
+</li>
+<li>删除 <ul>
+<li>remove</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>还有个专门管理软件包的 <ul>
+<li>aptitude</li>
+</ul>
+</li>
+<li>下次玩什么呢？🤔</li>
+</ul>
+<h3 id="_3">牛说</h3>
+<ul>
+<li>这次我们下载个牛说 <ul>
+<li>cowsay：</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>cowsay
+</code></pre></div>
+
+<ul>
+<li>cowsay 牛说<ul>
+<li>cow 就是牛 🐄</li>
+<li>say 就是说 🗣</li>
+</ul>
+</li>
+<li>cowsay 就是牛说</li>
+<li>牛说的东西作为参数给 cowsay</li>
+</ul>
+<div class="highlight"><pre><span></span><code>cowsay<span class="w"> </span>oeasy
+</code></pre></div>
+
+<p><img alt="Image text" src="images/cowsay.png" /></p>
+<ul>
+<li>还有什么好玩的呢？👁 </li>
+<li>我们查查手册！📕</li>
+</ul>
+<h3 id="_4">表情</h3>
+<div class="highlight"><pre><span></span><code>cowsay<span class="w"> </span>-p<span class="w"> </span>oeasy
+cowsay<span class="w"> </span>-s<span class="w"> </span>oeasy
+cowsay<span class="w"> </span>-e<span class="w"> </span>*-<span class="w"> </span>oeasy
+</code></pre></div>
+
+<p><img alt="图片描述" src="images/uid1190679-20220902-1662088066936.png" /></p>
+<h3 id="_5">更多表情</h3>
+<ul>
+<li><code>-b</code> 极简主义 Borg Mode</li>
+<li><code>-d</code> 死亡状态 dead</li>
+<li><code>-g</code> 贪婪金钱 greedy</li>
+<li><code>-p</code> 偏执狂 paranoia</li>
+<li><code>-s</code> 石化 stone</li>
+<li><code>-w</code> 紧张睁大眼 wired</li>
+<li><code>-t</code> 闭眼的</li>
+<li><code>-e</code> 设置眼睛 eye 字符 后面眼睛字符</li>
+</ul>
+<h3 id="cowthink">cowthink</h3>
+<ul>
+<li>除了 cowsay 之外</li>
+<li>cowthink 也可以使用</li>
+</ul>
+<div class="highlight"><pre><span></span><code>cowthink<span class="w"> </span>-p<span class="w"> </span>oeasy
+</code></pre></div>
+
+<p><img alt="图片描述" src="images/uid1190679-20210910-1631265649559.png" /></p>
+<ul>
+<li>cowsay 牛不但能说</li>
+<li>而且能思考</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20211216-1639645388753.png" /></p>
+<ul>
+<li>昆丁也感觉很牛啊</li>
+</ul>
+<h3 id="_6">不同动物 🐫</h3>
+<ul>
+<li>我们先列出所有动物<ul>
+<li>先按下cowsay -f 然后按下<kbd>tab</kbd></li>
+<li>就可以列出所有的动物</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221012-1665577653736.png" /></p>
+<ul>
+<li>这些动物存放在哪里呢？</li>
+</ul>
+<h3 id="_7">列出所有动物</h3>
+<ul>
+<li>使用 <code>-l</code> 列出 list</li>
+</ul>
+<div class="highlight"><pre><span></span><code>cowsay<span class="w"> </span>-l
+</code></pre></div>
+
+<p><img alt="Image text" src="images/cowsay_list.png" /></p>
+<div class="highlight"><pre><span></span><code>cowsay<span class="w"> </span>-f<span class="w"> </span>apt<span class="w"> </span>oeasy
+</code></pre></div>
+
+<h3 id="_8">让动物说出自己的名字！🐑</h3>
+<div class="highlight"><pre><span></span><code>cowsay<span class="w"> </span>-l<span class="p">|</span>sed<span class="w"> </span><span class="s2">"s/ /\n/g"</span><span class="p">|</span>xargs<span class="w"> </span>-I<span class="w"> </span><span class="o">{}</span><span class="w"> </span>cowsay<span class="w"> </span><span class="o">{}</span><span class="w"> </span><span class="o">{}</span>
+</code></pre></div>
+
+<ul>
+<li>这个用法有点复杂</li>
+<li>我们可以一段段地来执行这个代码</li>
+<li>很有意思的</li>
+</ul>
+<h3 id="_9">内容太长</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220826-1661467718312.png" /></p>
+<ul>
+<li>有时候屏幕会乱掉</li>
+<li>查询一下手册</li>
+</ul>
+<h3 id="_10">查询</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220826-1661467847059.png" /></p>
+<ul>
+<li>-W 80</li>
+<li>可以保障正确换行么？</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220826-1661468054679.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20220826-1661468062782.png" /></p>
+<ul>
+<li>列宽可以设置</li>
+<li>但是无法保证正常使用</li>
+</ul>
+<h3 id="_11">查文档</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220826-1661469086480.jpg" /></p>
+<ul>
+<li>仿佛抓住一根救命稻草</li>
+</ul>
+<h3 id="_12">一言难尽</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220826-1661469113020.jpg" /></p>
+<ul>
+<li>2000年的事儿了</li>
+<li>这个Tony大哥帮助也没有写参数用法</li>
+<li>那谁知道怎么不换行</li>
+</ul>
+<h3 id="_13">搜索</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220826-1661469274391.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20220826-1661470108373.png" /></p>
+<ul>
+<li>不过这个n代表什么呢？</li>
+</ul>
+<h3 id="_14">刨根问底</h3>
+<ul>
+<li>把manual恢复回来</li>
+</ul>
+<div class="highlight"><pre><span></span><code>sudo minimize
+man cowsay
+</code></pre></div>
+
+<p><img alt="图片描述" src="images/uid1190679-20220826-1661470131334.png" /></p>
+<ul>
+<li>-n意味着not be word-wrapped</li>
+<li>就是保留原来的转义字符<code>\n</code></li>
+</ul>
+<h3 id="_15">总结 🤨</h3>
+<ul>
+<li>这次的 cowsay 可以做签名档</li>
+<li>可以改变动物类型</li>
+<li>😚 可以改变动物表情</li>
+<li>能否把 cowsay 和 figlet、toilet 结合呢？</li>
+<li>下次再说！👋</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220902-1662088233876.png" /></p>
+    </div>
+</body>
+</html>

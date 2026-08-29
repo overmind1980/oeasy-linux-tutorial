@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：本章回顾，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解高级软件包工具 apt。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖deb https://mirrors.aliyun.com/ubuntu/ xenial-updates main deb-src https://mirrors.aliyun.com/ub...">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 高级软件包工具, apt, 本章回顾">
+    <meta property="og:title" content="oeasy Linux系统教程：本章回顾，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解高级软件包工具 apt。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖deb https://mirrors.aliyun.com/ubuntu/ xenial-updates main deb-src https://mirrors.aliyun.com/ub...">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="_1">本章回顾</h1>
+<h2 id="_2">我们来回顾一下 😌</h2>
+<ul>
+<li>上次了解了dpkg<ul>
+<li>查看包(package)</li>
+<li>安装包</li>
+</ul>
+</li>
+<li>这个命令是ubuntu从他的上游debian上获得的</li>
+<li>不过下载包、管理包真的好麻烦</li>
+<li>能否连下载带管理一条龙都给做了呢？</li>
+</ul>
+<h3 id="_3">工具链</h3>
+<ul>
+<li>得到的二进制文件可能不能用</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20211017-1634465711818.png" /></p>
+<ul>
+<li>软件包之间是有依赖关系的<ul>
+<li>这个软件包依赖的软件包不存在</li>
+<li>甚至被依赖的软件包所依赖的软件包不存在</li>
+<li>这就形成了一条链路</li>
+<li>我们就需要把这条链路上所有的软件包都下载下来</li>
+</ul>
+</li>
+<li>有没有更便捷的方法呢？</li>
+</ul>
+<h3 id="_4">下载</h3>
+<ul>
+<li>当然有<ul>
+<li>使用 apt 把相关下载操作封装成接口</li>
+<li>我们直接调用 apt 就可以了</li>
+<li>不但下载你要求下载的二进制文件</li>
+<li>而且下载运行这个二进制文件需要的工具链上相关的二进制文件</li>
+<li>所以叫做高级包管理工具</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220901-1662005035709.png" /></p>
+<ul>
+<li>高级就高级在这了<ul>
+<li>当然你得有地方下载链上这一系列文件</li>
+<li>下载的地方就是镜像站</li>
+</ul>
+</li>
+</ul>
+<h3 id="mirrors">镜像站 (mirrors)</h3>
+<ul>
+<li>我们可以自己访问 <a href="https://www.debian.org/mirror/list">debian 系的镜象列表</a> <ul>
+<li>查看各地的镜像列表</li>
+</ul>
+</li>
+<li>我们自己的镜像源设置在 <code>/etc/apt/sources.list</code><ul>
+<li>cat /etc/apt/sources.list </li>
+<li>去观察</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210910-1631245850086.png" /></p>
+<ul>
+<li>镜像站一般也不只提供一个发行版的镜像。<ul>
+<li>除了debian</li>
+<li>也有rhel等其他发行版上的软件</li>
+</ul>
+</li>
+</ul>
+<h3 id="_5">阿里源</h3>
+<ul>
+<li>实验楼里面默认的是阿里源</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220901-1662018120270.jpg" /></p>
+<ul>
+<li>选择ubuntu系统</li>
+</ul>
+<h3 id="_6">选择版本</h3>
+<ul>
+<li>想要下载源的文本</li>
+<li>要选择选择系统版本</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220901-1662018198015.png" /></p>
+<ul>
+<li>那我怎么知道<ul>
+<li>目前我的这的系统是什么版本呢？</li>
+</ul>
+</li>
+</ul>
+<h3 id="_7">当前系统版本</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220901-1662005600355.png" /></p>
+<h3 id="_8">更新源</h3>
+<ul>
+<li>当前的系统是ubuntu16<ul>
+<li>https://developer.aliyun.com/mirror/ubuntu</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220901-1662018316134.png" /></p>
+<ul>
+<li>我把这个粘贴到/etc/apt/sources.list 就设置好了</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">deb</span><span class="w"> </span><span class="s">https://mirrors.aliyun.com/ubuntu/</span><span class="w"> </span><span class="kp">xenial</span><span class="w"> </span><span class="kp">main</span>
+<span class="k">deb-src</span><span class="w"> </span><span class="s">https://mirrors.aliyun.com/ubuntu/</span><span class="w"> </span><span class="kp">xenial</span><span class="w"> </span><span class="kp">main</span>
+
+<span class="k">deb</span><span class="w"> </span><span class="s">https://mirrors.aliyun.com/ubuntu/</span><span class="w"> </span><span class="kp">xenial-updates</span><span class="w"> </span><span class="kp">main</span>
+<span class="k">deb-src</span><span class="w"> </span><span class="s">https://mirrors.aliyun.com/ubuntu/</span><span class="w"> </span><span class="kp">xenial-updates</span><span class="w"> </span><span class="kp">main</span>
+
+<span class="k">deb</span><span class="w"> </span><span class="s">https://mirrors.aliyun.com/ubuntu/</span><span class="w"> </span><span class="kp">xenial</span><span class="w"> </span><span class="kp">universe</span>
+<span class="k">deb-src</span><span class="w"> </span><span class="s">https://mirrors.aliyun.com/ubuntu/</span><span class="w"> </span><span class="kp">xenial</span><span class="w"> </span><span class="kp">universe</span>
+<span class="k">deb</span><span class="w"> </span><span class="s">https://mirrors.aliyun.com/ubuntu/</span><span class="w"> </span><span class="kp">xenial-updates</span><span class="w"> </span><span class="kp">universe</span>
+<span class="k">deb-src</span><span class="w"> </span><span class="s">https://mirrors.aliyun.com/ubuntu/</span><span class="w"> </span><span class="kp">xenial-updates</span><span class="w"> </span><span class="kp">universe</span>
+
+<span class="k">deb</span><span class="w"> </span><span class="s">https://mirrors.aliyun.com/ubuntu/</span><span class="w"> </span><span class="kp">xenial-security</span><span class="w"> </span><span class="kp">main</span>
+<span class="k">deb-src</span><span class="w"> </span><span class="s">https://mirrors.aliyun.com/ubuntu/</span><span class="w"> </span><span class="kp">xenial-security</span><span class="w"> </span><span class="kp">main</span>
+<span class="k">deb</span><span class="w"> </span><span class="s">https://mirrors.aliyun.com/ubuntu/</span><span class="w"> </span><span class="kp">xenial-security</span><span class="w"> </span><span class="kp">universe</span>
+<span class="k">deb-src</span><span class="w"> </span><span class="s">https://mirrors.aliyun.com/ubuntu/</span><span class="w"> </span><span class="kp">xenial-security</span><span class="w"> </span><span class="kp">universe</span>
+</code></pre></div>
+
+<ul>
+<li>我可以从别的源中获取软件么？</li>
+</ul>
+<h3 id="_9">清华源</h3>
+<ul>
+<li>https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20230220-1676861972488.png" /></p>
+<ul>
+<li>甚至可以用命令一键换源</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">sudo</span><span class="w"> </span><span class="n">sed</span><span class="w"> </span><span class="o">-</span><span class="n">i</span><span class="w"> </span><span class="ss">"s@http://.*archive.ubuntu.com@https://mirrors.tuna.tsinghua.edu.cn@g"</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">apt</span><span class="o">/</span><span class="n">sources</span><span class="p">.</span><span class="n">list</span>
+<span class="n">sudo</span><span class="w"> </span><span class="n">sed</span><span class="w"> </span><span class="o">-</span><span class="n">i</span><span class="w"> </span><span class="ss">"s@http://.*security.ubuntu.com@https://mirrors.tuna.tsinghua.edu.cn@g"</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">apt</span><span class="o">/</span><span class="n">sources</span><span class="p">.</span><span class="n">list</span>
+</code></pre></div>
+
+<ul>
+<li>ubuntu是debian的下游<ul>
+<li>可以使用debian的源吗？</li>
+</ul>
+</li>
+</ul>
+<h3 id="_10">上下游</h3>
+<ul>
+<li>debian是ubuntu的上游</li>
+<li>用的都是apt的包管理工具</li>
+<li>是可以设置的</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220901-1662017445163.png" /></p>
+<ul>
+<li>但要找到两者版本之间的对应关系</li>
+</ul>
+<h3 id="_11">对应关系</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220901-1662018538407.png" /></p>
+<ul>
+<li>实验楼上面用的是ubuntu16.04</li>
+<li>对应着debian9(stretch)</li>
+<li>这回我们去清华源上去找</li>
+</ul>
+<h3 id="_12">找到配置</h3>
+<ul>
+<li>找到系统</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220901-1662019094504.png" /></p>
+<ul>
+<li>点进去</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220901-1662019123091.png" /></p>
+<ul>
+<li>找到帮助</li>
+</ul>
+<h3 id="_13">版本</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220901-1662019146850.png" /></p>
+<ul>
+<li>这样找到具体的路径</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220901-1662019218912.png" /></p>
+<ul>
+<li>但是如果我想复制相关源的文本呢？</li>
+</ul>
+<h3 id="_14">清华源</h3>
+<ul>
+<li>以 <a href="https://mirror.tuna.tsinghua.edu.cn/">清华镜像站</a> 为例：</li>
+<li>有好多发行版</li>
+<li>点击debian后面问号</li>
+<li>可以获得 <code>sources.list</code> 的相关清华源配置代码</li>
+</ul>
+<p><img alt="Image text" src="images/mirror.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20220901-1662019313595.png" /></p>
+<ul>
+<li>我们怎么选的<ul>
+<li>根据目前的系统版本选</li>
+<li>目前是ubuntu-16.04对应的debian9</li>
+</ul>
+</li>
+<li>如果是自己做服务器的话<ul>
+<li>建议选用debian</li>
+<li>选debian哪个版本呢？</li>
+</ul>
+</li>
+</ul>
+<h3 id="_15">版本选择</h3>
+<ul>
+<li>这里有不同版本</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20211017-1634466482300.png" /></p>
+<ul>
+<li>应该选哪个呢？</li>
+</ul>
+<h3 id="_16">主要版本</h3>
+<ul>
+<li>
+<p>https://www.debian.org/distrib/packages</p>
+</li>
+<li>
+<p>主要三类版本</p>
+<ul>
+<li>stable</li>
+<li>testing</li>
+<li>unstable</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20211017-1634466549852.png" /></p>
+<ul>
+<li>
+<p>这三个东西</p>
+<ul>
+<li>随着时间推进水涨船高的</li>
+<li>也就是说</li>
+<li>unstable会进化成testing</li>
+<li>testing会进化成stable</li>
+</ul>
+</li>
+<li>
+<p>选stable就很稳当</p>
+</li>
+</ul>
+<h3 id="_17">具体版本</h3>
+<ul>
+<li>比stable更稳当的是oldstable</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20211017-1634466720165.png" /></p>
+<ul>
+<li>oldoldstable就有点过于稳当了</li>
+<li>再稳当一点就被淘汰了</li>
+</ul>
+<h3 id="_18">具体看看</h3>
+<p><img alt="图片描述" src="images/uid1190679-20211216-1639624493462.png" /></p>
+<ul>
+<li>版本里支持各种架构</li>
+<li>我们这个debian9的stretch是什么意思？</li>
+</ul>
+<h3 id="stretch">stretch</h3>
+<p><img alt="图片描述" src="images/uid1190679-20211017-1634467511937.png" /></p>
+<ul>
+<li>这个名字来自于玩具总动员3</li>
+<li>Debian版本的名字大多来自于玩具总动员</li>
+</ul>
+<h3 id="_19">玩具总动员</h3>
+<p><img alt="图片描述" src="images/uid1190679-20211017-1634467613830.png" /></p>
+<ul>
+<li>很有趣 </li>
+<li>不是么？</li>
+<li>除了阿里源、清华源之外</li>
+<li>腾讯源也类似</li>
+<li>一般来说和你自己轻量云提供商有关</li>
+<li>从近的地方下载比较快</li>
+<li>看看源上都设置了什么🤪</li>
+</ul>
+<h3 id="sourceslist">sources.list🗒</h3>
+<ul>
+<li>sources.list 语法是这样的<ul>
+<li>deb url distribution component1 component2 component3 [..] componentX</li>
+<li>deb-src url distribution component1 component2 component3 [..] componentX</li>
+</ul>
+</li>
+<li>含义<ul>
+<li>deb 对应二进制文件</li>
+<li>deb-src 对应源文件</li>
+<li>在地址后面有个版本号</li>
+<li>版本在 dists(distribution) 里面可以找到</li>
+<li><a href="https://mirror.tuna.tsinghua.edu.cn/debian/dists/">https://mirror.tuna.tsinghua.edu.cn/debian/dists/</a></li>
+<li>debian 系列版本号都是玩具总动员中的角色</li>
+<li>ubuntu 版本号来自于动物 🦊</li>
+<li>main、contribute 是文件夹的名字</li>
+<li>Buster 版是最新的稳定版，适合拿来使用</li>
+</ul>
+</li>
+<li>维护者维护的源头是源文件</li>
+<li>有了源文件，可以编译成到各种架构的二进制文件</li>
+<li>修改也是，先修改源文件</li>
+<li>有一个源不是就够了么</li>
+<li>为什么会设置有很多源<ul>
+<li>网络不一定连通</li>
+<li>更多的源意味着我们可以从更多的地方下载可执行文件或者源文件</li>
+</ul>
+</li>
+</ul>
+<h3 id="_20">周期</h3>
+<ul>
+<li>各种版本的生命周期</li>
+</ul>
+<p><img alt="Image text" src="images/release-cycle.png" /></p>
+<h3 id="package">package🎁</h3>
+<ul>
+<li>软件包发布的过程生命周期：</li>
+</ul>
+<p><img alt="Image text" src="images/package-lifecycle.png" /></p>
+<h3 id="_21">其他发行版的包管理工具🧩</h3>
+<ul>
+<li>其他家族发行版的包管理<ul>
+<li>红帽系的 yum</li>
+<li>arch 系的 pacman </li>
+<li>也是很好的管理工具</li>
+</ul>
+</li>
+<li>如果有些包你是从红帽系 rpm 下载的</li>
+<li>可以用 alien 转化为 deb</li>
+<li>然后安装 deb 文件</li>
+<li>其实都差不多</li>
+</ul>
+<h3 id="_22">总结</h3>
+<ul>
+<li>我们这里了解了如何<ul>
+<li>设置源</li>
+<li>换源</li>
+</ul>
+</li>
+<li>我们可以从源上下载各种好用的最新的软件</li>
+<li>了解了ubuntu和debian的上下游关系</li>
+<li>了解了获取源的一些方法</li>
+<li>源上有源代码</li>
+<li>可是github上也有源代码</li>
+<li>我可以从git直接下载源代码</li>
+<li>然后编译安装么？</li>
+<li>小伙子，你这个想法很可怕啊？🤔 </li>
+<li>且听下个实验再分解！👋</li>
+</ul>
+    </div>
+</body>
+</html>

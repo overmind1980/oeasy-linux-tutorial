@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：请求和响应，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解请求和响应。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 请求和响应">
+    <meta property="og:title" content="oeasy Linux系统教程：请求和响应，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解请求和响应。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="_1">请求和响应</h1>
+<h2 id="_2">回顾</h2>
+<ul>
+<li>这次了解了 <ul>
+<li>什么是后端</li>
+<li>什么又是前端？🤔</li>
+</ul>
+</li>
+<li>前端<ul>
+<li>负责发送请求(requests)</li>
+<li>负责接收响应(response)</li>
+<li>网页设计做图切片</li>
+<li>管的是看得见听得着的部分</li>
+<li>前端javascript代码</li>
+</ul>
+</li>
+<li>后端<ul>
+<li>负责接收请求(requests)</li>
+<li>负责发送响应(response)</li>
+<li>java语言</li>
+<li>应用服务器使用</li>
+<li>后台数据库操作</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220505-1651727871909.png" /></p>
+<ul>
+<li>可是究竟<ul>
+<li>什么是请求</li>
+<li>什么又是响应呢？</li>
+</ul>
+</li>
+</ul>
+<h3 id="_3">堂倌</h3>
+<ul>
+<li>客人发出请求<ul>
+<li>我要普洱</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220509-1652105842874.png" /></p>
+<ul>
+<li>堂倌进行响应<ul>
+<li>给您沏上</li>
+</ul>
+</li>
+<li>如果没有普洱<ul>
+<li>就实话实说</li>
+<li>找不到该茶(404)</li>
+</ul>
+</li>
+</ul>
+<h3 id="_4">请求和响应</h3>
+<ul>
+<li>客户端浏览器发出请求</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220509-1652105692734.png" /></p>
+<ul>
+<li>服务器赶紧进行响应<ul>
+<li>给您页面</li>
+</ul>
+</li>
+<li>如果没有页面<ul>
+<li>就告诉您找不到该页(404)</li>
+</ul>
+</li>
+</ul>
+<h3 id="_5">观察</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220510-1652139679821.png" /></p>
+<ul>
+<li>有眼色</li>
+<li>情商高</li>
+<li>有胆量</li>
+<li>什么是好堂倌呢？</li>
+</ul>
+<h3 id="_6">经验</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220509-1652106222344.png" /></p>
+<ul>
+<li>一进店人家就知道<ul>
+<li>你是买东西的还是闲逛的</li>
+<li>两人一起是什么关系</li>
+</ul>
+</li>
+<li>什么是好服务器呢？</li>
+</ul>
+<h3 id="_7">服务器</h3>
+<ul>
+<li>好的服务器</li>
+<li>知道用户想要的是什么</li>
+<li>用户是怎么过来的<ul>
+<li>电脑版</li>
+<li>手机版</li>
+<li>微信小程序版</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220509-1652106438963.png" /></p>
+<ul>
+<li>
+<p>那服务器是怎么知道的呢？</p>
+</li>
+<li>
+<p>这些东西大多在webapps/examples的文件夹下</p>
+</li>
+<li>这些可以通过页面访问么？</li>
+</ul>
+<h3 id="_8">页面访问</h3>
+<p><img alt="图片描述" src="images/uid1190679-20210912-1631426362330.png" /></p>
+<ul>
+<li>这些例子属于examples</li>
+<li>这个例子HelloWorldExample</li>
+<li>可以在web.xml里面找到它对应的class文件么？</li>
+</ul>
+<h3 id="_9">映射</h3>
+<p><img alt="图片描述" src="images/uid1190679-20210912-1631426785530.png" /></p>
+<ul>
+<li>进入/webapps/examples</li>
+<li>进入WEB-INF</li>
+<li>在web.xml中查找Hello<ul>
+<li>红色的是可以看到的url</li>
+<li>绿色的是对应的servlet的名字</li>
+<li>紫色的是class的名字</li>
+</ul>
+</li>
+<li>我们只要找到HelloWorldExample.java就可以了</li>
+</ul>
+<h3 id="_10">例子</h3>
+<ul>
+<li>启动tomcat之后</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220509-1652107086677.jpg" /></p>
+<h3 id="requestinfoexample">RequestInfoExample</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220509-1652107292558.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20220509-1652107308552.jpg" /></p>
+<ul>
+<li>确实得到了一些请求和响应的信息</li>
+</ul>
+<h3 id="_11">请求和响应</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220515-1652620544008.png" /></p>
+<ul>
+<li>请求里面包括的是<ul>
+<li>浏览器客户端的信息</li>
+<li>所请求的资源</li>
+</ul>
+</li>
+<li>响应里面包括的是<ul>
+<li>服务器的信息</li>
+<li>状态码</li>
+<li>请求资源的具体内容</li>
+</ul>
+</li>
+<li>这些访问的信息可以得到浏览器的ip</li>
+<li>根据这些地址服务器可以判断<ul>
+<li>来自于北京</li>
+<li>还是广州</li>
+<li>还是哪个电信运营商</li>
+</ul>
+</li>
+<li>这些访问会记录到日志么？</li>
+</ul>
+<h3 id="_12">记录到日志</h3>
+<ul>
+<li>logs/localhost_access_log_2022-05-19.txt<ul>
+<li>里面存有2022-5-19日当天所有的访问记录日志</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220519-1652933723228.png" /></p>
+<ul>
+<li>但是浏览器具体是什么系统什么浏览器来的呢？</li>
+</ul>
+<h3 id="requestheaderexample">RequestHeaderExample</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220509-1652107510675.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20220509-1652107497266.jpg" /></p>
+<ul>
+<li>我们写一个试试</li>
+</ul>
+<h3 id="_13">代码</h3>
+<ul>
+<li>编写servlet</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220509-1652107914649.png" /></p>
+<ul>
+<li>配置路由</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220509-1652107944004.png" /></p>
+<h3 id="_14">网页访问</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220509-1652107981970.png" /></p>
+<ul>
+<li>确实可以得到请求的headers</li>
+<li>但是都堆在一起</li>
+<li>加上网页浏览器认可的换行符<code>&lt;br/&gt;</code>就可以了</li>
+</ul>
+<h3 id="_15">修改</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220509-1652108036519.png" /></p>
+<ul>
+<li>修改代码并重新编译</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220509-1652108050403.png" /></p>
+<ul>
+<li>访问成功！</li>
+</ul>
+<h3 id="_16">总结 🤨</h3>
+<ul>
+<li>我们这次了解了请求和响应<ul>
+<li>请求就是客户发出的订单</li>
+<li>响应就是堂倌做出的反应</li>
+<li>堂倌会看人下菜碟</li>
+<li>来了请求</li>
+<li>能把浏览器基本信息都得到</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220509-1652108351283.png" /></p>
+<ul>
+<li>还能从浏览器得到什么信息么？<ul>
+<li>下次再说！👋</li>
+</ul>
+</li>
+</ul>
+    </div>
+</body>
+</html>

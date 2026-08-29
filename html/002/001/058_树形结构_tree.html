@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：阴历lunar，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解树形结构 tree。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 树形结构, tree, 阴历lunar">
+    <meta property="og:title" content="oeasy Linux系统教程：阴历lunar，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解树形结构 tree。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="lunar">阴历(lunar)</h1>
+<h2 id="_1">回忆</h2>
+<ul>
+<li>上次我们研究的是阴历</li>
+<li>主要是把阳历日期转化为阴历</li>
+<li>不是阴历日历</li>
+<li>我们可以把我们的year给补全一下么？</li>
+<li>每个月里面都有合适的文件名？</li>
+</ul>
+<h3 id="_2">新建目录</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663231936513.png" /></p>
+<h3 id="_3">复制两个月</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663232002832.png" /></p>
+<h3 id="_4">删除</h3>
+<ul>
+<li>删除11月的第31天</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663232066572.png" /></p>
+<h3 id="_5">复制冬季并修改</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663232167893.png" /></p>
+<h3 id="_6">改名</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663232306830.png" /></p>
+<h3 id="_7">继续改名</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663232457449.png" /></p>
+<ul>
+<li>类似套路</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663232472473.png" /></p>
+<h3 id="_8">秋天</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663232809788.png" /></p>
+<h3 id="_9">一年四季</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663232893984.png" /></p>
+<ul>
+<li>可以只看目录吗？</li>
+</ul>
+<h3 id="_10">只看目录</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663232931150.png" /></p>
+<ul>
+<li>我希望看到树形结构</li>
+<li>查询tree的文档手册</li>
+</ul>
+<h3 id="tree">tree</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663233064538.png" /></p>
+<ul>
+<li>默认是所有可见文件都可以查询出来</li>
+<li>如果我想看到.开头的隐藏文件</li>
+</ul>
+<h3 id="_11">查看隐藏文件</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663233198251.jpg" /></p>
+<ul>
+<li>linux系统中</li>
+<li>.开头的是隐藏文件</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663233343160.png" /></p>
+<ul>
+<li>如果我只想要看目录</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663233142941.jpg" /></p>
+<h3 id="_12">只看目录</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663233392806.png" /></p>
+<ul>
+<li>如果我想只看一层目录呢？</li>
+</ul>
+<h3 id="_13">层级</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663233542854.jpg" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663233533625.png" /></p>
+<h3 id="_14">名称匹配</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663233653603.jpg" /></p>
+<ul>
+<li>匹配的文件会被筛选出来</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663233660950.png" /></p>
+<h3 id="_15">模糊匹配？</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663234167899.png" /></p>
+<ul>
+<li>?代表一个任意字符</li>
+</ul>
+<h3 id="_16">模糊匹配*</h3>
+<ul>
+<li>*代表任意多个任意字符</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663234251386.png" /></p>
+<ul>
+<li>可以匹配路径名么？</li>
+</ul>
+<h3 id="_17">匹配路径名</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663234555174.jpg" /></p>
+<h3 id="_18">匹配路径名效果</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663234699633.png" /></p>
+<ul>
+<li>筛选掉无关文件夹</li>
+<li>prune<ul>
+<li>[pruːn]</li>
+<li>含义是修剪枝干</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663234718457.png" /></p>
+<ul>
+<li>有匹配的话</li>
+<li>有没有不匹配</li>
+</ul>
+<h3 id="_19">模式不匹配</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663234335337.jpg" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663234450463.png" /></p>
+<ul>
+<li>如果有指向文件夹的符号链接呢？</li>
+</ul>
+<h3 id="_20">查文档</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663235356718.jpg" /></p>
+<h3 id="_21">构建环境测试</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663235392929.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663235379597.png" /></p>
+<ul>
+<li>-l确实可以遍历软链接</li>
+</ul>
+<h3 id="_22">总结</h3>
+<ul>
+<li>tree是一个查询递归查询文件夹结构的命令</li>
+<li>tree 有一些参数<ul>
+<li>只遍历路径 -d</li>
+<li>控制路径层级 -L</li>
+<li>控制匹配模式 -P<ul>
+<li>控制路径符合匹配模式 --matchdirs</li>
+<li>控制不显示空路径 --prune</li>
+</ul>
+</li>
+<li>控制不匹配模式 -I</li>
+<li>遍历符号链接 -l</li>
+</ul>
+</li>
+<li>这部分实验我们学了很多</li>
+<li>下次总结一下？🤔</li>
+<li>下次再说👋</li>
+</ul>
+    </div>
+</body>
+</html>

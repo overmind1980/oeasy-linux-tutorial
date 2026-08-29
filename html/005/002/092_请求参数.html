@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：请求参数，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解请求参数。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 请求参数">
+    <meta property="og:title" content="oeasy Linux系统教程：请求参数，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解请求参数。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="_1">请求参数</h1>
+<h2 id="_2">回顾</h2>
+<ul>
+<li>我们上次了解了请求和响应<ul>
+<li>请求就是客户发出的订单</li>
+<li>响应就是堂倌做出的反应</li>
+<li>堂倌会看人下菜碟</li>
+<li>来了请求</li>
+<li>能把浏览器基本信息都得到</li>
+</ul>
+</li>
+<li>还能从浏览器得到什么信息么？</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220509-1652108351283.png" /></p>
+<ul>
+<li>看看第三个例子</li>
+</ul>
+<h3 id="_3">提交表单</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220521-1653101635903.png" /></p>
+<ul>
+<li>其实这根本不用后端</li>
+<li>前端就完全能够搞定！</li>
+</ul>
+<h3 id="_4">前端搞定</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220521-1653101564860.png" /></p>
+<ul>
+<li>前端直接接收处理就可以</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220521-1653101581147.png" /></p>
+<ul>
+<li>但是后端又是什么玩法呢？</li>
+</ul>
+<h3 id="requestparameter">RequestParameter</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220509-1652108699937.jpg" /></p>
+<ul>
+<li>这次的method<ul>
+<li>不是Get了</li>
+<li>而是Post</li>
+<li>这是什么意思？</li>
+</ul>
+</li>
+</ul>
+<h3 id="get">Get</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220515-1652622126817.png" /></p>
+<ul>
+<li>如果方法是Get</li>
+<li>可以清楚地看到参数的传递</li>
+<li>那post呢？</li>
+</ul>
+<h3 id="post">post</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220509-1652109016649.png" /></p>
+<ul>
+<li>这次post过去的数据在url里面看不见<ul>
+<li>但是最终还是被servlet接收到了</li>
+</ul>
+</li>
+</ul>
+<h3 id="_5">具体实现</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220521-1653101879869.png" /></p>
+<ul>
+<li>最终Post的处理函数是通过调用Get来实现的</li>
+<li>这样Get和Post过来的参数都能处理</li>
+</ul>
+<h3 id="_6">访问</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220509-1652108803615.png" /></p>
+<ul>
+<li>网页里面有一个表单(form)</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220509-1652108904819.jpg" /></p>
+<ul>
+<li>表单提交到RequestParamExample</li>
+<li>/RequestParamExample是一个地址</li>
+<li>这url路由到了我们的servlet</li>
+</ul>
+<h3 id="_7">准备网页</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220509-1652110420703.png" /></p>
+<ul>
+<li>注意修改name属性的值</li>
+</ul>
+<h3 id="_8">尝试访问</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220521-1653102110965.png" /></p>
+<ul>
+<li>可以访问<ul>
+<li>确实提交到了/add</li>
+<li>参数也Post到位了</li>
+<li>/add没有路由到任何servlet</li>
+<li>返回了个寂寞</li>
+</ul>
+</li>
+<li>你得知道做什么菜找哪个大师傅<ul>
+<li>而且大师傅得在岗</li>
+<li>才能把菜做出来</li>
+</ul>
+</li>
+</ul>
+<h3 id="_9">修改代码</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220509-1652109942673.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20220509-1652110123061.png" /></p>
+<h3 id="_10">提交</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220509-1652110486828.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20220509-1652110498429.png" /></p>
+<ul>
+<li>虽然计算的方法不对</li>
+<li>但是这毕竟是远程计算资源计算的1+1</li>
+<li>具有不同的意义</li>
+<li>用的可能是万里之外的服务器</li>
+<li>通过tcp/ip协议过来的</li>
+</ul>
+<h3 id="_11">回顾</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220505-1651720737181.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20220505-1651727871909.png" /></p>
+<ul>
+<li>这远程计算是很大的进步</li>
+</ul>
+<h3 id="_12">西气东输</h3>
+<ul>
+<li>西气东输</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220509-1652110815638.png" /></p>
+<ul>
+<li>传输的是天然气分子</li>
+<li>靠的是气压</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220521-1653094846595.png" /></p>
+<h3 id="_13">西电东送</h3>
+<ul>
+<li>到西电东送</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220509-1652110845791.png" /></p>
+<ul>
+<li>传递的东西从分子到电子</li>
+<li>速度从分子速度到光速</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220515-1652619501848.png" /></p>
+<h3 id="_14">东数西算</h3>
+<ul>
+<li>光能和风能持续演进</li>
+<li>能自动转向调整俯仰的太阳能光伏设备</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220521-1653095319601.png" /></p>
+<ul>
+<li>当地发电当地运算节省了能量损耗</li>
+<li>西部一度电1毛钱，东部1块钱</li>
+<li>只要把最终渲染结果或者计算结果传递过去就可以了</li>
+<li>这是信息时代的新基建</li>
+<li>东数西算</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220509-1652110866696.png" /></p>
+<ul>
+<li>这很明显在进化</li>
+</ul>
+<h3 id="_15">进化</h3>
+<ul>
+<li>传递的的内容在升级<ul>
+<li>石油天然气是物质</li>
+<li>电力是能量</li>
+<li>数据是信息</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220509-1652110928853.png" /></p>
+<ul>
+<li>物质能量信息<ul>
+<li>新基建会有新的机会</li>
+<li>会形成信息时代的枢纽</li>
+<li>当地应该会需要一些linux维护开发人员</li>
+</ul>
+</li>
+<li>虽然目前连1+1都没有算对<ul>
+<li>但感觉还是充满了希望！！！</li>
+</ul>
+</li>
+<li>先去总结一下吧</li>
+</ul>
+<h3 id="_16">总结 🤨</h3>
+<ul>
+<li>这次后台servlet接收到了网页post过来的参数<ul>
+<li>尝试处理</li>
+<li>但是出了错误</li>
+<li>这个怎么办呢？🤔</li>
+</ul>
+</li>
+<li>下次再说！👋</li>
+</ul>
+    </div>
+</body>
+</html>

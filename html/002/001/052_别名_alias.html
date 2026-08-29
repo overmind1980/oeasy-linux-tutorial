@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：别名alias，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解别名 alias。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 别名, alias, 别名alias">
+    <meta property="og:title" content="oeasy Linux系统教程：别名alias，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解别名 alias。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="alias">别名(alias)</h1>
+<h2 id="_1">回忆</h2>
+<ul>
+<li>上次研究了文件存储信息<ul>
+<li>stat</li>
+</ul>
+</li>
+<li>stat可以显示文件的元数据，包括<ul>
+<li>大小</li>
+<li>硬链接数</li>
+<li>权限</li>
+<li>最近访问</li>
+<li>最近更改</li>
+<li>最近打开时间</li>
+<li>blocks等</li>
+</ul>
+</li>
+<li>如果一个索引节点(inode)被引用数为0</li>
+<li>那么这个索引节点就可以被回收了</li>
+<li>这个就是硬链接的基础</li>
+<li>除了硬链接之外我们还有什么办法定义命令吗？</li>
+</ul>
+<h3 id="alias_1">alias</h3>
+<ul>
+<li>我们看一些常用的命令</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220914-1663145251437.png" /></p>
+<ul>
+<li>其实都是一些alias</li>
+<li>那么什么是alias呢？</li>
+</ul>
+<h3 id="alias_2">alias别名</h3>
+<ul>
+<li>alias</li>
+<li>发音 [ˈeɪliəs]</li>
+<li>意思是别名</li>
+<li>就是起绰号、外号</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220914-1663145388634.png" /></p>
+<ul>
+<li>起个外号有什么用么？</li>
+</ul>
+<h3 id="_2">自动加上参数</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220914-1663145486305.png" /></p>
+<h3 id="_3">简化命令</h3>
+<div class="highlight"><pre><span></span><code>alias
+</code></pre></div>
+
+<ul>
+<li>alias可以看到所有的别名</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220914-1663152231316.png" /></p>
+<ul>
+<li>确实可以少打很多字</li>
+<li>每次都要先打alias</li>
+<li>然后才能用别名</li>
+<li>有点麻烦</li>
+<li>可以直接定义好吗？</li>
+</ul>
+<h3 id="_4">定义</h3>
+<ul>
+<li>vi ~/.zshrc</li>
+<li>编辑这个zshell 的 run command</li>
+<li>系统每次初始化zsh都要运行这个文件</li>
+<li>把这句话加到最后一行</li>
+</ul>
+<div class="highlight"><pre><span></span><code>alias ls='echo "Dir Size|Perms|Link Count|Owner|Group|Size|Mod.Time|Name"; ls -Fhls --color --group-directories-first'
+</code></pre></div>
+
+<ul>
+<li>:wq 保存并退出</li>
+<li>重启zsh</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663248785584.png" /></p>
+<ul>
+<li>ls命令就有了标题行</li>
+<li>还有什么实用的别名吗？</li>
+</ul>
+<h3 id="pbcopy">pbcopy</h3>
+<ul>
+<li>pbcopy是mac上面很好用的命令</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221119-1668865498364.png" /></p>
+<ul>
+<li>作用是<ul>
+<li>把输出到标准输出流的内容<ul>
+<li>复制到剪贴板</li>
+</ul>
+</li>
+<li>很像xclip</li>
+</ul>
+</li>
+</ul>
+<h3 id="_5">建立别名</h3>
+<div class="highlight"><pre><span></span><code>alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
+</code></pre></div>
+
+<ul>
+<li>验证可用</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221119-1668865668885.png" /></p>
+<ul>
+<li>alias和ln有什么不一样呢？</li>
+</ul>
+<h3 id="_6">别名和链接</h3>
+<ul>
+<li>alias<ul>
+<li>建立一个别名</li>
+<li>在~/.zshrc里面完成初始化</li>
+<li>直接就能用起来</li>
+<li>alias改了就变化</li>
+</ul>
+</li>
+<li>ln<ul>
+<li>建立一个链接</li>
+<li>有具体的文件</li>
+<li>即使是符号链接也有文件</li>
+<li>想要修改就要重新建立链接</li>
+</ul>
+</li>
+</ul>
+<h3 id="_7">总结</h3>
+<ul>
+<li>这次我们研究了alias别名</li>
+<li>可以给命令起一些别名</li>
+<li>这些别名可以<ul>
+<li>简化命令文本</li>
+<li>还可以为命令添加默认参数</li>
+</ul>
+</li>
+<li>回到我们上次研究的那个一年四季</li>
+<li>可以删除文件和文件夹么？🤔</li>
+<li>下次再说👋</li>
+</ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：阴历lunar，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解我是谁 who。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 我是谁, who, 阴历lunar">
+    <meta property="og:title" content="oeasy Linux系统教程：阴历lunar，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解我是谁 who。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="lunar">阴历(lunar)</h1>
+<h2 id="_1">回忆</h2>
+<ul>
+<li>上次我们可以操作文件和文件夹了<ul>
+<li>复制 cp</li>
+<li>新建 mkdir</li>
+<li>删除 rm</li>
+<li>改名移动 mv</li>
+</ul>
+</li>
+<li>我们还可以查询文件和文件夹<ul>
+<li>列表 ls</li>
+<li>递归查询文件夹 tree</li>
+<li>详细信息 stat</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663246208006.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663246222331.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663246234059.png" /></p>
+<ul>
+<li>这里值为shiyanlou的uid到底是什么呢？ </li>
+</ul>
+<h3 id="whoami">我是谁(whoami)</h3>
+<div class="highlight"><pre><span></span><code>whoami
+whatis whoami
+whereis whoami
+which whoami
+dpkg -S /usr/bin/whoami
+</code></pre></div>
+
+<ul>
+<li>我是shiyanlou</li>
+<li>shiyanlou是当前系统的userid</li>
+<li>whoami 是一个coreutils的程序 </li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663247582855.png" /></p>
+<h3 id="_2">帮助细节</h3>
+<ul>
+<li>这可以说就是没有细节了</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663247953852.png" /></p>
+<ul>
+<li>http://www.gnu.org/software/coreutils/whoami</li>
+</ul>
+<h3 id="_3">官网文件</h3>
+<p><img alt="图片描述" src="images/uid1190679-20240805-1722827556240.png" /></p>
+<ul>
+<li>看看手册去</li>
+</ul>
+<h3 id="_4">更多帮助手册</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663247944584.png" /></p>
+<ul>
+<li>看不出什么新东西了</li>
+</ul>
+<h3 id="who">都有谁(who)</h3>
+<div class="highlight"><pre><span></span><code>who --help
+</code></pre></div>
+
+<ul>
+<li>who显示已登陆的用户信息</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240805-1722827691314.png" /></p>
+<ul>
+<li>还可以看到细节么？</li>
+</ul>
+<h3 id="_5">标题</h3>
+<ul>
+<li>-H<ul>
+<li>标题</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240805-1722827778656.png" /></p>
+<ul>
+<li>-q<ul>
+<li>统计</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663249200544.png" /></p>
+<ul>
+<li>能用的参数好像就这么多</li>
+<li>再细节呢？</li>
+</ul>
+<h3 id="man-who">man who</h3>
+<div class="highlight"><pre><span></span><code>man who
+</code></pre></div>
+
+<p><img alt="图片描述" src="images/uid1190679-20240805-1722828084423.png" /></p>
+<ul>
+<li>好像结果是从/var/run/utmp读到的</li>
+</ul>
+<h3 id="_6">直接读取</h3>
+<div class="highlight"><pre><span></span><code><span class="n">vi</span><span class="w"> </span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">utmp</span>
+</code></pre></div>
+
+<ul>
+<li>设置换行</li>
+</ul>
+<div class="highlight"><pre><span></span><code>:set wrap
+</code></pre></div>
+
+<p><img alt="图片描述" src="images/uid1190679-20240805-1722828340705.png" /></p>
+<ul>
+<li>还有什么吗？</li>
+</ul>
+<h3 id="w">新命令w</h3>
+<ul>
+<li>这次可以看到更多信息</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240805-1722828459393.png" /></p>
+<h3 id="_7">总结 🤔</h3>
+<ul>
+<li>这次了解了三个命令<ul>
+<li>whoami</li>
+<li>who</li>
+<li>w</li>
+</ul>
+</li>
+<li>最短的最好用</li>
+<li>可以查看都有谁目前登录到系统中</li>
+<li>whoami就是查看我是谁<ul>
+<li>对应哪个userid</li>
+</ul>
+</li>
+<li>可以把所有的用户id列出来么？</li>
+<li>下次再说👋</li>
+</ul>
+    </div>
+</body>
+</html>

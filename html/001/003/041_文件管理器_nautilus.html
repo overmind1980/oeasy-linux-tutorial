@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：本章回顾，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解文件管理器 nautilus。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖上一部分我们都讲了什么？🤔等内容，搜索oeasy即可学习。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 文件管理器, nautilus, 本章回顾">
+    <meta property="og:title" content="oeasy Linux系统教程：本章回顾，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解文件管理器 nautilus。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖上一部分我们都讲了什么？🤔等内容，搜索oeasy即可学习。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="_1">本章回顾</h1>
+<h2 id="_2">我们来回顾一下 😌</h2>
+<p><strong>上一部分我们都讲了什么？</strong>🤔</p>
+<ul>
+<li>讲了火狐 🦊</li>
+<li>火狐的位置</li>
+<li>用命令行打开多个网址</li>
+<li>火狐 🦊 的升级</li>
+<li>火狐 🦊 桌面建立快捷方式</li>
+</ul>
+<p>那么我们可以知道桌面快捷方式文件的名称么？</p>
+<h2 id="_3">从文件管理器 🗂 到命令行 📟</h2>
+<p><img alt="Image text" src="images/file.png" /></p>
+<p>按住文件，拖动到 terminal📟 上面，这样我们就知道文件的绝对路径了。文件夹也可以拖动，我们也可以先打上命令，然后把文件作为参数拖动过来。</p>
+<p><img alt="Image text" src="images/file.pngAsArguement" /></p>
+<h2 id="_4">从命令行 📟 到文件管理器 🗂</h2>
+<p>我们首先在命令行的位置输入 pwd，把路径复制到剪贴板：</p>
+<p><img alt="Image text" src="images/file.pngpath.png" /></p>
+<p>之后把路径粘贴到文件管理器的地址栏，这样就可以到达命令行所在的位置了。</p>
+<p><strong>也可以用 nautilus 命令打开文件管理器，让我们一起来看看吧～</strong></p>
+<h2 id="nautilus">nautilus</h2>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>nautilus
+nautilus<span class="w"> </span>.
+nautilus<span class="w"> </span>/etc
+</code></pre></div>
+
+<ul>
+<li><code>nautilus .</code> 打开当前路径</li>
+<li><code>nautilus /etc</code> 打开根下的 etc 文件夹</li>
+</ul>
+<p>然后使用 <kbd>ctrl</kbd>+<kbd>c</kbd> 结束进程。</p>
+<h3 id="_5">总结 🤨</h3>
+<ul>
+<li>这次了解了 gui（图形用户界面）和 cli（命令行界面）之间关系</li>
+<li>可以把文件从 gui 拖到 cli</li>
+<li>也可以吧 cli 的路径在 gui 中打开</li>
+<li>了解了桌面上的快捷方式的本质是个文件</li>
+<li>图形用户界面还有什么可玩的呢？</li>
+<li>下次再说！👋</li>
+</ul>
+    </div>
+</body>
+</html>

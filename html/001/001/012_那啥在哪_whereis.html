@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：那啥在哪 whereis，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解那啥在哪 whereis。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖我们可以查询到 whereis 的具体内容：📕等内容，搜索oeasy即可学习。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 那啥在哪, whereis">
+    <meta property="og:title" content="oeasy Linux系统教程：那啥在哪 whereis，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解那啥在哪 whereis。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖我们可以查询到 whereis 的具体内容：📕等内容，搜索oeasy即可学习。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="whereis">那啥在哪 whereis</h1>
+<h2 id="_1">回忆上次内容 😌</h2>
+<ul>
+<li>上次讲了ls的细节<ul>
+<li>参数 (arguement) </li>
+<li>选项 (option) </li>
+</ul>
+</li>
+<li>如果我想要对 <code>/proc</code> 执行 ls 操作<ul>
+<li>不但要递归查询<ul>
+<li>而且要列表<ul>
+<li>不但要列表而且要用人类可读的方式列表<ul>
+<li>而且还要显示出隐藏文件</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>这个应该怎么写呢？🤔 </li>
+<li>大家可以自己试试～</li>
+<li>你忘记了吗？！！😱<ul>
+<li>没关系，我们可以查手册📕 </li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>man ls
+</code></pre></div>
+
+<h3 id="_2">进程列表</h3>
+<ul>
+<li>现在我们要制作这样一个进程列表：🗒</li>
+</ul>
+<div class="highlight"><pre><span></span><code>ls -lh /proc
+</code></pre></div>
+
+<ul>
+<li>对于 /proc 路径进行列表<ul>
+<li>显示详细信息<ul>
+<li>-l</li>
+</ul>
+</li>
+<li>其中容量使用人们熟知的单位<ul>
+<li>-h</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20230203-1675396106750.png" /></p>
+<ul>
+<li>做完了之后可以思考</li>
+<li>ls 到底在哪？🤔</li>
+</ul>
+<h3 id="ls">ls 在哪？🤔</h3>
+<ul>
+<li>想要知道 <ul>
+<li>ls 在哪就得用 新命令<ul>
+<li>whereis</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>命令的参数是 <ul>
+<li>ls</li>
+</ul>
+</li>
+<li>综合起来就是：</li>
+</ul>
+<div class="highlight"><pre><span></span><code>whereis<span class="w"> </span>ls
+</code></pre></div>
+
+<ul>
+<li>我们可以得到 ls 两个硬盘位置：</li>
+</ul>
+<div class="highlight"><pre><span></span><code>/bin/ls
+/usr/share/man/man1/ls.1.gz
+</code></pre></div>
+
+<ul>
+<li>难道说我们最常用的一个命令</li>
+<li>竟然是文件系统中的一个文件？</li>
+<li>为什么 ls 在硬盘里？🤔</li>
+</ul>
+<h3 id="_3">位置</h3>
+<ul>
+<li>我们复盘整个过程<ul>
+<li><code>ls</code> 文件最开始在 <code>/bin</code> 这个位置</li>
+<li>当我在命令行敲击之后 <code>ls</code> 回车之后</li>
+<li>操作系统要求运行 <code>ls</code> 程序</li>
+<li>操作系统分配内存空间给 <code>ls</code></li>
+<li>操作系统把 <code>ls</code> 从硬盘加载到内存中</li>
+<li>操作系统分配 cpu 资源去执行程序</li>
+<li>最终把 <code>ls</code> 的结果输出到标准输出流（屏幕）上</li>
+</ul>
+</li>
+<li>为什么 ls 命令对应两个位置呢 🤔</li>
+</ul>
+<h3 id="_4">位置</h3>
+<ul>
+<li>第一个<ul>
+<li>看起来是命令的位置</li>
+</ul>
+</li>
+<li>第二个<ul>
+<li>看起来是一个文件</li>
+<li>而且像一个man 型的帮助手册</li>
+</ul>
+</li>
+<li>把他当做man的参数</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220831-1661952283272.png" /></p>
+<ul>
+<li>这怎么理解</li>
+</ul>
+<h3 id="gz">搜索打开gz</h3>
+<p><img alt="图片描述" src="images/uid1190679-20210910-1631238746539.png" /></p>
+<ul>
+<li>看起来可以用</li>
+<li>gunzip xxx.gz解压</li>
+</ul>
+<h3 id="_5">尝试</h3>
+<ul>
+<li>可以看到确实是帮助！</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220831-1661953066003.png" /></p>
+<ul>
+<li>sudo是<ul>
+<li>superuser do </li>
+<li>用管理员的权限运行命令</li>
+<li>允许已验证的用户以其他用户的身份来运行命令</li>
+<li>其他用户可以是普通用户或者超级用户</li>
+<li>大部分时候我们用它来以提升的权限来运行命令</li>
+<li>这样就可以执行解压程序</li>
+</ul>
+</li>
+<li>然后去目录底下找到cat一下</li>
+</ul>
+<h3 id="_6">直接打开</h3>
+<ul>
+<li>可以直接打开解压后的文件</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220831-1661952911002.jpg" /></p>
+<ul>
+<li>这和man ls有什么关系呢？</li>
+<li>这些都是一回事<ul>
+<li>man /usr/share/man/man1/ls.1.gz </li>
+<li>man ls </li>
+<li>cat /usr/share/man/man1/ls.1</li>
+</ul>
+</li>
+<li>那个简单些？<ul>
+<li>man ls更简单一些</li>
+<li>其实man ls就是解压并输出ls的帮助文件 </li>
+</ul>
+</li>
+<li>怎么理解whereis呢？</li>
+</ul>
+<h3 id="whatis">whatis</h3>
+<div class="highlight"><pre><span></span><code>whatis<span class="w">  </span>whereis
+</code></pre></div>
+
+<ul>
+<li>whereis 可以帮我们定位命令的位置</li>
+<li>但是 whereis 描述太简单了</li>
+<li>我们可以查询 whereis 的手册 man：📕</li>
+</ul>
+<h3 id="man">man</h3>
+<div class="highlight"><pre><span></span><code>man<span class="w"> </span>whereis
+</code></pre></div>
+
+<p>我们可以查询到 whereis 的具体内容：📕</p>
+<p><img alt="Image text" src="images/whereis.png" /></p>
+<ul>
+<li>走</li>
+<li>试试选项的功能</li>
+</ul>
+<h3 id="-b">二进制(-b)</h3>
+<div class="highlight"><pre><span></span><code>whereis<span class="w"> </span>-b<span class="w"> </span>ls
+</code></pre></div>
+
+<ul>
+<li>b 的意思是 <ul>
+<li>binary 二进制</li>
+<li>查找 ls的 二进制文件<ul>
+<li>二进制文件在/bin 里</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210910-1631239617122.png" /></p>
+<h3 id="-m">文档(-m)</h3>
+<div class="highlight"><pre><span></span><code>whereis<span class="w"> </span>-m<span class="w"> </span>ls
+</code></pre></div>
+
+<ul>
+<li>
+<p>m 的意思是 manual 文档</p>
+<ul>
+<li>查找 whereis 的文档</li>
+<li>文档在/usr/share/man 里面</li>
+</ul>
+</li>
+<li>
+<p>总结来说</p>
+<ul>
+<li><code>whereis -b ls</code> <ul>
+<li>找的是二进制文件</li>
+</ul>
+</li>
+<li><code>whereis -m ls</code> <ul>
+<li>找的是帮助手册</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>这系统不是开源的么</li>
+<li>那 ls 的源文件在哪呢？<ul>
+<li>这有点复杂...🧐</li>
+</ul>
+</li>
+</ul>
+<h3 id="ls_1">先查找 ls 的源文件</h3>
+<ul>
+<li>dpkg -S /bin/ls</li>
+<li>dpkg 是 Debian Package 是 Debian 的包管理命令</li>
+<li>包管理命令是管理各种应用软件包的</li>
+<li>可以理解为添加删除程序</li>
+<li>-S 是在已经安装的包里面查找 search</li>
+<li>/bin/ls 是具体文件的位置</li>
+<li>得到结果是 coreutils<ul>
+<li>core utilities</li>
+<li>核心应用</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210910-1631239752764.png" /></p>
+<ul>
+<li>怎么找到这个应用呢？</li>
+</ul>
+<h3 id="_7">设置源</h3>
+<ul>
+<li>要找到coreutil</li>
+<li>需要从apt的源上找</li>
+<li>什么是apt呢？<ul>
+<li>apt 是Linux下的一款安装包管理工具</li>
+<li>是一个客户/服务器系统</li>
+<li>apt-get是用来安装linux下的各种工具包的</li>
+<li>就像一个应用商店</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>vi<span class="w"> </span>/etc/apt/sources.list
+</code></pre></div>
+
+<h3 id="_8">分步操作</h3>
+<ol>
+<li>打开源的apt配置文件</li>
+<li>apt 是高级包管理的命令</li>
+<li>sudo 是使用管理员权限<ul>
+<li>vi 是文本编辑器</li>
+<li><code>/etc/apt/sources.list</code> 是源的配置文件</li>
+<li>目前的光标在第一行</li>
+</ul>
+</li>
+<li>依次输入 <kbd>4</kbd><kbd>G</kbd><ul>
+<li>移动光标直接到第四行</li>
+<li>光标在行首</li>
+<li>黄色、绿色的部分 是 设置好的源</li>
+<li>粽红色的部分 前面有井号<ul>
+<li>是注释</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p><img alt="图片描述" src="images/uid1190679-20230203-1675396300282.png" /></p>
+<h3 id="_9">取消注释</h3>
+<ul>
+<li>我想要取消注释<ul>
+<li>也就是应用这个源</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20230203-1675396390265.png" /></p>
+<ol>
+<li>输入2个 <kbd>x</kbd><ul>
+<li>删除两个字符</li>
+<li>取消注释</li>
+</ul>
+</li>
+<li>确认deb-src源的位置<ul>
+<li>这样我们不但可以下载包</li>
+<li>还可以下载包的源文件(source)</li>
+</ul>
+</li>
+<li>到底是谁的源文件？<ul>
+<li>所有可执行程序的源程序都可以下载</li>
+<li>这就是所谓的开放源代码，开源</li>
+</ul>
+</li>
+<li>从哪里下载<ul>
+<li>从mirror镜像</li>
+<li>比如阿里源就是mirrors.cloud.aliyuncs.com下载</li>
+</ul>
+</li>
+<li>依次摁下<ul>
+<li><kbd>:</kbd></li>
+<li><kbd>w</kbd></li>
+<li><kbd>q</kbd></li>
+<li><kbd>回车</kbd></li>
+<li>保存并退出 vi</li>
+</ul>
+</li>
+</ol>
+<h3 id="apt">用 apt 下载源代码</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">#运行 `sudo apt update`（更新源）</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>update
+<span class="c1">#获得源代码，注意结尾有s</span>
+sudo<span class="w"> </span>apt<span class="w"> </span><span class="nb">source</span><span class="w"> </span>coreutils
+<span class="c1">#在当前文件夹下找到 `coreutilsXXX` 文件夹</span>
+ls<span class="w"> </span>coreutils*
+<span class="c1">#8.25是对应的软件包的版本号</span>
+<span class="c1">#可能和您对应的不一样</span>
+<span class="c1">#cd 进入这个文件夹</span>
+<span class="nb">cd</span><span class="w"> </span>coreutils-8.25
+</code></pre></div>
+
+<p><img alt="图片描述" src="images/uid1190679-20210910-1631239978617.png" /></p>
+<h3 id="_10">找</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">#查看一下 coreutils-8.25 下有什么</span>
+<span class="n">ls</span><span class="w"> </span>
+<span class="c1">#进入 `src` 源文件文件夹 (source)</span>
+<span class="n">cd</span><span class="w"> </span><span class="n">src</span>
+<span class="c1">#查看一下 src 下有什么</span>
+<span class="n">ls</span><span class="w"> </span>
+<span class="c1">#再次文件夹查找ls的文件</span>
+<span class="c1">#找到了 `ls.c` 文件 (ls 的 c 语言源文件）</span>
+<span class="c1">#ls ls.*</span>
+</code></pre></div>
+
+<p><img alt="ls Source" src="images/listsourcefile.png" /></p>
+<h3 id="_11">查看</h3>
+<div class="highlight"><pre><span></span><code>#查看这个源文件
+vi ls.c
+</code></pre></div>
+
+<ul>
+<li>别小看一个ls<ul>
+<li>居然有4000多行c代码</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210910-1631240124547.png" /></p>
+<ul>
+<li><code>:q</code>可以退出</li>
+</ul>
+<h3 id="_12">总结思考 🤔</h3>
+<ul>
+<li>这次了解了where<ul>
+<li>可以找到命令的位置</li>
+</ul>
+</li>
+<li>命令有三种位置<ul>
+<li>二进制代码 binary</li>
+<li>源代码 source</li>
+<li>帮助手册 manual</li>
+</ul>
+</li>
+<li>我们真的可以获得 ls 源代码<ul>
+<li>这太棒了！👊 </li>
+</ul>
+</li>
+<li>可是如果有多个版本的命令比如：<ul>
+<li>python2</li>
+<li>python3 </li>
+</ul>
+</li>
+<li>又比如java有很多版本<ul>
+<li>我到底用的是那个版本的 java 呢？</li>
+</ul>
+</li>
+<li>我们下次再说。 👋</li>
+</ul>
+    </div>
+</body>
+</html>

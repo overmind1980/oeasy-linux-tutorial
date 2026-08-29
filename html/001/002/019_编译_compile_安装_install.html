@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：本章回顾，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解编译 compile 安装 install。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 编译, compile, 安装, install, 本章回顾">
+    <meta property="og:title" content="oeasy Linux系统教程：本章回顾，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解编译 compile 安装 install。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="_1">本章回顾</h1>
+<h2 id="_2">我们来回顾一下 😌</h2>
+<ul>
+<li>上次了解了如何<ul>
+<li>设置源</li>
+<li>换源</li>
+</ul>
+</li>
+<li>我们可以从源上下载各种好用的最新的软件</li>
+<li>了解了ubuntu和debian的上下游关系</li>
+<li>了解了获取源的一些方法</li>
+<li>源上有源代码</li>
+<li>可是github上也有源代码</li>
+<li>我可以从git直接下载源代码</li>
+<li>然后编译安装么？</li>
+<li>小伙子，你这个想法很可怕啊？</li>
+</ul>
+<h3 id="_3">找到软件</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220901-1662020700882.png" /></p>
+<ul>
+<li>准备克隆</li>
+</ul>
+<h3 id="_4">克隆</h3>
+<div class="highlight"><pre><span></span><code>git clone https://github.com/fph/bastet.git
+</code></pre></div>
+
+<p><img alt="图片描述" src="images/uid1190679-20220901-1662020791014.png" /></p>
+<ul>
+<li>用cpp写的一个东西</li>
+</ul>
+<h3 id="_5">编译</h3>
+<ul>
+<li>有些软件编译之前要先配置</li>
+</ul>
+<div class="highlight"><pre><span></span><code>configure
+</code></pre></div>
+
+<ul>
+<li>我们这个不用</li>
+</ul>
+<div class="highlight"><pre><span></span><code>make
+</code></pre></div>
+
+<ul>
+<li>编译之后出现一个bastet可执行的二进制文件</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220901-1662020910173.png" /></p>
+<ul>
+<li>运行bastet</li>
+</ul>
+<h3 id="_6">俄罗斯方块</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220901-1662020994798.png" /></p>
+<ul>
+<li>可以玩</li>
+<li>最后可以做一些收尾工作<ul>
+<li>把他挪到/usr/local/bin</li>
+<li>把源码删除</li>
+</ul>
+</li>
+<li>这就是编译安装的过程</li>
+<li>我可以用apt再安装一次么？<ul>
+<li>可以</li>
+<li>但是要先关闭当前的环境</li>
+</ul>
+</li>
+</ul>
+<h3 id="apt">apt安装</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220901-1662021165247.png" /></p>
+<ul>
+<li>这个和github那个有什么区别么？</li>
+</ul>
+<h3 id="_7">查看详细</h3>
+<ul>
+<li>基本差不多</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220901-1662021250752.png" /></p>
+<ul>
+<li>debian游戏团队觉得不错</li>
+<li>放进来的</li>
+<li>这东西在哪？</li>
+</ul>
+<h3 id="_8">灵魂三问</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220901-1662021309190.png" /></p>
+<ul>
+<li>直接就把编译好的东西</li>
+<li>和帮助的manual放到位置上了</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220901-1662021441023.png" /></p>
+<ul>
+<li>自己单独一个包</li>
+<li>apt确实很方便</li>
+<li>我们想象debian软件的maintainer都做了什么？</li>
+</ul>
+<h3 id="package">package🎁</h3>
+<ul>
+<li>软件包发布的过程生命周期：</li>
+</ul>
+<p><img alt="Image text" src="images/package-lifecycle.png" /></p>
+<h3 id="maintainer">maintainer</h3>
+<ul>
+<li>上游作者 fph 发布 bastet 最新版</li>
+<li>maintainer <ul>
+<li>编译 <ul>
+<li>不同的 cpu 架构要用不同的二进制文件</li>
+</ul>
+</li>
+<li>打包更新到最新的unstable中</li>
+<li>放到debian的服务器上去</li>
+<li>过了一段时间进入stable的版本</li>
+</ul>
+</li>
+<li>ubuntu从debian的服务器下载stable的版本</li>
+<li>然后更新到ubuntu的源</li>
+<li>清华源、阿里源同步到本地服务器</li>
+<li>最终用户从源上获得最终版的软件</li>
+</ul>
+<h3 id="_9">时差问题</h3>
+<ul>
+<li>比如vim的作者更新到了vim9</li>
+<li>maintainer放到unstable中</li>
+<li>等了好久才能下载到stable中的vim9</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220901-1662022741779.png" /></p>
+<ul>
+<li>稳是真稳</li>
+<li>稳得有点过了</li>
+<li>玩的时候不用这么稳<ul>
+<li>最新的vim、python、linux都可以试着编译安装一下</li>
+<li>不难</li>
+<li>而且很有成就感</li>
+</ul>
+</li>
+<li>不过维护服务器的时候必须得稳</li>
+</ul>
+<h3 id="_10">两种方法比较</h3>
+<ul>
+<li>编译安装<ul>
+<li>可以获得最新版的软件</li>
+<li>可以获得特定版本(tag)的软件</li>
+<li>可以获得其他架构的软件(交叉编译)</li>
+</ul>
+</li>
+<li>apt 安装<ul>
+<li>非常方便</li>
+<li>也可以下载源码</li>
+<li>但是版本是maintainer来控制的</li>
+<li>就像命令行版的应用商店</li>
+</ul>
+</li>
+</ul>
+<h3 id="_11">总结</h3>
+<ul>
+<li>我们这次编译安装了俄罗斯方块</li>
+<li>比较两种安装软件的方法<ul>
+<li>编译安装</li>
+<li>apt安装</li>
+</ul>
+</li>
+<li>各有优劣</li>
+<li>我们去下载一些好玩的软件吧？！🤔 </li>
+<li>且听下个实验再分解！👋</li>
+</ul>
+    </div>
+</body>
+</html>

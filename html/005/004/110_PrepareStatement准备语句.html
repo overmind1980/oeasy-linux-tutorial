@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：封装数据库连接，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解PrepareStatement准备语句。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, PrepareStatement准备语句, 封装数据库连接">
+    <meta property="og:title" content="oeasy Linux系统教程：封装数据库连接，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解PrepareStatement准备语句。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="_1">封装数据库连接</h1>
+<h3 id="_2">回忆</h3>
+<ul>
+<li>上次把数据库给封装了一层<ul>
+<li>新建了一个类DBConUtil </li>
+</ul>
+</li>
+<li>好处是<ul>
+<li>较少代码量</li>
+<li>替换数据库用户名密码变得很方便</li>
+</ul>
+</li>
+<li>这个类里面提到的<ul>
+<li>Conn、Statement、ResultSet都见过</li>
+<li>PrepareStatement究竟是什么?</li>
+<li>怎么用呢？🤔</li>
+</ul>
+</li>
+</ul>
+<h3 id="_3">搜索</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220428-1651117845616.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20220428-1651117856008.png" /></p>
+<h3 id="_4">修改</h3>
+<ul>
+<li>要执行下面的sql语句</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220428-1651118329289.png" /></p>
+<ul>
+<li>原始的SelectServlet.java</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220428-1651118391819.png" /></p>
+<ul>
+<li>查询结果</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651635235790.png" /></p>
+<ul>
+<li>现在在此基础上添加PrepareStatement代码</li>
+</ul>
+<h3 id="_5">查询</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651635466146.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651635447589.png" /></p>
+<h3 id="_6">代码</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651646914148.png" /></p>
+<ul>
+<li>这次在statement之外</li>
+<li>增加了PrepareStatement<ul>
+<li>? 就是占位符</li>
+<li>PrepareStatment有什么用呢？</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651647082835.jpg" /></p>
+<ul>
+<li>PrepareStatment会在?两侧自动加上单引号(')<ul>
+<li>从输出的两句sql语句中</li>
+<li>看不出prepare有什么优势啊</li>
+</ul>
+</li>
+<li>去jdk的官方文档看看究竟什么是PrepareStatement</li>
+</ul>
+<h3 id="_7">官网</h3>
+<ul>
+<li>https://jdk.java.net/18/<ul>
+<li>找到jdk18的api地址</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651648084257.jpg" /></p>
+<h3 id="api">api</h3>
+<ul>
+<li>https://docs.oracle.com/en/java/javase/18/docs/api/index.html</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651648187178.jpg" /></p>
+<h3 id="_8">描述</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651648292902.png" /></p>
+<ul>
+<li>我们可以从中找到PrepareStatement</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651648354873.jpg" /></p>
+<h3 id="_9">执行</h3>
+<ul>
+<li>生成这个PrepareStatement靠的是<ul>
+<li>connection执行prepareStatement方法</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651648677347.png" /></p>
+<ul>
+<li>这个函数<ul>
+<li>通过预编译的方法</li>
+<li>优化了参数化的sql语句</li>
+<li>如果驱动程序支持预编译</li>
+<li>这个方法会先向数据库发送预编译</li>
+</ul>
+</li>
+<li>总之<ul>
+<li>就是对于sql语句执行过程进行了优化</li>
+<li>而且</li>
+</ul>
+</li>
+<li>怎么注入呢？</li>
+</ul>
+<h3 id="sql">sql注入</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651649073949.png" /></p>
+<ul>
+<li>首先构造一个查询</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651649836929.png" /></p>
+<ul>
+<li>其中<ul>
+<li>--说明后面的都是注释，可被忽略</li>
+<li>用单引号封闭了前面之后</li>
+<li>后面想干什么都行<ul>
+<li>延迟</li>
+<li>删数据</li>
+<li>删表</li>
+<li>删库</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>了解了这个语句<ul>
+<li>我们如何写程序呢？</li>
+</ul>
+</li>
+</ul>
+<h3 id="_10">代码</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651649973480.jpg" /></p>
+<ul>
+<li>红框处构建了这个结构</li>
+<li>我们来看看执行结果</li>
+</ul>
+<h3 id="_11">结果</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651650098004.jpg" /></p>
+<ul>
+<li>我们可以看到Statement和PrepareStatement的区别</li>
+<li>PrepareStatement做了一些准备和预处理</li>
+<li>所以一定要</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651650237719.jpg" /></p>
+<h3 id="preparestatement">PrepareStatement</h3>
+<ul>
+<li>PreparedStatement<ul>
+<li>写参数化查询并预编译</li>
+</ul>
+</li>
+<li>PreparedStatement有两个好处<ul>
+<li>预编译比Statement能获得更好的性能</li>
+<li>可以阻止常见的SQL注入式攻击</li>
+</ul>
+</li>
+<li>那么我们就选择PreparedStatement而不是Statement</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.Connection</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.DriverManager</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.ResultSet</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.PreparedStatement</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.PrintWriter</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.ServletException</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.http.HttpServlet</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.http.HttpServletRequest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.http.HttpServletResponse</span><span class="p">;</span>
+<span class="n">public</span> <span class="k">class</span><span class="w"> </span><span class="nc">SelectServlet</span> <span class="n">extends</span> <span class="n">HttpServlet</span> <span class="p">{</span>
+    <span class="n">private</span> <span class="n">static</span> <span class="n">final</span> <span class="n">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="mi">1</span><span class="n">L</span><span class="p">;</span>
+    <span class="nd">@Override</span>
+    <span class="n">public</span> <span class="n">void</span> <span class="n">doGet</span><span class="p">(</span><span class="n">HttpServletRequest</span> <span class="n">request</span><span class="p">,</span>
+                      <span class="n">HttpServletResponse</span> <span class="n">response</span><span class="p">)</span>
+        <span class="n">throws</span> <span class="n">IOException</span><span class="p">,</span> <span class="n">ServletException</span>
+    <span class="p">{</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">setContentType</span><span class="p">(</span><span class="s2">"text/html"</span><span class="p">);</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">setCharacterEncoding</span><span class="p">(</span><span class="s2">"UTF-8"</span><span class="p">);</span>
+        <span class="n">PrintWriter</span> <span class="n">out</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">getWriter</span><span class="p">();</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;body&gt;"</span><span class="p">);</span>
+        <span class="n">Connection</span> <span class="n">c</span> <span class="o">=</span> <span class="n">null</span><span class="p">;</span>
+        <span class="k">try</span> <span class="p">{</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="n">DBConUtil</span><span class="o">.</span><span class="n">getConn</span><span class="p">();</span>
+            <span class="n">c</span><span class="o">.</span><span class="n">setAutoCommit</span><span class="p">(</span><span class="n">false</span><span class="p">);</span>
+            <span class="n">String</span> <span class="n">SearchName</span> <span class="o">=</span> <span class="s2">""</span><span class="p">;</span>
+            <span class="n">String</span> <span class="n">sql2</span> <span class="o">=</span> <span class="s2">"select * from login where username like ?"</span><span class="p">;</span>
+            <span class="n">PreparedStatement</span> <span class="n">pstmt</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">prepareStatement</span><span class="p">(</span><span class="n">sql2</span><span class="p">);</span>
+            <span class="n">pstmt</span><span class="o">.</span><span class="n">setString</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s2">"%"</span><span class="o">+</span><span class="n">SearchName</span><span class="o">+</span><span class="s2">"%"</span><span class="p">);</span>
+            <span class="n">ResultSet</span> <span class="n">rs</span> <span class="o">=</span> <span class="n">pstmt</span><span class="o">.</span><span class="n">executeQuery</span><span class="p">();</span>
+            <span class="k">while</span><span class="p">(</span><span class="n">rs</span><span class="o">.</span><span class="n">next</span><span class="p">()){</span>
+                <span class="n">String</span> <span class="n">username</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">getString</span><span class="p">(</span><span class="s2">"username"</span><span class="p">);</span>
+                <span class="n">String</span> <span class="n">password</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">getString</span><span class="p">(</span><span class="s2">"password"</span><span class="p">);</span>
+                <span class="n">out</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="n">username</span><span class="o">+</span><span class="s2">":"</span><span class="o">+</span><span class="n">password</span><span class="o">+</span><span class="s2">"&lt;br/&gt;"</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="n">DBConUtil</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">pstmt</span><span class="p">,</span><span class="n">null</span><span class="p">,</span><span class="n">rs</span><span class="p">);</span>
+        <span class="p">}</span> <span class="n">catch</span> <span class="p">(</span><span class="ne">Exception</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="n">printStackTrace</span><span class="p">();</span>
+            <span class="n">System</span><span class="o">.</span><span class="n">err</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">getClass</span><span class="p">()</span><span class="o">.</span><span class="n">getName</span><span class="p">()</span> <span class="o">+</span> <span class="s2">": "</span> <span class="o">+</span> <span class="n">e</span><span class="o">.</span><span class="n">getMessage</span><span class="p">());</span>
+        <span class="p">}</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"select query is ok!&lt;br/&gt;"</span><span class="p">);</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"&lt;/body&gt;&lt;/html&gt;"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h2 id="_12">总结</h2>
+<ul>
+<li>经过比较，PreparedStatement比Statement具有两个优势<ul>
+<li>预编译比Statement能获得更好的性能</li>
+<li>可以阻止常见的SQL注入式攻击</li>
+</ul>
+</li>
+<li>以后尽量使用PreparedStatement<ul>
+<li>PreparedStatement是使用DBConUtil 得到的connection生成的</li>
+<li>用户名、密码、数据连接都在DBConUtil里面</li>
+<li>如果别人看到了DBConUtil.java也可以得到相应的连接数据的方法</li>
+</ul>
+</li>
+<li>能否有个办法<ul>
+<li>在oeasy这个app的外面配置好数据库连接</li>
+<li>这样<ul>
+<li>不光oeasy这个app</li>
+<li>其他的应用只要使用这种连接</li>
+</ul>
+</li>
+<li>就可以直接连接到数据库</li>
+<li>一概全改</li>
+<li>而且更安全</li>
+</ul>
+</li>
+<li>有可能么？🤔</li>
+<li>下次再说！👋</li>
+</ul>
+    </div>
+</body>
+</html>

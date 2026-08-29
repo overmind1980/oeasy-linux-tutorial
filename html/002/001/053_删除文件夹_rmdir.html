@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：别名alias，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解删除文件夹 rmdir。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 删除文件夹, rmdir, 别名alias">
+    <meta property="og:title" content="oeasy Linux系统教程：别名alias，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解删除文件夹 rmdir。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="alias">别名(alias)</h1>
+<h2 id="_1">回忆</h2>
+<ul>
+<li>上次我们研究了alias别名</li>
+<li>可以给命令起一些别名</li>
+<li>这些别名可以<ul>
+<li>简化命令文本</li>
+<li>还可以为命令添加默认参数</li>
+</ul>
+</li>
+<li>回到我们上次研究的那个一年四季</li>
+<li>可以删除文件和文件夹么？</li>
+</ul>
+<h3 id="spring">从spring开始</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220914-1663158656096.png" /></p>
+<ul>
+<li>rm和rmdir是两个独立的命令</li>
+<li>具体怎么用呢？</li>
+</ul>
+<h3 id="2">进入2月</h3>
+<ul>
+<li>rm 12<ul>
+<li>删除具体的文件12</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220914-1663158754262.png" /></p>
+<ul>
+<li>rm 3*<ul>
+<li>删除3开头的文件</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220914-1663158803427.png" /></p>
+<ul>
+<li>rm *4<ul>
+<li>删除4结尾的文件</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220914-1663158846824.png" /></p>
+<ul>
+<li>我要想删除所有带2的文件应该如何呢？</li>
+</ul>
+<h3 id="_2">删除</h3>
+<ul>
+<li>rm <em>2</em><ul>
+<li>删除所有带2的文件</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220914-1663158913312.png" /></p>
+<ul>
+<li>rm *<ul>
+<li>删除所有文件</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220914-1663158962932.png" /></p>
+<ul>
+<li>
+<ul>
+<li></li>
+<li>是通配符</li>
+<li>代表0到任意多个任意字符</li>
+</ul>
+</li>
+<li>
+<p>我要把2月这个文件夹删了</p>
+</li>
+<li>应该如何呢？</li>
+</ul>
+<h3 id="_3">查询文档</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220914-1663159198503.jpg" /></p>
+<ul>
+<li>-r<ul>
+<li>recursive </li>
+<li>递归地删除文件夹和子文件夹</li>
+</ul>
+</li>
+<li>-f<ul>
+<li>force</li>
+<li>不提示强制删除</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220914-1663159359698.png" /></p>
+<h3 id="_4">删除文件夹</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220914-1663159472756.png" /></p>
+<ul>
+<li>甚至可以删除当前所在的文件夹</li>
+<li>可以交互地删除么？</li>
+</ul>
+<h3 id="_5">交互</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220914-1663159639775.jpg" /></p>
+<ul>
+<li>删除</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220914-1663159655072.png" /></p>
+<ul>
+<li>可以不交互</li>
+<li>但是把具体删除的文件列出来么？</li>
+</ul>
+<h3 id="_6">详细信息</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220914-1663159750007.jpg" /></p>
+<ul>
+<li>v<ul>
+<li>verbose</li>
+<li>详细信息</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220914-1663159807207.png" /></p>
+<ul>
+<li>可以删除er结尾</li>
+<li>前面有四个字符的文件夹吗？</li>
+</ul>
+<h3 id="_7">?通配符</h3>
+<ul>
+<li>问号?代表任意一个字符</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220914-1663159949561.png" /></p>
+<ul>
+<li>ls ????er<ul>
+<li>查询4个字符后面跟er的文件和文件夹</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220914-1663159993352.png" /></p>
+<ul>
+<li>查询后删掉</li>
+</ul>
+<h3 id="_8">尝试</h3>
+<div class="highlight"><pre><span></span><code>sudo rm -rf /
+</code></pre></div>
+
+<ul>
+<li>看着屏幕疯狂滴滚动</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220914-1663160226866.png" /></p>
+<ul>
+<li>无法删除只读系统文件</li>
+<li>看来这个删除还和文件的权限有关系</li>
+<li>先去总结吧</li>
+</ul>
+<h3 id="_9">总结</h3>
+<ul>
+<li>这次我们研究了删除</li>
+<li>删除时可以使用通配符<ul>
+<li>
+<ul>
+<li>0到任意多个字符</li>
+</ul>
+</li>
+<li>? 1个字符</li>
+</ul>
+</li>
+<li>参数<ul>
+<li>-r 递归</li>
+<li>-f 强制</li>
+<li>-v 详细信息</li>
+<li>-i 交互式</li>
+</ul>
+</li>
+<li>这样我们就了解了rm命令</li>
+<li>可以再了解一下改名命令么？🤔</li>
+<li>下次再说👋</li>
+</ul>
+    </div>
+</body>
+</html>

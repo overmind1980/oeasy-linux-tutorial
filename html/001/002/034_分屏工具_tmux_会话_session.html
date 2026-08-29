@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：分屏工具tmux，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解分屏工具 tmux 会话 session。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 分屏工具, tmux, 会话, session, 分屏工具tmux">
+    <meta property="og:title" content="oeasy Linux系统教程：分屏工具tmux，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解分屏工具 tmux 会话 session。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="tmux">分屏工具tmux</h1>
+<h2 id="_1">我们来回顾一下 😌</h2>
+<ul>
+<li>上次下载了中 🀄️ 文谚语</li>
+<li>输出重定向了中文谚语</li>
+<li>理解词典和颜色</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220903-1662197273972.png" /></p>
+<ul>
+<li>我们这次想要分屏！🤔</li>
+</ul>
+<h3 id="tmux_1">tmux</h3>
+<ul>
+<li>首先下载tmux</li>
+<li>进入tmux</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220903-1662198532989.png" /></p>
+<ul>
+<li>退出tmux<ul>
+<li>exit</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210927-1632741113713.png" /></p>
+<ul>
+<li>键入exit这种退出<ul>
+<li>是真的结束进程</li>
+</ul>
+</li>
+<li>除此之外<ul>
+<li>还有另一种退出</li>
+</ul>
+</li>
+</ul>
+<h3 id="detach">退出detach</h3>
+<ul>
+<li>脱离会话<ul>
+<li>tmux detach</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220903-1662198812603.png" /></p>
+<ul>
+<li>detach的意思是脱离<ul>
+<li>脱离什么</li>
+<li>脱离当前session 0</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220903-1662198825637.png" /></p>
+<ul>
+<li>什么是session？</li>
+</ul>
+<h3 id="session">session</h3>
+<ul>
+<li>session翻译为会话<ul>
+<li>原来指的是法庭定期的开庭</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20211209-1639019898088.png" /> </p>
+<ul>
+<li>后来也指一段时间的活动，比如<ul>
+<li>音乐会</li>
+<li>学年</li>
+<li>摄影</li>
+<li>录音</li>
+</ul>
+</li>
+<li>这里的session指的是和服务器之间的固定关联<ul>
+<li>除了用tmux detach</li>
+<li>之外还可以用快捷键</li>
+</ul>
+</li>
+</ul>
+<h3 id="_2">快捷键分离会话</h3>
+<ul>
+<li>快捷键是<kbd>ctrl</kbd> + <kbd>b</kbd> <kbd>d</kbd><ul>
+<li>先用左手小指按下<kbd>ctrl</kbd>不松手</li>
+<li>然后左手中指按下<kbd>b</kbd></li>
+<li>然后同时松手</li>
+<li>再按一下<kbd>d</kbd></li>
+</ul>
+</li>
+<li>作用也是和当前会话(session)分离(detach)<ul>
+<li>但不是从当前会话(session)中退出(exit)</li>
+<li>只是分离(detach)</li>
+<li>会话(session)还在</li>
+</ul>
+</li>
+<li>回到一般终端后<ul>
+<li>可以用tmux ls<ul>
+<li>观察所有分离的会话</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220903-1662199117687.png" /></p>
+<h3 id="_3">重新连接会话</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220903-1662199566386.png" /></p>
+<ul>
+<li>也可以用<ul>
+<li>意思是连接上原来的第0号session</li>
+<li>如果忘了的话，可以输入tab</li>
+<li>查看提示</li>
+</ul>
+</li>
+<li>tmux attach -t 0</li>
+<li>继续连接这个session</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220903-1662199624101.png" /></p>
+<ul>
+<li>现在就连接上上次的会话(ession)了</li>
+<li>还能看到上次detach那句话呢</li>
+</ul>
+<h3 id="session_1">自建session</h3>
+<ul>
+<li>重新detach<ul>
+<li>在detach回到一般状态后</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220903-1662199863334.png" /></p>
+<ul>
+<li>可以新建一个session<ul>
+<li>tmux new -s oeasy</li>
+<li>建立一个新的session名字叫做oeasy</li>
+</ul>
+</li>
+<li>这时就有了3个session</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220903-1662199969331.png" /></p>
+<ul>
+<li>可以切换session吗</li>
+</ul>
+<h3 id="session_2">切换session</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220903-1662200042971.png" /></p>
+<ul>
+<li>tmux switch -t 0<ul>
+<li>切换到名字是0的session</li>
+<li>当前session后面会有attached</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220903-1662200105463.png" /></p>
+<ul>
+<li>tmux switch -t oeasy<ul>
+<li>切换到名字是oeasy的session</li>
+</ul>
+</li>
+<li>反复练习切换</li>
+<li>0这个session的名字有点太特殊了</li>
+<li>会话(session)可以改名字吗？</li>
+</ul>
+<h3 id="session_3">session改名</h3>
+<ul>
+<li>tmux rename-session -t 0 o2z<ul>
+<li>把原来叫做0的session改名为o2z</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220903-1662200548401.png" /></p>
+<ul>
+<li>可以把另一改成o3z么？</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220903-1662200638103.png" /></p>
+<ul>
+<li>会话(session)可以删除么？</li>
+</ul>
+<h3 id="session_4">删除session</h3>
+<ul>
+<li>回车进入session</li>
+<li>回到命令行</li>
+<li>tmux ls列出所有session</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220903-1662206840972.png" /></p>
+<ul>
+<li>总共3个会话(session)</li>
+<li>当前session为o3z</li>
+<li>尝试删除<ul>
+<li>tmux kill-session -t session_name</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220903-1662207290084.png" /></p>
+<ul>
+<li>先删除名为o2z的会话(session)</li>
+<li>再删除名为oeasy的会话(session)</li>
+</ul>
+<h3 id="tmux_2">tmux管理器</h3>
+<ul>
+<li>列出会话<ul>
+<li>tmux ls </li>
+<li><kbd>ctrl</kbd>+<kbd>b</kbd> <kbd>s</kbd></li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220903-1662207948563.png" /></p>
+<ul>
+<li>上下方向键可以上下切换session</li>
+<li>回车可以选择session</li>
+<li>+键上→可以打开+</li>
+<li>我们总结一下tmux的session</li>
+</ul>
+<h3 id="_4">会话总结</h3>
+<ul>
+<li>新建会话<ul>
+<li>tmux</li>
+<li>tmux new -s session_name</li>
+</ul>
+</li>
+<li>列出所有会话<ul>
+<li>tmux ls</li>
+</ul>
+</li>
+<li>进入会话<ul>
+<li>tmux attach -t session_name</li>
+</ul>
+</li>
+<li>切换会话<ul>
+<li>tmux switch -t session_name </li>
+</ul>
+</li>
+<li>退出会话<ul>
+<li>tmux detach </li>
+<li><kbd>ctrl</kbd>+<kbd>b</kbd> <kbd>d</kbd></li>
+</ul>
+</li>
+<li>删除会话<ul>
+<li>tmux kill-session -t session_name</li>
+</ul>
+</li>
+<li>会话改名<ul>
+<li>tmux rename-session -t old new    </li>
+<li>当前会话改名<ul>
+<li><kbd>ctrl</kbd>+<kbd>b</kbd> <kbd>$</kbd></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>会话管理器<ul>
+<li><kbd>ctrl</kbd>+<kbd>b</kbd> <kbd>s</kbd></li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220903-1662208792424.png" /></p>
+<ul>
+<li>每个session后面有个<code>1 windows</code>是什么意思?🤔</li>
+<li>下次再说👋🏻</li>
+</ul>
+    </div>
+</body>
+</html>

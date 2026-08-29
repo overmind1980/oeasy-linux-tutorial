@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：趣味拓展 自由软件运动 free software unix，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解趣味拓展 自由软件运动 free software unix。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖| 个人兴趣爱好 | 大规模工业制造 | | --- | --- | | 织毛衣、围脖、手套 | 曼彻斯特 纺织行业 | | 家酿葡萄酒 | 大规模现代化...">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 趣味拓展, 自由软件运动, free, software, unix">
+    <meta property="og:title" content="oeasy Linux系统教程：趣味拓展 自由软件运动 free software unix，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解趣味拓展 自由软件运动 free software unix。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖| 个人兴趣爱好 | 大规模工业制造 | | --- | --- | | 织毛衣、围脖、手套 | 曼彻斯特 纺织行业 | | 家酿葡萄酒 | 大规模现代化...">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h2 id="_1">回忆🤔</h2>
+<ul>
+<li>软件行业 也和 各行各业一样<ul>
+<li>从 个人兴趣爱好</li>
+<li>发展为 产业</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240211-1707617118443.png" /></p>
+<ul>
+<li>比尔盖茨 将 公开信 <ul>
+<li>发到 家酿俱乐部</li>
+<li>冒 天下之大不韪 </li>
+<li>起诉 自由分享的行为 </li>
+<li>会有 <code>什么</code>结果 呢？</li>
+</ul>
+</li>
+<li>家酿的黑客群体<ul>
+<li>会 <code>如何</code> 反击呢？🤔</li>
+</ul>
+</li>
+</ul>
+<h3 id="_2">软件行业缘起</h3>
+<ul>
+<li>自1945年以来</li>
+<li>计算机技术吸引了世界上最睿智和最有创意的人</li>
+<li>有一批编程爱好</li>
+<li>他们创造另一种技术文化</li>
+<li>他们编软件和玩软件只是出于乐趣</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220928-1664365640046.png" /></p>
+<ul>
+<li>MIT（Massachusetts Institute of Technology）有了第一台PDP-1</li>
+<li>MIT铁路模型俱乐部（Tech Model Railroad Club）的信号和动力委员会（Signals and Power Committee）把这台机器当作他们最喜欢的科技玩具</li>
+<li>并由此发明了一系列的<ul>
+<li>编程工具</li>
+<li>俚语</li>
+<li>以及直到今天仍然依稀可辨的文化氛围</li>
+</ul>
+</li>
+</ul>
+<h3 id="arpa">ARPA网</h3>
+<ul>
+<li>1969年开始有了arpa网</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220928-1664365924183.png" /></p>
+<ul>
+<li>随着阿帕网联入mit和斯坦福</li>
+<li>极客文化也在传播</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220928-1664365988310.png" /></p>
+<ul>
+<li>MIT的AI实验室和计算机科学实验室（LCS）</li>
+<li>斯坦福大学人工智能实验室（Stanford Artificial Intelligence Laboratory，SAIL）</li>
+<li>卡内基-梅隆大学（Carnegie Mellon University，CMU）</li>
+<li>都是当时的文化圣地</li>
+</ul>
+<h3 id="unixc">unix和c</h3>
+<ul>
+<li>贝尔实验室研发multics项目失败</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220928-1664366214261.png" /></p>
+<ul>
+<li>项目中的两人<ul>
+<li>丹尼斯·里奇</li>
+<li>肯·汤姆逊</li>
+</ul>
+</li>
+<li>为了玩游戏</li>
+<li>想继续操作系统的项目</li>
+<li>但是项目组已经没有钱了</li>
+</ul>
+<h3 id="_3">产假</h3>
+<ul>
+<li>肯·汤姆逊计划4周开发个系统<ol>
+<li>内核</li>
+<li>文件系统</li>
+<li>编辑器</li>
+<li>编译程序</li>
+</ol>
+</li>
+<li>他的老婆回娘家休产假3个星期<ul>
+<li>他就把这个系统给做出来了</li>
+</ul>
+</li>
+<li>丹尼斯·里奇<ul>
+<li>表现出了不小的兴趣</li>
+<li>主动请求加入进来共同完善这个系统</li>
+<li>完善了unix</li>
+<li>开发了c语言</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221231-1672485368730.png" /></p>
+<ul>
+<li>然后这些软件被自由地分发到各地</li>
+</ul>
+<h3 id="_4">产业</h3>
+<ul>
+<li>AT&amp;T的管理层发现unix和c有利可图</li>
+<li>就把这个工程师业余时的作品商业化</li>
+<li>并开始销售</li>
+<li>而且生成私下拷贝都是犯法的</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220928-1664366832621.png" /></p>
+<ul>
+<li>从此软件也开始可以卖钱了</li>
+</ul>
+<h3 id="_5">软件行业发展</h3>
+<ul>
+<li>软件公司 越来越多<ul>
+<li>软件制作 逐渐从 爱好者的分享</li>
+<li>变成了 商业公司 盈利的手段</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20231018-1697635322364.png" /></p>
+<ul>
+<li>利润 确保 <ul>
+<li>软件公司 扩大雇佣规模</li>
+<li>使得 软件行业 加速进化</li>
+<li>资本 有意愿 进一步收购</li>
+<li>扩大规模</li>
+</ul>
+</li>
+<li>软件 开发<ul>
+<li>从 个人爱好 </li>
+<li>进化为 软件行业</li>
+</ul>
+</li>
+<li>那 软件行业 <ul>
+<li>卖的是 <code>什么</code> 呢？</li>
+</ul>
+</li>
+</ul>
+<h3 id="_6">许可证</h3>
+<ul>
+<li>新兴 的 软件业 <ul>
+<li>卖的是 <code>许可证</code></li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220926-1664194106235.png" /></p>
+<ul>
+<li>销售<ul>
+<li>许可证 (Licence)</li>
+<li>序列号 (Serial Number)</li>
+<li>成就了 目前最大的软件公司<ul>
+<li>微软(Microsoft)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>许可证 这种说法<ul>
+<li>是 <code>什么时候</code>开始有的呢？</li>
+</ul>
+</li>
+</ul>
+<h3 id="_7">许可</h3>
+<ul>
+<li>英国王室 对海盗 <ul>
+<li>授予 劫掠许可证</li>
+</ul>
+</li>
+<li>好望角以东 没挂英国国旗的船只 <ul>
+<li>都可以击沉 </li>
+</ul>
+</li>
+<li>通过 劫掠西班牙商船 <ul>
+<li>摧毁 他国海上贸易</li>
+<li>最终 战胜了 无敌舰队</li>
+<li>终结了 西班牙称霸梦</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240211-1707623821073.png" /></p>
+<ul>
+<li>用户 通过付费 <ul>
+<li>得到 软件开发公司的 授权许可</li>
+<li>才 可以用 软件</li>
+</ul>
+</li>
+</ul>
+<h3 id="_8">软件授权</h3>
+<ul>
+<li>商业软件</li>
+<li>用户  看<code>不</code>见 源代码</li>
+<li>更不能 修改 源代码</li>
+<li>商业软件公司<ul>
+<li>希望 通过闭源 </li>
+<li>把编写软件 这件事 <ul>
+<li>作为 特权垄断</li>
+</ul>
+</li>
+<li>只有 自己 才能做</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240211-1707623832363.png" /></p>
+<ul>
+<li>微软office 或者 3dmax<ul>
+<li>都 看不到 <code>源代码</code></li>
+<li>只能下载 编译后的 </li>
+<li>安装包 或 可执行二进制文件</li>
+</ul>
+</li>
+<li>这是 <ul>
+<li>微软带来的 新局面</li>
+</ul>
+</li>
+</ul>
+<h3 id="_9">工业化</h3>
+<ul>
+<li>工业化<ul>
+<li>更重视 职业化、专业化</li>
+<li>对标准化工具的掌握</li>
+<li>遵从 上级命令</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240318-1710769498545.png" /></p>
+<ul>
+<li>专注于特定的、重复的任务<ul>
+<li>减少了工作的创造性和多样性</li>
+</ul>
+</li>
+<li>人 在 软件公司 中<ul>
+<li>丧失了 主体地位</li>
+</ul>
+</li>
+</ul>
+<h3 id="_10">复仇</h3>
+<ul>
+<li>面对 商业软件的崛起<ul>
+<li>软件 从爱好者的玩具</li>
+<li>变成了 工业化的商品</li>
+</ul>
+</li>
+<li>软件 源代码 <ul>
+<li>成为 商业公司 秘密</li>
+<li>使用者 <ul>
+<li>再也看不到</li>
+<li>也改不了</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>软件开发 <ul>
+<li>变得封闭</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240310-1710076243223.png" /></p>
+<ul>
+<li>这让 原来那些 <ul>
+<li>自由分享软件的 </li>
+<li>家酿俱乐部先驱们 </li>
+<li>不！爽！😕！</li>
+</ul>
+</li>
+</ul>
+<h3 id="_11">从 家酿 到 产业</h3>
+<ul>
+<li>最初家里 蒸馒头、酿酒、泡菜 都是个人爱好<ul>
+<li>并且将吃不了的 分给 亲戚朋友</li>
+<li>并不存在 馒头厂、酒厂、泡菜厂</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240310-1710076663773.png" /></p>
+<ul>
+<li>最初做饭的 只是 个人爱好<ul>
+<li>并不存在 饭店、餐饮行业</li>
+</ul>
+</li>
+</ul>
+<h3 id="_12">殊途同归</h3>
+<ul>
+<li>各行各业 都会 <ul>
+<li>走向工业化</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240404-1712198982387.png" /></p>
+<ul>
+<li>总会有人 发现 商业价值<ul>
+<li>并且 获得 原始的积累</li>
+</ul>
+</li>
+</ul>
+<h3 id="_13">源头</h3>
+<ul>
+<li>
+<p>餐饮工业 再发达</p>
+<ul>
+<li>还能不让我 在家 <ul>
+<li>包饺子</li>
+<li>蒸馒头</li>
+<li>泡腊八蒜 啦？</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>做菜的权利</p>
+<ul>
+<li>需要自己珍惜</li>
+</ul>
+</li>
+<li>
+<p>做菜的快乐</p>
+<ul>
+<li>需要自己珍惜</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240324-1711248368033.png" /></p>
+<ul>
+<li>历史 总是 螺旋式上升的<ul>
+<li>还会 绕回来的！！！</li>
+</ul>
+</li>
+</ul>
+<h3 id="_14">回顾最初</h3>
+<ul>
+<li>最初 采集文明的时候<ul>
+<li>摘果子 也都是 个体行为</li>
+<li>摘了 可以给 亲戚朋友</li>
+<li>不存在 摘果子行业</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240211-1707623852708.png" /></p>
+<ul>
+<li>各种行业<ul>
+<li>都是 从业余爱好开始 </li>
+<li>后来 才工业化 的</li>
+</ul>
+</li>
+</ul>
+<h3 id="vs">家酿 vs 酒厂</h3>
+<ul>
+<li>行业和工业化<ul>
+<li>是逐渐形成的</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>个人兴趣爱好</th>
+<th>大规模工业制造</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>织毛衣、围脖、手套</td>
+<td>曼彻斯特 纺织行业</td>
+</tr>
+<tr>
+<td>家酿葡萄酒</td>
+<td>大规模现代化白酒行业</td>
+</tr>
+<tr>
+<td>自己蒸馒头</td>
+<td>馒头工厂</td>
+</tr>
+<tr>
+<td>农户种地</td>
+<td>大规模机械化种植产业</td>
+</tr>
+<tr>
+<td>写诗讲故事</td>
+<td>出版印刷行业</td>
+</tr>
+<tr>
+<td>唱歌</td>
+<td>唱片行业</td>
+</tr>
+<tr>
+<td>软件爱好者</td>
+<td>大规模商业软件产业</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>企业家 引领工业化 <ul>
+<li>替代爱好、小手工业、农业的过程</li>
+<li>大势所趋 不可逆转</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240211-1707623900349.png" /></p>
+<ul>
+<li>软件工业 兴起<ul>
+<li>也一样</li>
+<li>也是 个 <code>不可逆</code>的过程</li>
+</ul>
+</li>
+<li>但 又有人  洞察到 <ul>
+<li>软件行业的 <code>不同</code>之处</li>
+</ul>
+</li>
+</ul>
+<h3 id="stallman">Stallman</h3>
+<ul>
+<li>理查德·马修·斯托曼<ul>
+<li>Richard Matthew Stallman</li>
+<li>被称作 <code>rms</code></li>
+<li>出生在纽约</li>
+<li>从小喜欢计算机</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240211-1707623874514.png" /></p>
+<ul>
+<li>长大了之后<ul>
+<li>在 mit人工智能研究所 工作</li>
+<li>mit 是当时的 黑客文化核心</li>
+</ul>
+</li>
+</ul>
+<h3 id="_15">秘密</h3>
+<ul>
+<li>Stallman家族 是<ul>
+<li>原来应该是 商铺摊主</li>
+<li>典型犹太姓</li>
+<li>应该是最了解 </li>
+<li>商业、商品和复利的</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240310-1710076793832.png" /></p>
+<ul>
+<li>他发现了<ul>
+<li>软件 这种商品的特点</li>
+<li>软件到底有什么特点呢？</li>
+</ul>
+</li>
+<li>我们 还是 <ul>
+<li>先来回顾历史</li>
+</ul>
+</li>
+</ul>
+<h3 id="_16">媒介变化</h3>
+<ul>
+<li>软件 作为 商品<ul>
+<li>媒介 和之前的 <code>不</code>一样</li>
+</ul>
+</li>
+<li>报纸、杂志、书籍<ul>
+<li>都有 所谓的 版权</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240211-1707651269263.png" /></p>
+<ul>
+<li>版权 指的是    <ul>
+<li>印刷用的板子 </li>
+<li>是我做的</li>
+</ul>
+</li>
+<li>我有 用这个板子 <ul>
+<li>复印东西 的 权利</li>
+<li>copy right </li>
+<li>拷贝权</li>
+</ul>
+</li>
+</ul>
+<h3 id="_17">分发</h3>
+<ul>
+<li>报纸、杂志、书籍<ul>
+<li>都需要 具体的 纸张和油墨的 原子<ul>
+<li>做成 产品</li>
+</ul>
+</li>
+<li>也需要 制造产品的物理过程<ul>
+<li>造纸厂、印刷厂</li>
+</ul>
+</li>
+<li>还需要 存储、运输 这些原子<ul>
+<li>报摊、邮局、书店、图书馆</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240310-1710077030290.png" /></p>
+<ul>
+<li>以前上班 凌晨出门时<ul>
+<li>真的曾经 见到 </li>
+<li>每天报纸的 分发工作</li>
+<li>是 真·人工物理分发</li>
+</ul>
+</li>
+</ul>
+<h3 id="_18">视听媒体</h3>
+<ul>
+<li>黑胶、磁带<ul>
+<li>都需要 基于原子的 制造</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240211-1707651282659.png" /></p>
+<ul>
+<li>还有 基于原子的 存储和物流</li>
+</ul>
+<h3 id="_19">拷贝</h3>
+<ul>
+<li>胶片拷贝、录影带、卡带 、cd<ul>
+<li>也是如此</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240211-1707651296099.png" /></p>
+<ul>
+<li>原来 内容也都得有个 物理介质<ul>
+<li>存储、运输 都有费用</li>
+</ul>
+</li>
+<li>所有 店铺、唱片公司、影视公司 <ul>
+<li>都需要 依靠卖版权 盈利</li>
+</ul>
+</li>
+<li>计算机 出现<code>后</code><ul>
+<li>有 <code>什么</code>变化 吗？</li>
+</ul>
+</li>
+</ul>
+<h2 id="_20">总结</h2>
+<ul>
+<li>软件产业 工业化<ul>
+<li>不可避免</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240211-1707623922951.png" /></p>
+<ul>
+<li>Stallman 发现了 软件行业<code>独特之处</code><ul>
+<li>不同于 以往所有的工业的 <code>特点</code></li>
+<li>具体 是 <code>什么特点</code> 呢？🤔</li>
+</ul>
+</li>
+<li>我们下次再说！👋</li>
+</ul>
+    </div>
+</body>
+</html>

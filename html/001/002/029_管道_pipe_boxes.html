@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：本章回顾，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解管道 pipe boxes。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖上一部分我们都讲了什么？🤔等内容，搜索oeasy即可学习。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 管道, pipe, boxes, 本章回顾">
+    <meta property="og:title" content="oeasy Linux系统教程：本章回顾，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解管道 pipe boxes。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖上一部分我们都讲了什么？🤔等内容，搜索oeasy即可学习。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="_1">本章回顾</h1>
+<h2 id="_2">我们来回顾一下 😌</h2>
+<p><strong>上一部分我们都讲了什么？</strong>🤔</p>
+<ul>
+<li>这次的 cowsay 可以做签名档</li>
+<li>可以改变动物类型</li>
+<li>😚 可以改变动物表情</li>
+<li>能否把 cowsay 和 figlet、toilet 结合呢？</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220902-1662088233876.png" /></p>
+<h2 id="_3">回顾字符画</h2>
+<ul>
+<li>下载 figlet 和 toilett</li>
+</ul>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>figlet<span class="w"> </span>toilet
+figlet<span class="w"> </span>oeasy
+</code></pre></div>
+
+<ul>
+<li>那我们怎么让别的小动物说出字符画呢？</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1">#查询所有的小动物</span>
+<span class="c1">#都在 </span>
+cowsay<span class="w"> </span>-l
+</code></pre></div>
+
+<ul>
+<li>-f应该对应着file</li>
+<li>文件都在/usr/share/cowsay/cows里面</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210325-1616684032530.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20210325-1616683856720.png" /></p>
+<ul>
+<li>应该可以添加.cow文件增加更多的小动物</li>
+</ul>
+<h3 id="duck">让duck说不必</h3>
+<div class="highlight"><pre><span></span><code>cowsay -f duck "不必"
+</code></pre></div>
+
+<p><img alt="图片描述" src="images/uid1190679-20210325-1616683897932.png" /></p>
+<ul>
+<li>中文桌面双击搜狗</li>
+<li>然后右下角选择输入法</li>
+</ul>
+<h3 id="_4">使用管道重定向</h3>
+<div class="highlight"><pre><span></span><code>figlet<span class="w"> </span><span class="s2">"oeasy"</span>
+figlet<span class="w"> </span><span class="s2">"oeasy"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cowsay<span class="w"> </span>-f<span class="w"> </span>moose<span class="w"> </span>-n
+</code></pre></div>
+
+<ul>
+<li>本来figlet "oeasy"直接输出到屏幕</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210325-1616684296872.png" /></p>
+<ul>
+<li>现在通过管道重定向给cowsay -f moose -n<ul>
+<li>-n用来正确的换行</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220802-1659411731787.png" /></p>
+<h3 id="_5">运行结果</h3>
+<p><img alt="Image text" src="images/cowsay_pipe.png" /></p>
+<ul>
+<li>好使</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220802-1659411395584.png" /></p>
+<ul>
+<li>如何理解管道?</li>
+</ul>
+<h2 id="pipe">pipe 原理</h2>
+<ul>
+<li>
+<p>中间的那条竖线 | （在键盘回车上面）, 就是 pipe</p>
+<ul>
+<li>pipe, 意思是管道</li>
+<li>原来 figlet "oeasy"命令执行之后流到标准输出流</li>
+<li>所谓标准输出流，就是直接流到屏幕 (stdout) 上</li>
+</ul>
+</li>
+<li>
+<p>现在给他加了一个管道|</p>
+<ul>
+<li>figlet 不直接输出到屏幕了</li>
+<li>figlet 把输出结果流到了 cowsay 指令中</li>
+<li>cowsay 接收到了流过来的 figlet 的结果做为参数</li>
+<li>cowsay 的输出结果最终流到了屏幕 (stdout) 上</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>#这样就可以更新系统，并且不用反复输入yes了
+yes | sudo apt install cowsay
+</code></pre></div>
+
+<ul>
+<li>将输出yes给到apt</li>
+<li>安装的时候就不用反复输入yes</li>
+<li>自动化了</li>
+</ul>
+<h3 id="pipe_1">pipe</h3>
+<p><img alt="Image text" src="images/pipe.png" /></p>
+<h3 id="_6">彩色牛说</h3>
+<ul>
+<li>我们尝试一下让牛说出彩色字<ul>
+<li>toilet</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>toilet<span class="w">  </span>--gay<span class="w"> </span>oeasy<span class="w"> </span><span class="p">|</span><span class="w"> </span>cowthink<span class="w"> </span>-n
+</code></pre></div>
+
+<ul>
+<li>toilet 是彩色字<ul>
+<li>--gay 是 toilet 的选项开关</li>
+</ul>
+</li>
+<li>oeasy 是 toilet 的参数(arguement)</li>
+<li>toilet 的输出流到 cowthink 中</li>
+<li>-n 是 cowthink 的参数，解决回车问题</li>
+</ul>
+<h3 id="_7">动手</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">#牛说 uname</span>
+uname<span class="w"> </span><span class="p">|</span><span class="w"> </span>cowsay<span class="w"> </span>-f<span class="w"> </span>moose<span class="w"> </span>-n
+
+<span class="c1"># 牛说 pwd, 把 pwd 的结果给到 cowsay</span>
+<span class="nb">pwd</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cowsay<span class="w"> </span>-f<span class="w"> </span>moose<span class="w"> </span>-n
+
+<span class="c1"># 牛说 ls, 把 ls 的结果给到 cowsay</span>
+ls<span class="w"> </span><span class="p">|</span><span class="w"> </span>cowsay<span class="w"> </span>-f<span class="w"> </span>moose<span class="w"> </span>-n
+
+<span class="c1"># 牛说 ls /etc, 把 ls /etc 的结果给到 cowsay</span>
+ls<span class="w"> </span>etc<span class="w"> </span><span class="p">|</span><span class="w"> </span>cowsay<span class="w"> </span>-f<span class="w"> </span>moose<span class="w"> </span>-n
+
+<span class="c1"># 把 cowsay 的内容输出到 toilet 染色</span>
+cowsay<span class="w"> </span>-f<span class="w"> </span>moose<span class="w"> </span><span class="s2">"oeasy"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>toilet<span class="w"> </span>--gay<span class="w"> </span>-f<span class="w"> </span>term
+</code></pre></div>
+
+<p><img alt="Image text" src="images/rainbow.png" /></p>
+<ul>
+<li>还有一些其他的字符工具</li>
+<li>比如boxes</li>
+</ul>
+<h3 id="boxes">boxes</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">#首先要下载boxes</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>boxes
+</code></pre></div>
+
+<ul>
+<li>boxes 也是类似的字符画</li>
+<li>也可以配置多种参数</li>
+<li>也可以使用管道</li>
+</ul>
+<h3 id="boxes_1">boxes</h3>
+<div class="highlight"><pre><span></span><code>figlet oeasy | boxes -d peek -pa2t0b0
+</code></pre></div>
+
+<p><img alt="图片描述" src="images/uid1190679-20211216-1639647537858.png" /></p>
+<h3 id="_8">进化</h3>
+<p><img alt="Image text" src="images/cat_clock.png" /></p>
+<div class="highlight"><pre><span></span><code>watch<span class="w"> </span>-n1<span class="w"> </span><span class="s2">"date '+%D%n%T'| figlet -k | boxes -a c -s 59 -d cat"</span>
+</code></pre></div>
+
+<h3 id="_9">总结 🤨</h3>
+<ul>
+<li>管道的符号是|</li>
+<li>管道的作用是连接</li>
+<li>原来应该输出到屏幕内容</li>
+<li>通过管道流到了另一个命令做为参数</li>
+<li>是否可以让 cow 说出一些中文呢？</li>
+<li>下次再说！👋</li>
+</ul>
+    </div>
+</body>
+</html>

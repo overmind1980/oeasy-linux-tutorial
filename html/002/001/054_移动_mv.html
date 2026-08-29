@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：别名alias，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解移动 mv。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 移动, mv, 别名alias">
+    <meta property="og:title" content="oeasy Linux系统教程：别名alias，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解移动 mv。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="alias">别名(alias)</h1>
+<h2 id="_1">回忆</h2>
+<ul>
+<li>上次我们研究了删除</li>
+<li>删除时可以使用通配符<ul>
+<li>
+<ul>
+<li>0到任意多个字符</li>
+</ul>
+</li>
+<li>? 1个字符</li>
+</ul>
+</li>
+<li>参数<ul>
+<li>-r 递归</li>
+<li>-f 强制</li>
+<li>-v 详细信息</li>
+<li>-i 交互式</li>
+</ul>
+</li>
+<li>这样我们就了解了rm命令</li>
+<li>可以再了解一下改名命令么？</li>
+</ul>
+<h3 id="_2">灵魂三问</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663203252639.png" /></p>
+<ul>
+<li>mv既可以改名</li>
+<li>也可以移动</li>
+<li>我们先试试移动</li>
+</ul>
+<h3 id="_3">尝试移动</h3>
+<ul>
+<li>把/usr/bin/python符号链接所指向的python2.7</li>
+<li>移动到当前目录(~)</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663203384459.png" /></p>
+<ul>
+<li>移动之后软链接失效</li>
+<li>但是当前路径的python是好用的</li>
+<li>如果我想保持当前路径的python可用</li>
+<li>也恢复原来的软链接</li>
+<li>应该如何呢？</li>
+</ul>
+<h3 id="cp">拷贝(cp)</h3>
+<ul>
+<li>将当前路径下的python2.7拷贝至/usr/bin下</li>
+<li>恢复原来的软链接</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663203537493.png" /></p>
+<ul>
+<li>移动和拷贝的区别<ul>
+<li>移动的源消失 是搬家</li>
+<li>拷贝的源保留 是复制</li>
+</ul>
+</li>
+<li>还有什么细节么？</li>
+</ul>
+<h3 id="_4">文档手册</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663204647806.jpg" /></p>
+<ul>
+<li>和cp命令很像</li>
+</ul>
+<h3 id="_5">动手</h3>
+<ul>
+<li>sudo mv -v year/winter/1/3* ./</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663204903481.png" /></p>
+<ul>
+<li>-v可以显示详细信息</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663204764154.png" /></p>
+<ul>
+<li>-i 可以交互式控制移动</li>
+<li>可以控制备份么？</li>
+</ul>
+<h3 id="_6">备份</h3>
+<ul>
+<li>-n 是不备份</li>
+<li>-b 是覆盖并备份<ul>
+<li>首先移动30到当前位置</li>
+<li>备份原来的30成为备份文件(30~) </li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663205868684.jpg" /></p>
+<ul>
+<li>ls中显示的时间是最近更改时间</li>
+<li>原来的30真的变成了30~么？</li>
+</ul>
+<h3 id="_7">再备份</h3>
+<ul>
+<li>故意往旧30里面写一些东西</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663206374466.jpg" /></p>
+<ul>
+<li>这些东西会出现在30~中</li>
+<li>可是这个只能有一个备份文件么？</li>
+<li>再覆盖原备份就消失了...</li>
+</ul>
+<h3 id="_8">指定后缀</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663206818405.jpg" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663206765615.png" /></p>
+<ul>
+<li>这样就可以指定备份的后缀名了</li>
+<li>可以要求新的覆盖旧的么？</li>
+<li>但旧的不能覆盖新的吗？</li>
+</ul>
+<h3 id="_9">更新</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663206925806.jpg" /></p>
+<ul>
+<li>先更新一下30_202209150950的更新时间</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663207094141.png" /></p>
+<ul>
+<li>旧的不可以替换新的</li>
+<li>新的可以替换旧的</li>
+<li>这里面和时间有很大关系</li>
+<li>我们先去总结这节课</li>
+</ul>
+<h3 id="_10">总结</h3>
+<ul>
+<li>我们这次学习的是移动(mv)</li>
+<li>mv命令<ul>
+<li>既可以改名</li>
+<li>又可以移动</li>
+</ul>
+</li>
+<li>mv命令有一些参数<ul>
+<li>-v 显示细节</li>
+<li>-u 更新文件</li>
+<li>-i 交互式</li>
+<li>-f 强制</li>
+<li>-n 不覆盖</li>
+<li>--suffix 控制后缀</li>
+</ul>
+</li>
+<li>这里面的更新和时间有很大关系</li>
+<li>每个文件都有三个时间</li>
+<li>这如何理解呢？🤔</li>
+<li>下次再说👋</li>
+</ul>
+    </div>
+</body>
+</html>

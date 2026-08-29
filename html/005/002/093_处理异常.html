@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：处理异常，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解处理异常。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 处理异常">
+    <meta property="og:title" content="oeasy Linux系统教程：处理异常，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解处理异常。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="_1">处理异常</h1>
+<h2 id="_2">回顾</h2>
+<ul>
+<li>上次后台servlet接收到了网页post过来的参数</li>
+<li>尝试处理</li>
+<li>但是出了错误</li>
+<li>这个怎么办呢？</li>
+</ul>
+<h3 id="_3">分析现状</h3>
+<ul>
+<li>路由映射没有问题</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220521-1653098129262.png" /></p>
+<ul>
+<li>这部分有问题</li>
+<li>加法是按照字符串相加处理的</li>
+<li>需要的是数字相加</li>
+</ul>
+<h3 id="_4">修改</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220521-1653098185266.png" /></p>
+<ul>
+<li>结果如何呢？</li>
+</ul>
+<h3 id="_5">结果</h3>
+<ul>
+<li>如果给的是1和2<ul>
+<li>计算没有问题</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220521-1653098276527.png" /></p>
+<ul>
+<li>如果给的是小数</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220521-1653098351536.png" /></p>
+<ul>
+<li>爆出了错误</li>
+</ul>
+<h3 id="_6">修改</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220521-1653098492684.png" /></p>
+<ul>
+<li>把转化函数修改为Float.parseFloat</li>
+<li>就可以把参数转化为小数了</li>
+<li>并进行运算了么？</li>
+</ul>
+<h3 id="_7">运算成功</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220521-1653098500250.png" /></p>
+<ul>
+<li>但是，如果传过来的都不是数字呢？</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220521-1653098564698.png" /></p>
+<h3 id="_8">异常</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220521-1653099430265.png" /></p>
+<ul>
+<li>发现了NumberFormatException</li>
+<li>并没有进行处理</li>
+</ul>
+<h3 id="_9">处理异常</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220521-1653099414228.png" /></p>
+<ul>
+<li>如果捕获了这个异常</li>
+<li>就输出错误信息</li>
+<li>然后return</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220521-1653099523193.png" /></p>
+<ul>
+<li>确实解决了这个问题</li>
+<li>但如果系统跳过prepareInsert.html</li>
+<li>直接调用/add呢？</li>
+</ul>
+<h3 id="_10">错误</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220521-1653099589661.png" /></p>
+<ul>
+<li>网页会报NullPointerException</li>
+<li>空指针异常</li>
+<li>这也需要处理</li>
+</ul>
+<h3 id="_11">处理空指针</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220521-1653099792110.png" /></p>
+<ul>
+<li>处理异常后</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220521-1653099809896.png" /></p>
+<ul>
+<li>服务要到位</li>
+</ul>
+<h3 id="_12">服务</h3>
+<ul>
+<li>只有把方方面面都处理得妥帖之后</li>
+<li>才能顺利完成茶坊</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220509-1652111049032.png" /></p>
+<ul>
+<li>不能哪壶不开提那壶</li>
+<li>而是处理周全</li>
+<li>要什么给什么</li>
+<li>知道可能会出什么错</li>
+</ul>
+<h3 id="_13">见过世面</h3>
+<ul>
+<li>客人是来自<ul>
+<li>五湖四海</li>
+<li>三教九流</li>
+<li>五行八作</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220521-1653100275471.png" /></p>
+<ul>
+<li>客人多了什么样的情况都有可能发生</li>
+<li>就需要堂客留神长眼</li>
+<li>我们开发网站应用也要长个心眼</li>
+<li>先把当前这个应用备份到本地</li>
+</ul>
+<h3 id="_14">备份应用</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220717-1658017397095.png" /></p>
+<ul>
+<li>把app打成tar包</li>
+<li>放到~/Code里面</li>
+<li>然后用蓝桥右侧的下载代码下载到本地</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220717-1658017442230.png" /></p>
+<ul>
+<li>以后直接上传这个tar包就可以恢复oeasy应用了</li>
+</ul>
+<h3 id="_15">总结 🤨</h3>
+<ul>
+<li>我们处理了后台加法运算中<ul>
+<li>可能出现的异常</li>
+</ul>
+</li>
+<li>不过后台最重要的还是操作数据库！</li>
+<li>这后台数据库究竟如何操作怎么做？🤔</li>
+<li>下次再说！👋</li>
+</ul>
+    </div>
+</body>
+</html>

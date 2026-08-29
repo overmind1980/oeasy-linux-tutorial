@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：阴历lunar，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解列出用户信息 id。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖|  参数   | 信息  | |  ----  | ----  | |    -g或--group |　显示用户所属群组的ID | |    -G或--groups| 　显示用户所属附加群组的I...">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 列出用户信息, id, 阴历lunar">
+    <meta property="og:title" content="oeasy Linux系统教程：阴历lunar，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解列出用户信息 id。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖|  参数   | 信息  | |  ----  | ----  | |    -g或--group |　显示用户所属群组的ID | |    -G或--groups| 　显示用户所属附加群组的I...">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="lunar">阴历(lunar)</h1>
+<h2 id="_1">回忆</h2>
+<ul>
+<li>上次了解了三个命令<ul>
+<li>whoami</li>
+<li>who</li>
+<li>w</li>
+</ul>
+</li>
+<li>最短的最好用</li>
+<li>可以查看都有谁目前登录到系统中</li>
+<li>whoami就是查看我是谁<ul>
+<li>对应哪个userid</li>
+</ul>
+</li>
+<li>可以把所有的用户id列出来么？</li>
+</ul>
+<h3 id="id">id</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220917-1663418898698.png" /></p>
+<ul>
+<li>id 命令<ul>
+<li>可以 查看试验楼用户的账号信息</li>
+</ul>
+</li>
+<li>shiyanlou<ul>
+<li>uid - 用户id</li>
+<li>gid - 用户组id</li>
+<li>5000(shiyanlou) - 这个userid</li>
+<li>属于三个组(group)<ul>
+<li>5000(shiyanlou)</li>
+<li>27(sudo)</li>
+<li>5002(public)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>如何理解id呢？</li>
+</ul>
+<h3 id="_2">灵魂三问</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220917-1663419957917.png" /></p>
+<ul>
+<li>id是输出用户和组的id的命令</li>
+<li>我们来查看一下id的帮助手册</li>
+</ul>
+<h3 id="_3">细节</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220917-1663419015481.png" /></p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>信息</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-g或--group</td>
+<td>　显示用户所属群组的ID</td>
+</tr>
+<tr>
+<td>-G或--groups</td>
+<td>　显示用户所属附加群组的ID</td>
+</tr>
+<tr>
+<td>-n或--name 　</td>
+<td>显示用户，所属群组或附加群组的名称</td>
+</tr>
+<tr>
+<td>-r或--real 　</td>
+<td>显示实际ID</td>
+</tr>
+<tr>
+<td>-u或--user 　</td>
+<td>显示用户ID</td>
+</tr>
+<tr>
+<td>-help 　</td>
+<td>显示帮助</td>
+</tr>
+<tr>
+<td>-version 　</td>
+<td>显示版本信息</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>如何查看到更多用户呢？</li>
+</ul>
+<h3 id="id_1">id</h3>
+<ul>
+<li>id 之后 按下 <kbd>Tab</kbd></li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220917-1663421352171.png" /></p>
+<ul>
+<li>可以看到更多的用户id</li>
+<li>可以查看某个id的详细信息</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220917-1663421420068.png" /></p>
+<ul>
+<li>在哪里可以查询用户更详细的信息呢？</li>
+</ul>
+<h3 id="etcpasswd">/etc/passwd</h3>
+<div class="highlight"><pre><span></span><code>cat /etc/passwd
+vi /etc/passwd
+</code></pre></div>
+
+<ul>
+<li>可以看到更多的userid</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220917-1663421467055.png" /></p>
+<ul>
+<li>应该如何理解这些用:分割的字段呢？</li>
+</ul>
+<h3 id="_4">区分</h3>
+<div class="highlight"><pre><span></span><code>cat /etc/passwd | grep shiyanlou
+</code></pre></div>
+
+<p><img alt="图片描述" src="images/uid1190679-20220917-1663422514779.jpg" /></p>
+<ul>
+<li>这就是更详细的用户信息</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220917-1663423241735.png" /></p>
+<ul>
+<li>各种用户很多</li>
+<li>但是这七列的结构是一致的</li>
+</ul>
+<h3 id="_5">总结</h3>
+<ul>
+<li>这次我们研究了一个新的命令id</li>
+<li>可以显示出用户id的一些信息</li>
+<li>我们目前的用户id就是shiyanlou</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220917-1663418898698.png" /></p>
+<ul>
+<li>/etc/passwd中有更详细的用户信息</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220917-1663422514779.jpg" /></p>
+<ul>
+<li>这些信息被:分割为7列</li>
+<li>我可以自己创造一个用户id吗?🤔</li>
+<li>下次再说👋</li>
+</ul>
+    </div>
+</body>
+</html>

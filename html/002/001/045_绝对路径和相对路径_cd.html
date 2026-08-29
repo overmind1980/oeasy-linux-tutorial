@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：目录跳转，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解绝对路径和相对路径 cd。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 绝对路径和相对路径, cd, 目录跳转">
+    <meta property="og:title" content="oeasy Linux系统教程：目录跳转，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解绝对路径和相对路径 cd。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="_1">目录跳转</h1>
+<h2 id="_2">回忆</h2>
+<ul>
+<li>上次研究了新建文件夹</li>
+<li>mkdir<ul>
+<li>make directory</li>
+<li>可以加-p自动添加子文件夹</li>
+<li>可以在建文件夹的时候是用缩略形式<ul>
+<li>{1,2,4}</li>
+<li>{1..4}</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>建了文件夹就像建了可以装文件的容器</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220913-1663063314374.png" /></p>
+<ul>
+<li>我们可以在各种文件夹之间跳跃么？</li>
+</ul>
+<h3 id="_3">../向上一层</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220913-1663062103632.png" /></p>
+<ul>
+<li>使用cd进入1月文件夹</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220913-1663062117439.png" /></p>
+<ul>
+<li>../可以向上一层</li>
+<li>来到winter文件夹</li>
+<li>然后再进入11月文件夹</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220913-1663062478109.png" /></p>
+<ul>
+<li>如果我现在想从11直接去10呢？</li>
+</ul>
+<h3 id="_4">../../向上两层</h3>
+<ul>
+<li>向上两层<ul>
+<li>../../</li>
+<li>在进入autumn的10</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220913-1663062536958.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20220913-1663062602107.png" /></p>
+<ul>
+<li>这种方式属于相对路径</li>
+<li>这种表示法有个名字吗？</li>
+</ul>
+<h3 id="dot-notation">dot notation</h3>
+<ul>
+<li>点的标记法</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221226-1672023359300.png" /></p>
+<ul>
+<li>除了相对路径之外</li>
+<li>还有什么样的路径呢？</li>
+</ul>
+<h3 id="_5">绝对路径</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220913-1663062757812.png" /></p>
+<ul>
+<li>所谓绝对路径指的是从/(根上)论的</li>
+<li>根目录上有什么呢？</li>
+</ul>
+<h3 id="_6">探索根目录</h3>
+<div class="highlight"><pre><span></span><code>cd /
+ls
+</code></pre></div>
+
+<ul>
+<li>进入/root根目录</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220913-1663059706406.png" /></p>
+<ul>
+<li>看看都有些什么？</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220913-1663060370822.png" /></p>
+<ul>
+<li>我们打下cd /之后</li>
+</ul>
+<h3 id="root">root下的结构</h3>
+<ul>
+<li>/boot <ul>
+<li>存放启动系统所必需的文件<ul>
+<li>包括内核文件、启动菜单配置文件等</li>
+</ul>
+</li>
+<li>出于系统安全考虑<ul>
+<li>"/boot"目录通常被划分为独立的分区</li>
+<li>称为“/boot”分区</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>/bin: <ul>
+<li>存放系统中最基本的用户命令</li>
+<li>普通用户都有执行权限</li>
+</ul>
+</li>
+<li>/dev：<ul>
+<li>存放系统中的硬盘、键盘、鼠标、光驱</li>
+<li>各种设备文件</li>
+</ul>
+</li>
+<li>/etc：<ul>
+<li>存放系统及各种程序的配置文件</li>
+<li>配置文件较多的程序会在“etc”目录下建立独立的子目录</li>
+<li>用于存放各自的配置文件。</li>
+</ul>
+</li>
+<li>/home：<ul>
+<li>存放所有普通用户系统用户的默认工作目录(又称为宿主目录)<ul>
+<li>例如用户帐号“oeasy”对应的宿主目录位于“/home/oeasy”</li>
+</ul>
+</li>
+<li>如果服务器需要提供给大量的普通用户使用<ul>
+<li>建议将/home目录划分独立分区</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>/root: <ul>
+<li>为Linux系统超级用户root的宿主目录</li>
+<li>默认情况下只有root的宿主目录在根目录下</li>
+<li>而不是在/home下</li>
+<li>这是root用户的宿主目录</li>
+<li>而不是linux文件系统的根</li>
+<li>linux文件系统的根是/</li>
+</ul>
+</li>
+<li>/sbin：<ul>
+<li>存放最基本的管理命令</li>
+<li>一般管理员用户才有执行权限</li>
+</ul>
+</li>
+<li>/usr：<ul>
+<li>存放其他的用户应用程序</li>
+<li>通常还被划分为很多子目录</li>
+<li>用于存放不通类型的应用程序</li>
+</ul>
+</li>
+<li>/var: <ul>
+<li>存放系统中经常需要变化的一些文件</li>
+<li>如系统日志、用户邮箱目录等</li>
+</ul>
+</li>
+<li>/tmp：<ul>
+<li>存放系统运行过程中使用的一些临时文件</li>
+</ul>
+</li>
+</ul>
+<h3 id="_7">快速进入目录</h3>
+<ul>
+<li>按下<kbd>tab</kbd>可以调出提示选项</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20211128-1638102878217.png" /></p>
+<ul>
+<li>在按下<kbd>tab</kbd>，可以配合上下左右进行选择</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20211128-1638102916261.png" /></p>
+<ul>
+<li>回车可以确认选项</li>
+<li>也可以先打一些字符然后配合tab进行快速输入</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20211128-1638102983950.png" /></p>
+<ul>
+<li>
+<p>在命令行模式</p>
+<ul>
+<li>上下方向键可以选择历史命令</li>
+<li>选好了之后左右可以移动光标</li>
+<li><kbd>ctrl</kbd>+方向键可以快速移动光标</li>
+</ul>
+</li>
+<li>
+<p>这个cd命令从哪来的呢？</p>
+</li>
+</ul>
+<h3 id="_8">灵魂三问</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220914-1663118900369.png" /></p>
+<ul>
+<li>系统说cd是内建(builtin)的命令</li>
+<li>而mkdir属于debian中coreutil包的命令</li>
+<li>什么是属于builtin的命令呢？</li>
+</ul>
+<h3 id="builtin">builtin</h3>
+<ul>
+<li>linux是内核(kernel)</li>
+<li>debian是发行版(distribution)</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220914-1663120166067.png" /></p>
+<ul>
+<li>cd是内建(buitlin) 命令(command)<ul>
+<li>跟着内核进入内存的</li>
+<li>源代码在linux内核</li>
+</ul>
+</li>
+<li>mkdir 是 外部命令<ul>
+<li>在发行版debian的coreutils包中的</li>
+<li>在硬盘上放置的</li>
+<li>调用的时候先到硬盘找</li>
+<li>然后把他从硬盘放到内存</li>
+<li>然后在内存中执行的</li>
+<li>源代码在debian的coreutils</li>
+</ul>
+</li>
+<li>那有那些命令是内建命令呢？</li>
+</ul>
+<h3 id="_9">显示所有内建命令</h3>
+<div class="highlight"><pre><span></span><code>print<span class="w"> </span>-roC5<span class="w"> </span><span class="cp">${</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="n">builtins</span><span class="cp">}</span>
+</code></pre></div>
+
+<ul>
+<li>print <ul>
+<li>输出</li>
+</ul>
+</li>
+<li>-roC5<ul>
+<li>原始 raw</li>
+<li>排序 ordered </li>
+<li>5 Column 5列</li>
+</ul>
+</li>
+<li>${(k)builtins}<ul>
+<li>$ 系统变量</li>
+<li>{数组}</li>
+<li>key 关键字</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220914-1663120505343.png" /></p>
+<ul>
+<li>我们发现既有cd又有chdir</li>
+<li>这两个有区别么？</li>
+</ul>
+<h3 id="cdchdir">cd和chdir</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220914-1663121730050.png" /></p>
+<ul>
+<li>这两个没有任何区别</li>
+<li>就像md和mkdir一样</li>
+<li>可以找到cd的源代码么？</li>
+</ul>
+<h3 id="_10">查找源码</h3>
+<ul>
+<li>可以找到mkdir的源代码吗？</li>
+<li>搜索chdir找到60+条匹配</li>
+<li>依次排查</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220914-1663122417572.png" /></p>
+<ul>
+<li>这里有个sys_chdir</li>
+<li>调用了my_syscall1</li>
+<li>再去搜索my_syscall1的定义</li>
+</ul>
+<h3 id="my_syscall1">my_syscall1</h3>
+<ul>
+<li>总共有7个匹配</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220914-1663122566455.png" /></p>
+<ul>
+<li>好像是对应1个参数的系统调用</li>
+<li>然后对应不同cpu指令架构实现</li>
+</ul>
+<h3 id="_11">总结</h3>
+<ul>
+<li>这次我们研究了cd<ul>
+<li>也就是chdir</li>
+<li>可以改变当前路径(pwd)</li>
+<li>cd 是一个内建的命令</li>
+<li>可以在linux内核(kernel)找到相关的实现</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221231-1672492674731.png" /></p>
+<ul>
+<li>相对路径有点抽象<ul>
+<li>可以将相对路径</li>
+<li>转化为绝对路径吗？🤔</li>
+</ul>
+</li>
+<li>下次再说👋</li>
+</ul>
+    </div>
+</body>
+</html>

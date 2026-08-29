@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：阴历lunar，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解脚本解释器 zsh。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖source $ZSH/oh-my-zsh.sh等内容，搜索oeasy即可学习。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 脚本解释器, zsh, 阴历lunar">
+    <meta property="og:title" content="oeasy Linux系统教程：阴历lunar，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解脚本解释器 zsh。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖source $ZSH/oh-my-zsh.sh等内容，搜索oeasy即可学习。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="lunar">阴历(lunar)</h1>
+<h2 id="_1">回忆</h2>
+<ul>
+<li>上次我们学习了修改用户的密码<ul>
+<li>passwd</li>
+</ul>
+</li>
+<li>/etc/passwd中看不到用户的密码</li>
+<li>但是可以看到用户的<ul>
+<li>宿主目录</li>
+<li>登录shell</li>
+</ul>
+</li>
+<li>我们选择了zsh做默认的shell</li>
+<li>那么什么是zsh呢？</li>
+</ul>
+<h3 id="_2">搜索</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220922-1663816311819.jpg" /></p>
+<ul>
+<li>github有仓库</li>
+</ul>
+<h3 id="zsh">zsh</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220922-1663816360994.png" /></p>
+<ul>
+<li>可以下载下来</li>
+<li>也可以用apt的方式源码安装</li>
+<li>首先修改/etc/apt/sources.list</li>
+</ul>
+<div class="highlight"><pre><span></span><code>sudop apt source zsh
+</code></pre></div>
+
+<h3 id="_3">安装手册</h3>
+<ul>
+<li>打开INSTALL</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220922-1663816696323.png" /></p>
+<ul>
+<li>一行行查看</li>
+</ul>
+<h3 id="_4">配置</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220922-1663817079181.jpg" /></p>
+<ul>
+<li>配置文件会根据本机的架构等信息</li>
+<li>进行配置</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220922-1663818322501.png" /></p>
+<h3 id="_5">编译</h3>
+<div class="highlight"><pre><span></span><code>sudo make install
+</code></pre></div>
+
+<p><img alt="图片描述" src="images/uid1190679-20220922-1663818250689.png" /></p>
+<h3 id="_6">检查编译结果</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220922-1663819742725.png" /></p>
+<ul>
+<li>这是原来的zsh</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220922-1663819756628.png" /></p>
+<ul>
+<li>这是最新的zsh而且可用</li>
+</ul>
+<h3 id="zsh_1">实验楼zsh配置</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># If you come from bash you might have to change your $PATH.</span>
+<span class="c1"># export PATH=$HOME/bin:/usr/local/bin:$PATH</span>
+
+<span class="c1"># Path to your oh-my-zsh installation.</span>
+<span class="n">export</span><span class="w"> </span><span class="n">ZSH</span><span class="o">=</span><span class="s">"/home/shiyanlou/.oh-my-zsh"</span>
+
+<span class="c1"># Set name of the theme to load --- if set to "random", it will</span>
+<span class="c1"># load a random theme each time oh-my-zsh is loaded, in which case,</span>
+<span class="c1"># to know which specific one was loaded, run: echo $RANDOM_THEME</span>
+<span class="c1"># See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes</span>
+<span class="n">ZSH_THEME</span><span class="o">=</span><span class="s">"philips"</span>
+
+<span class="c1"># Set list of themes to pick from when loading at random</span>
+<span class="c1"># Setting this variable when ZSH_THEME=random will cause zsh to load</span>
+<span class="c1"># a theme from this variable instead of looking in $ZSH/themes/</span>
+<span class="c1"># If set to an empty array, this variable will have no effect.</span>
+<span class="c1"># ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )</span>
+
+<span class="c1"># Uncomment the following line to use case-sensitive completion.</span>
+<span class="c1"># CASE_SENSITIVE="true"</span>
+
+<span class="c1"># Uncomment the following line to use hyphen-insensitive completion.</span>
+<span class="c1"># Case-sensitive completion must be off. _ and - will be interchangeable.</span>
+<span class="c1"># HYPHEN_INSENSITIVE="true"</span>
+
+<span class="c1"># Uncomment the following line to disable bi-weekly auto-update checks.</span>
+<span class="w"> </span><span class="n">DISABLE_AUTO_UPDATE</span><span class="o">=</span><span class="s">"true"</span>
+
+<span class="c1"># Uncomment the following line to automatically update without prompting.</span>
+<span class="c1"># DISABLE_UPDATE_PROMPT="true"</span>
+
+<span class="c1"># Uncomment the following line to change how often to auto-update (in days).</span>
+<span class="c1"># export UPDATE_ZSH_DAYS=13</span>
+
+<span class="c1"># Uncomment the following line if pasting URLs and other text is messed up.</span>
+<span class="w"> </span><span class="n">DISABLE_MAGIC_FUNCTIONS</span><span class="o">=</span><span class="s">"true"</span>
+
+<span class="c1"># Uncomment the following line to disable colors in ls.</span>
+<span class="c1"># DISABLE_LS_COLORS="true"</span>
+
+<span class="c1"># Uncomment the following line to disable auto-setting terminal title.</span>
+<span class="c1"># DISABLE_AUTO_TITLE="true"</span>
+
+<span class="c1"># Uncomment the following line to enable command auto-correction.</span>
+<span class="c1"># ENABLE_CORRECTION="true"</span>
+
+<span class="c1"># Uncomment the following line to display red dots whilst waiting for completion.</span>
+<span class="c1"># COMPLETION_WAITING_DOTS="true"</span>
+
+<span class="c1"># Uncomment the following line if you want to disable marking untracked files</span>
+<span class="c1"># under VCS as dirty. This makes repository status check for large repositories</span>
+<span class="c1"># much, much faster.</span>
+<span class="c1"># DISABLE_UNTRACKED_FILES_DIRTY="true"</span>
+
+<span class="c1"># Uncomment the following line if you want to change the command execution time</span>
+<span class="c1"># stamp shown in the history command output.</span>
+<span class="c1"># You can set one of the optional three formats:</span>
+<span class="c1"># "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"</span>
+<span class="c1"># or set a custom format using the strftime function format specifications,</span>
+<span class="c1"># see 'man strftime' for details.</span>
+<span class="c1"># HIST_STAMPS="mm/dd/yyyy"</span>
+
+<span class="c1"># Would you like to use another custom folder than $ZSH/custom?</span>
+<span class="c1"># ZSH_CUSTOM=/path/to/new-custom-folder</span>
+
+<span class="c1"># Which plugins would you like to load?</span>
+<span class="c1"># Standard plugins can be found in $ZSH/plugins/</span>
+<span class="c1"># Custom plugins may be added to $ZSH_CUSTOM/plugins/</span>
+<span class="c1"># Example format: plugins=(rails git textmate ruby lighthouse)</span>
+<span class="c1"># Add wisely, as too many plugins slow down shell startup.</span>
+<span class="n">plugins</span><span class="o">=</span><span class="p">(</span><span class="n">git</span><span class="w"> </span><span class="n">zsh</span><span class="o">-</span><span class="n">syntax</span><span class="o">-</span><span class="n">highlighting</span><span class="p">)</span>
+
+<span class="n">source</span><span class="w"> </span><span class="nv">$ZSH</span><span class="o">/</span><span class="n">oh</span><span class="o">-</span><span class="k">my</span><span class="o">-</span><span class="n">zsh</span><span class="o">.</span><span class="n">sh</span>
+
+<span class="c1"># User configuration</span>
+
+<span class="c1"># export MANPATH="/usr/local/man:$MANPATH"</span>
+
+<span class="c1"># You may need to manually set your language environment</span>
+<span class="c1"># export LANG=en_US.UTF-8</span>
+
+<span class="c1"># Preferred editor for local and remote sessions</span>
+<span class="c1"># if [[ -n $SSH_CONNECTION ]]; then</span>
+<span class="c1">#   export EDITOR='vim'</span>
+<span class="c1"># else</span>
+<span class="c1">#   export EDITOR='mvim'</span>
+<span class="c1"># fi</span>
+
+<span class="c1"># Compilation flags</span>
+<span class="c1"># export ARCHFLAGS="-arch x86_64"</span>
+
+<span class="c1"># Set personal aliases, overriding those provided by oh-my-zsh libs,</span>
+<span class="c1"># plugins, and themes. Aliases can be placed here, though oh-my-zsh</span>
+<span class="c1"># users are encouraged to define aliases within the ZSH_CUSTOM folder.</span>
+<span class="c1"># For a full list of active aliases, run `alias`.</span>
+<span class="c1">#</span>
+<span class="c1"># Example aliases</span>
+<span class="c1"># alias zshconfig="mate ~/.zshrc"</span>
+<span class="c1"># alias ohmyzsh="mate ~/.oh-my-zsh"</span>
+<span class="n">setopt</span><span class="w"> </span><span class="n">nonomatch</span>
+<span class="n">export</span><span class="w"> </span><span class="n">PROMPT_EOL_MARK</span><span class="o">=</span>
+<span class="n">export</span><span class="w"> </span><span class="n">XDG_SESSION_TYPE</span><span class="o">=</span><span class="n">X11</span>
+<span class="n">export</span><span class="w"> </span><span class="n">PATH</span><span class="o">=</span><span class="nv">$PATH:</span><span class="sr">/home/s</span><span class="n">hiyanlou</span><span class="sr">/.local/</span><span class="n">bin</span>
+<span class="n">export</span><span class="w"> </span><span class="n">JAVA_HOME</span><span class="o">=</span><span class="sr">/usr/</span><span class="n">lib</span><span class="sr">/jvm/</span><span class="n">java</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="n">openjdk</span><span class="o">-</span><span class="n">amd64</span>
+<span class="n">export</span><span class="w"> </span><span class="n">JRE_HOME</span><span class="o">=</span><span class="nv">$JAVA_HOME</span>
+<span class="n">export</span><span class="w"> </span><span class="n">CLASSPATH</span><span class="o">=.</span><span class="p">:</span><span class="nv">$JAVA_HOME</span><span class="sr">/lib:$JRE_HOME/</span><span class="n">lib</span>
+<span class="n">export</span><span class="w"> </span><span class="n">PATH</span><span class="o">=</span><span class="nv">$JAVA_HOME</span><span class="sr">/bin:$JRE_HOME/</span><span class="n">bin:</span><span class="nv">$PATH</span>
+<span class="n">export</span><span class="w"> </span><span class="n">GOPATH</span><span class="o">=</span><span class="sr">/home/s</span><span class="n">hiyanlou</span><span class="o">/</span><span class="n">golang</span>
+<span class="n">export</span><span class="w"> </span><span class="n">GOROOT</span><span class="o">=</span><span class="sr">/usr/</span><span class="nb">local</span><span class="o">/</span><span class="n">go</span>
+<span class="n">export</span><span class="w"> </span><span class="n">GOBIN</span><span class="o">=</span><span class="sr">/home/s</span><span class="n">hiyanlou</span><span class="sr">/golang/</span><span class="n">bin</span>
+<span class="n">export</span><span class="w"> </span><span class="n">PATH</span><span class="o">=</span><span class="nv">$PATH:$GOROOT</span><span class="sr">/bin:$GOPATH/</span><span class="n">bin</span>
+<span class="n">export</span><span class="w"> </span><span class="n">MAVEN_HOME</span><span class="o">=</span><span class="sr">/usr/s</span><span class="n">hare</span><span class="o">/</span><span class="n">maven</span>
+<span class="n">export</span><span class="w"> </span><span class="n">MAVEN_CONFIG</span><span class="o">=</span><span class="sr">/home/s</span><span class="n">hiyanlou</span><span class="o">/.</span><span class="n">m2</span>
+<span class="n">export</span><span class="w"> </span><span class="n">PATH</span><span class="o">=</span><span class="nv">$PATH:$MAVEN_HOME</span><span class="o">/</span><span class="n">bin</span>
+<span class="n">export</span><span class="w"> </span><span class="n">CATALINA_HOME</span><span class="o">=</span><span class="sr">/opt/</span><span class="n">apache</span><span class="o">-</span><span class="n">tomcat</span><span class="o">-</span><span class="mf">8.5.54</span>
+<span class="n">export</span><span class="w"> </span><span class="n">PATH</span><span class="o">=</span><span class="nv">$PATH:</span><span class="sr">/usr/</span><span class="nb">local</span><span class="o">/</span><span class="n">bin</span>
+<span class="n">export</span><span class="w"> </span><span class="n">NODE_HOME</span><span class="o">=</span><span class="sr">/usr/s</span><span class="n">bin</span><span class="o">/</span><span class="n">nodejs</span>
+<span class="n">export</span><span class="w"> </span><span class="n">PATH</span><span class="o">=</span><span class="nv">$PATH:$NODE_HOME</span><span class="o">/</span><span class="n">bin</span>
+<span class="n">export</span><span class="w"> </span><span class="n">NODE_PATH</span><span class="o">=</span><span class="nv">$NODE_HOME</span><span class="sr">/lib/</span><span class="n">node_modules</span>
+<span class="n">export</span><span class="w"> </span><span class="n">YARN_HOME</span><span class="o">=</span><span class="sr">/usr/s</span><span class="n">bin</span><span class="o">/</span><span class="n">yarn</span>
+<span class="n">export</span><span class="w"> </span><span class="n">PATH</span><span class="o">=</span><span class="nv">$PATH:$YARN_HOME</span><span class="o">/</span><span class="n">bin</span>
+<span class="n">HISTFILE</span><span class="o">=</span><span class="nv">$HOME</span><span class="o">/.</span><span class="n">zsh_history</span>
+<span class="n">HISTSIZE</span><span class="o">=</span><span class="mi">5000</span>
+<span class="n">SAVEHIST</span><span class="o">=</span><span class="mi">5000</span>
+<span class="n">setopt</span><span class="w"> </span><span class="n">BANG_HIST</span>
+<span class="n">setopt</span><span class="w"> </span><span class="n">EXTENDED_HISTORY</span>
+<span class="n">setopt</span><span class="w"> </span><span class="n">INC_APPEND_HISTORY</span>
+<span class="n">setopt</span><span class="w"> </span><span class="n">SHARE_HISTORY</span>
+<span class="n">setopt</span><span class="w"> </span><span class="n">HIST_EXPIRE_DUPS_FIRST</span>
+<span class="n">setopt</span><span class="w"> </span><span class="n">HIST_IGNORE_DUPS</span>
+<span class="n">setopt</span><span class="w"> </span><span class="n">HIST_IGNORE_ALL_DUPS</span>
+<span class="n">setopt</span><span class="w"> </span><span class="n">HIST_FIND_NO_DUPS</span>
+<span class="n">setopt</span><span class="w"> </span><span class="n">HIST_IGNORE_SPACE</span>
+<span class="n">setopt</span><span class="w"> </span><span class="n">HIST_SAVE_NO_DUPS</span>
+<span class="n">setopt</span><span class="w"> </span><span class="n">HIST_REDUCE_BLANKS</span>
+<span class="n">setopt</span><span class="w"> </span><span class="n">HIST_VERIFY</span>
+<span class="n">setopt</span><span class="w"> </span><span class="n">HIST_BEEP</span>
+</code></pre></div>
+
+<h3 id="shell">修改用户默认shell</h3>
+<ul>
+<li>sudo chsh --shell /bin/zsh shiyanlou</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221231-1672454733534.png" /></p>
+<ul>
+<li>此命令可以修改用户默认的登录shell</li>
+</ul>
+<h3 id="_7">总结</h3>
+<ul>
+<li>这次我们研究了zsh<ul>
+<li>从源码开始编译安装</li>
+<li>真的成功了</li>
+</ul>
+</li>
+<li>可以用chsh<ul>
+<li>来设置用户的默认shell</li>
+</ul>
+</li>
+<li>不过现在经常用的是<ul>
+<li>Oh-My-Zsh</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220922-1663819822325.png" /></p>
+<ul>
+<li>这个 <code>Oh-My-Zsh</code> 和 <code>zsh</code> 是什么关系呢？🤔</li>
+<li>下次再说👋</li>
+</ul>
+    </div>
+</body>
+</html>

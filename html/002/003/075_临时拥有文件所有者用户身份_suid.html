@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：修改文件权限chmod，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解临时拥有文件所有者用户身份 suid。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖int main {     printf"the uid is: %d", geteuid;     sleep5;     // system"rm -f test.txt"...">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 临时拥有文件所有者用户身份, suid, 修改文件权限chmod">
+    <meta property="og:title" content="oeasy Linux系统教程：修改文件权限chmod，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解临时拥有文件所有者用户身份 suid。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖int main {     printf"the uid is: %d", geteuid;     sleep5;     // system"rm -f test.txt"...">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="chmod">修改文件权限(chmod)</h1>
+<h2 id="_1">回忆</h2>
+<ul>
+<li>上次了解了命令chown<ul>
+<li>可以修改文件的所有者</li>
+<li>也可以修改文件的所属组</li>
+</ul>
+</li>
+<li>而且<ul>
+<li>还可以对于文件夹设置所有者</li>
+<li>甚至设置递归地设置文件夹的所有者</li>
+</ul>
+</li>
+<li>这两个可以配合<ul>
+<li>通过chown设置所有者和组</li>
+<li>通过chmod设置权限</li>
+</ul>
+</li>
+<li>但是也发现一些问题</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221013-1665625223620.png" /></p>
+<ul>
+<li>sudo命令的可执行权限是s</li>
+<li>这应该如何理解呢？</li>
+</ul>
+<h3 id="chmod_1">回忆chmod</h3>
+<ul>
+<li>chmod可以修改文件权限</li>
+<li>靠的是操作文件的权限位</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221013-1665627887665.jpg" /></p>
+<ul>
+<li>这权限位指的是什么呢？</li>
+</ul>
+<h3 id="_2">权限位</h3>
+<p><img alt="图片描述" src="images/uid1190679-20221013-1665627941963.jpg" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20221013-1665628047061.png" /></p>
+<ul>
+<li>可是</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221013-1665625223620.png" /></p>
+<ul>
+<li>sudo命令的可执行权限是s</li>
+<li>这如何理解？</li>
+</ul>
+<h3 id="_3">查看帮助</h3>
+<p><img alt="图片描述" src="images/uid1190679-20221013-1665629629068.jpg" /></p>
+<ul>
+<li>setuid是1位</li>
+<li>我可以给某个可执行文件设置这些吗？</li>
+</ul>
+<h3 id="setuid">修改setuid</h3>
+<p><img alt="图片描述" src="images/uid1190679-20221013-1665629764574.jpg" /></p>
+<ul>
+<li>确实可以修改</li>
+<li>修改之后有什么用吗？</li>
+</ul>
+<h3 id="_4">构建环境</h3>
+<ul>
+<li>新建test.c</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"the uid is: %d"</span><span class="p">,</span><span class="w"> </span><span class="n">geteuid</span><span class="p">());</span>
+<span class="w">    </span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// system("rm -f test.txt");</span>
+<span class="w">    </span><span class="n">remove</span><span class="p">(</span><span class="s">"test.txt"</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<ul>
+<li>编译</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221013-1665630506256.png" /></p>
+<h3 id="_5">新建文件</h3>
+<ul>
+<li>新建test.txt</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221013-1665631034841.png" /></p>
+<ul>
+<li>并新建用户</li>
+</ul>
+<h3 id="_6">尝试执行</h3>
+<ul>
+<li>用新用户登录之后</li>
+<li>尝试删除test.txt文件</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221013-1665631072477.png" /></p>
+<ul>
+<li>失败了</li>
+<li>因为没有权限</li>
+<li>使用刚才编译的test可以删除吗？</li>
+</ul>
+<h3 id="_7">尝试删除</h3>
+<p><img alt="图片描述" src="images/uid1190679-20221013-1665631236560.png" /></p>
+<ul>
+<li>程序可以执行x</li>
+<li>但是txt文件无法删除</li>
+<li>如果把文件的执行权限修改为s呢？</li>
+</ul>
+<h3 id="_8">修改权限</h3>
+<ul>
+<li>用shiyanlou 将test的执行权限 设置为s</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20230208-1675863714741.png" /></p>
+<ul>
+<li>尝试 使用oeasy用于运行test</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221013-1665631597685.png" /></p>
+<ul>
+<li>这回文件就删除成功了</li>
+<li>而且报当前用户uid为5000</li>
+<li>为什么可以删除成功呢？</li>
+</ul>
+<h3 id="_9">删除原理</h3>
+<ul>
+<li>
+<p>执行过程</p>
+<ul>
+<li>当oeasy想要执行test时</li>
+<li>oeasy 不属于 test的所有者和用户组</li>
+<li>oeasy 属于 other 可以有执行权限</li>
+<li>由于test的执行权限是s</li>
+<li>所以当前用户变成了test的所有者shiyanlou</li>
+<li>shiyanlou拥有删除test.txt的权限</li>
+<li>所以删除文件成功</li>
+</ul>
+</li>
+<li>
+<p>我可以在c语言程序里面直接设置用户吗？</p>
+</li>
+</ul>
+<h3 id="_10">直接设置</h3>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sys/types.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"real uid is %d---"</span><span class="p">,</span><span class="w"> </span><span class="n">getuid</span><span class="p">());</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"effective uid is %d---"</span><span class="p">,</span><span class="w"> </span><span class="n">geteuid</span><span class="p">());</span>
+<span class="w">    </span><span class="n">getchar</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">seteuid</span><span class="p">(</span><span class="mi">1001</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">-1</span><span class="p">)</span><span class="w">    </span><span class="cm">/* zzz = 1000 */</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">perror</span><span class="p">(</span><span class="s">"seteuid"</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"real uid is %d---"</span><span class="p">,</span><span class="w"> </span><span class="n">getuid</span><span class="p">());</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"effective uid is %d---"</span><span class="p">,</span><span class="w"> </span><span class="n">geteuid</span><span class="p">());</span>
+<span class="w">    </span><span class="n">getchar</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">seteuid</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">-1</span><span class="p">)</span><span class="w">       </span><span class="cm">/* root = 1001 */</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">perror</span><span class="p">(</span><span class="s">"seteuid"</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"real uid is %d---"</span><span class="p">,</span><span class="w"> </span><span class="n">getuid</span><span class="p">());</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"effective uid is %d---"</span><span class="p">,</span><span class="w"> </span><span class="n">geteuid</span><span class="p">());</span>
+<span class="w">    </span><span class="n">getchar</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<ul>
+<li>编译之后执行</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221013-1665633361264.png" /></p>
+<ul>
+<li>确实也可以获得指定的uid</li>
+<li>去总结一下</li>
+</ul>
+<h3 id="_11">总结 🤨</h3>
+<ul>
+<li>这次研究了suid<ul>
+<li>这种权限在文件所有者的执行权限上是一个s</li>
+<li>意味着执行的时候可以使用文件所有者的权限</li>
+<li>可是为什么要设置这样一种权限呢？🤔</li>
+</ul>
+</li>
+<li>下次再说👋</li>
+</ul>
+    </div>
+</body>
+</html>

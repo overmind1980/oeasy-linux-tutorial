@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：修改文件权限chmod，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解批量添加用户和文件夹。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖|  mode   | 说明  | |  ----  | ----  | | S_IRWXU  | 用户所有者读、写、执行 | | S_IRUSR  | 用户所有者读 | | S_IRWUSR ...">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 批量添加用户和文件夹, 修改文件权限chmod">
+    <meta property="og:title" content="oeasy Linux系统教程：修改文件权限chmod，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解批量添加用户和文件夹。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖|  mode   | 说明  | |  ----  | ----  | | S_IRWXU  | 用户所有者读、写、执行 | | S_IRUSR  | 用户所有者读 | | S_IRWUSR ...">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="chmod">修改文件权限(chmod)</h1>
+<h2 id="_1">回忆</h2>
+<ul>
+<li>我们上次了解了粘滞位sticky</li>
+<li>通过chmod o+t可以设置</li>
+<li>设置之后</li>
+<li>只有root和自身文件所有者可以删除</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>mode</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S_IRWXU</td>
+<td>用户(所有者)读、写、执行</td>
+</tr>
+<tr>
+<td>S_IRUSR</td>
+<td>用户(所有者)读</td>
+</tr>
+<tr>
+<td>S_IRWUSR</td>
+<td>用户(所有者)写</td>
+</tr>
+<tr>
+<td>S_IRXUSR</td>
+<td>用户(所有者)执行</td>
+</tr>
+<tr>
+<td>S_IRWXG</td>
+<td>用户组读、写、执行</td>
+</tr>
+<tr>
+<td>S_IRGRP</td>
+<td>用户组读</td>
+</tr>
+<tr>
+<td>S_IWGRP</td>
+<td>用户组写</td>
+</tr>
+<tr>
+<td>S_IXGRP</td>
+<td>用户组执行</td>
+</tr>
+<tr>
+<td>S_IRWXO</td>
+<td>其他读、写、执行</td>
+</tr>
+<tr>
+<td>S_IROTH</td>
+<td>其他读</td>
+</tr>
+<tr>
+<td>S_IROTH</td>
+<td>其他写</td>
+</tr>
+<tr>
+<td>S_IROTH</td>
+<td>其他执行</td>
+</tr>
+<tr>
+<td>S_ISUID</td>
+<td>执行时设置用户id</td>
+</tr>
+<tr>
+<td>S_ISGID</td>
+<td>执行时设置用户组id</td>
+</tr>
+<tr>
+<td>STICKY</td>
+<td>只有文件所有者和root可以删除</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>了解了这么多</li>
+<li>我可以<ul>
+<li>读取一个csv文件</li>
+<li>新建若干目录、用户</li>
+<li>并且进行设置吗？</li>
+</ul>
+</li>
+</ul>
+<h3 id="csv">读取csv文件</h3>
+<p><img alt="图片描述" src="images/uid1190679-20221013-1665657564554.png" /></p>
+<ul>
+<li>读取了csv文件之后</li>
+<li>输出具体的号码</li>
+</ul>
+<h3 id="_2">输出号码</h3>
+<p><img alt="图片描述" src="images/uid1190679-20221013-1665659481780.png" /></p>
+<ul>
+<li>运行结果</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221013-1665659497328.png" /></p>
+<ul>
+<li>我们的目的是在nginx的路径下建立路径</li>
+</ul>
+<h3 id="_3">建立文件夹</h3>
+<p><img alt="图片描述" src="images/uid1190679-20221013-1665660838490.png" /></p>
+<ul>
+<li>先删除</li>
+<li>再建立</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221013-1665664631824.png" /></p>
+<ul>
+<li>然后需要添加用户</li>
+</ul>
+<h3 id="_4">先查帮助</h3>
+<p><img alt="图片描述" src="images/uid1190679-20221013-1665664867271.jpg" /></p>
+<ul>
+<li>我们首先可以试着设置一下</li>
+</ul>
+<h3 id="adduser">adduser</h3>
+<ul>
+<li>可以添加用户</li>
+<li>并设置宿主目录</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221013-1665666344593.png" /></p>
+<ul>
+<li>尝试设置shell</li>
+</ul>
+<h3 id="shell">shell</h3>
+<p><img alt="图片描述" src="images/uid1190679-20221013-1665667556772.png" /></p>
+<ul>
+<li>如果要添加group</li>
+<li>应该如何呢？</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221013-1665666713831.png" /></p>
+<ul>
+<li>那如何新建一个group</li>
+<li>并知道他的gid呢？</li>
+</ul>
+<h3 id="_5">查询文档</h3>
+<ul>
+<li>man addgroup</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221013-1665667094434.png" /></p>
+<ul>
+<li>应该是用--gid参数</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221013-1665667278597.png" /></p>
+<ul>
+<li>构建完整添加用户语句</li>
+</ul>
+<h3 id="_6">构建语句</h3>
+<p><img alt="图片描述" src="images/uid1190679-20221013-1665667674486.png" /></p>
+<ul>
+<li>成功之后</li>
+<li>删除不必要的组和用户</li>
+<li>尝试添加csv中的用户名</li>
+</ul>
+<h3 id="_7">添加</h3>
+<p><img alt="图片描述" src="images/uid1190679-20221013-1665668529320.png" /></p>
+<ul>
+<li>直接添加是失败的</li>
+<li>用户名不能数字开头</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221013-1665668572924.png" /></p>
+<ul>
+<li>开头有字母就好办多了</li>
+<li>但是还需要输入密码</li>
+<li>我想自动完成</li>
+</ul>
+<h3 id="yes">通过管道送yes</h3>
+<p><img alt="图片描述" src="images/uid1190679-20221013-1665668678054.png" /></p>
+<ul>
+<li>试验成功！</li>
+<li>
+<p>echo yes | sudo adduser num --home /usr/share/nginx/html/ num --shell /usr/bin/zsh</p>
+</li>
+<li>
+<p>还需要设置密码才能登陆</p>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221016-1665906419928.png" /></p>
+<h3 id="_8">最终代码</h3>
+<ul>
+<li>最终代码</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221016-1665906722059.png" /></p>
+<ul>
+<li>如下</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/python3</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">"sudo addgroup og --gid 2000"</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"list.csv"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+    <span class="n">num</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span><span class="s2">""</span><span class="p">)</span>
+    <span class="n">num</span> <span class="o">=</span> <span class="s2">"o"</span> <span class="o">+</span> <span class="n">num</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">"sudo deluser "</span> <span class="o">+</span> <span class="n">num</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">"sudo rm -rf /usr/share/nginx/html/"</span> <span class="o">+</span> <span class="n">num</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">"sudo mkdir /usr/share/nginx/html/"</span> <span class="o">+</span> <span class="n">num</span><span class="p">)</span>
+    <span class="n">cmd</span> <span class="o">=</span> <span class="s2">"echo yes "</span>\
+        <span class="o">+</span> <span class="s2">"| sudo adduser "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>\
+        <span class="o">+</span> <span class="s2">" --home /usr/share/nginx/html/"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>\
+        <span class="o">+</span> <span class="s2">" --shell /usr/bin/zsh"</span>\
+        <span class="o">+</span> <span class="s2">" --gid 2000"</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+    <span class="n">cmd</span> <span class="o">=</span> <span class="s2">"echo </span><span class="se">\"</span><span class="s2">"</span> <span class="o">+</span> <span class="n">num</span> <span class="o">+</span> <span class="s2">":oeasy</span><span class="se">\"</span><span class="s2"> | sudo chpasswd"</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+    <span class="n">cmd</span> <span class="o">=</span> <span class="s2">"cp -r /root/.zshrc /usr/share/nginx/html/"</span> <span class="o">+</span> <span class="n">num</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+    <span class="n">cmd</span> <span class="o">=</span> <span class="s2">"cp -r /root/.oh-my-zsh /usr/share/nginx/html/"</span> <span class="o">+</span> <span class="n">num</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+    <span class="n">cmd</span> <span class="o">=</span> <span class="s2">"cp -r /root/.vimrc /usr/share/nginx/html/"</span> <span class="o">+</span> <span class="n">num</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+    <span class="n">cmd</span> <span class="o">=</span> <span class="s2">"cp -r /root/.cache /usr/share/nginx/html/"</span> <span class="o">+</span> <span class="n">num</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+<span class="n">cmd</span> <span class="o">=</span> <span class="s2">"chmod -R a+w /usr/share/nginx/html/"</span>
+</code></pre></div>
+
+<ul>
+<li>可以登陆吗？</li>
+</ul>
+<h3 id="_9">登录</h3>
+<p><img alt="图片描述" src="images/uid1190679-20221016-1665906792893.png" /></p>
+<ul>
+<li>前提是<ul>
+<li>路径存在</li>
+<li>并且zsh也存在</li>
+</ul>
+</li>
+<li>登录成功</li>
+</ul>
+<h3 id="_10">总结 🤨</h3>
+<ul>
+<li>这次根据一个csv文件<ul>
+<li>批量建立了一批学生用户</li>
+<li>让这些用户属于同一个组</li>
+<li>然后设置这些用户的宿主文件夹和默认shell</li>
+<li>最终可以让这些用户远程登录</li>
+<li>每个学生可以在自己的文件夹下编辑网页</li>
+<li>这其实并不难</li>
+</ul>
+</li>
+<li>当然这里面其实还可以有更细节的权限设置<ul>
+<li>学生是否可以执行文件夹中的程序</li>
+<li>学生是否可以看同组同学的网页</li>
+<li>是否可以改同组同学的网页</li>
+</ul>
+</li>
+<li>多人协作有没有什么更好用的方法呢？🤔</li>
+<li>下次再说👋</li>
+</ul>
+    </div>
+</body>
+</html>

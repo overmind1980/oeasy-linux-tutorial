@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：本章回顾，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解应用管理 aptitude。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖这软件包可以管理 apt, 首先要下载：🤪等内容，搜索oeasy即可学习。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 应用管理, aptitude, 本章回顾">
+    <meta property="og:title" content="oeasy Linux系统教程：本章回顾，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解应用管理 aptitude。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖这软件包可以管理 apt, 首先要下载：🤪等内容，搜索oeasy即可学习。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="_1">本章回顾</h1>
+<h2 id="_2">回忆 😌</h2>
+<ul>
+<li>这个hollywood真的很酷</li>
+<li>👻 退出的话用 <kbd>ctrl</kbd>+<kbd>c</kbd></li>
+<li>回到原来的 shell 用命令 zsh</li>
+<li>下面的关于 cpu、日期等信息仍然保留</li>
+<li>用这个当做屏保</li>
+<li>无意中让 MM 看看</li>
+<li>哈哈！</li>
+<li>目前我们只会安装软件包</li>
+<li>如何删除软件包呢？🤔</li>
+</ul>
+<h3 id="dpkg">dpkg管理软件包</h3>
+<ul>
+<li>dpkg是原始的包管理工具<ul>
+<li>管理本地的软件包</li>
+<li>查看所有已经安装的软件包 📦</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># dpkg debian 本地包管理</span>
+dpkg<span class="w"> </span>--list
+</code></pre></div>
+
+<ul>
+<li>内容太多了</li>
+<li>一下子翻到底</li>
+<li>啥都没看见</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220902-1662084361456.png" /></p>
+<h3 id="more">more</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># 管道送到 more</span>
+dpkg<span class="w"> </span>--list<span class="w"> </span><span class="p">|</span><span class="w"> </span>more
+</code></pre></div>
+
+<ul>
+<li>加一个管道 |</li>
+<li>送到more</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220902-1662084564732.png" /></p>
+<ul>
+<li>f可以翻页</li>
+<li>好多应用啊</li>
+<li>如何查某个应用呢？</li>
+</ul>
+<h3 id="_3">查询手册</h3>
+<ul>
+<li>查询某个应用</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220902-1662085151250.png" /></p>
+<ul>
+<li>如何删除应用呢？</li>
+<li>查dpkg手册</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220902-1662085252290.png" /></p>
+<ul>
+<li>尝试删除cmatrix</li>
+</ul>
+<h3 id="_4">拒绝</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220902-1662085274590.png" /></p>
+<ul>
+<li>hollywood基于cmatrix</li>
+<li>所以不让删</li>
+<li>这就是依赖关系</li>
+<li>那我们先删hollywood</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220902-1662085418392.png" /></p>
+<ul>
+<li>用dpkg删除不难</li>
+<li>可以用新一代的apt删除应用么？</li>
+<li>先关闭环境我们重开一下</li>
+</ul>
+<h3 id="apt">apt 高级软件包管理</h3>
+<div class="highlight"><pre><span></span><code>sudo apt list --installed
+</code></pre></div>
+
+<ul>
+<li>从可更新列表里面发现了 firefox</li>
+<li>如何只找firefox?</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220902-1662086352146.png" /></p>
+<ul>
+<li>grep就是再输出的文本中筛选后面的文本firefox</li>
+<li>观察firefox版本</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220902-1662085953376.png" /></p>
+<ul>
+<li>那我们如何更新 firefox 呢？</li>
+</ul>
+<h3 id="_5">本地软件包升级 📦</h3>
+<ul>
+<li>指定安装 firefox</li>
+<li>由于实验楼环境中已安装了 🦊 firefox</li>
+<li>安装可以完成升级么?</li>
+</ul>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>firefox
+</code></pre></div>
+
+<ul>
+<li>apt 尝试帮我们安装本地认为的最新的firefox</li>
+<li>grep 是文本查找工具</li>
+<li>grep firefox 是在文本中搜索 firefox</li>
+<li>| 起到管道作用</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220902-1662085995897.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 更新源</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>update
+</code></pre></div>
+
+<ul>
+<li>但是这可能是应为本地源没有更新造成的</li>
+</ul>
+<h3 id="_6">更新源</h3>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </span>
+</code></pre></div>
+
+<p><img alt="图片描述" src="images/uid1190679-20220902-1662086517211.jpg" /></p>
+<ul>
+<li>更新完了告诉我们firefox可以升级了</li>
+<li>尝试升级</li>
+</ul>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>firefox<span class="w"> </span>
+</code></pre></div>
+
+<p><img alt="图片描述" src="images/uid1190679-20210910-1631264821897.png" /></p>
+<ul>
+<li>看看还有什么可以升级？</li>
+</ul>
+<h3 id="_7">全升级</h3>
+<ul>
+<li>查看可升级的软件包 📦</li>
+</ul>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>list<span class="w"> </span>--upgradable
+</code></pre></div>
+
+<p><img alt="图片描述" src="images/uid1190679-20220902-1662086704295.png" /></p>
+<ul>
+<li>apt 可以更新</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220902-1662086761420.png" /></p>
+<ul>
+<li>更新完毕</li>
+<li>可以彻底删除再安装么？</li>
+</ul>
+<h3 id="_8">先删再装</h3>
+<ul>
+<li>full-upgrade 可以先删除再安装</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220902-1662087315038.png" /></p>
+<ul>
+<li>那如何只删除呢？</li>
+</ul>
+<h3 id="_9">删除</h3>
+<ul>
+<li>如果升级软件的时候依赖于删除现有的包</li>
+<li>怎么办?</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220902-1662087220613.jpg" /></p>
+<ul>
+<li>apt会帮我们把基于cmatrix的hollywood也删除...</li>
+<li>这个最好还是看清楚</li>
+<li>问明白再删</li>
+<li>还有什么方法更好的管理应用吗？🤔</li>
+</ul>
+<h2 id="aptitude">aptitude</h2>
+<p><strong>这软件包可以管理 apt, 首先要下载：</strong>🤪</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>aptitude
+</code></pre></div>
+
+<ul>
+<li>然后运行</li>
+</ul>
+<h3 id="_10">界面</h3>
+<p><img alt="Image text" src="images/aptitude.png" /></p>
+<ul>
+<li>/ 搜索</li>
+<li>? 帮助</li>
+<li>q 退出</li>
+<li>g 预览/下载/安装/移除</li>
+<li>u 升级</li>
+<li><kbd>ctrl</kbd>+<kbd>t</kbd> 调出菜单</li>
+<li>里面还有个扫雷子游戏</li>
+<li>点开之后可以查询软件的信息</li>
+<li>但是还是感觉命令行apt更方便</li>
+</ul>
+<h3 id="_11">总结 🤨</h3>
+<ul>
+<li>软件包工具 🔧 是 <ul>
+<li>dpkg</li>
+<li>apt </li>
+</ul>
+</li>
+<li>dpkg<ul>
+<li>查看<ul>
+<li>dpkg --list | grep cmatrix</li>
+</ul>
+</li>
+<li>卸载<ul>
+<li>dpkg -r cmatrix</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>apt<ul>
+<li>查询 <ul>
+<li>search</li>
+</ul>
+</li>
+<li>详细查询<ul>
+<li>show</li>
+</ul>
+</li>
+<li>下载 <ul>
+<li>install</li>
+</ul>
+</li>
+<li>更新源 <ul>
+<li>update </li>
+</ul>
+</li>
+<li>升级软件 <ul>
+<li>upgrade</li>
+</ul>
+</li>
+<li>删除 <ul>
+<li>remove</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>还有个专门管理软件包的 <ul>
+<li>aptitude</li>
+</ul>
+</li>
+<li>下次玩什么呢？🤔</li>
+<li>下次再说！👋</li>
+</ul>
+    </div>
+</body>
+</html>

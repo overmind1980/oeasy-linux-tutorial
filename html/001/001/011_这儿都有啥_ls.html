@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：这儿都有啥 ls，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解这儿都有啥 ls。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 这儿都有啥, ls">
+    <meta property="og:title" content="oeasy Linux系统教程：这儿都有啥 ls，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解这儿都有啥 ls。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="ls">这儿都有啥 ls</h1>
+<h2 id="_1">回忆上次内容 😌</h2>
+<ul>
+<li>上次讲了比whatis更详细的帮助man<ul>
+<li>可以查mannual</li>
+</ul>
+</li>
+<li>还了解到了命令分成<ul>
+<li>命令</li>
+<li>选项</li>
+<li>参数</li>
+</ul>
+</li>
+<li>什么不会就查<ul>
+<li>细节都在手册里</li>
+<li><strong>我们再来查查 ls 的手册：</strong></li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>man<span class="w"> </span>ls
+</code></pre></div>
+
+<p><img alt="图片描述" src="images/uid1190679-20210910-1631237793102.png" /></p>
+<ul>
+<li>ls 的手册比较复杂 🤗</li>
+</ul>
+<h3 id="_2">复杂</h3>
+<ul>
+<li>
+<p>ls 的手册比较复杂 🤗</p>
+<ul>
+<li>感觉好长，不要着急慢慢读，🤫 </li>
+<li>你得熟悉命令行的生活方式。🤗</li>
+<li>为什么？</li>
+<li>为什么要用命令行查询？🤔</li>
+</ul>
+</li>
+<li>
+<p>在图形界面 (GUI) 里面</p>
+</li>
+<li>查询不是很方便吗？</li>
+<li>🤔</li>
+</ul>
+<h3 id="_3">比较</h3>
+<p><img alt="Image text" src="images/gui1.png" /></p>
+<ul>
+<li>我们并不排斥使用 GUI<ul>
+<li>Graphic User Interface</li>
+</ul>
+</li>
+<li>但是我们得明白 CLI 是根本<ul>
+<li>Command Line Interface </li>
+</ul>
+</li>
+<li>为什么是根本<ul>
+<li>我们在gui里面只能看到这些名字</li>
+<li>cli里面会有更多细节</li>
+</ul>
+</li>
+<li>什么细节？</li>
+</ul>
+<h3 id="_4">细节</h3>
+<ul>
+<li>第一条选项<ul>
+<li><code>-a</code></li>
+<li>显示不忽略以"."开始的</li>
+</ul>
+</li>
+</ul>
+<p><img alt="Image text" src="images/man_ls.png" /></p>
+<ul>
+<li>linux 中以 "." 开始的文件和文件夹<ul>
+<li>为隐藏文件和文件夹</li>
+<li>如果不忽略以"."开始的</li>
+<li>就是全都(<code>a</code>ll)显示的意思吧 🤠</li>
+</ul>
+</li>
+<li>我们来试试 👉</li>
+</ul>
+<h3 id="_5">动手</h3>
+<div class="highlight"><pre><span></span><code>ls<span class="w"> </span>-a
+</code></pre></div>
+
+<ul>
+<li>这下我们看到隐藏文件（以"."开头的）了！✌ </li>
+<li>但是这些文件堆在一起<ul>
+<li>看不到更多细节</li>
+</ul>
+</li>
+<li>想看到大小、日期等细节怎么办呢？🤔</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210910-1631238135397.png" /></p>
+<h3 id="ls-l">ls选项 -l</h3>
+<ul>
+<li>通过查询手册我们发现了 <code>-l</code> <ul>
+<li>这个参数，<code>l</code> 的意思是 <code>l</code>ist</li>
+<li>这个参数可以以列表方式查询文件</li>
+</ul>
+</li>
+<li>让我们快去试试吧！</li>
+</ul>
+<div class="highlight"><pre><span></span><code>ls<span class="w"> </span>-l
+</code></pre></div>
+
+<ul>
+<li>好像真的列出很多信息</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210910-1631238165131.png" /></p>
+<h3 id="_6">开关</h3>
+<ul>
+<li>我们确实可以以列表的方式查看文件<ul>
+<li>但是我们看不见隐藏文件了，😤</li>
+</ul>
+</li>
+<li>我想<ul>
+<li>既能看到隐藏文件</li>
+<li>又使用列表方式</li>
+</ul>
+</li>
+<li>应该怎么办呢？🤔<ul>
+<li>俩开关都打开</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>ls<span class="w"> </span>-l<span class="w"> </span>-a
+</code></pre></div>
+
+<ul>
+<li>或者：</li>
+</ul>
+<div class="highlight"><pre><span></span><code>ls<span class="w"> </span>-a<span class="w"> </span>-l
+</code></pre></div>
+
+<ul>
+<li>我们还可以把两个开关合并到一起：</li>
+</ul>
+<div class="highlight"><pre><span></span><code>ls<span class="w"> </span>-al
+ls<span class="w"> </span>-la
+</code></pre></div>
+
+<ul>
+<li>还有什么开关吗？🤔</li>
+</ul>
+<h3 id="-h">选项-h</h3>
+<ul>
+<li>-h<ul>
+<li>human readable</li>
+<li>指的是人类可读：</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220831-1661951260938.png" /></p>
+<ul>
+<li>原来的文件大小使用的是字节数量<ul>
+<li>字节数量不利于阅读</li>
+<li>人们可以使用 k,m,g,t 等存储容量单位来观察了</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>ls<span class="w"> </span>-h
+</code></pre></div>
+
+<ul>
+<li>并没有反应？！😱 </li>
+<li>怎么回事？</li>
+</ul>
+<h3 id="_7">原因</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220831-1661951260938.png" /></p>
+<ul>
+<li>因为这里只显示文件名<ul>
+<li>只有在列表模式下</li>
+<li>才显示大小！👊 </li>
+<li>所以我们 -lh 两个开关要一起用</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>ls<span class="w"> </span>-lh
+</code></pre></div>
+
+<ul>
+<li>不过文件夹里面有什么东西还是看不见啊</li>
+</ul>
+<h3 id="_8">递归查询文件</h3>
+<ul>
+<li>使用 <code>-R</code> 开关可以递归地查询子文件下的内容</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220831-1661951414571.png" /></p>
+<ul>
+<li>不但查询文件夹里面有什么<ul>
+<li>就连子文件夹下面的东西也不放过</li>
+<li><code>R</code> 是大写的</li>
+<li>对应 Recursive</li>
+<li>意思是递归</li>
+</ul>
+</li>
+<li>我们来试试。</li>
+</ul>
+<div class="highlight"><pre><span></span><code>ls<span class="w"> </span>-R
+</code></pre></div>
+
+<ul>
+<li>我们可以看到很多文件<ul>
+<li>可以使用终端的滚轮上下翻页</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210910-1631238301914.png" /></p>
+<ul>
+<li>可以指定哪个文件夹来看么？</li>
+</ul>
+<h3 id="_9">参数</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220831-1661951524949.jpg" /></p>
+<ul>
+<li>也可以加上这个参数 <code>/etc</code><ul>
+<li>代表要对 <code>/etc</code> 下面的文件递归地列表</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>ls<span class="w"> </span>-R<span class="w"> </span>/etc
+</code></pre></div>
+
+<ul>
+<li><code>ls</code> 是命令command<ul>
+<li>起决定作用</li>
+<li>决定这次是列表操作</li>
+</ul>
+</li>
+<li><code>-R</code> 是选项option<ul>
+<li>是一个开关</li>
+<li>要把子文件夹也都翻遍</li>
+</ul>
+</li>
+<li><code>/etc</code> 是参数<ul>
+<li>是 <code>ls</code> 执行的对象</li>
+<li>就在这个文件夹里面翻</li>
+</ul>
+</li>
+<li>选项和参数可以交换吗？</li>
+</ul>
+<h3 id="_10">验证</h3>
+<p><img alt="图片描述" src="images/uid1190679-20211216-1639623733782.png" /></p>
+<ul>
+<li>实践证明<ul>
+<li>确实选项和参数是可以交换的</li>
+</ul>
+</li>
+</ul>
+<h3 id="_11">进一步，再深入</h3>
+<ul>
+<li>如果我想要对 <code>/proc</code> 执行 ls 操作<ul>
+<li>不但要递归查询<ul>
+<li>而且要列表<ul>
+<li>不但要列表而且要用人类可读的方式列表<ul>
+<li>而且还要显示出隐藏文件</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>这个应该怎么写呢？🤔 </li>
+<li>大家可以自己试试～</li>
+<li>我们下次再看！</li>
+</ul>
+    </div>
+</body>
+</html>

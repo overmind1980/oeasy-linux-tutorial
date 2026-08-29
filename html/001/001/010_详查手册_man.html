@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：详细手册，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解详查手册 man。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 详查手册, man, 详细手册">
+    <meta property="og:title" content="oeasy Linux系统教程：详细手册，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解详查手册 man。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="_1">详细手册</h1>
+<h2 id="_2">回忆上节课 😌</h2>
+<ul>
+<li>我们上节课学习了使用命令来了解命令<ul>
+<li>whatis</li>
+<li>我们通过他来发出灵魂之问</li>
+<li>whatis 到底是干什么的？🤔</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>whatis<span class="w"> </span>whatis
+</code></pre></div>
+
+<ul>
+<li>whatis你自己是干嘛的？</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210909-1631160072869.png" /></p>
+<ul>
+<li>但是<ul>
+<li>whatis 只是一句话介绍</li>
+</ul>
+</li>
+<li>有没有更详细的介绍呢？🤔</li>
+</ul>
+<h2 id="man">查看手册 man</h2>
+<ul>
+<li>更详细的查询命令就是  <strong>man</strong>😍<ul>
+<li>man 的意思是 manual<ul>
+<li>就是查手册</li>
+<li>查说明书</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>man 命令可以<ul>
+<li>查看<code>最</code>详细的命令细节 😍</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>man<span class="w"> </span>uname
+</code></pre></div>
+
+<ul>
+<li>想了解什么命令，就把他当作 man 的参数 🥰</li>
+</ul>
+<h3 id="_3">细节</h3>
+<p><img alt="Image text" src="images/man_uname.png" /></p>
+<ul>
+<li>用 <kbd>h</kbd> 来查看本说明书的帮助</li>
+<li>用 <kbd>q</kbd> 退出当前帮助</li>
+<li>用 <kbd>⬆️</kbd> 向上</li>
+<li><kbd>⬇️</kbd> 向下</li>
+<li>如果我就在帮助中想查找某个单词怎么办呢？</li>
+</ul>
+<h3 id="_4">用 <code>/</code> 进行搜索</h3>
+<ul>
+<li>输入 <kbd>/</kbd></li>
+<li>在屏幕左下角出现 <code>/</code></li>
+<li>输入 <code>version</code> <kbd>回车</kbd></li>
+<li>我们可以看到和 <code>version</code> 相关的内容</li>
+</ul>
+<p><img alt="Image text" src="images/man_search.png" /></p>
+<h3 id="_5">尝试</h3>
+<ul>
+<li>根据搜索的结果内容<ul>
+<li>可以查到添加 <code>--version</code> 选项查询版本号</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>uname<span class="w"> </span>--version
+</code></pre></div>
+
+<ul>
+<li>看完 uname手册 </li>
+<li>再来看看 cat</li>
+</ul>
+<h3 id="cat">cat 有什么细节</h3>
+<div class="highlight"><pre><span></span><code>man<span class="w"> </span>cat
+</code></pre></div>
+
+<ul>
+<li>用 <kbd>⬆️</kbd> 向上</li>
+<li><kbd>⬇️</kbd> 向下</li>
+<li>用 <kbd>ctrl</kbd>+<kbd>f</kbd> 向下 <code>Foward</code> 一页</li>
+<li>用 <kbd>ctrl</kbd>+<kbd>b</kbd> 向上 <code>Backward</code> 一页<ul>
+<li>这很像vim</li>
+<li><kbd>j</kbd><kbd>k</kbd>上下运动也和vim是一致的</li>
+<li>想了解更多vim可以去<a href="https://www.lanqiao.cn/courses/2840">oeasy教您玩转vim</a></li>
+</ul>
+</li>
+<li>翻到最后<ul>
+<li>注意这个作者是 <strong>Stallman</strong></li>
+<li>Stall不是集市上的售货亭么？</li>
+<li>用 <kbd>/</kbd> 搜索 number <ul>
+<li>发现上图中的 <code>-n</code> 参数</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img alt="Image text" src="images/man_cat.png" /></p>
+<ul>
+<li>用起来试试</li>
+</ul>
+<h3 id="-n">-n</h3>
+<p><img alt="图片描述" src="images/uid1190679-20210910-1631237569892.png" /></p>
+<ul>
+<li>cat -n /etc/*release</li>
+<li>这个怎么理解呢？</li>
+</ul>
+<h3 id="_6">回忆</h3>
+<ul>
+<li>先回忆一下<ul>
+<li>命令和参数 😌 </li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220903-1662179651613.jpg" /></p>
+<ul>
+<li>这次我们加上了选项：<ul>
+<li>-n就是选项</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>cat<span class="w"> </span>-n<span class="w"> </span>/etc/*release
+</code></pre></div>
+
+<p><img alt="图片描述" src="images/uid1190679-20220903-1662179703267.jpg" /></p>
+<h3 id="_7">我们这次的命令</h3>
+<ul>
+<li>命令是 cat,</li>
+<li>合并并输出内容</li>
+<li>选项是 -n, 打开输出行标记的开关<ul>
+<li>开着就有标号</li>
+<li>不开就没有标号</li>
+</ul>
+</li>
+<li>
+<p>参数是 <code>/etc</code> 目录下以 release 结尾的文件</p>
+</li>
+<li>
+<p>命令的结构</p>
+<ul>
+<li>命令<ul>
+<li>决定干什么事 ✊</li>
+</ul>
+</li>
+<li>选项<ul>
+<li>像一些开关</li>
+<li>调控控制命令的执行 🎛</li>
+</ul>
+</li>
+<li>参数<ul>
+<li>对谁执行命令 💡</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>能否查询关于手册的手册呢？</p>
+</li>
+</ul>
+<h3 id="man_1">man 🔦</h3>
+<ul>
+<li>试试</li>
+</ul>
+<div class="highlight"><pre><span></span><code>man<span class="w"> </span>man
+</code></pre></div>
+
+<ul>
+<li>这里有手册对于自身的深刻自省</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210910-1631237748367.png" /></p>
+<ul>
+<li>我们总结一下</li>
+</ul>
+<h3 id="_8">总结</h3>
+<ul>
+<li>这次讲了比whatis更详细的帮助man<ul>
+<li>可以查mannual</li>
+</ul>
+</li>
+<li>还了解到了命令分成<ul>
+<li>命令</li>
+<li>选项</li>
+<li>参数</li>
+</ul>
+</li>
+<li>什么不会就查<ul>
+<li>细节都在手册里</li>
+<li><strong>我们再来查查 ls 的手册：</strong></li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>man<span class="w"> </span>ls
+</code></pre></div>
+
+<p><img alt="图片描述" src="images/uid1190679-20210910-1631237793102.png" /></p>
+<ul>
+<li>ls 的手册比较复杂 🤗</li>
+<li>我们下次再说！👋🏻</li>
+</ul>
+    </div>
+</body>
+</html>

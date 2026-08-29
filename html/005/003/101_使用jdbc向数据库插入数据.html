@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：使用jdbc向数据库中插入数据，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解使用jdbc向数据库插入数据。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 使用jdbc向数据库插入数据, 使用jdbc向数据库中插入数据">
+    <meta property="og:title" content="oeasy Linux系统教程：使用jdbc向数据库中插入数据，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解使用jdbc向数据库插入数据。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="jdbc">使用jdbc向数据库中插入数据</h1>
+<h2 id="_1">回忆</h2>
+<ul>
+<li>我们玩了玩数据表的约束条件<ul>
+<li>可以添加约束条件<ul>
+<li>ALTER TABLE <code>table_name</code> ALTER COLUMN <code>column_name</code> SET NOT NULL;</li>
+</ul>
+</li>
+<li>也可以删除约束条件<ul>
+<li>ALTER TABLE <code>table_name</code> ALTER COLUMN  <code>column_name</code> DROP NOT NULL;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>但是数据库结构同时也收到数据影响</li>
+<li>所以一定要一开始的时候想明白</li>
+<li>保持数据库结构的稳定</li>
+<li>不过到现在还是没有插入数据啊</li>
+<li>如何插入数据呢？🤔</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658109262660.png" /></p>
+<h3 id="_2">复制代码</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658110153838.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658110994518.png" /></p>
+<ul>
+<li>在这个基础之上修改</li>
+<li>究竟应该如何插入数据呢？</li>
+<li>去哪里找呢？</li>
+<li>去sun/oracle公司给的jdbc api里面肯定有定义</li>
+</ul>
+<h3 id="api">查询api</h3>
+<ul>
+<li>既然statement可以根据sql找到结果集</li>
+<li>那么statement大致应该也可以通过sql插入数据</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658127226473.png" /></p>
+<ul>
+<li>好像确实可以</li>
+</ul>
+<h3 id="_3">搜索</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658113050379.png" /></p>
+<h3 id="_4">修改</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658113063897.png" /></p>
+<ul>
+<li>注意这里和查询不同的地方<ul>
+<li>查询<ul>
+<li>stmt.excuteQuery(sql)</li>
+</ul>
+</li>
+<li>更新<ul>
+<li>stmt.excuteUpdate(sql)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>保存并编译</li>
+<li>然后运行</li>
+</ul>
+<h3 id="_5">运行结果</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658114421175.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658114765385.png" /></p>
+<ul>
+<li>确实是可以插入的</li>
+<li>但是这个程序可以进行一些调试么？</li>
+</ul>
+<h3 id="_6">加入调试信息</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658114866601.png" /></p>
+<ul>
+<li>确实可以加入调试信息</li>
+<li>保存并编译</li>
+<li>可以运行么？</li>
+</ul>
+<h3 id="_7">运行结果</h3>
+<ul>
+<li>看到程序运行的过程</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658115029080.png" /></p>
+<ul>
+<li>由于url中已经有了http://oeasy.org</li>
+<li>所以无法插入同样的网址了</li>
+<li>绿色的部分可以直接放到pg里面运行一下么？</li>
+</ul>
+<h3 id="sql">直接运行sql</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658115134958.png" /></p>
+<ul>
+<li>可以看到运行的结果是一样的</li>
+<li>都是报错</li>
+</ul>
+<h3 id="_8">改代码</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658115248522.png" /></p>
+<h3 id="_9">运行</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658115352846.png" /></p>
+<ul>
+<li>再修改PostgresJdbc.java代码</li>
+</ul>
+<h3 id="_10">再修改</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658115602601.png" /></p>
+<ul>
+<li>编译成功</li>
+<li>编译时是无法发现那个字段是否修改的</li>
+<li>之后运行的时候，连接的时候才能发现</li>
+</ul>
+<h3 id="_11">结果</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658115671517.png" /></p>
+<ul>
+<li>运行成功</li>
+<li>也就是说我们后厨已经能做这道菜了</li>
+<li>但是能否是通过前台来发请求</li>
+<li>我们再去做菜呢？</li>
+<li>先总结一下</li>
+</ul>
+<h3 id="_12">总结</h3>
+<ul>
+<li>这次我们完成了<ul>
+<li>通过jdbc连接postgres</li>
+<li>并且插入数据</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658116165544.png" /></p>
+<ul>
+<li>用java程序插数据这个任务后厨能完成</li>
+<li>但是怎么和前台配合联动呢？🤔</li>
+<li>我们下次再说！👋🏻</li>
+</ul>
+    </div>
+</body>
+</html>

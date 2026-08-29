@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：分屏工具tmux，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解分屏工具 tmux 窗格 pane。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 分屏工具, tmux, 窗格, pane, 分屏工具tmux">
+    <meta property="og:title" content="oeasy Linux系统教程：分屏工具tmux，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解分屏工具 tmux 窗格 pane。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="tmux">分屏工具tmux</h1>
+<h2 id="_1">回忆</h2>
+<ul>
+<li>新建窗口<ul>
+<li>tmux new-window -n window_name</li>
+</ul>
+</li>
+<li>切换窗口<ul>
+<li><kbd>ctrl</kbd>+<kbd>b</kbd> <kbd>数字</kbd></li>
+</ul>
+</li>
+<li>关闭当前窗口<ul>
+<li><kbd>ctrl</kbd>+<kbd>b</kbd> <kbd>c</kbd></li>
+<li>tmux kill-session -t session_name</li>
+</ul>
+</li>
+<li>会话窗口<ul>
+<li>tmux rename-session -t old new    </li>
+<li><kbd>ctrl</kbd>+<kbd>b</kbd> <kbd>$</kbd></li>
+</ul>
+</li>
+<li>窗口管理器<ul>
+<li><kbd>ctrl</kbd>+<kbd>b</kbd> <kbd>s</kbd></li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220903-1662210670959.png" /></p>
+<ul>
+<li>窗口下面还有什么？🤔</li>
+<li>下次再说！👋🏻</li>
+</ul>
+<h3 id="pane">pane窗格</h3>
+<ul>
+<li>tmux split-window 上下分开</li>
+<li>tmux split-window -h 左右分开</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210927-1632748849379.png" /></p>
+<ul>
+<li>使用快捷键的方式<ul>
+<li><kbd>ctrl</kbd>+<kbd>b</kbd> <kbd>"</kbd>  上下分开</li>
+<li><kbd>ctrl</kbd>+<kbd>b</kbd> <kbd>%</kbd>  左右分开</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20211209-1639025794089.png" /></p>
+<ul>
+<li>窗格之间如何切换呢？</li>
+</ul>
+<h3 id="_2">窗格切换和关闭</h3>
+<ul>
+<li><kbd>ctrl</kbd>+<kbd>b</kbd> <kbd>方向键</kbd>  切换窗格</li>
+<li><kbd>ctrl</kbd>+<kbd>b</kbd> <kbd>x</kbd>  关闭窗格</li>
+<li>
+<p><kbd>ctrl</kbd>+<kbd>b</kbd> <kbd>!</kbd> 只留当前窗格</p>
+</li>
+<li>
+<p>如果要用命令的方式</p>
+<ul>
+<li>窗格关闭</li>
+</ul>
+</li>
+<li>怎么办呢？</li>
+</ul>
+<h3 id="_3">窗格关闭</h3>
+<ul>
+<li><kbd>ctrl</kbd>+<kbd>b</kbd> <kbd>q</kbd>  列出窗格pane标号</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210927-1632749332619.png" /></p>
+<ul>
+<li>tmux kill-pane -t 0</li>
+</ul>
+<h3 id="_4">暂时切到全屏</h3>
+<ul>
+<li>把当前窗格暂时独显<ul>
+<li><kbd>ctrl</kbd>+<kbd>b</kbd> <kbd>z</kbd> </li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220903-1662211373680.jpg" /></p>
+<ul>
+<li>当前窗格全屏</li>
+<li><kbd>ctrl</kbd>+<kbd>b</kbd> <kbd>z</kbd> </li>
+<li>再一次还原</li>
+<li>和只留当前窗格不同<ul>
+<li><kbd>ctrl</kbd>+<kbd>b</kbd> <kbd>!</kbd> 只留当前窗格</li>
+</ul>
+</li>
+</ul>
+<h3 id="_5">窗格大小控制</h3>
+<ul>
+<li><kbd>ctrl</kbd>+<kbd>b</kbd> <kbd>ctrl</kbd>+<kbd>方向键</kbd><ul>
+<li>移动当前窗格pane边界</li>
+</ul>
+</li>
+<li>这可能和快捷键冲突</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220903-1662211613420.png" /></p>
+<ul>
+<li><kbd>ctrl</kbd>+<kbd>b</kbd> <kbd>alt</kbd>+<kbd>方向键</kbd><ul>
+<li>以5为单位移动当前窗格pane边界</li>
+</ul>
+</li>
+</ul>
+<h3 id="_6">其他好玩的</h3>
+<ul>
+<li>
+<p>列出所有快捷键，及其对应的 Tmux 命令</p>
+<ul>
+<li>tmux list-keys</li>
+</ul>
+</li>
+<li>
+<p>列出所有 Tmux 命令及其参数</p>
+<ul>
+<li>tmux list-commands</li>
+</ul>
+</li>
+<li>
+<p>列出当前所有 Tmux 会话的信息</p>
+<ul>
+<li>tmux info</li>
+</ul>
+</li>
+<li>
+<p>重新加载当前的 Tmux 配置</p>
+<ul>
+<li>tmux source-file ~/.tmux.conf</li>
+</ul>
+</li>
+</ul>
+<h3 id="_7">窗格管理器</h3>
+<ul>
+<li><kbd>ctrl</kbd>+<kbd>b</kbd> <kbd>s</kbd> 会话管理器</li>
+<li><kbd>ctrl</kbd>+<kbd>b</kbd> <kbd>w</kbd> 窗口管理器</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220903-1662211845944.png" /></p>
+<ul>
+<li>可以用方向键打开窗格</li>
+</ul>
+<h3 id="_8">总结 🤨</h3>
+<ul>
+<li>我们这次使用了tmux</li>
+<li>tmux连接不同服务器可以有不同的session<ul>
+<li>同一个session里面可以有多个窗口window<ul>
+<li>同一个window里面可以有多个窗格pane</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>只用新建和切分window就够用了<ul>
+<li><kbd>ctrl</kbd>+<kbd>b</kbd> <kbd>c</kbd>新建窗口</li>
+<li><kbd>ctrl</kbd>+<kbd>b</kbd> <kbd>%</kbd>或<kbd>"</kbd>拆分窗格pane</li>
+<li><kbd>ctrl</kbd>+<kbd>b</kbd> <kbd>方向键</kbd>选择窗格pane</li>
+<li><kbd>ctrl</kbd>+<kbd>b</kbd> <kbd>x</kbd> 关闭窗格pane</li>
+</ul>
+</li>
+<li>还有什么好玩的么？🤔</li>
+<li>下次再说！👋</li>
+</ul>
+    </div>
+</body>
+</html>

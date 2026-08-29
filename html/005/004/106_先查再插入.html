@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：先查询再插入，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解先查再插入。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖} catch Exception e { 			e.printStackTrace; 			System.err.printlne.getClass.getName + ": " + e.getMess...">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 先查再插入, 先查询再插入">
+    <meta property="og:title" content="oeasy Linux系统教程：先查询再插入，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解先查再插入。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖} catch Exception e { 			e.printStackTrace; 			System.err.printlne.getClass.getName + ": " + e.getMess...">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="_1">先查询再插入</h1>
+<h3 id="_2">回忆</h3>
+<ul>
+<li>上次研究了表单提交信息的入库<ul>
+<li>就是一个注册的过程</li>
+<li>我们整合了接收post过来的数据和插入数据库的代码</li>
+<li>将接收到的表单数据直接插入数据库</li>
+</ul>
+</li>
+<li>但是如果已经有了的用户名<ul>
+<li>重新提交会如何呢？？🤔</li>
+</ul>
+</li>
+</ul>
+<h3 id="_3">我们来试试</h3>
+<p><img alt="图片描述" src="images/uid1190679-20211130-1638240643710.png" /></p>
+<ul>
+<li>已经有了aaa</li>
+<li>我们还要插入aaa</li>
+<li>结果肯定是无法重复插入的</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20211130-1638240830697.png" /></p>
+<ul>
+<li>而且返回了一个白屏</li>
+<li>那我们应该怎么办呢？</li>
+</ul>
+<h3 id="_4">看日志</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220427-1651026539716.jpg" /></p>
+<ul>
+<li>这句sql语句是可以看到的</li>
+<li>插入之后返回的错误也是可看到的<ul>
+<li>主要是违反了username的unique约束</li>
+<li>本来有个'aaa'的用户名</li>
+<li>我想要再插一个'aaa'的用户名</li>
+</ul>
+</li>
+<li>我们可以直接去psql里面试试这句话</li>
+</ul>
+<h3 id="_5">重复插入</h3>
+<p><img alt="图片描述" src="images/uid1190679-20211130-1638241035226.png" /></p>
+<ul>
+<li>报的错误是一样的</li>
+<li>因为这种unique约束的存在<ul>
+<li>同样的用户名是不能重复插入的</li>
+<li>但是这种返回白屏是很容易让用户困惑的</li>
+</ul>
+</li>
+<li>我们应该明确地告诉用户<ul>
+<li>这个用户名已经存在</li>
+<li>请换一个用户名</li>
+<li>而不是告诉他<ul>
+<li>你违反了username的unique约束</li>
+<li>用户会迷糊😯</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>这就需要在插入之前进行判断<ul>
+<li>这个用户名是否已经存在</li>
+</ul>
+</li>
+</ul>
+<h3 id="_6">先判断</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.Connection</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.DriverManager</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.ResultSet</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.Statement</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.PrintWriter</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.ServletException</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.http.HttpServlet</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.http.HttpServletRequest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.http.HttpServletResponse</span><span class="p">;</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">InsertServlet</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HttpServlet</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">serialVersionUID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1L</span><span class="p">;</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doPost</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span>
+<span class="w">                      </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">)</span>
+<span class="w">        </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="p">,</span><span class="w"> </span><span class="n">ServletException</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">request</span><span class="p">.</span><span class="na">setCharacterEncoding</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">);</span>
+<span class="w">        </span><span class="n">response</span><span class="p">.</span><span class="na">setContentType</span><span class="p">(</span><span class="s">"text/html"</span><span class="p">);</span>
+<span class="w">        </span><span class="n">response</span><span class="p">.</span><span class="na">setCharacterEncoding</span><span class="p">(</span><span class="s">"UTF-8"</span><span class="p">);</span>
+<span class="w">        </span><span class="n">PrintWriter</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">response</span><span class="p">.</span><span class="na">getWriter</span><span class="p">();</span>
+<span class="w">        </span><span class="n">Connection</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">        </span><span class="n">Statement</span><span class="w"> </span><span class="n">stmt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Class</span><span class="p">.</span><span class="na">forName</span><span class="p">(</span><span class="s">"org.postgresql.Driver"</span><span class="p">);</span>
+<span class="w">            </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DriverManager</span><span class="p">.</span><span class="na">getConnection</span><span class="p">(</span>
+<span class="w">                    </span><span class="s">"jdbc:postgresql://localhost:5432/oeasy"</span><span class="p">,</span><span class="w"> </span><span class="s">"postgres"</span><span class="p">,</span>
+<span class="w">                    </span><span class="s">"oeasy@pg"</span><span class="p">);</span>
+<span class="w">            </span><span class="n">c</span><span class="p">.</span><span class="na">setAutoCommit</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+<span class="w">            </span><span class="n">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"db connection is ok!!&lt;br/&gt;"</span><span class="p">);</span>
+<span class="w">            </span><span class="n">stmt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="p">.</span><span class="na">createStatement</span><span class="p">();</span>
+<span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">Username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getParameter</span><span class="p">(</span><span class="s">"username"</span><span class="p">);</span>
+<span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">Password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getParameter</span><span class="p">(</span><span class="s">"password"</span><span class="p">);</span>
+<span class="w">            </span><span class="n">ResultSet</span><span class="w"> </span><span class="n">rs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stmt</span><span class="p">.</span><span class="na">executeQuery</span><span class="p">(</span><span class="s">"select * from login where Username='"</span><span class="o">+</span><span class="n">Username</span><span class="o">+</span><span class="s">"'"</span><span class="p">);</span>
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="n">rs</span><span class="p">.</span><span class="na">next</span><span class="p">()){</span>
+<span class="w">                </span><span class="n">stmt</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+<span class="w">                </span><span class="n">c</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+<span class="w">                </span><span class="n">response</span><span class="p">.</span><span class="na">sendRedirect</span><span class="p">(</span><span class="s">"http://localhost:8080/oeasy/error?msg=usernameExists"</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">sql</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"insert into login(username,password) values('"</span><span class="o">+</span><span class="n">Username</span><span class="o">+</span><span class="s">"','"</span><span class="o">+</span><span class="n">Password</span><span class="o">+</span><span class="s">"');"</span><span class="p">;</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">"sql======================"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sql</span><span class="p">);</span>
+<span class="w">            </span><span class="n">stmt</span><span class="p">.</span><span class="na">executeUpdate</span><span class="p">(</span><span class="n">sql</span><span class="p">);</span>
+<span class="w">            </span><span class="n">stmt</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+<span class="w">            </span><span class="n">c</span><span class="p">.</span><span class="na">commit</span><span class="p">();</span>
+<span class="w">            </span><span class="n">c</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">err</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="na">getClass</span><span class="p">().</span><span class="na">getName</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">": "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">getMessage</span><span class="p">());</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">response</span><span class="p">.</span><span class="na">sendRedirect</span><span class="p">(</span><span class="s">"http://localhost:8080/oeasy/select"</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<ul>
+<li>要注意跳转之前结束<ul>
+<li>statement</li>
+<li>connection</li>
+</ul>
+</li>
+</ul>
+<h3 id="error">新建error映射</h3>
+<p><img alt="图片描述" src="images/uid1190679-20211130-1638243308689.jpg" /></p>
+<h3 id="errorservletjava">ErrorServlet.java</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.PrintWriter</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.ServletException</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.http.HttpServlet</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.http.HttpServletRequest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.http.HttpServletResponse</span><span class="p">;</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ErrorServlet</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HttpServlet</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">serialVersionUID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1L</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doGet</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span>
+<span class="w">                      </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">)</span>
+<span class="w">        </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="p">,</span><span class="w"> </span><span class="n">ServletException</span><span class="p">{</span>
+<span class="w">        </span><span class="n">request</span><span class="p">.</span><span class="na">setCharacterEncoding</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">);</span>
+<span class="w">        </span><span class="n">response</span><span class="p">.</span><span class="na">setContentType</span><span class="p">(</span><span class="s">"text/html"</span><span class="p">);</span>
+<span class="w">        </span><span class="n">response</span><span class="p">.</span><span class="na">setCharacterEncoding</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">);</span>
+<span class="w">        </span><span class="n">PrintWriter</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">response</span><span class="p">.</span><span class="na">getWriter</span><span class="p">();</span>
+<span class="w">        </span><span class="n">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;body&gt;"</span><span class="p">);</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">ErrorMessage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getParameter</span><span class="p">(</span><span class="s">"msg"</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">ErrorMessage</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="s">"usernameExists"</span><span class="p">)){</span>
+<span class="w">            </span><span class="n">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">"这个用户名已经存在，请重新选择!"</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">"&lt;a href="</span><span class="p">.</span><span class="o">/</span><span class="n">prepareInsert</span><span class="p">.</span><span class="na">html</span><span class="s">"&gt;返回注册页面&lt;/a&gt;"</span><span class="p">);</span>
+<span class="w">        </span><span class="n">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"&lt;/body&gt;&lt;/html&gt;"</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<ul>
+<li>如果是复制代码的话</li>
+<li>注意双引号的转义问题</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220427-1651027426734.png" /></p>
+<h3 id="_7">报错信息</h3>
+<p><img alt="图片描述" src="images/uid1190679-20211130-1638243754158.png" /></p>
+<ul>
+<li>从红色的连线可知</li>
+<li>报错信息确实是<ul>
+<li>用get的方式传递到/error</li>
+<li>/error 路由到 ErrorServlet.class</li>
+<li>进行处理</li>
+</ul>
+</li>
+<li>这样重复用户名注册的问题就解决了</li>
+<li>可是如果数据库服务根本就没开会如何呢？</li>
+</ul>
+<h3 id="_8">报错</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220427-1651060517475.jpg" /></p>
+<ul>
+<li>如果连接的时候就出了问题</li>
+<li>直接就跳到59行</li>
+<li>导致画面一片大白</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220427-1651060630648.png" /></p>
+<ul>
+<li>用户会很迷茫</li>
+<li>哪怕就是告诉他出错了呢?!</li>
+</ul>
+<h3 id="_9">处理</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220427-1651060714753.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.Connection</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.DriverManager</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.ResultSet</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.Statement</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.PrintWriter</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.ServletException</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.http.HttpServlet</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.http.HttpServletRequest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.http.HttpServletResponse</span><span class="p">;</span>
+<span class="n">public</span> <span class="k">class</span><span class="w"> </span><span class="nc">InsertServlet</span> <span class="n">extends</span> <span class="n">HttpServlet</span> <span class="p">{</span>
+    <span class="n">private</span> <span class="n">static</span> <span class="n">final</span> <span class="n">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="mi">1</span><span class="n">L</span><span class="p">;</span>
+    <span class="nd">@Override</span>
+    <span class="n">public</span> <span class="n">void</span> <span class="n">doPost</span><span class="p">(</span><span class="n">HttpServletRequest</span> <span class="n">request</span><span class="p">,</span>
+            <span class="n">HttpServletResponse</span> <span class="n">response</span><span class="p">)</span>
+        <span class="n">throws</span> <span class="n">IOException</span><span class="p">,</span> <span class="n">ServletException</span><span class="p">{</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">setCharacterEncoding</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">);</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">setContentType</span><span class="p">(</span><span class="s2">"text/html"</span><span class="p">);</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">setCharacterEncoding</span><span class="p">(</span><span class="s2">"UTF-8"</span><span class="p">);</span>
+        <span class="n">PrintWriter</span> <span class="n">out</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">getWriter</span><span class="p">();</span>
+        <span class="n">Connection</span> <span class="n">c</span> <span class="o">=</span> <span class="n">null</span><span class="p">;</span>
+        <span class="n">Statement</span> <span class="n">stmt</span> <span class="o">=</span> <span class="n">null</span><span class="p">;</span>
+        <span class="k">try</span> <span class="p">{</span>
+            <span class="n">Class</span><span class="o">.</span><span class="n">forName</span><span class="p">(</span><span class="s2">"org.postgresql.Driver"</span><span class="p">);</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="n">DriverManager</span><span class="o">.</span><span class="n">getConnection</span><span class="p">(</span>
+                    <span class="s2">"jdbc:postgresql://localhost:5432/oeasy"</span><span class="p">,</span> <span class="s2">"postgres"</span><span class="p">,</span>
+                    <span class="s2">"oeasy@pg"</span><span class="p">);</span>
+            <span class="n">c</span><span class="o">.</span><span class="n">setAutoCommit</span><span class="p">(</span><span class="n">false</span><span class="p">);</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"db connection is ok!!&lt;br/&gt;"</span><span class="p">);</span>
+            <span class="n">stmt</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">createStatement</span><span class="p">();</span>
+            <span class="n">String</span> <span class="n">Username</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">getParameter</span><span class="p">(</span><span class="s2">"username"</span><span class="p">);</span>
+            <span class="n">String</span> <span class="n">Password</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">getParameter</span><span class="p">(</span><span class="s2">"password"</span><span class="p">);</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">Username</span><span class="o">!=</span><span class="n">null</span><span class="o">&amp;&amp;</span><span class="n">Username</span><span class="o">.</span><span class="n">length</span><span class="p">()</span><span class="o">&gt;</span><span class="mi">10</span><span class="p">){</span>
+                <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"=====yes username too loog"</span><span class="p">);</span>
+                <span class="n">stmt</span><span class="o">.</span><span class="n">close</span><span class="p">();</span>
+                <span class="n">c</span><span class="o">.</span><span class="n">commit</span><span class="p">();</span>
+                <span class="n">c</span><span class="o">.</span><span class="n">close</span><span class="p">();</span>
+                <span class="n">response</span><span class="o">.</span><span class="n">sendRedirect</span><span class="p">(</span><span class="s2">"http://localhost:8080/oeasy/error?msg=usernameTooLong"</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="k">else</span><span class="p">{</span>
+                <span class="n">ResultSet</span> <span class="n">rs</span> <span class="o">=</span> <span class="n">stmt</span><span class="o">.</span><span class="n">executeQuery</span><span class="p">(</span><span class="s2">"select * from login where Username='"</span><span class="o">+</span><span class="n">Username</span><span class="o">+</span><span class="s2">"'"</span><span class="p">);</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">rs</span><span class="o">.</span><span class="n">next</span><span class="p">()){</span>
+                    <span class="n">stmt</span><span class="o">.</span><span class="n">close</span><span class="p">();</span>
+                    <span class="n">c</span><span class="o">.</span><span class="n">commit</span><span class="p">();</span>
+                    <span class="n">c</span><span class="o">.</span><span class="n">close</span><span class="p">();</span>
+                    <span class="n">response</span><span class="o">.</span><span class="n">sendRedirect</span><span class="p">(</span><span class="s2">"http://localhost:8080/oeasy/error?msg=usernameExists"</span><span class="p">);</span>
+                <span class="p">}</span>
+                <span class="k">else</span><span class="p">{</span>
+                    <span class="n">String</span> <span class="n">sql</span> <span class="o">=</span> <span class="s2">"insert into login(username,password) values('"</span><span class="o">+</span><span class="n">Username</span><span class="o">+</span><span class="s2">"','"</span><span class="o">+</span><span class="n">Password</span><span class="o">+</span><span class="s2">"');"</span><span class="p">;</span>
+                    <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="s2">"sql======================"</span> <span class="o">+</span> <span class="n">sql</span><span class="p">);</span>
+                    <span class="n">stmt</span><span class="o">.</span><span class="n">executeUpdate</span><span class="p">(</span><span class="n">sql</span><span class="p">);</span>
+                    <span class="n">stmt</span><span class="o">.</span><span class="n">close</span><span class="p">();</span>
+                    <span class="n">c</span><span class="o">.</span><span class="n">commit</span><span class="p">();</span>
+                    <span class="n">c</span><span class="o">.</span><span class="n">close</span><span class="p">();</span>
+                    <span class="n">response</span><span class="o">.</span><span class="n">sendRedirect</span><span class="p">(</span><span class="s2">"http://localhost:8080/oeasy/select"</span><span class="p">);</span>
+                <span class="p">}</span>
+
+            <span class="p">}</span>
+        <span class="p">}</span> <span class="n">catch</span> <span class="p">(</span><span class="ne">Exception</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="n">printStackTrace</span><span class="p">();</span>
+            <span class="n">System</span><span class="o">.</span><span class="n">err</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">getClass</span><span class="p">()</span><span class="o">.</span><span class="n">getName</span><span class="p">()</span> <span class="o">+</span> <span class="s2">": "</span> <span class="o">+</span> <span class="n">e</span><span class="o">.</span><span class="n">getMessage</span><span class="p">());</span>
+            <span class="n">response</span><span class="o">.</span><span class="n">sendRedirect</span><span class="p">(</span><span class="s2">"http://localhost:8080/oeasy/error?msg=err"</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<ul>
+<li>然后也error中也需要处理分支</li>
+</ul>
+<h3 id="error_1">error</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220427-1651060948083.png" /></p>
+<ul>
+<li>分支处理应该没有问题</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220427-1651061162560.png" /></p>
+<ul>
+<li>但如果/error根本接不到msg参数会如何？</li>
+</ul>
+<h3 id="_10">大白</h3>
+<ul>
+<li>又是大白</li>
+<li>这程序写得都快赶上诗仙了...</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220427-1651063695243.jpg" /></p>
+<ul>
+<li>在logs/catalina.out中找到原因</li>
+</ul>
+<h3 id="_11">细化</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220427-1651063878436.png" /></p>
+<ul>
+<li>在最前面先判断ErrorMessage是否为空</li>
+<li>如果为空的话就直接写出错了</li>
+<li>null==ErrorMessage更好<ul>
+<li>因为ErrorMessage==null可能出错<ul>
+<li>有可能误写成ErrorMessage=null</li>
+</ul>
+</li>
+<li>null==ErrorMessage一目了然 <ul>
+<li>不出问题</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="errorservletjava_1">ErrorServlet.java</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.PrintWriter</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.ServletException</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.http.HttpServlet</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.http.HttpServletRequest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.http.HttpServletResponse</span><span class="p">;</span>
+<span class="n">public</span> <span class="k">class</span><span class="w"> </span><span class="nc">ErrorServlet</span> <span class="n">extends</span> <span class="n">HttpServlet</span> <span class="p">{</span>
+    <span class="n">private</span> <span class="n">static</span> <span class="n">final</span> <span class="n">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="mi">1</span><span class="n">L</span><span class="p">;</span>
+    <span class="n">public</span> <span class="n">void</span> <span class="n">doGet</span><span class="p">(</span><span class="n">HttpServletRequest</span> <span class="n">request</span><span class="p">,</span>
+                      <span class="n">HttpServletResponse</span> <span class="n">response</span><span class="p">)</span>
+        <span class="n">throws</span> <span class="n">IOException</span><span class="p">,</span> <span class="n">ServletException</span><span class="p">{</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">setCharacterEncoding</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">);</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">setContentType</span><span class="p">(</span><span class="s2">"text/html"</span><span class="p">);</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">setCharacterEncoding</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">);</span>
+        <span class="n">PrintWriter</span> <span class="n">out</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">getWriter</span><span class="p">();</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;body&gt;"</span><span class="p">);</span>
+        <span class="n">String</span> <span class="n">ErrorMessage</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">getParameter</span><span class="p">(</span><span class="s2">"msg"</span><span class="p">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="s2">"==="</span><span class="o">+</span><span class="n">ErrorMessage</span><span class="o">+</span><span class="s2">"=="</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">null</span><span class="o">==</span><span class="n">ErrorMessage</span><span class="p">){</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="s2">"出错了"</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">ErrorMessage</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="s2">"usernameExists"</span><span class="p">)){</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="s2">"这个用户名已经存在，请重新选择!"</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">ErrorMessage</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="s2">"usernameTooLong"</span><span class="p">)){</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="s2">"用户名太长了,不能超过十个字符"</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">ErrorMessage</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="s2">"err"</span><span class="p">)){</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="s2">"出错了"</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="s2">"&lt;a href=</span><span class="se">\"</span><span class="s2">./prepareInsert.html</span><span class="se">\"</span><span class="s2">&gt;返回注册页面&lt;/a&gt;"</span><span class="p">);</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"&lt;/body&gt;&lt;/html&gt;"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="_12">总结</h3>
+<ul>
+<li>这次解决了重复用户名的问题</li>
+<li>但是还是可能有问题的</li>
+<li>比如数据库中我们的数据存储宽度是30</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20211130-1638244120503.png" /></p>
+<ul>
+<li>如果提交的字符串长度大于30，会如何呢?🤔</li>
+<li>下次再说！👋</li>
+</ul>
+    </div>
+</body>
+</html>

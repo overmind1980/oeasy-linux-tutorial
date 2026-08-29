@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：阴历lunar，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解阴历 lunar。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 阴历, lunar, 阴历lunar">
+    <meta property="og:title" content="oeasy Linux系统教程：阴历lunar，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解阴历 lunar。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="lunar">阴历(lunar)</h1>
+<h2 id="_1">回忆</h2>
+<ul>
+<li>上次我们研究了日历</li>
+<li>这个日历<ul>
+<li>可以显示一个月的</li>
+<li>也可以显示前后几个月的</li>
+<li>还可以显示某一年的</li>
+</ul>
+</li>
+<li>日历来自于unix</li>
+<li>不过这里面没有阴历</li>
+<li>就是初一十五那种东西</li>
+<li>我们可以在终端里面显示阴历么？</li>
+</ul>
+<h3 id="_2">搜索</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663226911779.png" /></p>
+<ul>
+<li>找到两个</li>
+<li>先装第一个</li>
+</ul>
+<h3 id="_3"></h3>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663226949461.png" /></p>
+<ul>
+<li>第一个卡在这里不能运行</li>
+<li>往后走</li>
+<li>lunar<ul>
+<li>月亮的历法</li>
+<li>阴历</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>sudo apt install lunar
+</code></pre></div>
+
+<h3 id="_4">灵魂三问</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663227304172.png" /></p>
+<ul>
+<li>怎么用呢？</li>
+</ul>
+<h3 id="_5">八字</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663227342066.png" /></p>
+<ul>
+<li>得到当前时辰的四柱八字</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663227454352.png" /></p>
+<ul>
+<li>每一柱都有天干和地支</li>
+<li>年月日时总共四柱</li>
+<li>得到八字</li>
+<li>可以得到你的生辰八字么？</li>
+</ul>
+<h3 id="_6">转化</h3>
+<ul>
+<li>需要从阳历日期转化为阴历</li>
+<li>查文档</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663227684135.png" /></p>
+<ul>
+<li>照要求转化</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663227767371.png" /></p>
+<ul>
+<li>可以找到自己的阴历生日</li>
+<li>可以看到由于没有过春节</li>
+<li>这个日期并不属猴</li>
+<li>而是数羊</li>
+<li>也就是午马未羊的羊</li>
+<li>年份属于己未年</li>
+<li>时间用的也是东八区</li>
+<li>赶紧拍照分享一下这熟悉的感觉</li>
+</ul>
+<h3 id="_7">输出大字</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663230672664.png" /></p>
+<ul>
+<li>可以通过阴历求阳历么？</li>
+</ul>
+<h3 id="_8">通过阴历求阳历</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663230832549.jpg" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663230768606.png" /></p>
+<ul>
+<li>这程序谁写的呢？</li>
+</ul>
+<h3 id="_9">作者</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663230940766.png" /></p>
+<ul>
+<li>作者好像曾经在波士顿</li>
+<li>92年写了一版</li>
+<li>01年更新了</li>
+<li>感谢<ul>
+<li>Fung F. Lee</li>
+<li>Ricky Yeung</li>
+</ul>
+</li>
+<li>2049之后期待有人可以更新这个程序</li>
+</ul>
+<h3 id="_10">总结</h3>
+<ul>
+<li>这次我们研究的是阴历</li>
+<li>主要是把阳历日期转化为阴历</li>
+<li>不是阴历日历</li>
+<li>我们可以把我们的year给补全一下么？</li>
+<li>每个月里面都有合适的文件名？🤔</li>
+<li>下次再说👋</li>
+</ul>
+    </div>
+</body>
+</html>

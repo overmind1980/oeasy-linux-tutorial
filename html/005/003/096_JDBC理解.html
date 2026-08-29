@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：理解jdbc，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解JDBC理解。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖public class PostgresJdbc { 	public static void mainString args { 		Connection c = null; 		Statement ...">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, JDBC理解, 理解jdbc">
+    <meta property="og:title" content="oeasy Linux系统教程：理解jdbc，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解JDBC理解。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖public class PostgresJdbc { 	public static void mainString args { 		Connection c = null; 		Statement ...">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        <h1 id="jdbc">理解jdbc</h1>
+<h2 id="_1">回顾</h2>
+<ul>
+<li>上次我们编辑 Postgres.java 成功访问了 pq数据库<ul>
+<li>首先要导入类库</li>
+<li>然后要开启数据库</li>
+<li>并了解数据库的用户名密码</li>
+<li>要用正确的连接、库、表、字段</li>
+<li>还要使用正确的sql语句</li>
+</ul>
+</li>
+<li>真的只要照猫画虎改代码就可以连接数据库了</li>
+<li>这种方式是通过jdbc方式进行的</li>
+<li>什么是jdbc呢？🤔</li>
+</ul>
+<h3 id="jdbc_1">jdbc</h3>
+<ul>
+<li>我们先去看看那个jar包</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220717-1658045702219.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20220717-1658045735134.png" /></p>
+<ul>
+<li>这套积木就像servlet.jar一样</li>
+<li>拿来用就可以</li>
+<li>那这套积木是谁提供的呢？</li>
+</ul>
+<h3 id="postgres">postgres</h3>
+<ul>
+<li>pg的jdbc是有pg提供的</li>
+<li>在pg的官网上搜就可以找到</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220717-1658045983393.png" /></p>
+<ul>
+<li>还有一个jdbc的子域名</li>
+<li>源代码在哪里呢？</li>
+</ul>
+<h3 id="_2">源代码</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220717-1658046009294.png" /></p>
+<ul>
+<li>pg是开源的</li>
+<li>pg的jdbc也是开源的</li>
+<li>我们去看看文档</li>
+</ul>
+<h3 id="_3">文档</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220717-1658046528308.png" /></p>
+<ul>
+<li>文档分成两块<ul>
+<li>一块是pg自己的文档</li>
+<li>另一块是oracle公司的文档</li>
+</ul>
+</li>
+<li>这怎么理解呢？</li>
+</ul>
+<h3 id="_4">定义接口</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220717-1658046857943.png" /></p>
+<ul>
+<li>原来的sun公司定义了数据库访问的接口</li>
+<li>具体的数据库厂商根据自己的数据库</li>
+<li>制作自己的jdbc驱动</li>
+<li>这个驱动必须符合sun公司定义的jdbc接口</li>
+<li>这有什么好处呢？</li>
+</ul>
+<h3 id="_5">面向接口编程</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220717-1658047197960.png" /></p>
+<ul>
+<li>我们作为应用开发的程序员不用管pg或者别的什么数据源具体的实现过程</li>
+<li>我们只需要按照接口的要求</li>
+<li>把接口接上</li>
+<li>执行相应的sql语句</li>
+<li>得到相应的结果集就可以了</li>
+<li>这样有什么好处呢？</li>
+</ul>
+<h3 id="_6">解耦</h3>
+<ul>
+<li>这种抽象可以解耦<ul>
+<li>把复杂的数据库操作和</li>
+<li>具体应用的开发解耦</li>
+</ul>
+</li>
+<li>数据库的开发工程师只关注<ul>
+<li>数据库具体的实现和优化</li>
+<li>数据库对外接口的实现和优化</li>
+<li>就管数据库里面和jdbc的这些事情</li>
+<li>应用开发工程师具体怎么调用我不管</li>
+</ul>
+</li>
+<li>我们应用开发工程师只关注<ul>
+<li>业务逻辑</li>
+<li>接口如何调用</li>
+<li>就管开发的这些事情</li>
+<li>数据库的事情通过接口给到数据库就可以</li>
+<li>具体数据库的实现我不管</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220717-1658048254826.png" /></p>
+<ul>
+<li>这样就是铁路警察<ul>
+<li>各管一段</li>
+<li>实现了高内聚、低耦合</li>
+</ul>
+</li>
+<li>如果更换了数据库<ul>
+<li>只需要更新相应的连接方式和驱动就可以了</li>
+<li>代码基本不需要进行修改</li>
+</ul>
+</li>
+<li>前提是<ul>
+<li>jdbc驱动要符合sun公司定义的接口要求</li>
+</ul>
+</li>
+<li>或者说火车司机不用管铁轨的化学成分和尺寸<ul>
+<li>不过前提是铁轨符合铁轨的要求</li>
+<li>铁轨的要求是谁定的？</li>
+</ul>
+</li>
+</ul>
+<h3 id="_7">铁路标准</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220717-1658050001557.png" /></p>
+<ul>
+<li>铁路系统有统一的标准</li>
+<li>整个铁路系统是一个复杂的系统</li>
+<li>有很多的细节</li>
+<li>每个细节都有很多具体的标准</li>
+</ul>
+<h3 id="_8">标准细则</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220717-1658050117642.png" /></p>
+<ul>
+<li>方方面面的</li>
+<li>都有相应的标准</li>
+<li>那具体到铁道呢？</li>
+</ul>
+<h3 id="_9">铁道</h3>
+<ul>
+<li>铁道的标准也是随着时代而进化的<ul>
+<li>火车的速度也随之提高</li>
+<li>从40到400</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220717-1658050412306.png" /></p>
+<ul>
+<li>不管是武钢、邯钢还是首钢生产的铁轨都必须合规</li>
+<li>不合规的铁轨会造成重大事故</li>
+<li>有尺寸的要求还有化学成分的要求</li>
+<li>具体化学成分什么要求</li>
+</ul>
+<h3 id="_10">化学成分</h3>
+<ul>
+<li>化学成分是非常细致的</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220717-1658050267052.png" /></p>
+<ul>
+<li>这就是生产标准</li>
+<li>甚至检测方法都是有标准的</li>
+</ul>
+<h3 id="_11">检测方法</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220717-1658050619895.png" /></p>
+<ul>
+<li>我们只是买了张票就可以从北京去广州了</li>
+<li>没想到这背后其实还挺复杂的</li>
+<li>从蒸汽火车到电力机车再到高铁</li>
+<li>背后其实标准的变化</li>
+</ul>
+<h3 id="_12">标准的演化</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220717-1658050825558.png" /></p>
+<ul>
+<li>这就是标准化的力量</li>
+<li>也就是工业化的力量</li>
+<li>工业产品和农产品的区别比较明显</li>
+</ul>
+<h3 id="_13">农业</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220717-1658051118633.png" /></p>
+<ul>
+<li>农产品的标准确实比较模糊</li>
+<li>不过不影响我们吃就行了</li>
+<li>不过农业和畜牧业也有工业化的倾向</li>
+<li>甚至我们玩也逐渐标准化</li>
+</ul>
+<h3 id="_14">体育工业化</h3>
+<ul>
+<li>踢标准的足球</li>
+<li>练标准的脚法</li>
+<li>遵循标准规则</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220717-1658051185269.png" /></p>
+<ul>
+<li>可是曾经的足球对于重量、材质、弹性是没有什么标准的</li>
+<li>这可能是时代发展的趋势吧</li>
+<li>不过也可能物极必反</li>
+</ul>
+<h3 id="_15">实现</h3>
+<ul>
+<li>postgres是如何实现sun公司定义的jdbc接口的呢？</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220717-1658051349530.png" /></p>
+<ul>
+<li>看起来这是个class文件</li>
+<li>我们可以找到他的源文件么?</li>
+</ul>
+<h3 id="_16">溯源</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220717-1658051530542.png" /></p>
+<ul>
+<li>我们可以找到源文件</li>
+<li>具体来说是什么函数呢？</li>
+</ul>
+<h3 id="connect">connect函数</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220717-1658051754551.png" /></p>
+<ul>
+<li>那他是怎么连接的呢?</li>
+</ul>
+<h3 id="_17">具体链接</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220717-1658051864506.png" /></p>
+<ul>
+<li>这个pgConnection是具体实现</li>
+<li>是postgres实现的sun公司要求的jdbc结构的实现函数</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220717-1658060380282.png" /></p>
+<ul>
+<li>这个函数究竟是怎么连接的呢？</li>
+</ul>
+<h3 id="_18">具体实现</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220717-1658061182862.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20220717-1658061194704.png" /></p>
+<ul>
+<li>这些都是基于端口io的</li>
+</ul>
+<h3 id="io">端口io</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220607-1654613026808.png" /></p>
+<ul>
+<li>在5432端口上有相应的io服务</li>
+<li>我们的驱动就是<ul>
+<li>通过发给这个端口命令(select等)</li>
+<li>往这个端口上写一些命令过去</li>
+</ul>
+</li>
+<li>得到返回的结果集或执行结果<ul>
+<li>从这个端口上读到相应的数据</li>
+</ul>
+</li>
+</ul>
+<h3 id="_19">流程</h3>
+<ul>
+<li>
+<p>具体来说是一步步进行完成的</p>
+</li>
+<li>
+<p><img alt="图片描述" src="images/uid1190679-20220717-1658060485001.png" /></p>
+</li>
+<li>
+<p>这过程中每一步都可能出问题</p>
+</li>
+</ul>
+<h3 id="1-">错误类型1-没有连接</h3>
+<ul>
+<li>没有连接，可能是ip地址或者端口不对</li>
+<li>这个错误编译的时候发现不了</li>
+<li>因为编译的时候不真的进行连接</li>
+<li>只有运行的时候才真的连接</li>
+<li>才会报错</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220521-1653132307924.png" /></p>
+<ul>
+<li>这时候要判断连接字符串是否有问题</li>
+<li>如果有了连接，看是否能连接到指定的数据库database</li>
+</ul>
+<h3 id="2-database">错误类型2-找不到database</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220521-1653132440146.png" /></p>
+<ul>
+<li>这个时候要确认database的名字</li>
+<li>有了连接，并连上了指定的database</li>
+<li>但是没有找到表</li>
+</ul>
+<h3 id="3-">错误类型3-找不到表</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220521-1653132559776.png" /></p>
+<ul>
+<li>这个时候要确认这个连接</li>
+<li>这个库里面</li>
+<li>有没有这个表</li>
+</ul>
+<h3 id="4-">错误类型4-找不到字段</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220521-1653132762924.png" /></p>
+<ul>
+<li>连接</li>
+<li>数据库</li>
+<li>表</li>
+<li>都没有问题</li>
+<li>查询出来的结果集没有找到相应的字段</li>
+</ul>
+<h3 id="-">反复其道-加上筛选</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.Connection</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.DriverManager</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.ResultSet</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.Statement</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">PostgresJdbc</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">args</span><span class="o">[]</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Connection</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">        </span><span class="n">Statement</span><span class="w"> </span><span class="n">stmt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Class</span><span class="p">.</span><span class="na">forName</span><span class="p">(</span><span class="s">"org.postgresql.Driver"</span><span class="p">);</span>
+<span class="w">            </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DriverManager</span><span class="p">.</span><span class="na">getConnection</span><span class="p">(</span>
+<span class="w">                    </span><span class="s">"jdbc:postgresql://localhost:5432/oeasy"</span><span class="p">,</span><span class="w"> </span><span class="s">"postgres"</span><span class="p">,</span>
+<span class="w">                    </span><span class="s">"oeasy@pg"</span><span class="p">);</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"Pq Connection success!"</span><span class="p">);</span>
+<span class="w">            </span><span class="n">stmt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="p">.</span><span class="na">createStatement</span><span class="p">();</span>
+<span class="w">            </span><span class="n">ResultSet</span><span class="w"> </span><span class="n">rs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stmt</span><span class="p">.</span><span class="na">executeQuery</span><span class="p">(</span><span class="s">"select * from urls where topics like 's%'"</span><span class="p">);</span>
+<span class="w">            </span><span class="k">while</span><span class="p">(</span><span class="n">rs</span><span class="p">.</span><span class="na">next</span><span class="p">()){</span>
+<span class="w">                </span><span class="n">String</span><span class="w"> </span><span class="n">topic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rs</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">"topic"</span><span class="p">);</span>
+<span class="w">                </span><span class="n">String</span><span class="w"> </span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rs</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">"url"</span><span class="p">);</span>
+<span class="w">                </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="n">topic</span><span class="o">+</span><span class="s">":"</span><span class="o">+</span><span class="n">url</span><span class="o">+</span><span class="s">"\n"</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="n">rs</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+<span class="w">            </span><span class="n">stmt</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+<span class="w">            </span><span class="n">c</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">err</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="na">getClass</span><span class="p">().</span><span class="na">getName</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">": "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">getMessage</span><span class="p">());</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"Pg select query success!"</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<ul>
+<li>注意数据库名</li>
+<li>表名</li>
+<li>字段名</li>
+<li>数据类型</li>
+<li>我是反复了好几次才成功</li>
+<li>可能会出现什么错误呢？</li>
+</ul>
+<h3 id="_20">最终</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220425-1650891353563.png" /></p>
+<ul>
+<li>engine is running！！！</li>
+<li>现在需要我们把这个jdbc.java和OeasyServlet.java融合到一起</li>
+<li>也就是在浏览器里面把postgres里的数据表展示出来</li>
+</ul>
+<h3 id="_21">大厨</h3>
+<ul>
+<li>web服务器(tomcat)是堂倌</li>
+<li>这次我们跳过了堂倌</li>
+<li>直接用java访问了后厨(数据库服务器)</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220510-1652140315911.png" /></p>
+<ul>
+<li>但是浏览器用户不能直接这么干</li>
+<li>必须通过浏览器访问</li>
+<li>就是访问tomcat服务器</li>
+<li>让堂倌通知大厨做菜</li>
+<li>做了菜之后再传给客户</li>
+<li>这又怎么做呢？</li>
+</ul>
+<h3 id="_22">总结 🤨</h3>
+<ul>
+<li>这次我们理解了jdbc<ul>
+<li>还明确了几种可能出现的错误</li>
+</ul>
+</li>
+<li>准备工作完毕<ul>
+<li>all parts accounted for.</li>
+<li>下一步就是要整合servlet</li>
+<li>在浏览器里面把页面显示出来</li>
+<li>客户通知堂倌</li>
+<li>让堂倌通知大厨</li>
+<li>后厨做好内容</li>
+<li>堂倌上菜</li>
+<li>客户吃上饭</li>
+</ul>
+</li>
+<li>这又怎么做呢？🤔</li>
+<li>下次再说！👋</li>
+</ul>
+    </div>
+</body>
+</html>

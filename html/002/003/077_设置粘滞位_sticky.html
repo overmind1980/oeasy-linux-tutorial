@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：修改文件权限chmod，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解设置粘滞位 sticky。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖|  mode   | 说明  | |  ----  | ----  | | S_IRWXU  | 用户所有者读、写、执行 | | S_IRUSR  | 用户所有者读 | | S_IRWUS...">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 设置粘滞位, sticky, 修改文件权限chmod">
+    <meta property="og:title" content="oeasy Linux系统教程：修改文件权限chmod，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解设置粘滞位 sticky。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖|  mode   | 说明  | |  ----  | ----  | | S_IRWXU  | 用户所有者读、写、执行 | | S_IRUSR  | 用户所有者读 | | S_IRWUS...">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="chmod">修改文件权限(chmod)</h1>
+<h2 id="_1">回忆</h2>
+<ul>
+<li>我们现在可以<ul>
+<li>让进程获得文件所有者的权限suid</li>
+<li>让进程获得文件所属组的权限sgid</li>
+</ul>
+</li>
+<li>文件夹的sgid具有继承性</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>mode</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S_IRWXU</td>
+<td>用户(所有者)读、写、执行</td>
+</tr>
+<tr>
+<td>S_IRUSR</td>
+<td>用户(所有者)读</td>
+</tr>
+<tr>
+<td>S_IRWUSR</td>
+<td>用户(所有者)写</td>
+</tr>
+<tr>
+<td>S_IRXUSR</td>
+<td>用户(所有者)执行</td>
+</tr>
+<tr>
+<td>S_IRWXG</td>
+<td>用户组读、写、执行</td>
+</tr>
+<tr>
+<td>S_IRGRP</td>
+<td>用户组读</td>
+</tr>
+<tr>
+<td>S_IWGRP</td>
+<td>用户组写</td>
+</tr>
+<tr>
+<td>S_IXGRP</td>
+<td>用户组执行</td>
+</tr>
+<tr>
+<td>S_IRWXO</td>
+<td>其他读、写、执行</td>
+</tr>
+<tr>
+<td>S_IROTH</td>
+<td>其他读</td>
+</tr>
+<tr>
+<td>S_IROTH</td>
+<td>其他写</td>
+</tr>
+<tr>
+<td>S_IROTH</td>
+<td>其他执行</td>
+</tr>
+<tr>
+<td>S_ISUID</td>
+<td>执行时设置用户id</td>
+</tr>
+<tr>
+<td>S_ISGID</td>
+<td>执行时设置用户组id</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>理论上其他组(o)应该也有个临时设置的特殊位</li>
+<li>这个真的有吗？</li>
+</ul>
+<h3 id="_2">查看帮助</h3>
+<p><img alt="图片描述" src="images/uid1190679-20221013-1665644181884.jpg" /></p>
+<ul>
+<li>自身啥都可以干</li>
+<li>同组或其他可以改写文件</li>
+<li>但是不能删除</li>
+</ul>
+<h3 id="_3">建立环境</h3>
+<ul>
+<li>建立路径</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221013-1665645185397.jpg" /></p>
+<ul>
+<li>然后建立用户</li>
+</ul>
+<h3 id="_4">建立用户</h3>
+<ul>
+<li>将oeasy加入shiyanlou组</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221013-1665645089549.png" /></p>
+<ul>
+<li>尝试删除</li>
+</ul>
+<h3 id="_5">同组用户尝试删除</h3>
+<p><img alt="图片描述" src="images/uid1190679-20221013-1665645670873.png" /></p>
+<ul>
+<li>oeasy属于shiyanlou组具有写权限</li>
+<li>确实可以写</li>
+<li>但是不能删除文件夹</li>
+<li>其他用户呢?</li>
+</ul>
+<h3 id="_6">其他用户尝试写</h3>
+<p><img alt="图片描述" src="images/uid1190679-20221013-1665645846238.png" /></p>
+<ul>
+<li>其他用户确实可以写文件</li>
+<li>粘滞位不具有继承性</li>
+<li>其他用户可以删除有粘滞位的文件吗？</li>
+</ul>
+<h3 id="_7">其他用户尝试删除</h3>
+<p><img alt="图片描述" src="images/uid1190679-20221013-1665645943045.png" /></p>
+<ul>
+<li>删除失败</li>
+<li>只有root和所有者可以进行删除</li>
+<li>如果是具有粘滞位的文件会如何呢？</li>
+</ul>
+<h3 id="_8">尝试删除带有粘滞位的文件</h3>
+<p><img alt="图片描述" src="images/uid1190679-20221013-1665646103241.png" /></p>
+<ul>
+<li>具有粘滞位的文件</li>
+<li>可以读</li>
+<li>可以写</li>
+<li>但是不可以删除</li>
+<li>只有root和自身所有者才有权限删除</li>
+<li>如果我先chown了</li>
+<li>然后再删除呢？</li>
+</ul>
+<h3 id="chown">先chown</h3>
+<p><img alt="图片描述" src="images/uid1190679-20221013-1665646404179.png" /></p>
+<ul>
+<li>修改了所有者之后</li>
+<li>新的文件所有者就可以进行删除了</li>
+</ul>
+<h3 id="_9">总结 🤨</h3>
+<ul>
+<li>我们这次了解了粘滞位sticky</li>
+<li>通过chmod o+t可以设置</li>
+<li>设置之后</li>
+<li>只有root和自身文件所有者可以删除</li>
+</ul>
+<h3 id="_10">标志位总结</h3>
+<table>
+<thead>
+<tr>
+<th>mode</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S_IRWXU</td>
+<td>用户(所有者)读、写、执行</td>
+</tr>
+<tr>
+<td>S_IRUSR</td>
+<td>用户(所有者)读</td>
+</tr>
+<tr>
+<td>S_IRWUSR</td>
+<td>用户(所有者)写</td>
+</tr>
+<tr>
+<td>S_IRXUSR</td>
+<td>用户(所有者)执行</td>
+</tr>
+<tr>
+<td>S_IRWXG</td>
+<td>用户组读、写、执行</td>
+</tr>
+<tr>
+<td>S_IRGRP</td>
+<td>用户组读</td>
+</tr>
+<tr>
+<td>S_IWGRP</td>
+<td>用户组写</td>
+</tr>
+<tr>
+<td>S_IXGRP</td>
+<td>用户组执行</td>
+</tr>
+<tr>
+<td>S_IRWXO</td>
+<td>其他读、写、执行</td>
+</tr>
+<tr>
+<td>S_IROTH</td>
+<td>其他读</td>
+</tr>
+<tr>
+<td>S_IROTH</td>
+<td>其他写</td>
+</tr>
+<tr>
+<td>S_IROTH</td>
+<td>其他执行</td>
+</tr>
+<tr>
+<td>S_ISUID</td>
+<td>执行时设置用户id</td>
+</tr>
+<tr>
+<td>S_ISGID</td>
+<td>执行时设置用户组id</td>
+</tr>
+<tr>
+<td>STICKY</td>
+<td>只有文件所有者和root可以删除</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>了解了这么多</li>
+<li>我可以<ul>
+<li>读取一个csv文件</li>
+<li>新建若干目录、用户</li>
+<li>并且进行设置吗？🤔</li>
+</ul>
+</li>
+<li>下次再说👋</li>
+</ul>
+    </div>
+</body>
+</html>

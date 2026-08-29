@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：封装数据库连接，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解JNDI。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, JNDI, 封装数据库连接">
+    <meta property="og:title" content="oeasy Linux系统教程：封装数据库连接，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解JNDI。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="_1">封装数据库连接</h1>
+<h2 id="_2">回忆</h2>
+<ul>
+<li>经过比较，PreparedStatement比Statement具有两个优势<ul>
+<li>预编译比Statement能获得更好的性能</li>
+<li>可以阻止常见的SQL注入式攻击</li>
+</ul>
+</li>
+<li>以后尽量使用PreparedStatement<ul>
+<li>PreparedStatement是使用DBConUtil 得到的connection生成的</li>
+<li>用户名、密码、数据连接都在DBConUtil里面</li>
+<li>如果别人看到了DBConUtil.java也可以得到相应的连接数据的方法</li>
+</ul>
+</li>
+<li>能否有个办法<ul>
+<li>在oeasy这个app的外面配置好数据库连接</li>
+<li>这样<ul>
+<li>不光oeasy这个app</li>
+<li>其他的应用只要使用这种连接</li>
+</ul>
+</li>
+<li>就可以直接连接到数据库</li>
+<li>一概全改</li>
+<li>而且更安全</li>
+</ul>
+</li>
+<li>有可能么？🤔</li>
+</ul>
+<h3 id="_3">文档</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651663948204.jpg" /></p>
+<ul>
+<li>找到有一个东西叫做jndi</li>
+<li>那么什么是jndi呢？</li>
+</ul>
+<h3 id="jndi">jndi</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651664068439.jpg" /></p>
+<ul>
+<li>java Naming and Directory Interface<ul>
+<li>java名字和目录接口</li>
+</ul>
+</li>
+<li>java的web容器<ul>
+<li>为每一个他包含的网页应用(webapp)提供jndi</li>
+<li>jndi是上下文初始化的通用实现</li>
+<li>tomcat作为web容器也提供</li>
+</ul>
+</li>
+<li>具体怎么配置jndi呢？</li>
+</ul>
+<h3 id="_4">第一步</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651664444771.png" /></p>
+<ul>
+<li>在oeasy/WEB-INF/class/下</li>
+<li>建立com/mycompany/MyBean.java</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651664503783.png" /></p>
+<ul>
+<li>保存并编译成MyBean.class<ul>
+<li>这里有两个成员变量<ul>
+<li>String的foo</li>
+<li>int的bar</li>
+</ul>
+</li>
+<li>分别都有自己的getter和setter方法</li>
+</ul>
+</li>
+</ul>
+<h3 id="_5">第二步</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651664579584.png" /></p>
+<ul>
+<li>在oeasy/WEB-INF/web.xml中描述资源</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651664662053.png" /></p>
+<ul>
+<li>如何理解resource-env-ref?</li>
+</ul>
+<h3 id="_6">第二步分析</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220522-1653179642395.png" /></p>
+<ul>
+<li>环境(enviroment)中有很多资源(Resource)</li>
+<li>怎么找到资源呢？</li>
+<li>靠的是资源的引用(Reference)</li>
+</ul>
+<h3 id="_7">第三步</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651664841284.png" /></p>
+<ul>
+<li>Context是上下文</li>
+<li>envCtx是环境上下文</li>
+<li>找到那个资源引用<ul>
+<li>bean/MyBeanFactory</li>
+</ul>
+</li>
+<li>然后映射到相关的class类<ul>
+<li>com.mycompany.MyBean</li>
+</ul>
+</li>
+<li>根据这个找到的类<ul>
+<li>再构建com.mycompany.MyBean这个类的对象bean</li>
+<li>然后通过bean这个对象调用方法<ul>
+<li>getFoo()</li>
+<li>getBar()</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="_8">第三步实现</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651665066002.jpg" /></p>
+<h3 id="_9">具体类型</h3>
+<ul>
+<li>编译java为class文件<ul>
+<li>如果编译不通过的话注意classpath</li>
+<li>要包括当前目录或者包括当前app下的/WEB-INF/classes目录</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651665503172.png" /></p>
+<h3 id="_10">第四步</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651665148314.png" /></p>
+<ul>
+<li>配置tomcat的资源工厂<ul>
+<li>在tomcat根下找到conf/context.xml<ul>
+<li>context.xml上下文配置文件</li>
+</ul>
+</li>
+<li>找到Context项<ul>
+<li>在下面添加Resource</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651665301272.png" /></p>
+<ul>
+<li>尝试运行</li>
+</ul>
+<h3 id="_11">路由</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651665604760.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651665612623.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651665637510.png" /></p>
+<ul>
+<li>最终运行成功</li>
+</ul>
+<h3 id="_12">通用资源</h3>
+<ul>
+<li>如果我想给容器里面每一个web应用都配置这个东西呢？</li>
+<li>先把class移动到tomcat下面的lib下面</li>
+<li>lib目录里面的包对于tomcat整个可见</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651668532631.png" /></p>
+<ul>
+<li>由于classpath包括当前目录.</li>
+<li>编译通过</li>
+<li>但是jdni的那个servlet可以编译通过么？</li>
+</ul>
+<h3 id="servlet">编译servlet</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651668702392.png" /></p>
+<ul>
+<li>重新编译JNDIServlet.java会出现编译错误</li>
+<li>修改$CLASSPATH</li>
+</ul>
+<h3 id="_13">路径</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651668792426.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651668840021.png" /></p>
+<ul>
+<li>在浏览器中访问效果如何呢？</li>
+</ul>
+<h3 id="_14">浏览器访问</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651668874203.png" /></p>
+<ul>
+<li>地址栏处的/jndi被路由到JNDIServlet.class<ul>
+<li>JNDIServlet.class需要引用com/mycompany/MyBean.class<ul>
+<li>tomcat根下的lib下的所有文件都能被引用</li>
+</ul>
+</li>
+<li>所以JNDIServlet可以正常运行</li>
+</ul>
+</li>
+<li>所以/jndi可以正常显示</li>
+<li>输出的内容是MyBean里面配置的一些值</li>
+</ul>
+<hr />
+<ul>
+<li>以前还做过一个HelloWorld<ul>
+<li>也可以根据浏览器不同的语言</li>
+<li>进行相应的配置</li>
+<li>有什么不同么？</li>
+</ul>
+</li>
+</ul>
+<h3 id="_15">回顾</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651669648712.png" /></p>
+<ul>
+<li>具体的返回字符串通过ResourceBundle来找到</li>
+<li>根据当前请求的语言环境</li>
+<li>得到不同的你好世界(hello world)<ul>
+<li>英文</li>
+<li>中文</li>
+<li>日文</li>
+<li>韩文</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651669665640.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651669674794.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651669688999.png" /></p>
+<h3 id="_16">位置</h3>
+<ul>
+<li>以前都是在web应用内部配置<ul>
+<li>只能这个应用来用</li>
+</ul>
+</li>
+<li>这次在应用之外配置<ul>
+<li>每个应用都可以使用</li>
+<li>所有资源一改全改</li>
+<li>其实我们要的是DBConnection的封装信息</li>
+<li>我们只需要把这两个整合起来就好了</li>
+</ul>
+</li>
+<li>再看看文档</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651669905243.png" /></p>
+<ul>
+<li>居然还有一个专门的jdbc连接池的配置方法😲</li>
+<li>先总结jndi吧...</li>
+</ul>
+<h2 id="_17">总结</h2>
+<ul>
+<li>jndi<ul>
+<li>java Naming and Directory Interface</li>
+<li>可以配置一些通用的信息</li>
+</ul>
+</li>
+<li>通过指定的四步<ol>
+<li>构建资源类com.mycompany.MyBean</li>
+<li>声明资源引用</li>
+<li>在代码中引用</li>
+<li>配置资源工厂</li>
+</ol>
+</li>
+<li>经过这四步<ul>
+<li>我们就为每个具体web应用配置一些通用资源</li>
+</ul>
+</li>
+<li>数据库连接貌似有专门的配置方法😲</li>
+<li>怎么配置呢？🤔</li>
+<li>下次再说！👋</li>
+</ul>
+    </div>
+</body>
+</html>

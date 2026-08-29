@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：搭建开发环境，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解搭建开发环境。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 搭建开发环境">
+    <meta property="og:title" content="oeasy Linux系统教程：搭建开发环境，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解搭建开发环境。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="_1">搭建开发环境</h1>
+<h2 id="_2">我们来回顾一下 😌</h2>
+<ul>
+<li>我们这次搭建了tomcat</li>
+<li>运行了起来</li>
+<li>在里面建立了自己的web application<ul>
+<li>oeasy</li>
+</ul>
+</li>
+<li>设置好了WEB-INF<ul>
+<li>web.xml</li>
+<li>classes</li>
+</ul>
+</li>
+<li>然后就可以在浏览器中动态的显示信息了</li>
+<li>那我能做一个自己的servlet</li>
+<li>然后映射到自己url么？🤔</li>
+<li>总是在编辑器和重启服务器之间切换太麻烦了</li>
+<li>试试多任务窗口的方式</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220716-1657978005968.png" /></p>
+<h3 id="tmux">运行tmux</h3>
+<ul>
+<li>首先运行tmux<ul>
+<li>启动tmux会看到底下的绿色横条</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>tmux
+</code></pre></div>
+
+<ul>
+<li>观察一下<ul>
+<li>只有一个窗口<ul>
+<li>0号窗口</li>
+</ul>
+</li>
+<li>这里面可以显示新窗口的选项卡</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220510-1652183174639.jpg" /></p>
+<ul>
+<li>红色框中的是窗口标签编号<ul>
+<li>0号窗口</li>
+</ul>
+</li>
+<li>蓝色框中的是当前活跃标记<ul>
+<li>0号窗口是当前活跃窗口</li>
+</ul>
+</li>
+</ul>
+<h3 id="_3">构造新窗口</h3>
+<ul>
+<li>先<kbd>ctrl</kbd>+<kbd>b</kbd> <ul>
+<li>先用左手小指按下ctrl不松手</li>
+<li>然后按下b</li>
+<li>然后同时松手</li>
+<li><kbd>ctrl</kbd>+<kbd>b</kbd>是prefix前置组合键</li>
+</ul>
+</li>
+<li>再<kbd>c</kbd><ul>
+<li>再按一下c</li>
+<li>c 的意思是建立 create</li>
+<li>就可以看到绿色横条出现新的窗口</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220510-1652182810493.jpg" /></p>
+<ul>
+<li>红色框的位置告诉我们有两个窗口<ul>
+<li>0号窗口</li>
+<li>1号窗口<ul>
+<li>1号窗口是活跃的，后面有*号</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>这个窗口选项卡可以切换么？</li>
+</ul>
+<h3 id="_4">切换窗口</h3>
+<ul>
+<li>在1号窗口处输出<ul>
+<li>做出标记</li>
+<li>说明这是1号窗</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220510-1652183347656.png" /></p>
+<ul>
+<li>切换窗口<ul>
+<li><kbd>ctrl-b</kbd> + <kbd>0</kbd><ul>
+<li>切换到0号窗口</li>
+<li>然后输出说明自己是0号窗口</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220510-1652183428761.png" /></p>
+<h3 id="_5">反复切换</h3>
+<ul>
+<li>反复切换<ul>
+<li><kbd>ctrl-b</kbd> + <kbd>1</kbd><ul>
+<li>切换到1号窗口</li>
+</ul>
+</li>
+<li><kbd>ctrl-b</kbd> + <kbd>0</kbd><ul>
+<li>切换到0号窗口</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>最下面一行就是显示切换信息的任务栏</li>
+<li>星号的位置标识着当前活动的(active)的窗口</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220510-1652183487604.png" /></p>
+<ul>
+<li>这里注意在进入目录的时候有快速的方法</li>
+</ul>
+<h3 id="0">0号窗口</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220716-1657978168038.png" /></p>
+<ul>
+<li>这个窗口主要负责执行命令</li>
+<li>开启或关闭tomcat</li>
+<li>开启火狐查看页面</li>
+<li>目前叫做0:zsh</li>
+<li>想给他换个名字</li>
+</ul>
+<h3 id="bin">bin</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220716-1657978203214.png" /></p>
+<ul>
+<li><kbd>ctrl-b</kbd> + <kbd>,</kbd><ul>
+<li>给0号窗口改名为bin</li>
+<li>意思是binary(二进制可执行文件)</li>
+<li>这个窗口是执行binary命令的</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220510-1652183623282.png" /></p>
+<ul>
+<li>现在0号窗口的名字改成了bin</li>
+</ul>
+<h3 id="1">1号窗口</h3>
+<ul>
+<li><kbd>ctrl-b</kbd> + <kbd>1</kbd><ul>
+<li>切换到1号窗口</li>
+</ul>
+</li>
+<li>进入webapps/oeasy/WEB-INF/classes<ul>
+<li>注意是oeasy这个文件夹下面的</li>
+<li>而不是webapps目录下的WEB-INF/classes</li>
+</ul>
+</li>
+<li>vi Hello.java</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220716-1657978339609.png" /></p>
+<ul>
+<li>这个窗口可以编辑<ul>
+<li>java源文件</li>
+<li>web.xml等配置文件</li>
+</ul>
+</li>
+<li>所有的文件修改尽量都在这个窗口选项卡中完成</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220510-1652183981592.png" /></p>
+<h3 id="vimzsh">切换vim和zsh</h3>
+<ul>
+<li>在1号窗口中</li>
+<li>运行的是vim这个程序</li>
+<li>开启zsh子窗口<ul>
+<li>:term</li>
+<li>意思是进入terminal终端状态</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220716-1657978440790.png" /></p>
+<h3 id="_6">复制代码</h3>
+<ul>
+<li>:term 切换到zsh</li>
+<li>此时屏幕分成两个</li>
+<li>
+<p>上面是zsh子窗口</p>
+<ul>
+<li>位置是/tomcat/webapps/WEB-INF/classes</li>
+</ul>
+</li>
+<li>
+<p>尝试把Hello.java复制成OeasyServlet.java</p>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220716-1657978592505.png" /></p>
+<ul>
+<li>exit退出当前的zsh终端窗口</li>
+<li>回到vim全屏的状态</li>
+<li>并进行编辑<ul>
+<li>:e OeasyServlet.java</li>
+</ul>
+</li>
+</ul>
+<h3 id="java">修改java</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220510-1652187038839.jpg" /></p>
+<ul>
+<li>public class的名字应该和文件名一致</li>
+<li>保存并尝试编译<ul>
+<li>w|!javac %</li>
+</ul>
+</li>
+</ul>
+<h3 id="_7">编译</h3>
+<ul>
+<li>我们试图将OeasyServlet.java编译成OeasyServlet.class</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220510-1652187323902.png" /></p>
+<ul>
+<li>找不到 HttpServletResponse 这个类</li>
+<li>上次我们用-cp解决了这个问题</li>
+<li>可是这如何理解呢？</li>
+</ul>
+<h3 id="_8">基础</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220510-1652187598063.png" /></p>
+<ul>
+<li>我们要搭建房子<ul>
+<li>房子的名字叫做OeasyServlet.class</li>
+<li>这个房子是由现成的积木搭成的</li>
+<li>我们无须锯木头、做抛光、上颜色、刷清漆</li>
+<li>只需要把积木拿过来</li>
+<li>直接按照我们的方式连接放置好就可以了</li>
+</ul>
+</li>
+<li>问题是<ul>
+<li>积木从哪里来呢？</li>
+</ul>
+</li>
+</ul>
+<h3 id="_9">积木</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220510-1652187901029.jpg" /></p>
+<ul>
+<li>红色框里面的东西就是我们要拼接的积木套装</li>
+<li>这里面有些什么积木呢？</li>
+</ul>
+<h3 id="_10">查看</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220510-1652188580926.png" /></p>
+<ul>
+<li>查看文件内容</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220510-1652188599928.png" /></p>
+<ul>
+<li>可以找到HttpServletResponse.class等</li>
+<li>这就是我们搭建要用到的各种积木</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220511-1652237576097.png" /></p>
+<ul>
+<li>我们的目标是搭建一个OeasyServlet.class</li>
+<li>搭建所需要的HttpServletResponse.class等class作为原料</li>
+<li>这些class都放在存储在servlet-api.jar里面</li>
+<li>那什么是servlet-api呢？</li>
+<li>怎么理解api呢？</li>
+</ul>
+<h3 id="api">api</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220510-1652188831241.png" /></p>
+<ul>
+<li>api就是application programming interface</li>
+<li>应用程序编程接口</li>
+<li>意思就是<ul>
+<li>你要做应用程序</li>
+<li>人家tomcat给你基本的框架(framework)<ul>
+<li>你拿tomcat给的这套积木搭建就行</li>
+<li>不用尝试造轮子</li>
+</ul>
+</li>
+<li>tomcat这里面有Request也有Response</li>
+<li>每个积木块你都可以拿去用</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220510-1652188844621.jpg" /></p>
+<ul>
+<li>但是要根据具体的积木接口interface</li>
+<li>什么是接口？</li>
+</ul>
+<h3 id="_11">接口</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220511-1652237790343.png" /></p>
+<ul>
+<li>接口就是两个系统之间结合的部分</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220511-1652237723591.png" /></p>
+<ul>
+<li>比如u盘和笔记本电脑之间的接口<ul>
+<li>就是usb接口</li>
+</ul>
+</li>
+<li>类似的还有<ul>
+<li>网口</li>
+<li>显示器接口</li>
+<li>midi接口</li>
+</ul>
+</li>
+<li>但是我怎么看不见这个接口呢？</li>
+</ul>
+<h3 id="_12">软件接口</h3>
+<ul>
+<li>我们编程时<ul>
+<li>先引入这些类(积木)</li>
+<li>然后根据api来进行编程</li>
+<li>按照这些积木的使用要求来使用</li>
+<li>这就是软件中的接口</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220511-1652238203796.jpg" /></p>
+<ul>
+<li>这种东西就是为了让我们来开发应用程序来用的</li>
+<li>从1978年第一次出现</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220511-1652238311999.png" /></p>
+<h3 id="_13">搭建应用</h3>
+<ul>
+<li>根据这些接口</li>
+<li>我们就可以编程制作<ul>
+<li>购物应用</li>
+<li>博客应用</li>
+<li>论坛应用等</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220511-1652238387633.png" /></p>
+<ul>
+<li>应用和什么是相对的呢？</li>
+</ul>
+<h3 id="_14">系统</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220521-1653106645079.png" /></p>
+<ul>
+<li>系统和应用是分层级的<ul>
+<li>我们的系统是ubuntu20运行在裸金属之上</li>
+<li>jvm运行在ubuntu20之上</li>
+<li>应用tomcat是在jvm上运行的</li>
+<li>我们的具体应用oeasy是基于tomcat的</li>
+</ul>
+</li>
+<li>下层的基础搭建好了之后<ul>
+<li>我们就可以直接用积木搭自己建筑了</li>
+</ul>
+</li>
+<li>具体如何找到这些积木呢？🤔</li>
+</ul>
+<h3 id="cp">cp</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220510-1652189089161.png" /></p>
+<ul>
+<li>-cp参数设置了CLASSPATH</li>
+<li>把servlet-api.jar这个文件作为一个路径放入CLASSPATH</li>
+<li>包括我们需要的所有积木<ul>
+<li>基础类包</li>
+<li>servlet-api.jar中的</li>
+<li>HttpServletResponse.class等</li>
+</ul>
+</li>
+<li>编译通过了</li>
+<li>得到了OeasyServlet.class</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220510-1652189898627.jpg" /></p>
+<ul>
+<li>工作流程<ul>
+<li>设置好CLASSPATH</li>
+<li>编译java文件 </li>
+<li>编译成功</li>
+</ul>
+</li>
+<li>但是每次都要打一个长长的 -cp很麻烦</li>
+<li>可以设置CLASSPATH成系统变量么？</li>
+</ul>
+<h3 id="classpath">CLASSPATH路径设置</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220716-1657978966001.png" /></p>
+<ul>
+<li>找到servlet-api.jar包绝对路径</li>
+<li>然后附加到CLASSPATH变量中</li>
+<li>这个过程其实就是配置类库<ul>
+<li>配置有哪些能供我们使用的积木库</li>
+</ul>
+</li>
+<li>可以每次进入zsh都自动设置好CLASSPATH么？</li>
+</ul>
+<h3 id="_15">配置文件</h3>
+<ul>
+<li>编辑~/.zshrc</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220716-1657979253214.png" />
+- 编辑并保存CLASSPATH变量
+- 添加servlet-api.jar这个包
+- 然后执行~/.zshrc使新配置生效
+- 重新编译</p>
+<p><img alt="图片描述" src="images/uid1190679-20220716-1657979307339.png" /></p>
+<ul>
+<li>编译成功</li>
+<li>这样每次进入zsh的时候</li>
+<li>就会自动设置好CLASSPATH</li>
+<li>想用什么jakarka库里面的HttpServletResponse</li>
+<li>直接拿过来用就可以了</li>
+<li>如何把这个OeasyServlet.class映射到url里面呢？</li>
+</ul>
+<h3 id="_16">映射</h3>
+<ul>
+<li>web.xml是怎么映射的？</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210912-1631406260957.png" /></p>
+<ul>
+<li>如何理解这些url呢？</li>
+</ul>
+<h3 id="_17">路由</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220510-1652160207048.png" /></p>
+<ul>
+<li>所有的交互都是用户使用url进行的</li>
+<li>url是<code>u</code>niversal <code>r</code>esources <code>l</code>ocator</li>
+<li>注意所有的交互都基于url！！！</li>
+</ul>
+<h3 id="_18">交互</h3>
+<ul>
+<li>打开lanqiao.cn</li>
+<li>浏览器和服务器之间不只进行一次交互</li>
+<li>下载的所有图片、样式、脚本、声音</li>
+<li>都是需要发送请求和接收响应来完成</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220510-1652192049533.jpg" /></p>
+<ul>
+<li>访问了一次首页</li>
+<li>进行了216次请求</li>
+<li>
+<p>传输了22.72M的数据</p>
+</li>
+<li>
+<p>我们已经</p>
+<ul>
+<li>找到了了积木<ul>
+<li>成功编译了class</li>
+</ul>
+</li>
+<li>需要servlet name <ul>
+<li>映射到url上去</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>具体怎么写呢？</li>
+</ul>
+<h3 id="webxml">web.xml</h3>
+<ul>
+<li>找到classes向上一层的web.xml</li>
+<li>这个web.xml是oeasy这个应用的</li>
+<li>把原来的内容复制出一份来</li>
+<li>:13,20t20</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220510-1652192288320.png" /></p>
+<ul>
+<li>然后修改</li>
+</ul>
+<h3 id="_19">批量替换</h3>
+<ul>
+<li>:22,26s/HelloWorldExample/OeasyServlet/</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210912-1631440296688.png" /></p>
+<ul>
+<li>再把url修改好</li>
+<li>保存之后</li>
+</ul>
+<h3 id="_20">启动</h3>
+<ul>
+<li>谁负责根据请求的url<ul>
+<li>找到对应的程序呢？</li>
+<li>web.xml</li>
+</ul>
+</li>
+<li>重启tomcat观察<ul>
+<li>顺利成功</li>
+<li>如果没有成功的话</li>
+<li>根据错误提示</li>
+</ul>
+</li>
+<li>层层排错<ol>
+<li>是不是没有找到这个url-pattern</li>
+<li>找到了url-pattern但 <ol>
+<li>是不是指定了servlet</li>
+<li>指定了servlet<ol>
+<li>是不是没有这个class</li>
+<li>有这个class<ol>
+<li>是不是能正确运行</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210912-1631440677288.png" /></p>
+<ul>
+<li>这个web.xml是负责从url路由到具体执行文件接线员(route)<ul>
+<li>什么是接线员呢？</li>
+</ul>
+</li>
+</ul>
+<h3 id="_21">导航</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220510-1652159778659.png" /></p>
+<ul>
+<li>你要找的是哪里</li>
+<li>有导航员负责接电话<ul>
+<li>各部衙署</li>
+<li>朝廷大臣</li>
+<li>亲王官邸</li>
+<li>后来有了社会名流</li>
+</ul>
+</li>
+<li>后来有了程控电话交换机<ul>
+<li>程序控制的自动路由交换的交换机</li>
+</ul>
+</li>
+<li>
+<p>网络时代</p>
+<ul>
+<li>hub</li>
+<li>交换机</li>
+<li>路由器</li>
+</ul>
+</li>
+<li>
+<p>顺利完成后，我们总结一下</p>
+</li>
+</ul>
+<h3 id="_22">总结 🤨</h3>
+<ul>
+<li>我们这次搭建了开发环境</li>
+<li>使用tmux建立了2个子标签页<ul>
+<li>一个负责执行命令</li>
+<li>一个负责编辑文件</li>
+</ul>
+</li>
+<li>这里面的路由核心是web.xml<ul>
+<li>web.xml是从url路由到class的核心</li>
+<li>web.xml是后端程序的核心</li>
+<li>出了错就层层排错</li>
+</ul>
+</li>
+<li>可是有这样一个问题</li>
+<li>就是出了预想不到的错误</li>
+<li>去哪里查看报错信息呢？🤔</li>
+<li>下次再说！👋</li>
+</ul>
+    </div>
+</body>
+</html>

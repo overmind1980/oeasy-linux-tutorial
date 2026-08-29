@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：使用网页插入数据，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解管理约束条件CONSTRAINT。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 管理约束条件CONSTRAINT, 使用网页插入数据">
+    <meta property="og:title" content="oeasy Linux系统教程：使用网页插入数据，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解管理约束条件CONSTRAINT。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="_1">使用网页插入数据</h1>
+<h2 id="_2">回忆</h2>
+<ul>
+<li>我们这次研究了表的修改<ul>
+<li>可以添加删除列<ul>
+<li>ALTER TABLE <code>table_name</code> ADD COLUMN <code>column_name</code> DATATYPE;</li>
+<li>ALTER TABLE <code>table_name</code> DROP COLUMN <code>column_name</code> ;</li>
+</ul>
+</li>
+<li>修改列<ul>
+<li>ALTER TABLE <code>table_name</code> ALTER COLUMN <code>column_name</code> TYPE DATATYPE;</li>
+<li>ALTER TABLE <code>table_name</code> ALTER COLUMN <code>column_name</code> SET NOT NULL;</li>
+<li>ALTER TABLE <code>table_name</code> ALTER COLUMN  <code>unique_name</code> UNIQUE(<code>column_name1</code>,<code>column_name2</code>)`;</li>
+</ul>
+</li>
+<li>添加修改主键约束<ul>
+<li>ALTER TABLE <code>table_name</code> DROP CONSTRAINT <code>primary_key_name</code>;</li>
+<li>ALTER TABLE <code>table_name</code> ADD  CONSTRAINT <code>primary_key_name</code> PRIMARY KEY(<code>column_name1</code>,<code>column_name2</code>);</li>
+</ul>
+</li>
+<li>修改列名<ul>
+<li>ALTER TABLE <code>table_name</code> RENAME <code>column_origin_name</code> TO <code>column_dest_name</code>;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>不过到现在还是没有插入数据啊</li>
+<li>如何插入数据呢？🤔</li>
+</ul>
+<h3 id="_3">观察一下现在的表结构</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658104302604.png" /></p>
+<ul>
+<li>现在两个字段<ul>
+<li>都是非空的</li>
+</ul>
+</li>
+<li>如果正常插入应该是什么效果呢？</li>
+</ul>
+<h3 id="_4">插入数据</h3>
+<div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span>
+<span class="w">    </span><span class="n">urls</span><span class="p">(</span><span class="n">topic</span><span class="p">,</span><span class="n">url</span><span class="p">)</span><span class="w"> </span>
+<span class="k">VALUES</span>
+<span class="w">    </span><span class="p">(</span><span class="s1">'tom'</span><span class="p">,</span><span class="s1">'http://tom.com'</span><span class="p">)</span>
+<span class="p">;</span>
+</code></pre></div>
+
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658104382313.png" /></p>
+<ul>
+<li>但是如果我要插入空值呢？</li>
+</ul>
+<h3 id="_5">插入空串</h3>
+<div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span>
+<span class="w">    </span><span class="n">urls</span><span class="p">(</span><span class="n">topic</span><span class="p">,</span><span class="n">url</span><span class="p">)</span><span class="w"> </span>
+<span class="k">VALUES</span>
+<span class="w">    </span><span class="p">(</span><span class="s1">'null'</span><span class="p">,</span><span class="s1">''</span><span class="p">)</span>
+<span class="p">;</span>
+</code></pre></div>
+
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658104640849.png" /></p>
+<ul>
+<li>这个还是插入了</li>
+<li>因为给的字符串是<ul>
+<li><code>null</code>的字符串</li>
+<li>空的字符串</li>
+</ul>
+</li>
+<li>他和真正的空值还不一样</li>
+<li>那什么是空值呢？</li>
+</ul>
+<h3 id="_6">插入空值</h3>
+<div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span>
+<span class="w">    </span><span class="n">urls</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="w"> </span>
+<span class="k">VALUES</span>
+<span class="w">    </span><span class="p">(</span><span class="s1">'something'</span><span class="p">)</span>
+<span class="p">;</span>
+</code></pre></div>
+
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658104793199.png" /></p>
+<ul>
+<li>这个真null确实不行啊</li>
+<li>因为数据库的url字段有not null的约束</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658104859591.png" /></p>
+<ul>
+<li>那我可以去掉这个非空的约束么？</li>
+</ul>
+<h3 id="_7">查询</h3>
+<p><img alt="图片描述" src="images/uid1190679-20211128-1638102417632.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20211128-1638102425515.png" /></p>
+<h3 id="_8">试试</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658105043986.png" /></p>
+<ul>
+<li>修改了之后就可以插入了么？</li>
+</ul>
+<h3 id="_9">插入</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658105337299.png" /></p>
+<ul>
+<li>确实可以插入了</li>
+<li>不过字段究竟是不是应该not null</li>
+<li>一定要在建立数据库的初期就设计好</li>
+<li>感觉还是应该加上相应的not null的约束</li>
+</ul>
+<h3 id="_10">添加非空约束</h3>
+<div class="highlight"><pre><span></span><code>ALTER TABLE
+    urls
+ALTER COLUMN
+    url SET NOT NULL
+;
+</code></pre></div>
+
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658105362516.png" /></p>
+<ul>
+<li>因为这里面的有些数据行</li>
+<li>在url这列上的值就是NULL</li>
+<li>所以先要处理数据</li>
+</ul>
+<h3 id="_11">处理数据</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658108725093.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658108739049.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658108747187.png" /></p>
+<ul>
+<li>经过处理</li>
+<li>url这列上不存在值是NULL的数据了</li>
+</ul>
+<h3 id="_12">修改表结构</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658108986519.png" /></p>
+<ul>
+<li>这样非空的约束就去掉了</li>
+<li>但是可能我又改主意了</li>
+<li>网页的网址怎么可以为空呢？</li>
+</ul>
+<h3 id="_13">改回来</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658109170111.png" /></p>
+<ul>
+<li>这来回来去拉抽屉</li>
+<li>这受不了啊</li>
+<li>数据库结构是编程的基础</li>
+<li>必须先确定下来</li>
+<li>并保持相对的稳定</li>
+</ul>
+<h3 id="_14">数据库管理员</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658109262660.png" /></p>
+<ul>
+<li>数据库管理员不能反复修改数据库</li>
+<li>先把一切想明白</li>
+<li>然后给程序员一个比较稳固的数据库结构</li>
+<li>程序员就可以进行编程了</li>
+</ul>
+<h3 id="_15">总结</h3>
+<ul>
+<li>我们玩了玩数据表的约束条件<ul>
+<li>可以添加约束条件<ul>
+<li>ALTER TABLE <code>table_name</code> ALTER COLUMN <code>column_name</code> SET NOT NULL;</li>
+</ul>
+</li>
+<li>也可以删除约束条件<ul>
+<li>ALTER TABLE <code>table_name</code> ALTER COLUMN  <code>column_name</code> DROP NOT NULL;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>但是数据库结构同时也收到数据影响</li>
+<li>所以一定要一开始的时候想明白</li>
+<li>保持数据库结构的稳定</li>
+<li>不过到现在还是没有插入数据啊</li>
+<li>如何插入数据呢？🤔</li>
+<li>下次再说👋🏻</li>
+</ul>
+    </div>
+</body>
+</html>

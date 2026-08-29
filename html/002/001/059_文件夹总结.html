@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：阴历lunar，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解文件夹总结。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 文件夹总结, 阴历lunar">
+    <meta property="og:title" content="oeasy Linux系统教程：阴历lunar，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解文件夹总结。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="lunar">阴历(lunar)</h1>
+<h2 id="_1">回忆</h2>
+<ul>
+<li>上次我们研究的tree</li>
+<li>是一个查询递归查询文件夹结构的命令</li>
+<li>tree 有一些参数<ul>
+<li>只遍历路径 -d</li>
+<li>控制路径层级 -L</li>
+<li>控制匹配模式 -P<ul>
+<li>控制路径符合匹配模式 --matchdirs</li>
+<li>控制不显示空路径 --prune</li>
+</ul>
+</li>
+<li>控制不匹配模式 -I</li>
+<li>遍历符号链接 -l</li>
+</ul>
+</li>
+<li>这部分实验我们学了很多</li>
+<li>这次总结一下？</li>
+</ul>
+<h3 id="_2">文件和文件夹的基本操作</h3>
+<ul>
+<li>新建 <ul>
+<li>mkdir</li>
+<li>md = mkdir -p</li>
+</ul>
+</li>
+<li>复制<ul>
+<li>cp</li>
+</ul>
+</li>
+<li>删除<ul>
+<li>rmdir</li>
+<li>rm</li>
+</ul>
+</li>
+<li>
+<p>改名</p>
+<ul>
+<li>mv</li>
+</ul>
+</li>
+<li>
+<p>这些命令有一些类似的参数</p>
+<ul>
+<li>-f 强制</li>
+<li>-i 交互式</li>
+<li>-r 递归文件夹</li>
+<li>-n 不覆盖</li>
+<li>-u 更新</li>
+<li>-v 介绍细节</li>
+</ul>
+</li>
+<li>
+<p>有了这些我们就可以构建出复杂的文件结构</p>
+</li>
+</ul>
+<h3 id="_3">一年四季</h3>
+<ul>
+<li>建立文件夹层次结构<ul>
+<li>一年分四季</li>
+<li>每一季分成3个月</li>
+<li>每个月大概30天</li>
+<li>在路径之间可以跳转 </li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663238515055.jpg" /></p>
+<ul>
+<li>文件可以建立链接(link)</li>
+<li>文件夹可以建符号链接(symboliclink)</li>
+</ul>
+<h3 id="_4">链接</h3>
+<ul>
+<li>链接分两种<ul>
+<li>硬链接 hard link</li>
+<li>符号链接 symbolic link</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663238630057.png" /></p>
+<ul>
+<li>硬链接<ul>
+<li>直接指到文件所指的inode</li>
+<li>inode被指数加一</li>
+<li>inode指向具体的存储块(block)</li>
+</ul>
+</li>
+<li>
+<p>符号链接</p>
+<ul>
+<li>指向文件</li>
+<li>如果文件删除<ul>
+<li>则符号链接失效</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>路径很多之后</p>
+<ul>
+<li>可以有路径堆栈</li>
+</ul>
+</li>
+</ul>
+<h3 id="_5">路径堆栈</h3>
+<ul>
+<li>dirs</li>
+<li>pushd</li>
+<li>popd</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663238986836.png" /></p>
+<ul>
+<li>可以通过cd -n进入路径</li>
+</ul>
+<h3 id="stat">文件详细信息stat</h3>
+<ul>
+<li>可以显示文件的各种元数据</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663239179652.png" /></p>
+<ul>
+<li>有四个和时间相关<ul>
+<li>access 读取时间</li>
+<li>modify 修改时间</li>
+<li>change 状态变化时间</li>
+<li>birth 创建时间 一般为-</li>
+</ul>
+</li>
+</ul>
+<h3 id="_6">时间日期</h3>
+<ul>
+<li>date是基于epoch的</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663240328987.png" /></p>
+<ul>
+<li>可以输出各种日期形式</li>
+</ul>
+<h3 id="_7">日历</h3>
+<ul>
+<li>cal 可以输出日历</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663240434397.png" /></p>
+<ul>
+<li>lunar可以进行阳历阴历转化</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663245539610.png" /></p>
+<h3 id="_8">可以控制输出文件的时间格式</h3>
+<ul>
+<li>观察</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663217046187.jpg" /></p>
+<ul>
+<li>--time=atime  <ul>
+<li>access 上次读取时间</li>
+</ul>
+</li>
+<li>--time=ctime<ul>
+<li>change 上次状态(status)变化时间</li>
+</ul>
+</li>
+<li>不设置--time<ul>
+<li>modify 上次文件本体修改时间</li>
+</ul>
+</li>
+<li>和ls很像的一个文件查询工具叫做tree</li>
+<li>他们有很多共性</li>
+</ul>
+<h3 id="tree">tree</h3>
+<ul>
+<li>都可以对文件夹递归遍历<ul>
+<li>ls -R</li>
+<li>tree</li>
+</ul>
+</li>
+<li>都可以显示隐藏文件<ul>
+<li><code>tree -a</code></li>
+<li><code>ls -a</code></li>
+</ul>
+</li>
+<li>都支持通配符<ul>
+<li><code>tree -P *2*</code></li>
+<li><code>ls *a*</code></li>
+</ul>
+</li>
+<li>容量都可以人类可读<ul>
+<li><code>tree -h</code></li>
+<li><code>ls -h</code></li>
+</ul>
+</li>
+<li>输出时间都可控<ul>
+<li><code>tree --time-fmt "%D %T"</code></li>
+<li><code>ls --time-style=+"%D %T"</code></li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663245991720.png" /></p>
+<h3 id="_9">总结</h3>
+<ul>
+<li>我们可以操作文件和文件夹了<ul>
+<li>复制 cp</li>
+<li>新建 mkdir</li>
+<li>删除 rm</li>
+<li>改名移动 mv</li>
+</ul>
+</li>
+<li>我们还可以查询文件和文件夹<ul>
+<li>列表 ls</li>
+<li>递归查询文件夹 tree</li>
+<li>详细信息 stat</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663246208006.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663246222331.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663246234059.png" /></p>
+<ul>
+<li>这里值为shiyanlou的uid到底是什么呢？ 🤔</li>
+<li>下次再说👋</li>
+</ul>
+    </div>
+</body>
+</html>

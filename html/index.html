@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>oeasylinux - 在线教程</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; overflow: hidden; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; }
+
+.layout { display: flex; height: 100vh; }
+
+/* 左侧导航 */
+.sidebar {
+    width: 320px;
+    min-width: 260px;
+    background: #1e1e2e;
+    color: #cdd6f4;
+    overflow-y: auto;
+    border-right: 1px solid #313244;
+    display: flex;
+    flex-direction: column;
+}
+.sidebar-header {
+    padding: 18px 20px;
+    background: #181825;
+    border-bottom: 1px solid #313244;
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: .5px;
+    color: #f5c2e7;
+}
+.sidebar-header small {
+    display: block;
+    margin-top: 4px;
+    font-weight: 400;
+    font-size: 12px;
+    color: #a6adc8;
+}
+.search-box {
+    margin: 12px 14px 6px;
+    padding: 8px 12px;
+    background: #313244;
+    border: 1px solid #45475a;
+    border-radius: 6px;
+    color: #cdd6f4;
+    font-size: 13px;
+    outline: none;
+    width: calc(100% - 28px);
+}
+.search-box::placeholder { color: #6c7086; }
+.search-box:focus { border-color: #89b4fa; }
+
+.tree { padding: 8px 0; flex: 1; }
+.tree ul { list-style: none; padding-left: 18px; }
+.tree > ul { padding-left: 0; }
+.tree li { line-height: 1.5; }
+.tree .node {
+    display: flex;
+    align-items: center;
+    padding: 4px 14px;
+    cursor: pointer;
+    font-size: 13px;
+    white-space: nowrap;
+    user-select: none;
+    transition: background .15s;
+}
+.tree .node:hover { background: #313244; }
+.tree .node.active { background: #45475a; color: #f9e2af; font-weight: 500; }
+.tree .node .arrow {
+    display: inline-block;
+    width: 14px;
+    font-size: 10px;
+    color: #6c7086;
+    transition: transform .15s;
+    flex-shrink: 0;
+}
+.tree .node.collapsed .arrow { transform: rotate(-90deg); }
+.tree .node .icon { margin-right: 6px; font-size: 13px; }
+.tree .node.dir { color: #89b4fa; font-weight: 500; }
+.tree .node.file { color: #cdd6f4; }
+.tree .node.file.active { color: #f9e2af; }
+.tree ul.hidden { display: none; }
+
+/* 右侧内容 */
+.content { flex: 1; background: #fff; }
+.content iframe { width: 100%; height: 100%; border: 0; display: block; }
+.welcome {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #fafafa;
+    color: #555;
+}
+.welcome h1 { color: #333; margin-bottom: 12px; font-size: 28px; }
+.welcome p { font-size: 15px; color: #888; }
+
+/* 滚动条 */
+.sidebar::-webkit-scrollbar { width: 8px; }
+.sidebar::-webkit-scrollbar-track { background: #1e1e2e; }
+.sidebar::-webkit-scrollbar-thumb { background: #45475a; border-radius: 4px; }
+.sidebar::-webkit-scrollbar-thumb:hover { background: #585b70; }
+</style>
+</head>
+<body>
+<div class="layout">
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            OEASY Linux 教程
+            <small>oeasylinux · oeasy 在线教程</small>
+        </div>
+        <input type="text" class="search-box" id="searchInput" placeholder="🔍 搜索页面...">
+        <div class="tree" id="tree"></div>
+    </aside>
+    <main class="content">
+        <iframe id="viewer" src="about:blank"></iframe>
+    </main>
+</div>
+
+<script>
+const TREE_DATA = [{"name": "001", "children": [{"name": "001", "children": [{"name": "001_什么是内核_uname", "path": "001/001/001_什么是内核_uname.html"}, {"name": "002_[趣味拓展]编程起源_格子衫_提花织布机_家酿俱乐部_homebrew", "path": "001/001/002_[趣味拓展]编程起源_格子衫_提花织布机_家酿俱乐部_homebrew.html"}, {"name": "003_[趣味拓展]自由软件运动_free_software_unix", "path": "001/001/003_[趣味拓展]自由软件运动_free_software_unix.html"}, {"name": "004_[趣味拓展]媒介的变化_media_software_数字时代特点_tilt_野牛格子衫", "path": "001/001/004_[趣味拓展]媒介的变化_media_software_数字时代特点_tilt_野牛格子衫.html"}, {"name": "005_[趣味拓展]开源运动_opensource_linux", "path": "001/001/005_[趣味拓展]开源运动_opensource_linux.html"}, {"name": "006_[趣味拓展]什么是发行版_distro_debian_ubuntu_canonical", "path": "001/001/006_[趣味拓展]什么是发行版_distro_debian_ubuntu_canonical.html"}, {"name": "007_[趣味拓展]红帽_red_hat_centos_rhel_fedora", "path": "001/001/007_[趣味拓展]红帽_red_hat_centos_rhel_fedora.html"}, {"name": "008_我在哪_pwd", "path": "001/001/008_我在哪_pwd.html"}, {"name": "009_灵魂之问_whatis", "path": "001/001/009_灵魂之问_whatis.html"}, {"name": "010_详查手册_man", "path": "001/001/010_详查手册_man.html"}, {"name": "011_这儿都有啥_ls", "path": "001/001/011_这儿都有啥_ls.html"}, {"name": "012_那啥在哪_whereis", "path": "001/001/012_那啥在哪_whereis.html"}, {"name": "013_到底哪个_which", "path": "001/001/013_到底哪个_which.html"}, {"name": "014_清屏_clear", "path": "001/001/014_清屏_clear.html"}, {"name": "015_命令_command_总结", "path": "001/001/015_命令_command_总结.html"}]}, {"name": "002", "children": [{"name": "016_持续输出_yes", "path": "001/002/016_持续输出_yes.html"}, {"name": "017_包管理_dpkg", "path": "001/002/017_包管理_dpkg.html"}, {"name": "018_高级软件包工具_apt", "path": "001/002/018_高级软件包工具_apt.html"}, {"name": "019_编译_compile_安装_install", "path": "001/002/019_编译_compile_安装_install.html"}, {"name": "020_标志_linuxlogo", "path": "001/002/020_标志_linuxlogo.html"}, {"name": "021_字符画_figlet", "path": "001/002/021_字符画_figlet.html"}, {"name": "022_风格文字_toilet", "path": "001/002/022_风格文字_toilet.html"}, {"name": "023_蒸汽机车_sl", "path": "001/002/023_蒸汽机车_sl.html"}, {"name": "024_黑客帝国_cmatrix", "path": "001/002/024_黑客帝国_cmatrix.html"}, {"name": "025_满屏乱码_bb", "path": "001/002/025_满屏乱码_bb.html"}, {"name": "026_更新源_apt_update_hollywood", "path": "001/002/026_更新源_apt_update_hollywood.html"}, {"name": "027_应用管理_aptitude", "path": "001/002/027_应用管理_aptitude.html"}, {"name": "028_牛说_cowsay", "path": "001/002/028_牛说_cowsay.html"}, {"name": "029_管道_pipe_boxes", "path": "001/002/029_管道_pipe_boxes.html"}, {"name": "030_中文输入_fcitx", "path": "001/002/030_中文输入_fcitx.html"}, {"name": "031_自制字符图_asciiview", "path": "001/002/031_自制字符图_asciiview.html"}, {"name": "032_随机笑话_fortune", "path": "001/002/032_随机笑话_fortune.html"}, {"name": "033_中文诗词_fortune-zh", "path": "001/002/033_中文诗词_fortune-zh.html"}, {"name": "034_分屏工具_tmux_会话_session", "path": "001/002/034_分屏工具_tmux_会话_session.html"}, {"name": "035_分屏工具_tmux_窗口_window", "path": "001/002/035_分屏工具_tmux_窗口_window.html"}, {"name": "036_分屏工具_tmux_窗格_pane", "path": "001/002/036_分屏工具_tmux_窗格_pane.html"}, {"name": "037_终端浏览器_w3m", "path": "001/002/037_终端浏览器_w3m.html"}, {"name": "038_dosbox_x86_pc_dos模拟器", "path": "001/002/038_dosbox_x86_pc_dos模拟器.html"}]}, {"name": "003", "children": [{"name": "039_桌面宠物_pet", "path": "001/003/039_桌面宠物_pet.html"}, {"name": "040_火狐_firefox", "path": "001/003/040_火狐_firefox.html"}, {"name": "041_文件管理器_nautilus", "path": "001/003/041_文件管理器_nautilus.html"}, {"name": "042_桌面环境_xfce", "path": "001/003/042_桌面环境_xfce.html"}, {"name": "043_总结", "path": "001/003/043_总结.html"}]}]}, {"name": "002", "children": [{"name": "001", "children": [{"name": "044_新建文件夹_mkdir", "path": "002/001/044_新建文件夹_mkdir.html"}, {"name": "045_绝对路径和相对路径_cd", "path": "002/001/045_绝对路径和相对路径_cd.html"}, {"name": "046_查找文件_find_输出文件的绝对路径_realpath", "path": "002/001/046_查找文件_find_输出文件的绝对路径_realpath.html"}, {"name": "047_路径_dirs_堆栈", "path": "002/001/047_路径_dirs_堆栈.html"}, {"name": "048_复制_copy", "path": "002/001/048_复制_copy.html"}, {"name": "049_软链接_link_硬链接_读取链接_readlink", "path": "002/001/049_软链接_link_硬链接_读取链接_readlink.html"}, {"name": "050_拷贝粘贴文件内容_pbcopy_pbpaste", "path": "002/001/050_拷贝粘贴文件内容_pbcopy_pbpaste.html"}, {"name": "051_查看文件信息_stat", "path": "002/001/051_查看文件信息_stat.html"}, {"name": "052_别名_alias", "path": "002/001/052_别名_alias.html"}, {"name": "053_删除文件夹_rmdir", "path": "002/001/053_删除文件夹_rmdir.html"}, {"name": "054_移动_mv", "path": "002/001/054_移动_mv.html"}, {"name": "055_时间日期_date", "path": "002/001/055_时间日期_date.html"}, {"name": "056_日历_cal", "path": "002/001/056_日历_cal.html"}, {"name": "057_阴历_lunar", "path": "002/001/057_阴历_lunar.html"}, {"name": "058_树形结构_tree", "path": "002/001/058_树形结构_tree.html"}, {"name": "059_文件夹总结", "path": "002/001/059_文件夹总结.html"}]}, {"name": "002", "children": [{"name": "060_我是谁_who", "path": "002/002/060_我是谁_who.html"}, {"name": "061_列出用户信息_id", "path": "002/002/061_列出用户信息_id.html"}, {"name": "062_添加用户_adduser", "path": "002/002/062_添加用户_adduser.html"}, {"name": "063_修改密码_passwd", "path": "002/002/063_修改密码_passwd.html"}, {"name": "064_脚本解释器_zsh", "path": "002/002/064_脚本解释器_zsh.html"}, {"name": "065_个性化颜色方案_Oh-My-Zsh", "path": "002/002/065_个性化颜色方案_Oh-My-Zsh.html"}, {"name": "067_远程拷贝_scp", "path": "002/002/067_远程拷贝_scp.html"}, {"name": "068_提权_sudo", "path": "002/002/068_提权_sudo.html"}, {"name": "069_用户组_group", "path": "002/002/069_用户组_group.html"}, {"name": "070_给用户组发信息_wall", "path": "002/002/070_给用户组发信息_wall.html"}, {"name": "071_用户和用户组总结", "path": "002/002/071_用户和用户组总结.html"}]}, {"name": "003", "children": [{"name": "072_修改文件权限模式_chmod", "path": "002/003/072_修改文件权限模式_chmod.html"}, {"name": "073_修改所属组_chgrp_修改执行权限_chmod_execute", "path": "002/003/073_修改所属组_chgrp_修改执行权限_chmod_execute.html"}, {"name": "074_修改所有者_chown_递归修改_查看细节", "path": "002/003/074_修改所有者_chown_递归修改_查看细节.html"}, {"name": "075_临时拥有文件所有者用户身份_suid", "path": "002/003/075_临时拥有文件所有者用户身份_suid.html"}, {"name": "076_临时拥有文件所有组身份_sgid", "path": "002/003/076_临时拥有文件所有组身份_sgid.html"}, {"name": "077_设置粘滞位_sticky", "path": "002/003/077_设置粘滞位_sticky.html"}, {"name": "078_批量添加用户和文件夹", "path": "002/003/078_批量添加用户和文件夹.html"}, {"name": "079_改名_rename", "path": "002/003/079_改名_rename.html"}]}]}, {"name": "003", "children": [{"name": "001", "children": [{"name": "080_快速定位目录", "path": "003/001/080_快速定位目录.html"}]}]}, {"name": "004", "children": [{"name": "001", "children": [{"name": "081_数据库_postgresql", "path": "004/001/081_数据库_postgresql.html"}]}]}, {"name": "005", "children": [{"name": "001", "children": [{"name": "082_nginx", "path": "005/001/082_nginx.html"}, {"name": "083_apache", "path": "005/001/083_apache.html"}]}, {"name": "002", "children": [{"name": "084_tomcat源起", "path": "005/002/084_tomcat源起.html"}, {"name": "085_tomcat结构", "path": "005/002/085_tomcat结构.html"}, {"name": "086_徒手建立应用", "path": "005/002/086_徒手建立应用.html"}, {"name": "087_搭建开发环境", "path": "005/002/087_搭建开发环境.html"}, {"name": "088_调试模式_debug_mode_log日志", "path": "005/002/088_调试模式_debug_mode_log日志.html"}, {"name": "089_前端和后端", "path": "005/002/089_前端和后端.html"}, {"name": "090_双层架构(2-tier)", "path": "005/002/090_双层架构(2-tier).html"}, {"name": "091_请求和响应", "path": "005/002/091_请求和响应.html"}, {"name": "092_请求参数", "path": "005/002/092_请求参数.html"}, {"name": "093_处理异常", "path": "005/002/093_处理异常.html"}]}, {"name": "003", "children": [{"name": "094_连接postgresql数据库引擎", "path": "005/003/094_连接postgresql数据库引擎.html"}, {"name": "095_通过驱动访问postgres数据库引擎", "path": "005/003/095_通过驱动访问postgres数据库引擎.html"}, {"name": "096_JDBC理解", "path": "005/003/096_JDBC理解.html"}, {"name": "097_通过动态页面访问postgres数据库引擎", "path": "005/003/097_通过动态页面访问postgres数据库引擎.html"}, {"name": "098_自动加载更新的class_tomcat无需重启", "path": "005/003/098_自动加载更新的class_tomcat无需重启.html"}, {"name": "099_修改表结构", "path": "005/003/099_修改表结构.html"}, {"name": "100_管理约束条件CONSTRAINT", "path": "005/003/100_管理约束条件CONSTRAINT.html"}, {"name": "101_使用jdbc向数据库插入数据", "path": "005/003/101_使用jdbc向数据库插入数据.html"}, {"name": "102_使用servlet向数据库插入数据", "path": "005/003/102_使用servlet向数据库插入数据.html"}, {"name": "103_响应重定向", "path": "005/003/103_响应重定向.html"}]}, {"name": "004", "children": [{"name": "104_使用网页提交数据_文本框post提交表单", "path": "005/004/104_使用网页提交数据_文本框post提交表单.html"}, {"name": "105_使用网页插入数据库", "path": "005/004/105_使用网页插入数据库.html"}, {"name": "106_先查再插入", "path": "005/004/106_先查再插入.html"}, {"name": "107_文本框前端验证", "path": "005/004/107_文本框前端验证.html"}, {"name": "108_密码二次输入验证复杂性", "path": "005/004/108_密码二次输入验证复杂性.html"}, {"name": "109_封装数据库连接", "path": "005/004/109_封装数据库连接.html"}, {"name": "110_PrepareStatement准备语句", "path": "005/004/110_PrepareStatement准备语句.html"}, {"name": "111_JNDI", "path": "005/004/111_JNDI.html"}, {"name": "112_JDBC数据库连接池", "path": "005/004/112_JDBC数据库连接池.html"}]}, {"name": "005", "children": [{"name": "113_准备删除", "path": "005/005/113_准备删除.html"}, {"name": "114_WebServlet自动路由配置", "path": "005/005/114_WebServlet自动路由配置.html"}]}, {"name": "006", "children": [{"name": "116_Session深入", "path": "005/006/116_Session深入.html"}, {"name": "117_网络曲奇Cookie", "path": "005/006/117_网络曲奇Cookie.html"}, {"name": "118_角色", "path": "005/006/118_角色.html"}]}]}, {"name": "006", "children": [{"name": "001", "children": [{"name": "119_tcpdump", "path": "006/001/119_tcpdump.html"}]}]}, {"name": "index", "path": "index.html"}];
+
+function buildTree(data, parent) {
+    const ul = document.createElement('ul');
+    data.forEach(item => {
+        const li = document.createElement('li');
+        
+        if (item.children) {
+            // 目录
+            const node = document.createElement('div');
+            node.className = 'node dir';
+            node.innerHTML = `<span class="arrow">▼</span><span class="icon">📁</span><span class="label">${item.name}</span>`;
+            node.onclick = (e) => {
+                e.stopPropagation();
+                const sub = node.nextElementSibling;
+                if (sub.classList.contains('hidden')) {
+                    sub.classList.remove('hidden');
+                    node.classList.remove('collapsed');
+                } else {
+                    sub.classList.add('hidden');
+                    node.classList.add('collapsed');
+                }
+            };
+            li.appendChild(node);
+            const childUl = buildTree(item.children, li);
+            li.appendChild(childUl);
+        } else {
+            // 文件
+            const node = document.createElement('div');
+            node.className = 'node file';
+            node.innerHTML = `<span class="arrow"></span><span class="icon">📄</span><span class="label">${item.name}</span>`;
+            node.onclick = (e) => {
+                e.stopPropagation();
+                document.querySelectorAll('.node.active').forEach(n => n.classList.remove('active'));
+                node.classList.add('active');
+                const viewer = document.getElementById('viewer');
+                viewer.removeAttribute('srcdoc');
+                viewer.src = item.path;
+            };
+            li.appendChild(node);
+        }
+        ul.appendChild(li);
+    });
+    return ul;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const tree = document.getElementById('tree');
+    tree.appendChild(buildTree(TREE_DATA, tree));
+
+    // 初始欢迎页（用 srcdoc，不影响后续 .src 赋值）
+    document.getElementById('viewer').srcdoc =
+        '<div style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;' +
+        'background:#fafafa;color:#555;font-family:-apple-system,Segoe UI,PingFang SC,sans-serif;">' +
+        '<h1 style="color:#333;margin-bottom:12px;font-size:28px;">👋 OEASY Linux 教程</h1>' +
+        '<p style="font-size:15px;color:#888;">← 从左侧选择一个章节开始学习</p>' +
+        '</div>';
+
+    // 搜索
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+        const q = e.target.value.toLowerCase();
+        const allNodes = document.querySelectorAll('.node');
+        allNodes.forEach(n => {
+            const label = n.querySelector('.label').textContent.toLowerCase();
+            const match = label.includes(q);
+            n.style.display = match || !q ? '' : 'none';
+            // 父目录展开
+            if (match) {
+                let p = n.parentElement;
+                while (p) {
+                    if (p.classList && p.classList.contains('hidden')) p.classList.remove('hidden');
+                    const prev = p.previousElementSibling;
+                    if (prev && prev.classList && prev.classList.contains('node')) {
+                        prev.classList.remove('collapsed');
+                    }
+                    p = p.parentElement;
+                }
+            }
+        });
+    });
+});
+</script>
+</body>
+</html>

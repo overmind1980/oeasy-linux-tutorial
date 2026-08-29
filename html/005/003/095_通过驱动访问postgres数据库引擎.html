@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：通过驱动连接postgres，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解通过驱动访问postgres数据库引擎。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖public class PostgresJdbc {    public static void mainString args {       Connection c =...">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 通过驱动访问postgres数据库引擎, 通过驱动连接postgres">
+    <meta property="og:title" content="oeasy Linux系统教程：通过驱动连接postgres，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解通过驱动访问postgres数据库引擎。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖public class PostgresJdbc {    public static void mainString args {       Connection c =...">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="postgres">通过驱动连接postgres</h1>
+<h2 id="_1">回顾</h2>
+<ul>
+<li>我们设置了postgres引擎</li>
+<li>添加了<ul>
+<li>数据库</li>
+<li>数据表</li>
+<li>数据</li>
+</ul>
+</li>
+<li>但是这一切都是在postgres的客户端psql上完成的</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220717-1658022536351.gif" /></p>
+<ul>
+<li>我们先试试恢复postgres中的数据</li>
+</ul>
+<h3 id="_2">恢复数据库</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220717-1658022993335.png" /></p>
+<ul>
+<li>数据库结构和数据确实是可以一把恢复的</li>
+<li>那我可以使用java来读写postgres数据库中的数据么？</li>
+</ul>
+<h3 id="_3">搜索</h3>
+<p><img alt="图片描述" src="images/uid1190679-20210912-1631441137230.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20210912-1631441149209.png" /></p>
+<h3 id="_4">开始编程</h3>
+<ul>
+<li>把代码复制下来</li>
+<li>然后回到classes</li>
+<li>粘贴进入一个PostgresJdbc.java</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.Connection</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.DriverManager</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">PostgresJdbc</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">args</span><span class="o">[]</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">Connection</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">      </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="n">Class</span><span class="p">.</span><span class="na">forName</span><span class="p">(</span><span class="s">"org.postgresql.Driver"</span><span class="p">);</span>
+<span class="w">         </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DriverManager</span>
+<span class="w">            </span><span class="p">.</span><span class="na">getConnection</span><span class="p">(</span><span class="s">"jdbc:postgresql://localhost:5432/testdb"</span><span class="p">,</span>
+<span class="w">            </span><span class="s">"postgres"</span><span class="p">,</span><span class="w"> </span><span class="s">"123"</span><span class="p">);</span>
+<span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+<span class="w">         </span><span class="n">System</span><span class="p">.</span><span class="na">err</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="na">getClass</span><span class="p">().</span><span class="na">getName</span><span class="p">()</span><span class="o">+</span><span class="s">": "</span><span class="o">+</span><span class="n">e</span><span class="p">.</span><span class="na">getMessage</span><span class="p">());</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">      </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"Opened database successfully"</span><span class="p">);</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<ul>
+<li>注意公有类的类名和文件名一致</li>
+<li>尝试编译</li>
+</ul>
+<h3 id="_5">编译运行</h3>
+<ul>
+<li>编译没有遇到问题</li>
+<li>但是运行遇到了问题</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20211120-1637412762597.png" /></p>
+<ul>
+<li>首先的问题就是找不到驱动</li>
+<li>提示需要一个postgresql-jdbc驱动</li>
+<li>什么是驱动呢？</li>
+</ul>
+<h3 id="_6">驱动</h3>
+<ul>
+<li>driver驾驶员</li>
+<li>最早来自于驾驶马车</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220521-1653122800305.png" /></p>
+<h3 id="_7">蒸汽机车</h3>
+<ul>
+<li>后来工业革命后也指蒸汽机车</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220501-1651358573525.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20220501-1651357981528.png" /></p>
+<ul>
+<li>仪表盘的来历<ul>
+<li>仪表盘的作用是监控引擎运行情况</li>
+</ul>
+</li>
+<li>driver在电脑系统中也指驱动<ul>
+<li>硬件的驱动程序</li>
+<li>文件系统驱动器</li>
+<li>主动控制引擎的人</li>
+</ul>
+</li>
+</ul>
+<h3 id="_8">下载驱动</h3>
+<p><img alt="图片描述" src="images/uid1190679-20210912-1631441201792.png" /></p>
+<ul>
+<li>下载postgresql jdbc 4.2 driver</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">sudo</span><span class="w"> </span><span class="n">wget</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">jdbc</span><span class="o">.</span><span class="n">postgresql</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">download</span><span class="o">/</span><span class="n">postgresql</span><span class="o">-</span><span class="mf">42.3</span><span class="o">.</span><span class="mf">1.j</span><span class="n">ar</span>
+</code></pre></div>
+
+<ul>
+<li>但是各位同学可能没有外网</li>
+<li>可以自己去网址下载下载<ul>
+<li>再传到~/Code</li>
+<li>然后移动到/tomcat/lib</li>
+<li>一般这里放置liberies 类库</li>
+</ul>
+</li>
+<li>我把他传到了github和gitee<ul>
+<li>git clone http://github.com/overmind1980/tomcat10.git</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220717-1658023187522.png" /></p>
+<h3 id="_9">设置路径</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220717-1658023548402.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20220717-1658023558728.png" /></p>
+<h3 id="_10">再次尝试</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220425-1650890063904.png" /></p>
+<ul>
+<li>再次尝试运行</li>
+<li>原来可能是postgres没开</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220717-1658020472789.png" /></p>
+<h3 id="_11">再三运行</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220717-1658023733967.png" /></p>
+<ul>
+<li>编译可以通过<ul>
+<li>现在的问题是password authentication</li>
+</ul>
+</li>
+<li>密码验证失败</li>
+<li>先去源程序看看</li>
+</ul>
+<h3 id="_12">源程序</h3>
+<p><img alt="图片描述" src="images/uid1190679-20210912-1631444184189.png" /></p>
+<ul>
+<li>用户名是postgres应该没有问题</li>
+<li>但是密码应该是什么？</li>
+</ul>
+<h3 id="_13">搜索</h3>
+<p><img alt="图片描述" src="images/uid1190679-20210912-1631444338028.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20210912-1631444427459.png" /></p>
+<ul>
+<li>注意这两个密码<ul>
+<li>一个是数据库中的的postgres账号的密码<ul>
+<li>这个用来在默认端口5432连接数据库</li>
+<li>是数据库中postgres这个用户对应的密码</li>
+<li>是java程序通过驱动控制数据库的密码</li>
+</ul>
+</li>
+<li>另一个是linux系统中的postgres用户的密码<ul>
+<li>这个系统中的postgres用ssh来登录时用的密码</li>
+<li>是系统用户的密码</li>
+<li>可以在系统中用来登录postgres账号</li>
+</ul>
+</li>
+<li>我们在java中用的是数据库中postgres用户的密码</li>
+</ul>
+</li>
+<li>这个如何修改呢？</li>
+</ul>
+<h3 id="_14">如何修改</h3>
+<p><img alt="图片描述" src="images/uid1190679-20210912-1631444544416.png" /></p>
+<ul>
+<li>这是修改系统中postgres账号密码的方法</li>
+<li>我们去修改数据库中postgres的密码</li>
+</ul>
+<h3 id="_15">查询帮助</h3>
+<ul>
+<li><code>:h ALTER ROLE</code></li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220721-1658366064210.png" /></p>
+<h3 id="postgres_1">修改数据库中postgres的密码</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220721-1658366367876.png" /></p>
+<ul>
+<li>我们把密码设置为oeasy@pg</li>
+<li>但是这个密码可以作为系统postgres用户的登录密码么？</li>
+<li>我们去试试</li>
+</ul>
+<h3 id="_16">尝试登录</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220721-1658367564965.png" /></p>
+<ul>
+<li>这个账号是不能用来登录系统的postgres账号的</li>
+<li>那如果我们想要登录系统的postgres账号应该怎么办？</li>
+</ul>
+<h3 id="postgres_2">修改系统中postgres的密码</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220721-1658367868379.png" /></p>
+<ul>
+<li>看起来系统的密码是在系统里面可以登陆的<ul>
+<li>废话！😄</li>
+</ul>
+</li>
+<li>postgres数据库中的postgres用户有什么作用呢？</li>
+</ul>
+<h3 id="_17">修改程序</h3>
+<ul>
+<li>然后去修改PostgresJdbc.java源程序</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20211120-1637414533817.png" /></p>
+<h3 id="_18">再次编译运行</h3>
+<p><img alt="图片描述" src="images/uid1190679-20211120-1637414580434.png" /></p>
+<ul>
+<li>这次密码认证过去了</li>
+<li>但是卡在了数据库的名称</li>
+<li>现在这个是testdb</li>
+<li>我们的database是oeasy</li>
+<li>修改源码</li>
+</ul>
+<h3 id="_19">修改</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220717-1658017046429.png" /></p>
+<ul>
+<li>编译运行</li>
+</ul>
+<h3 id="_20">运行结果</h3>
+<p><img alt="图片描述" src="images/uid1190679-20211120-1637414717663.png" /></p>
+<ul>
+<li>终于成功啦！！！！！！</li>
+<li>我想用一些快乐的词汇</li>
+<li>但是我忍住了</li>
+<li>我哭了</li>
+<li>现在还不是庆祝的时候</li>
+<li>我想把urls表里面的数据查询出来</li>
+</ul>
+<h3 id="_21">搜索</h3>
+<ul>
+<li>搜索能力是很重要</li>
+<li>真正有主见的人</li>
+<li>都是会搜索的</li>
+<li>相信世界也相信自己</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210912-1631445170233.png" /></p>
+<ul>
+<li>感觉自己充满了能量</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210912-1631445186971.png" /></p>
+<ul>
+<li>应该就是这样子可以查询数据库 </li>
+<li>把3行到46行拿到我们的PostgresJdbc.java中</li>
+</ul>
+<h3 id="_22">修改</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.Connection</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.DriverManager</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.ResultSet</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.Statement</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">PostgresJdbc</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">args</span><span class="o">[]</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Connection</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">        </span><span class="n">Statement</span><span class="w"> </span><span class="n">stmt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Class</span><span class="p">.</span><span class="na">forName</span><span class="p">(</span><span class="s">"org.postgresql.Driver"</span><span class="p">);</span>
+<span class="w">            </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DriverManager</span><span class="p">.</span><span class="na">getConnection</span><span class="p">(</span>
+<span class="w">                    </span><span class="s">"jdbc:postgresql://localhost:5432/oeasy"</span><span class="p">,</span><span class="w"> </span><span class="s">"postgres"</span><span class="p">,</span>
+<span class="w">                    </span><span class="s">"oeasy@pq"</span><span class="p">);</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"Pq Connection success!"</span><span class="p">);</span>
+<span class="w">            </span><span class="n">stmt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="p">.</span><span class="na">createStatement</span><span class="p">();</span>
+<span class="w">            </span><span class="n">ResultSet</span><span class="w"> </span><span class="n">rs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stmt</span><span class="p">.</span><span class="na">executeQuery</span><span class="p">(</span><span class="s">"select * from urls"</span><span class="p">);</span>
+<span class="w">            </span><span class="k">while</span><span class="p">(</span><span class="n">rs</span><span class="p">.</span><span class="na">next</span><span class="p">()){</span>
+<span class="w">                </span><span class="n">String</span><span class="w"> </span><span class="n">topic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rs</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">"topic"</span><span class="p">);</span>
+<span class="w">                </span><span class="n">String</span><span class="w"> </span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rs</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">"url"</span><span class="p">);</span>
+<span class="w">                </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="n">topic</span><span class="o">+</span><span class="s">":"</span><span class="o">+</span><span class="n">url</span><span class="o">+</span><span class="s">"\n"</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="n">rs</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+<span class="w">            </span><span class="n">stmt</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+<span class="w">            </span><span class="n">c</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">err</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="na">getClass</span><span class="p">().</span><span class="na">getName</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">": "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">getMessage</span><span class="p">());</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"Pq select query success!"</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p><img alt="图片描述" src="images/uid1190679-20220717-1658024316982.png" /></p>
+<ul>
+<li>真的可以通过jdbc链接到数据库</li>
+<li>然后得到数据</li>
+<li>我们先去总结一下</li>
+</ul>
+<h3 id="_23">总结 🤨</h3>
+<ul>
+<li>这次我们编辑 Postgres.java 成功访问了 pq数据库<ul>
+<li>首先要导入类库</li>
+<li>然后要开启数据库</li>
+<li>并了解数据库的用户名密码</li>
+<li>要用正确的连接、库、表、字段</li>
+<li>还要使用正确的sql语句</li>
+</ul>
+</li>
+<li>真的只要照猫画虎改代码就可以连接数据库了</li>
+<li>这种方式是通过jdbc方式进行的</li>
+<li>什么是jdbc呢？🤔</li>
+<li>下次再说！👋</li>
+</ul>
+    </div>
+</body>
+</html>

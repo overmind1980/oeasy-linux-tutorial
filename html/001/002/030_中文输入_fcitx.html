@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：本章回顾，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解中文输入 fcitx。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖运行 sogou，在终端里面就可以输入中文了，让牛作为 dragon 说"我会中文"。等内容，搜索oeasy即可学习。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 中文输入, fcitx, 本章回顾">
+    <meta property="og:title" content="oeasy Linux系统教程：本章回顾，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解中文输入 fcitx。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖运行 sogou，在终端里面就可以输入中文了，让牛作为 dragon 说"我会中文"。等内容，搜索oeasy即可学习。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="_1">本章回顾</h1>
+<h2 id="_2">回忆 😌</h2>
+<ul>
+<li>管道的符号是|</li>
+<li>管道的作用是连接</li>
+<li>原来应该输出到屏幕内容</li>
+<li>通过管道流到了另一个命令做为参数</li>
+<li>是否可以让 cow 说出一些中文呢？</li>
+</ul>
+<h3 id="fcitx">下载安装小企鹅输入法 ✏️fcitx</h3>
+<ul>
+<li>系统已经安装中文输入法了</li>
+<li>退一步说</li>
+<li>如果没有安装</li>
+<li>应该如何安装呢？</li>
+</ul>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>fcitx
+</code></pre></div>
+
+<ul>
+<li>fcitx[ˈfaɪtɪks]</li>
+<li>fcitx是 (Free Chinese Input Toy for X) 的英文缩写</li>
+<li>中文名为小企鹅输入法</li>
+<li>是一个以 GPL 方式发布的输入法框架</li>
+<li>编写它的目是为桌面环境提供一个灵活的输入方案</li>
+<li>彻底解决在GNU/Linux下没有一个好的中文输入法的问题</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210324-1616586617043.png" /></p>
+<h3 id="_3">下载搜狗输入法 🐶</h3>
+<div class="highlight"><pre><span></span><code>#直接安装
+sudo apt install sogoupinyin
+</code></pre></div>
+
+<p><img alt="图片描述" src="images/uid1190679-20210324-1616587086455.png" /></p>
+<h3 id="_4">网页安装</h3>
+<ul>
+<li>网页访问 <a href="https://pinyin.sogou.com/linux/">搜狗官网</a></li>
+<li>下载之后安装软件包</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1">#安装 debian package，XXXX指的是下载的名字。</span>
+sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span>sogoupinyin_XXXX_amd64.deb
+<span class="c1">#如果存在冲突，进行修复或删除</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>-f<span class="w"> </span>install<span class="w"> </span>sogoupinyin
+</code></pre></div>
+
+<h2 id="_5">配置输入法 ⚙️</h2>
+<p><img alt="Image text" src="images/fcitx.jpg" /></p>
+<p>运行 sogou，在终端里面就可以输入中文了，让牛作为 dragon 说"我会中文"。</p>
+<p><img alt="Image text" src="images/dragon.png" /></p>
+<h3 id="_6">分析牛 🐂 说</h3>
+<ul>
+<li>牛说在哪？</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1">#找到牛说的位置</span>
+whereis<span class="w"> </span>cowsay
+<span class="c1">#进入牛说的素材文件夹位置</span>
+<span class="nb">cd</span><span class="w"> </span>/usr/share/cowsay/cows
+<span class="c1">#查看图形素材文件</span>
+cat<span class="w"> </span>meow.cow
+</code></pre></div>
+
+<ul>
+<li>/usr/games/cowsay（命令的位置）</li>
+<li>/usr/share/cowsay/cow（素材的位置）</li>
+<li>动物的形象的文件都在 .cow 文件中，比如 meow.cow</li>
+</ul>
+<p><img alt="Image text" src="images/cat.png" /></p>
+<h3 id="_7">总结 🤨</h3>
+<ul>
+<li>这次输出了中文</li>
+<li>并且找到了 cowsay 的图像素材的位置 💡</li>
+<li>我们能否把现实世界的 jpg 图片</li>
+<li>变成ascii形式的cow文件呢？🤔</li>
+<li>下次再说！👋</li>
+</ul>
+    </div>
+</body>
+</html>

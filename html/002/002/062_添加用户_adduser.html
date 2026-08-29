@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：阴历lunar，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解添加用户 adduser。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖| 用户uid |	约定含义 | |  ----  | ----  | | 0	超级管理员 | 最高权限 |  | 1~200	系统用户 | 用来运行系统自带的进程，默认已创建 |  | 2...">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 添加用户, adduser, 阴历lunar">
+    <meta property="og:title" content="oeasy Linux系统教程：阴历lunar，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解添加用户 adduser。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖| 用户uid |	约定含义 | |  ----  | ----  | | 0	超级管理员 | 最高权限 |  | 1~200	系统用户 | 用来运行系统自带的进程，默认已创建 |  | 2...">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="lunar">阴历(lunar)</h1>
+<h2 id="_1">回忆</h2>
+<ul>
+<li>上次我们研究了一个新的命令id</li>
+<li>可以显示出用户id的一些信息</li>
+<li>我们目前的用户id就是shiyanlou</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220917-1663418898698.png" /></p>
+<ul>
+<li>/etc/passwd中有更详细的用户信息</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220917-1663422514779.jpg" />
+- 这些信息被:分割为7列
+- 我可以自己创造一个用户id吗?</p>
+<h3 id="_2">查询</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220921-1663745062373.png" /></p>
+<ul>
+<li>好像有两个命令<ul>
+<li>adduser</li>
+<li>useradd</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220921-1663745088679.png" /></p>
+<ul>
+<li>这如何取舍？</li>
+</ul>
+<h3 id="_3">查看文件</h3>
+<ul>
+<li>man adduser</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220921-1663746584697.jpg" /></p>
+<ul>
+<li>adduser 和 addgroup是 友好的前端</li>
+<li>他们调用的是useradd、groupadd、usermod</li>
+<li>useradd是什么文件呢？</li>
+</ul>
+<h3 id="useradd">useradd</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220921-1663749987720.png" /></p>
+<ul>
+<li>adduser来自于 passwd 这个包</li>
+<li>这个包里面都有什么呢？</li>
+</ul>
+<h3 id="_4">先改源</h3>
+<div class="highlight"><pre><span></span><code>sudo vi /etc/apt/sources.list
+</code></pre></div>
+
+<ul>
+<li>完成批量替换<ul>
+<li>可以下载源头</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nf">%s</span><span class="o">/</span><span class="err">#</span><span class="w"> </span><span class="n">deb</span><span class="o">-</span><span class="n">src</span><span class="w"> </span><span class="o">/</span><span class="n">deb</span><span class="o">-</span><span class="n">src</span><span class="o">/</span>
+</code></pre></div>
+
+<p><img alt="图片描述" src="images/uid1190679-20240805-1722828893855.png" /></p>
+<h3 id="_5">再更新源</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220921-1663750124890.png" /></p>
+<h3 id="_6">下载源代码</h3>
+<div class="highlight"><pre><span></span><code>sudo apt source passwd
+</code></pre></div>
+
+<ul>
+<li>下载源码之后可以看到</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220921-1663750231551.png" /></p>
+<ul>
+<li>确实可以下载到adduser的源代码</li>
+<li>打开看看</li>
+</ul>
+<h3 id="useraddc">useradd.c</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220921-1663750302153.png" /></p>
+<ul>
+<li>历经4代</li>
+<li>2000+行的c代码</li>
+<li>这就是开源的传承吗？</li>
+<li>useradd看起来是比较底层的</li>
+<li>那么adduser应该更容易使用</li>
+<li>不过adduser是怎么调用useradd的呢？</li>
+</ul>
+<h3 id="_7">观察</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220921-1663746752877.png" /></p>
+<ul>
+<li>定位adduser</li>
+<li>然后打开</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220921-1663746771209.png" /></p>
+<ul>
+<li>原来使用的是perl脚本调用的useradd</li>
+<li>具体来说怎么用呢？</li>
+</ul>
+<h3 id="_8">查看帮助</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220921-1663746905394.png" /></p>
+<ul>
+<li>这就去新建用户oeasy</li>
+</ul>
+<h3 id="_9">新建用户</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220921-1663747243180.png" /></p>
+<ul>
+<li>
+<p>adduser</p>
+<ul>
+<li>直接建立了用户</li>
+<li>用户的主目录</li>
+<li>还用交互的方式添加了信息</li>
+</ul>
+</li>
+<li>
+<p>useradd </p>
+<ul>
+<li>作为被调用的后端程序</li>
+<li>没有这么友好的界面</li>
+</ul>
+</li>
+<li>那可以用新用户登录吗？</li>
+</ul>
+<h3 id="_10">登录</h3>
+<div class="highlight"><pre><span></span><code>su oeasy
+</code></pre></div>
+
+<ul>
+<li>用oeasy用户名进行登录</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220921-1663747888849.png" /></p>
+<ul>
+<li>真的登录上去了！！!</li>
+<li>可以查看oeasy的具体信息吗？</li>
+</ul>
+<h3 id="_11">查看信息</h3>
+<div class="highlight"><pre><span></span><code>cat /etc/passwd
+</code></pre></div>
+
+<ul>
+<li>查看结果</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220921-1663748301933.jpg" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20220921-1663748313277.png" /></p>
+<ul>
+<li>为什么我们的uid是100呢？</li>
+</ul>
+<h3 id="uid">uid 范围</h3>
+<ul>
+<li>uid是有范围的</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>用户uid</th>
+<th>约定含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0 超级管理员</td>
+<td>最高权限</td>
+</tr>
+<tr>
+<td>1~200 系统用户</td>
+<td>用来运行系统自带的进程，默认已创建</td>
+</tr>
+<tr>
+<td>201~999   系统用户</td>
+<td>用来运行用户安装的程序，这类用户无需登录系统</td>
+</tr>
+<tr>
+<td>1000以上    普通用户</td>
+<td>正常可以登陆系统的用户，权限比较小，执行的任务有限</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>普通用户是从1000开始的<ul>
+<li>那么新建的这个oeasy就从第一个可用的uid(1000)开始</li>
+<li>除非使用了--uid 参数</li>
+</ul>
+</li>
+<li>那我可以新建个系统用户么？</li>
+</ul>
+<h3 id="_12">添加系统用户</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220921-1663748987465.jpg" /></p>
+<ul>
+<li>已经用过的用户名oeasy不能成为系统用户名</li>
+<li>怎么办呢？</li>
+</ul>
+<h3 id="_13">删除用户</h3>
+<p><img alt="图片描述" src="images/uid1190679-20221002-1664715898293.png" /></p>
+<ul>
+<li>删除了用户就可以重新新建用户了</li>
+<li>也可以用新用户名o2z可以成为系统用户名</li>
+<li>从可以用的uid中找到最小的121给o2z作为id</li>
+<li>系统用户的添加没有太多的交互</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220921-1663749080679.png" /></p>
+<ul>
+<li>这个不能登陆这个怎么办？</li>
+<li>先去总结一下</li>
+</ul>
+<h3 id="_14">总结</h3>
+<ul>
+<li>有两个命令可以添加用户<ul>
+<li>adduser</li>
+<li>useradd</li>
+</ul>
+</li>
+<li>useradd<ul>
+<li>很底层</li>
+<li>可以找到源代码</li>
+</ul>
+</li>
+<li>adduser<ul>
+<li>更前端一些</li>
+<li>更交互一些</li>
+<li>可以直接新建用户</li>
+</ul>
+</li>
+<li>但是新建的用户不能登录这个可怎么办?🤔</li>
+<li>下次再说👋</li>
+</ul>
+    </div>
+</body>
+</html>

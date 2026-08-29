@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：查看发行版 distro，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解趣味拓展 什么是发行版 distro debian ubuntu canonical。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖查看原图https://upload.wikimedia.org/wikipedia/commons/1/1b/Linux_Dis...">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 趣味拓展, 什么是发行版, distro, debian, ubuntu, 查看发行版">
+    <meta property="og:title" content="oeasy Linux系统教程：查看发行版 distro，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解趣味拓展 什么是发行版 distro debian ubuntu canonical。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖查看原图https://upload.wikimedia.org/wikipedia/commons/1/1b/Linux_Dis...">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="distro">查看发行版 distro</h1>
+<h2 id="_1">回忆上次内容 😌</h2>
+<ul>
+<li>计算机本身的特性决定</li>
+<li>计算机保存传递的是电子</li>
+<li>而不是原子</li>
+<li>这就使得存储和分发的成本几乎为零</li>
+<li>在这样的物理基础上<ul>
+<li>出现了自由软件运动</li>
+<li>从rms提出的free software 开始</li>
+<li>到gnu研发的各种软件</li>
+</ul>
+</li>
+<li>自由软件运动之后出现了开源运动<ul>
+<li>提倡把源代码开放</li>
+<li>也被大量的商业公司所跟随</li>
+</ul>
+</li>
+<li>github可以在全世界范围内进行协作</li>
+<li>linux是5000个极客一起协作出来的内核</li>
+<li>除了内核之外</li>
+<li>程序要运行还需要一个壳子</li>
+<li>具体是什么呢？🤔</li>
+</ul>
+<h3 id="_2">查看发行版</h3>
+<div class="highlight"><pre><span></span><code>uname<span class="w"> </span>--help
+</code></pre></div>
+
+<ul>
+<li>uname -a <ul>
+<li>可以得到全部信息</li>
+<li>还知道有 ubuntu 这个发行版(distro)</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210909-1631155355031.png" /></p>
+<ul>
+<li>ubuntu 就是一个壳子(发行版)<ul>
+<li>那么，什么是发行版呢？</li>
+</ul>
+</li>
+</ul>
+<h2 id="_3">发行版</h2>
+<ul>
+<li>只靠 linux 内核<ul>
+<li>我们无法做任何事情</li>
+</ul>
+</li>
+<li>只有内核和各种应用程序在一起<ul>
+<li>我们才能使用</li>
+</ul>
+</li>
+<li>发行版就是distro<ul>
+<li>distro 的英文原文是 distribution</li>
+<li>是内核和应用程序的集合</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220831-1661934313987.png" /></p>
+<ul>
+<li>一个典型的 Linux 发行版包括<ul>
+<li>Linux 内核</li>
+<li>一些 GNU 程序库和工具</li>
+<li>命令行 shell</li>
+<li>也会包含图形界面。</li>
+</ul>
+</li>
+</ul>
+<h3 id="_4">都有哪些发行版呢？🤔</h3>
+<ul>
+<li>发行版非常多<ul>
+<li>你可以去 <a href="https://distrowatch.com/">distrowatch</a></li>
+<li>去看看各种各样的发行版的流行趋势！</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220831-1661934219945.png" /></p>
+<ul>
+<li>也可以看到<ul>
+<li>当前各种发行版的排名</li>
+<li>搜索感兴趣的发行版！🤪</li>
+</ul>
+</li>
+</ul>
+<h3 id="distro-hop">Distro hop</h3>
+<ul>
+<li><strong>来做个 Distro hop</strong></li>
+<li>Distro hop 是指折腾 Distro 来玩的人</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220831-1661934491500.png" /></p>
+<ul>
+<li>您可以直接在 <a href="https://distrotest.net/">DestroTest</a> <ul>
+<li>浏览器里开一个虚拟机</li>
+<li>直接跑各种各样的发行版</li>
+</ul>
+</li>
+</ul>
+<h3 id="_5">排名</h3>
+<p><img alt="Image text" src="images/distro_rank.png" /></p>
+<ul>
+<li>我应该如何选择自己的发行版呢？🤔</li>
+</ul>
+<h3 id="_6">选择</h3>
+<ul>
+<li>我们可以去内核官网<ul>
+<li>看看 <a href="http://mirrors.kernel.org/">linux 内核对于各种发行版的吐槽</a></li>
+<li>内核对于发行版的吐槽</li>
+<li>官方吐槽最为致命</li>
+</ul>
+</li>
+</ul>
+<p><img alt="Image text" src="images/tuxrardar.jpg" /></p>
+<ul>
+<li>不同的发行版有不同的技能：<ul>
+<li>debian, 适合系统管理和运维</li>
+<li>ubuntu 安装简单，界面友好，社区活跃。</li>
+<li>kali 就适合做网络安全方面的操作</li>
+<li>deepin 国产的深度发行版，界面做的非常好看</li>
+<li>centos 服务器</li>
+<li>gentoo 深入底层，透明</li>
+</ul>
+</li>
+</ul>
+<h3 id="_7">辅助</h3>
+<ul>
+<li>
+<p>这里还有个网站能根据您回答问题的情况</p>
+<ul>
+<li>帮您选个 distro 🤪</li>
+<li><a href="https://distrochooser.de/zh-cn/">distrochooser</a></li>
+</ul>
+</li>
+<li>
+<p>发行版这么多</p>
+<ul>
+<li>这么乱</li>
+<li>没有头绪啊 😭</li>
+</ul>
+</li>
+<li>没关系<ul>
+<li>不要着急我帮您来梳理一下</li>
+</ul>
+</li>
+<li>🧐</li>
+</ul>
+<h3 id="linux">Linux 发行版三大家族</h3>
+<ul>
+<li>Linux 发行版虽然很多，但是大体上是三大家族：<ul>
+<li>Debian 家族</li>
+<li>Rhel 家族</li>
+<li>Suse 家族</li>
+</ul>
+</li>
+</ul>
+<p><img alt="Image text" src="images/distro_family.jpg" /></p>
+<p>我们分别来说一下：</p>
+<h2 id="_8">发行版家族关系大梳理 🧐</h2>
+<p><img alt="Image text" src="images/GNU_Linux_Distributions_Timeline.jpg" /></p>
+<p><a href="images/Linux_Distribution_Timeline.svg">查看原图</a></p>
+<h3 id="_9">详细发展过程</h3>
+<ul>
+<li>这图里面内容太多了<ul>
+<li>我们再梳理一下</li>
+<li>那么应该从哪个发行版衍生呢？</li>
+</ul>
+</li>
+<li>开门见山</li>
+<li>debian🧐</li>
+</ul>
+<h2 id="debian">debian家族</h2>
+<ul>
+<li><strong>debian 家族</strong> <strong>debian['dɛbɪən]</strong><ul>
+<li><a href="https://www.debian.org/">debian</a> 是免费发行版</li>
+<li>1993.12 月第一次出现</li>
+</ul>
+</li>
+<li>Ian Murdock 依据<ul>
+<li>他女朋友的名字 Debra Lynn </li>
+<li>他自己的名字 Ian Murdock</li>
+<li>最终叫做“Debian”</li>
+</ul>
+</li>
+<li>各版本代号<ul>
+<li>来自于玩具总动员中的角色</li>
+</ul>
+</li>
+<li>
+<p>Debian 是一个独立的组织</p>
+<ul>
+<li>组织着 5 万个以上的软件包</li>
+<li>320 百万行代码</li>
+<li>各种项目的负责人是社区选出来的</li>
+</ul>
+</li>
+<li>
+<p>支持的 cpu 指令集架构也多</p>
+<ul>
+<li>比如中科院华为阿里押宝的 risc-v</li>
+<li>比如龙芯兼容的 mips</li>
+</ul>
+</li>
+<li>
+<p>下图是他下载 cd 的截图：</p>
+</li>
+</ul>
+<p><img alt="Image text" src="images/debian_architecture.png" /></p>
+<ul>
+<li>debian家族成员很多</li>
+<li>比如Ubuntu😊</li>
+</ul>
+<h3 id="ubuntu">Ubuntu</h3>
+<ul>
+<li>其名称来自非洲 🌍 南部祖鲁语或豪萨语的“ubuntu"一词<ul>
+<li>意思是“人性”“我的存在是因为大家的存在"</li>
+<li>是非洲传统的一种价值观。</li>
+<li>发作“oo-boon-too”的音</li>
+<li>如果你喜欢添加一些非洲撒哈拉的味道</li>
+<li>你可以在第一个"u"後面带些嗡嗡声<ul>
+<li>oom-boon-too😮</li>
+<li>比较上头  </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220831-1661936414888.png" /></p>
+<ul>
+<li>自 2004 年创建 Ubuntu 以来<ul>
+<li>Mark Shuttleworth 让开放自由的开源软件被大众熟知</li>
+<li>Canonical 公司运营这个ubuntu</li>
+</ul>
+</li>
+<li>Canonical什么意思呢？</li>
+</ul>
+<h3 id="_10">词源</h3>
+<ul>
+<li>源于希腊语“κανὼν”(kānōn)<ul>
+<li>意为“芦苇”、“杆”、“竿”</li>
+<li>引申出“尺度”、“标准”、“规范”等含义</li>
+</ul>
+</li>
+<li>在古希腊时期<ul>
+<li>人们用芦苇杆等作为测量的标准工具</li>
+<li>进入拉丁语后<ul>
+<li>依然保留“规则”、“标准”、“教规”等意思</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221231-1672458976117.png" /></p>
+<h3 id="_11">手杖</h3>
+<ul>
+<li>reed sea<ul>
+<li>芦苇海</li>
+<li>《旧约》中摩西分开还睡的地方</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221231-1672481725724.png" /></p>
+<ul>
+<li>
+<p>cane </p>
+<ul>
+<li>植物的茎</li>
+<li>芦苇</li>
+</ul>
+</li>
+<li>
+<p>cane </p>
+<ul>
+<li>文明棍</li>
+<li>法杖</li>
+<li>权杖<ul>
+<li>度量的标准<ul>
+<li>两庹一丈不是很精确</li>
+<li>得有统一标准</li>
+<li>能服众</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="_12">老丈人</h3>
+<ul>
+<li>cunning <ul>
+<li>灵巧的</li>
+<li>狡猾的</li>
+<li>有知识的</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221231-1672476933703.png" /></p>
+<ul>
+<li>can<ul>
+<li>有能力丈量土地的人<ul>
+<li>老丈人</li>
+<li>丈夫</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="_13">演变</h3>
+<ul>
+<li>gun<ul>
+<li>枪也是棍子形状的</li>
+<li>从长枪发展而来</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20250206-1738836690020.png" /> </p>
+<ul>
+<li>candy<ul>
+<li>suger cane</li>
+<li>甜的植物的茎(甘蔗)</li>
+<li>糖果</li>
+</ul>
+</li>
+</ul>
+<h3 id="_14">芦苇中间是空的</h3>
+<ul>
+<li>can <ul>
+<li>罐子</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221231-1672458870597.jpg" /></p>
+<ul>
+<li>canoe<ul>
+<li>中空的小船</li>
+</ul>
+</li>
+</ul>
+<h3 id="_15">加农炮</h3>
+<ul>
+<li>cannon<ul>
+<li>加农炮</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221231-1672481021857.png" /></p>
+<ul>
+<li>canel<ul>
+<li>输水管道</li>
+</ul>
+</li>
+<li>channel<ul>
+<li>自然而形成的输水管道</li>
+<li>海峡</li>
+<li>渠道</li>
+<li>频率的渠道</li>
+</ul>
+</li>
+<li>canyon<ul>
+<li>ˈkænjən</li>
+<li>峡谷</li>
+</ul>
+</li>
+</ul>
+<h3 id="_16">控制器</h3>
+<ul>
+<li>织布机控制器来自于芦苇</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221231-1672459662444.png" /></p>
+<ul>
+<li>κανὼν (kānōn)<ul>
+<li>切换奇偶经线上的芦苇(Reed)</li>
+<li>通过这个控制经线</li>
+</ul>
+</li>
+</ul>
+<h3 id="_17">偶</h3>
+<p><img alt="图片描述" src="images/uid1190679-20221231-1672490696536.png" /></p>
+<ul>
+<li>even 始终是 <ul>
+<li>(平)的</li>
+<li>偶数的</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221231-1672461645497.png" /></p>
+<ul>
+<li>成对的<ul>
+<li>对称的</li>
+<li>稳稳当当的</li>
+</ul>
+</li>
+</ul>
+<h3 id="_18">奇</h3>
+<ul>
+<li>不稳当的<ul>
+<li>变化的</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221231-1672490985283.png" /></p>
+<ul>
+<li>不成对的<ul>
+<li>眼睛、耳朵、鼻孔不成对</li>
+<li>有问题</li>
+</ul>
+</li>
+</ul>
+<h3 id="_19">具体到织布机</h3>
+<ul>
+<li>odd 一会儿 高于 even</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221231-1672491268250.png" /></p>
+<ul>
+<li>odd 一会儿 低于 even</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221231-1672491284624.png" /></p>
+<ul>
+<li>
+<p>odd</p>
+<ul>
+<li>不平的</li>
+<li>相对even来说不正常的</li>
+</ul>
+</li>
+<li>
+<p>πηνίον </p>
+<ul>
+<li>纬线穿梭子</li>
+</ul>
+</li>
+</ul>
+<h3 id="canon">经典canon</h3>
+<ul>
+<li>特指<ul>
+<li>圣经</li>
+</ul>
+</li>
+<li>督教圣经<ul>
+<li>正典共有66卷<ul>
+<li>旧约39卷</li>
+<li>新约27卷</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221231-1672457679173.png" /></p>
+<ul>
+<li>也指<ul>
+<li>教会的法令，教会对于圣经的解释</li>
+<li>神职人员、教士</li>
+</ul>
+</li>
+</ul>
+<h3 id="_20">法律、规范、原则</h3>
+<ul>
+<li>law、norm、principle</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221231-1672482399901.png" /></p>
+<ul>
+<li>音乐中的卡农<h2 id="-chase">- 原本叫做chase</h2>
+<ul>
+<li>后来因为后面声部的规范性</li>
+<li>被叫做canon</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20250206-1738837620972.png" /> </p>
+<h3 id="canonical">canonical</h3>
+<ul>
+<li>canonical 来自于 canon<ul>
+<li>典型的; </li>
+<li>被收入真经篇目的; </li>
+<li>经典的; </li>
+<li>按照基督教会教规的; </li>
+<li>(数学表达式)最简洁的;</li>
+<li>(布道时应穿的)法衣;</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221231-1672482552616.png" /></p>
+<ul>
+<li>公司是要传道?</li>
+</ul>
+<h3 id="_21">总结</h3>
+<ul>
+<li>我们使用<ul>
+<li>uname -a</li>
+<li>可以查看系统详细信息</li>
+<li>除了内核之外</li>
+<li>还有发行版</li>
+</ul>
+</li>
+<li>研究了linux发行版<ul>
+<li>distro</li>
+</ul>
+</li>
+<li>研究了Debian家族<ul>
+<li>以及ubuntu</li>
+</ul>
+</li>
+<li>ubuntu来自于canonical(经典)公司<ul>
+<li>这个公司怎么挣钱呢？🤔</li>
+</ul>
+</li>
+<li>下次再说👋🏻</li>
+</ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：配置tomcat结构，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解tomcat结构。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, tomcat结构, 配置tomcat结构">
+    <meta property="og:title" content="oeasy Linux系统教程：配置tomcat结构，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解tomcat结构。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="tomcat">配置tomcat结构</h1>
+<h2 id="_1">回顾</h2>
+<ul>
+<li>上次了解了应用服务器<ul>
+<li>application server</li>
+<li>他可以动态处理各种请求</li>
+</ul>
+</li>
+<li>我们在众多java应用服务器中选择了tomcat</li>
+<li>了解了tomcat的历史</li>
+<li>并且学习了下载tomcat的方法</li>
+<li>还有找到本地tomcat的方法</li>
+<li>这个东西能不能跑起来呢？🤔</li>
+</ul>
+<h3 id="tomcat_1">启动 tomcat</h3>
+<ul>
+<li>首先要先下载并解压</li>
+</ul>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/overmind1980/tomcat10.git
+<span class="nb">cd</span><span class="w"> </span>tomcat10
+tar<span class="w"> </span>-zxf<span class="w"> </span>apache-tomcat-10.0.12.tar.gz
+</code></pre></div>
+
+<ul>
+<li>如果github不行的话<ul>
+<li>把github换成gitee试试</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220716-1657934991571.png" /></p>
+<ul>
+<li>红框中的就是我们解压出来的tomcat文件夹</li>
+<li>现在把他移动到根下去</li>
+</ul>
+<h3 id="_2">移动到根下</h3>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>mv<span class="w"> </span>apache-tomcat-10.0.12<span class="w"> </span>/tomcat
+<span class="nb">cd</span><span class="w"> </span>/tomcat
+ls
+</code></pre></div>
+
+<p><img alt="图片描述" src="images/uid1190679-20220716-1657935087759.png" /></p>
+<ul>
+<li>试着访问一下</li>
+</ul>
+<h3 id="_3">访问</h3>
+<ul>
+<li>火狐打开http://localhost:8080/</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220426-1650949102717.png" /></p>
+<ul>
+<li>在浏览器中访问tomcat会如何呢？<ul>
+<li>貌似只是把程序拷贝过来了</li>
+<li>还没有进行启动<ul>
+<li>如何启动 tomcat服务器呢？</li>
+</ul>
+</li>
+<li>服务器默认是宕机的</li>
+</ul>
+</li>
+<li>那当然无法连上服务器</li>
+</ul>
+<h3 id="tomcat_2">启动tomcat服务器</h3>
+<ul>
+<li>进入tomcat主目录<ul>
+<li>这个目录的位置叫做tomcat的根下</li>
+<li>找到并进入bin</li>
+</ul>
+</li>
+<li>所有的可执行脚本都在里面<ul>
+<li>找到startup.sh</li>
+<li>用管理员身份运行</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220716-1657935238778.png" /></p>
+<ul>
+<li>如果有权限问题的话<ul>
+<li>可以用sudo来解决</li>
+</ul>
+</li>
+</ul>
+<h3 id="_4">浏览器验证</h3>
+<ul>
+<li>命令行运行</li>
+</ul>
+<div class="highlight"><pre><span></span><code>firefox<span class="w"> </span>http://localhost:8080/
+</code></pre></div>
+
+<p><img alt="图片描述" src="images/uid1190679-20220425-1650877123798.png" /></p>
+<ul>
+<li>服务器打开了就能访问了</li>
+<li>这个首页文件存在哪里呢？</li>
+</ul>
+<h3 id="app">新建app</h3>
+<ul>
+<li>首先回到tomcat的根下</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220716-1657935496158.png" /></p>
+<ul>
+<li>webapps里面都是app<ul>
+<li>web 网站</li>
+<li>app 应用程序</li>
+<li>webapp 就是网站应用程序 </li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220425-1650877250116.png" /></p>
+<ul>
+<li>都有什么app呢？<ul>
+<li>examples<ul>
+<li>例子</li>
+</ul>
+</li>
+<li>docs<ul>
+<li>文档</li>
+</ul>
+</li>
+<li>host-manager<ul>
+<li>主机管理</li>
+</ul>
+</li>
+<li>manager<ul>
+<li>管理</li>
+</ul>
+</li>
+<li>ROOT<ul>
+<li>这个应该是根目录</li>
+<li>也就是 http://localhost:8080/ 对应的目录</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>如何理解app呢？</li>
+</ul>
+<h3 id="apply">apply</h3>
+<ul>
+<li>application的词根是apply<ul>
+<li>意思是连接到一起</li>
+<li>最早指的是往身体上摸点东西</li>
+<li>抹点草药这种</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220511-1652234826700.png" /></p>
+<ul>
+<li>用什么东西干什么事情这种</li>
+<li>总而言之就是用起来</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220511-1652235145134.png" /></p>
+<ul>
+<li>那application是怎么来怎么去呢？</li>
+</ul>
+<h3 id="application">application</h3>
+<ul>
+<li>application的意思最早也是<ul>
+<li>连接起来</li>
+<li>用起来</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220511-1652234673667.png" /></p>
+<ul>
+<li>一个用起来的动作</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220511-1652235541184.png" /></p>
+<ul>
+<li>
+<p>1969年的时候特指</p>
+<ul>
+<li>"program designed to carry out specific tasks or solve specific problems within a larger system" is a shortening of application program (1969).</li>
+<li>用一个大型系统</li>
+<li>来完成特定任务或者解决特殊问题的</li>
+<li>程序设计</li>
+</ul>
+</li>
+<li>
+<p>在webapps下新建一个oeasy文件夹</p>
+<ul>
+<li>也就是在webapps(网页应用程序)中</li>
+<li>建了一个新应用</li>
+<li>叫做oeasy</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220425-1650877250116.png" /></p>
+<h3 id="_5">网页</h3>
+<p><img alt="图片描述" src="images/uid1190679-20210911-1631367201797.png" /></p>
+<ul>
+<li>进入这个oeasy文件夹</li>
+<li>尝试在这里新建一个静态网页</li>
+<li>并在浏览器中显示</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210911-1631367236934.png" /></p>
+<ul>
+<li>这个静态网页是可以看的</li>
+<li>但是如何建立动态页面呢？</li>
+<li>我们先总结一下</li>
+</ul>
+<h3 id="_6">总结 🤨</h3>
+<ul>
+<li>我们这次搭建了tomcat</li>
+<li>在tomcat根下找到bin<ul>
+<li>让tomcat运行了起来</li>
+</ul>
+</li>
+<li>回到tomcat根下找到webapps<ul>
+<li>web是网</li>
+<li>apps是应用程序</li>
+</ul>
+</li>
+<li>具体这个app应该如何搭建呢？🤔</li>
+<li>下次再说！👋</li>
+</ul>
+    </div>
+</body>
+</html>

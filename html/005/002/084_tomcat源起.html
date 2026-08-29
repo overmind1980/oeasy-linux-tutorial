@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：动态服务器 tomcat，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解tomcat源起。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, tomcat源起, 动态服务器, tomcat">
+    <meta property="og:title" content="oeasy Linux系统教程：动态服务器 tomcat，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解tomcat源起。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="tomcat">动态服务器 tomcat🐱</h1>
+<h2 id="_1">我们来回顾一下 😌</h2>
+<ul>
+<li>下载并运行了静态网页服务器程序apache</li>
+<li>在服务器的根目录新建了一个网页<ul>
+<li>并在浏览器里面查看</li>
+</ul>
+</li>
+<li>nginx、apache都是静态服务器</li>
+<li>有没有什么动态服务器呢？🤔</li>
+<li>什么是动态服务器呢？</li>
+</ul>
+<h3 id="_2">动态</h3>
+<ul>
+<li>用户可以留言<ul>
+<li>可以传图</li>
+<li>可以传视频的</li>
+</ul>
+</li>
+<li>比如<ul>
+<li>weibo.com</li>
+<li>百度贴吧</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220714-1657807934515.png" /></p>
+<h3 id="_3">选型</h3>
+<ul>
+<li>我们现在要找到一个动态的服务器</li>
+<li>也叫做应用服务器Application Server</li>
+<li>都有什么样的服务器呢？</li>
+<li>https://www.g2.com/categories/application-server</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210911-1631358818539.png" /></p>
+<h3 id="_4">趋势研究</h3>
+<p><img alt="图片描述" src="images/uid1190679-20210911-1631358968363.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20210911-1631358994035.png" /></p>
+<ul>
+<li>百度指数和谷歌趋势都告诉我们tomcat搜索量排名持续第一</li>
+</ul>
+<h3 id="_5">市场份额</h3>
+<p><img alt="图片描述" src="images/uid1190679-20210911-1631359058031.png" /></p>
+<ul>
+<li>市场份额高意味着用的人多</li>
+<li>学习资料多</li>
+<li>遇到问题比较好解决</li>
+</ul>
+<h3 id="_6">国内趋势</h3>
+<p><img alt="图片描述" src="images/uid1190679-20210911-1631359130293.png" /></p>
+<ul>
+<li>可以看到这个在中国最热</li>
+<li>说明我们可以找到比较多的学习资料</li>
+<li>就选这个tomcat了</li>
+<li>那问题也就来了<ul>
+<li>啥是tomcat啊？</li>
+</ul>
+</li>
+</ul>
+<h3 id="_7">搜索</h3>
+<p><img alt="图片描述" src="images/uid1190679-20210911-1631359272810.png" /></p>
+<ul>
+<li>这个和apache还有关系</li>
+<li>apache是静态的</li>
+<li>tomcat是动态的</li>
+<li>静态动态指的是什么呢？</li>
+<li>指的是网页服务器后台是否运行程序</li>
+</ul>
+<h3 id="_8">区别</h3>
+<ul>
+<li>Apache httpd Server，是Apache第一款产品</li>
+<li>Apache httpd 具有坚实的稳定性、异常丰富的功能和灵活的可扩展性</li>
+<li>于是这个产品的名字在用户心中就成了个厂牌</li>
+<li>1999年6月，为支持Apache HTTP Server以及相关软件的发展<ul>
+<li>Apache开发小组成员们成立了一个非盈利性的Apache软件基金会</li>
+<li>Apache Software Foundation</li>
+</ul>
+</li>
+<li>Apache基金会支持开发了诸多享誉全球的开源软件<ul>
+<li>这些软件的名字前都会加上Apache</li>
+<li>其中就包括Apache Tomcat</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20211109-1636450078504.png" /></p>
+<ul>
+<li>可是这名字有点怪啊</li>
+<li>tomcat什么意思？</li>
+</ul>
+<h3 id="tomcat_1">tomcat</h3>
+<ul>
+<li>Tomcat的这个单词的意思是“公猫”</li>
+<li>开发者姆斯·邓肯·戴维森希望用一种能够自己照顾自己的动物代表这个软件<ul>
+<li>于是命名为tomcat</li>
+</ul>
+</li>
+<li>Logo兼吉祥物也被设计成了一只公猫形象</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20211109-1636450290480.png" /></p>
+<ul>
+<li>也有人说是三脚猫</li>
+</ul>
+<h3 id="_9">缘起</h3>
+<ul>
+<li>1999年Apache 软件基金会与Sun等其他公司一起合作的Jakarta（雅加达）项目</li>
+<li>其中中的一个子项是作为服务器的容器支持基于Java语言编写的程序在服务器上运行<ul>
+<li>这样的程序被称为<code>Servlet</code></li>
+<li>因为它是运行在<code>Server</code>上的<code>Applet</code>(应用程序)</li>
+</ul>
+</li>
+<li>理论上讲这容器并不是一个完整的服务器软件<ul>
+<li>因为最初只能运行Java程序</li>
+<li>而不能动态生成HTML页面数据</li>
+<li>也不能处理并发事务</li>
+</ul>
+</li>
+<li>开局就是这样的开局</li>
+</ul>
+<h3 id="_10">发展</h3>
+<ul>
+<li>可是你别忘了<ul>
+<li>appache httpd 是当时静态主流网页服务器</li>
+<li>从静态其实早晚要升级到动态</li>
+<li>这个需求其实一直带着tomcat不断发展</li>
+</ul>
+</li>
+<li>Apache或者Nginx 是<ul>
+<li>HTTP Server</li>
+<li>静态服务器</li>
+</ul>
+</li>
+<li>Tomcat 则是<ul>
+<li>Application Server</li>
+<li>应用服务器/动态服务器</li>
+<li>Web Server</li>
+<li>但本质上是一个Servlet/JSP应用的容器</li>
+</ul>
+</li>
+<li>我们可以试试这个tomcat么？<ul>
+<li>首先要下载</li>
+<li>可以把这个tarball下载下来直接解压</li>
+<li>那个目录就是tomcat</li>
+<li>可是有好多版本啊</li>
+<li>下哪个呢？</li>
+</ul>
+</li>
+</ul>
+<h3 id="_11">版本</h3>
+<p><img alt="图片描述" src="images/uid1190679-20211113-1636779429955.png" /></p>
+<ul>
+<li>新版本支持的东西更多更全</li>
+<li>新版本要求的java版本更高</li>
+<li>如果是从零开始</li>
+<li>可以考虑下载tomcat10</li>
+<li>本地现在有没有呢？</li>
+</ul>
+<h3 id="_12">启动起来</h3>
+<ul>
+<li>sudo find / -name "*tomcat*"</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20211113-1636808978087.png" /></p>
+<ul>
+<li>可以发现目前机器上有个8.5.54</li>
+<li>除此之外<ul>
+<li>还可以到源上找一下</li>
+</ul>
+</li>
+</ul>
+<h3 id="apt">apt找一找</h3>
+<ul>
+<li>apt search tomcat</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210911-1631366330708.png" /></p>
+<ul>
+<li>是可以找到tomcat9的</li>
+<li>等等，我可以</li>
+<li>下载最新版么？</li>
+</ul>
+<h3 id="_13">下载</h3>
+<p><img alt="图片描述" src="images/uid1190679-20210911-1631366151230.png" /></p>
+<ul>
+<li>如果没有外网的话</li>
+<li>我上传到了github和gitee</li>
+</ul>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/overmind1980/tomcat10.git
+<span class="nb">cd</span><span class="w"> </span>tomcat10
+tar<span class="w"> </span>-zxf<span class="w"> </span>apache-tomcat-10.0.12.tar.gz
+</code></pre></div>
+
+<ul>
+<li>如果下载不下来可以试试换个网址</li>
+<li>现在有三种方式了</li>
+</ul>
+<h3 id="_14">三种方式</h3>
+<ul>
+<li>三种使用tomcat的方式<ul>
+<li>用已经在系统里装好的tomcat8</li>
+<li>apt 下载安装 tomcat9</li>
+<li>网站下载 tomcat10</li>
+</ul>
+</li>
+<li>三种方式哪种好呢？</li>
+</ul>
+<h3 id="_15">小节</h3>
+<ul>
+<li>如果有现成的<ul>
+<li>先试试能不能用</li>
+<li>能用就省得下载啦</li>
+<li>而且一般也是配置好的</li>
+</ul>
+</li>
+<li>apt下载安装方法<ul>
+<li>首先源上面要有相关的安装包</li>
+<li>也是可以练练apt下载安装的方法</li>
+</ul>
+</li>
+<li>从网站下载的方法<ul>
+<li>下载之后是一个文件夹</li>
+<li>比较完整</li>
+<li>而且版本更高</li>
+<li>直接就能用</li>
+<li>所有文件都在一起</li>
+<li>可以练练下载安装的过程</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20211109-1636451827607.png" /></p>
+<ul>
+<li>不过tomcat10和以前有个小区别</li>
+<li>一定要注意</li>
+</ul>
+<h3 id="tomcat10">tomcat10</h3>
+<p><img alt="图片描述" src="images/uid1190679-20211113-1636780063172.png" /></p>
+<ul>
+<li>原来的包名是javax开头</li>
+<li>现在tomcat10的包是jakarta开头的</li>
+<li>为了代码兼容性</li>
+<li>还是选择最tomcat10吧</li>
+</ul>
+<h3 id="_16">总结</h3>
+<ul>
+<li>我们这次了解了应用服务器<ul>
+<li>application server</li>
+<li>他可以动态处理各种请求</li>
+</ul>
+</li>
+<li>我们在众多java应用服务器中选择了tomcat<ul>
+<li>了解了tomcat的历史</li>
+<li>并且学习了下载tomcat的方法</li>
+<li>还有找到本地tomcat的方法</li>
+</ul>
+</li>
+<li>这个东西能不能跑起来呢？🤔</li>
+<li>下次再说！👋</li>
+</ul>
+    </div>
+</body>
+</html>

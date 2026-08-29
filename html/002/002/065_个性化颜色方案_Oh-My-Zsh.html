@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：Oh-My-Zsh，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解个性化颜色方案 Oh-My-Zsh。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 个性化颜色方案, Oh-My-Zsh">
+    <meta property="og:title" content="oeasy Linux系统教程：Oh-My-Zsh，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解个性化颜色方案 Oh-My-Zsh。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="oh-my-zsh">Oh-My-Zsh</h1>
+<h2 id="_1">回忆</h2>
+<ul>
+<li>上次我们研究了zsh<ul>
+<li>从源码开始编译安装</li>
+<li>真的成功了</li>
+</ul>
+</li>
+<li>可以用chsh<ul>
+<li>来设置用户的默认shell</li>
+</ul>
+</li>
+<li>不过现在经常用的是<ul>
+<li>Oh-My-Zsh</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220922-1663819822325.png" /></p>
+<ul>
+<li>这个 <code>Oh-My-Zsh</code> 和 <code>zsh</code> 是什么关系呢？🤔</li>
+</ul>
+<h3 id="_2">搜索</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220922-1663822832491.png" /></p>
+<ul>
+<li>https://ohmyz.sh/</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220922-1663822839952.png" /></p>
+<h3 id="_3">安装命令</h3>
+<ul>
+<li>复制这个命令</li>
+</ul>
+<div class="highlight"><pre><span></span><code>sh -c "$(curl -fsSL images/install.png)" "" --unattended
+</code></pre></div>
+
+<ul>
+<li>然后粘贴到shell中</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220922-1663822849617.jpg" /></p>
+<ul>
+<li>完成安装</li>
+</ul>
+<h3 id="_4">安装过程</h3>
+<ul>
+<li>安装过程中</li>
+<li>有报错</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220922-1663822978270.png" /></p>
+<h3 id="_5">删除原来的</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220922-1663822991324.png" /></p>
+<ul>
+<li>清空之后</li>
+<li>就可以重新安装oh-my-zsh</li>
+</ul>
+<h3 id="_6">编辑主题</h3>
+<div class="highlight"><pre><span></span><code>sudo vi ~/.zshrc
+</code></pre></div>
+
+<ul>
+<li>目前Theme是robbyrussel</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220922-1663823144456.png" /></p>
+<ul>
+<li>效果如下图</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220922-1663823168680.png" /></p>
+<h3 id="_7">更多主题</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220922-1663823622241.png" /></p>
+<ul>
+<li>agnoster</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220922-1663823634165.png" /></p>
+<ul>
+<li>好像缺少字体</li>
+</ul>
+<h3 id="_8">字体问题</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220922-1663823902123.png" /></p>
+<ul>
+<li>需要安装vim-powerline</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220922-1663823966516.png" /></p>
+<h3 id="_9">安装字体</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220922-1663824046395.png" /></p>
+<ul>
+<li>安装字体之后</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220922-1663824062295.png" /></p>
+<ul>
+<li>文件夹字体前景颜色黑色和背景颜色蓝色太容易混淆了</li>
+</ul>
+<h3 id="_10">找到位置</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220922-1663824411245.png" /></p>
+<ul>
+<li>打开文件</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220922-1663845747196.png" /></p>
+<ul>
+<li>找到字体相关位置</li>
+</ul>
+<h3 id="_11">修改</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220922-1663845760627.png" /></p>
+<ul>
+<li>修改结果</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220922-1663845787505.png" /></p>
+<h3 id="_12">总结</h3>
+<ul>
+<li>这次我们研究的是oh-my-zsh</li>
+<li>是zsh上面的一款皮肤</li>
+<li>效果还不错</li>
+<li>可以设置字体和字体颜色</li>
+<li>这就是终端下的美化了</li>
+<li>如果是远程登录进来的o2z也会有zsh的效果么？🤔</li>
+<li>下次再说👋</li>
+</ul>
+    </div>
+</body>
+</html>

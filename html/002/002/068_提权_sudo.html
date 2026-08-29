@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：远程拷贝scp，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解提权 sudo。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 提权, sudo, 远程拷贝scp">
+    <meta property="og:title" content="oeasy Linux系统教程：远程拷贝scp，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解提权 sudo。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="scp">远程拷贝scp</h1>
+<h2 id="_1">回忆</h2>
+<ul>
+<li>上次我们使用了scp</li>
+<li>远程进行文件拷贝</li>
+<li>还是挺方便的</li>
+<li>有一些参数<ul>
+<li>-P 端口</li>
+<li>-r 递归</li>
+<li>-v 详细</li>
+</ul>
+</li>
+<li>这样拷贝文件真的很方便</li>
+<li>但是有的时候想要执行一些命令</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220922-1663849805431.png" /></p>
+<ul>
+<li>却告诉我没有权限</li>
+<li>这应该怎么解决呢？🤔</li>
+</ul>
+<h3 id="_2">构建环境</h3>
+<p><img alt="图片描述" src="images/uid1190679-20221001-1664631285369.png" /></p>
+<ul>
+<li>我们需要想办法把o2z放到sudoers里面</li>
+<li>就像shiyanlou一样</li>
+<li>先观察一下这两个账号的不同</li>
+</ul>
+<h3 id="_3">不同</h3>
+<p><img alt="图片描述" src="images/uid1190679-20221001-1664631711090.png" /></p>
+<ul>
+<li>shiyanlou(5000)之所以可以执行sudo的原因是<ul>
+<li>shiyanlou(5000)属于sudo(27)这个组</li>
+<li>那为什么shiyanlou(5000)可以属于这个组呢？</li>
+</ul>
+</li>
+</ul>
+<h3 id="etcgroup">/etc/group</h3>
+<p><img alt="图片描述" src="images/uid1190679-20221001-1664632230396.png" /></p>
+<ul>
+<li>shiyanlou(5000)这个用户在/etc/group中对应3条记录<ul>
+<li>sudo(27)组</li>
+<li>shiyanlou(5000)组</li>
+<li>public(5002)组</li>
+</ul>
+</li>
+<li>o2z(1000)这个用户只对应一条记录<ul>
+<li>o2z(1000)组</li>
+</ul>
+</li>
+<li>如何把o2z(1000)添加到sudo(27)组呢？</li>
+</ul>
+<h3 id="sudo">sudo</h3>
+<ul>
+<li>先查帮助</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221002-1664669720212.png" /></p>
+<ul>
+<li>把o2z(1000)添加到sudo(27)组</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221002-1664669690280.png" /></p>
+<ul>
+<li>真的添加进去了么？</li>
+</ul>
+<h3 id="_4">查看结果</h3>
+<p><img alt="图片描述" src="images/uid1190679-20221002-1664669750995.png" /></p>
+<ul>
+<li>现在sudo组里面有两个用户了</li>
+<li>可以用sudo这个命令了么？</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221002-1664669996468.png" /></p>
+<ul>
+<li>确实可以运行sudo了</li>
+<li>但是还需要输入o2z(1000)的密码</li>
+<li>为什么shiyanlou(5000)可以直接运行sudo<ul>
+<li>不用输入shiyanlou(5000)密码呢？</li>
+</ul>
+</li>
+</ul>
+<h3 id="_5">搜索</h3>
+<p><img alt="图片描述" src="images/uid1190679-20221002-1664704503019.png" /></p>
+<ul>
+<li>搜索结果</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221002-1664704520830.png" /></p>
+<ul>
+<li>这个可以用么？</li>
+</ul>
+<h3 id="_6">观察</h3>
+<p><img alt="图片描述" src="images/uid1190679-20221002-1664704686083.png" /></p>
+<ul>
+<li>确实有这么一个shiyanlou文件</li>
+<li>位于/etc/sudoers.d中</li>
+<li>是否可以将其复制为o2z呢？</li>
+</ul>
+<h3 id="_7">复制并修改</h3>
+<p><img alt="图片描述" src="images/uid1190679-20221002-1664704835594.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20221002-1664704843888.png" /></p>
+<ul>
+<li>修改之后检查文件</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221002-1664704856863.png" /></p>
+<ul>
+<li>真的可以不输入密码吗？</li>
+</ul>
+<h3 id="_8">结果</h3>
+<p><img alt="图片描述" src="images/uid1190679-20221002-1664704955741.png" /></p>
+<ul>
+<li>确实可以不用再输入o2z的密码了</li>
+<li>不过这个sudo到底是什么意思呢？</li>
+</ul>
+<h3 id="_9">灵魂三问</h3>
+<p><img alt="图片描述" src="images/uid1190679-20221002-1664710408946.jpg" /></p>
+<ul>
+<li>sudo的用户执行权限为s</li>
+<li>也就是让执行者拥有root权限</li>
+<li>那什么是root权限呢？</li>
+</ul>
+<h3 id="root">root</h3>
+<ul>
+<li>root权限指的是root用户的权限</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221002-1664713848044.png" /></p>
+<ul>
+<li>root用户的编号是0</li>
+<li>是最高级的权限拥有者</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221002-1664714486001.png" /></p>
+<ul>
+<li>还有什么文件也是这个s权限吗？</li>
+</ul>
+<h3 id="_10">列表</h3>
+<ul>
+<li>ll /usr/bin</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221002-1664712558718.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20221002-1664712567838.png" /></p>
+<ul>
+<li>需要sudo权限执行的大多都是s权限</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221002-1664712865622.png" /></p>
+<ul>
+<li>还有一些棕色的文件这些文件如何理解？</li>
+<li>先去总结一下</li>
+</ul>
+<h3 id="_11">总结 🤨</h3>
+<ul>
+<li>我们这次研究了如何让用户可以以管理员身份运行程序<ul>
+<li>将用户加入sudo(27)这个组里面就可以</li>
+</ul>
+</li>
+<li>如何避免每次都要输入密码呢？<ul>
+<li>在/etc/sudoers.d里面添加用户名对应的文件</li>
+<li>设置此用户不用输入密码就可以执行sudo命令</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221002-1664704856863.png" /></p>
+<ul>
+<li>为什么sudo拥有超级管理员的权限呢？<ul>
+<li>因为sudo的权限是s</li>
+<li>代表sudo会以root的权限运行</li>
+<li>从视觉上看到是红色的</li>
+<li>还有一些程序(wall)是黄色的</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221002-1664712865622.png" /></p>
+<ul>
+<li>这是什么意思呢？🤔</li>
+<li>下次再说！👋</li>
+</ul>
+    </div>
+</body>
+</html>

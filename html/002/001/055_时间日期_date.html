@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：日期时间date，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解时间日期 date。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 时间日期, date, 日期时间date">
+    <meta property="og:title" content="oeasy Linux系统教程：日期时间date，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解时间日期 date。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="date">日期时间(date)</h1>
+<h2 id="_1">回忆</h2>
+<ul>
+<li>上次学习的是移动(mv)</li>
+<li>mv命令<ul>
+<li>既可以改名</li>
+<li>又可以移动</li>
+</ul>
+</li>
+<li>mv命令有一些参数<ul>
+<li>-v 显示细节</li>
+<li>-u 更新文件</li>
+<li>-i 交互式</li>
+<li>-f 强制</li>
+<li>-n 不覆盖</li>
+<li>--suffix 控制后缀</li>
+</ul>
+</li>
+<li>这里面的更新和时间有很大关系</li>
+<li>每个文件都有三个时间</li>
+<li>这如何理解呢？</li>
+</ul>
+<h3 id="date_1">日期时间命令date</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663207849961.png" /></p>
+<ul>
+<li>这个命令就是date</li>
+<li>可以看到date更详细的用法吗？</li>
+</ul>
+<h3 id="_2">查看手册</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663209779941.jpg" /></p>
+<ul>
+<li>尝试使用</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663209829126.png" /></p>
+<ul>
+<li>好像加上了时区<ul>
+<li>我们是东八区</li>
+</ul>
+</li>
+<li>这个rfc-2822指的是什么呢？</li>
+</ul>
+<h3 id="ietfrfc">ietf的rfc</h3>
+<ul>
+<li>https://tools.ietf.org/html/rfc2822.html</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663209886721.png" /></p>
+<ul>
+<li>确实定义了时间和时区</li>
+<li>不过比较粗糙精确到了秒</li>
+<li>可以更精细么？</li>
+</ul>
+<h3 id="rfc3339">rfc3339</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663210107804.jpg" /></p>
+<ul>
+<li>这篇文档引用了3339</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663210140550.png" /></p>
+<ul>
+<li>定制时间从2822的2001年到了2002年</li>
+</ul>
+<h3 id="_3">使用</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663210251199.png" /></p>
+<ul>
+<li>继续看文档</li>
+</ul>
+<h3 id="_4">例子</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663210615478.png" /></p>
+<ul>
+<li>格林威治时间(GMT)</li>
+<li>太平洋夏令时间(PDT)  </li>
+<li>中部夏令时间(CDT)</li>
+<li>这和我们有点远</li>
+<li>还有什么细节么？</li>
+</ul>
+<h3 id="_5">格式化字符串</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>%%</td>
+<td>输出字符 %</td>
+</tr>
+<tr>
+<td>%a</td>
+<td>星期几的缩写 (Sun..Sat)</td>
+</tr>
+<tr>
+<td>%A</td>
+<td>星期的完整名称(Sunday..Saturday)。</td>
+</tr>
+<tr>
+<td>%b</td>
+<td>缩写的月份名称（例如，Jan）</td>
+</tr>
+<tr>
+<td>%B</td>
+<td>完整的月份名称（例如，January）</td>
+</tr>
+<tr>
+<td>%c</td>
+<td>本地日期和时间（例如，Thu Mar  3 23:05:25 2005）</td>
+</tr>
+<tr>
+<td>%C</td>
+<td>世纪，和%Y类似，但是省略后两位（例如，20）</td>
+</tr>
+<tr>
+<td>%d</td>
+<td>日 (01..31)</td>
+</tr>
+<tr>
+<td>%D</td>
+<td>日期，等价于%m/%d/%y</td>
+</tr>
+<tr>
+<td>%e</td>
+<td>一月中的一天，格式使用空格填充，等价于%_d</td>
+</tr>
+<tr>
+<td>%F</td>
+<td>完整的日期；等价于 %Y-%m-%d</td>
+</tr>
+<tr>
+<td>%g</td>
+<td>ISO 标准计数周的年份的最后两位数字</td>
+</tr>
+<tr>
+<td>%G</td>
+<td>ISO 标准计数周的年份，通常只对%V有用</td>
+</tr>
+<tr>
+<td>%h</td>
+<td>等价于 %b</td>
+</tr>
+<tr>
+<td>%H</td>
+<td>小时 (00..23)</td>
+</tr>
+<tr>
+<td>%I</td>
+<td>小时 (01..12)</td>
+</tr>
+<tr>
+<td>%j</td>
+<td>一年中的第几天 (001..366)</td>
+</tr>
+<tr>
+<td>%k</td>
+<td>小时，使用空格填充 ( 0..23); 等价于 %_H</td>
+</tr>
+<tr>
+<td>%l</td>
+<td>小时, 使用空格填充 ( 1..12); 等价于 %_I</td>
+</tr>
+<tr>
+<td>%m</td>
+<td>月份 (01..12)</td>
+</tr>
+<tr>
+<td>%M</td>
+<td>分钟 (00..59)</td>
+</tr>
+<tr>
+<td>%n</td>
+<td>新的一行，换行符</td>
+</tr>
+<tr>
+<td>%N</td>
+<td>纳秒 (000000000..999999999)</td>
+</tr>
+<tr>
+<td>%p</td>
+<td>用于表示当地的AM或PM，如果未知则为空白</td>
+</tr>
+<tr>
+<td>%P</td>
+<td>类似 %p, 但是是小写的</td>
+</tr>
+<tr>
+<td>%r</td>
+<td>本地的 12 小时制时间(例如 11:11:04 PM)</td>
+</tr>
+<tr>
+<td>%R</td>
+<td>24 小时制 的小时与分钟; 等价于 %H:%M</td>
+</tr>
+<tr>
+<td>%s</td>
+<td>自 1970-01-01 00:00:00 UTC 到现在的秒数</td>
+</tr>
+<tr>
+<td>%S</td>
+<td>秒 (00..60)</td>
+</tr>
+<tr>
+<td>%t</td>
+<td>插入水平制表符 tab</td>
+</tr>
+<tr>
+<td>%T</td>
+<td>时间; 等价于 %H:%M:%S</td>
+</tr>
+<tr>
+<td>%u</td>
+<td>一周中的一天 (1..7); 1 表示星期一</td>
+</tr>
+<tr>
+<td>%U</td>
+<td>一年中的第几周，周日作为一周的起始 (00..53)</td>
+</tr>
+<tr>
+<td>%V</td>
+<td>ISO 标准计数周，该方法将周一作为一周的起始 (01..53)</td>
+</tr>
+<tr>
+<td>%w</td>
+<td>一周中的一天（0..6），0代表星期天</td>
+</tr>
+<tr>
+<td>%W</td>
+<td>一年中的第几周，周一作为一周的起始（00..53）</td>
+</tr>
+<tr>
+<td>%x</td>
+<td>本地的日期格式（例如，12/31/99）</td>
+</tr>
+<tr>
+<td>%X</td>
+<td>本地的日期格式（例如，23:13:48）</td>
+</tr>
+<tr>
+<td>%y</td>
+<td>年份后两位数字 (00..99)</td>
+</tr>
+<tr>
+<td>%Y</td>
+<td>年</td>
+</tr>
+<tr>
+<td>%z</td>
+<td>+hhmm 格式的数值化时区格式（例如，-0400）</td>
+</tr>
+<tr>
+<td>%:z</td>
+<td>+hh:mm 格式的数值化时区格式（例如，-04:00）</td>
+</tr>
+<tr>
+<td>%::</td>
+<td>z  +hh:mm:ss格式的数值化时区格式（例如，-04:00:00）</td>
+</tr>
+<tr>
+<td>%::</td>
+<td>:z  数值化时区格式，相比上一个格式增加':'以显示必要的精度（例如，-04，+05:30）</td>
+</tr>
+<tr>
+<td>%Z</td>
+<td>时区缩写 （如 EDT）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_6">具体使用</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663211400583.png" /></p>
+<ul>
+<li>%D 日期</li>
+<li>%T 时间</li>
+<li>%z 时区</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663211531645.png" /></p>
+<ul>
+<li>这些其实都基于unix时间戳epoch</li>
+<li>这个在<a href="https://www.lanqiao.cn/teacher/workbench/courses/3584?tab=labsList">《oeasy教您玩转python》</a>第17个实验《刷新时间》中有详细说明</li>
+<li>每个文件的元数据中都有三个时间</li>
+<li>这三个时间怎么理解呢？</li>
+</ul>
+<h3 id="_7">三个时间</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663212321086.png" /></p>
+<ul>
+<li>这三个时间怎么理解呢？</li>
+<li>读文件</li>
+</ul>
+<h3 id="cat">cat读文件</h3>
+<ul>
+<li>cat读了之后</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663212406779.png" /></p>
+<ul>
+<li>最近访问改了</li>
+<li>最近更改和最近改动没有修改</li>
+</ul>
+<h3 id="echo">echo写文件</h3>
+<ul>
+<li>echo写文件之后</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663212541297.png" /></p>
+<ul>
+<li>最近更改和最近改动修改</li>
+<li>最近访问没有修改</li>
+<li>可见最近访问是是否最近被读取</li>
+<li>最近更改和最近改动有什么区别呢？</li>
+</ul>
+<h3 id="_8">修改元数据</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663212775409.png" /></p>
+<ul>
+<li>chmod只是改变了文件的权限</li>
+<li>而没有改变文件的内容</li>
+<li>所以最近更改时间没有变</li>
+<li>最近改动时间变了</li>
+<li>如果我用vi写一下会如何呢？</li>
+</ul>
+<h3 id="vi">vi写并存</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663212885733.png" /></p>
+<ul>
+<li>三个时间都修改了<ul>
+<li>最近访问(读)的时间变了</li>
+<li>最近更改(具体文件内容)的时间也变了</li>
+<li>最近改动(元数据)也变了</li>
+</ul>
+</li>
+<li>这三个时间的英文是什么呢？</li>
+</ul>
+<h3 id="_9">查看英文</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663213128196.png" /></p>
+<ul>
+<li>time of last access <ul>
+<li>access</li>
+<li>最近访问</li>
+<li>最后一次被读取</li>
+</ul>
+</li>
+<li>time of last status change<ul>
+<li>change</li>
+<li>最近改动</li>
+<li>最后一次元数据状态更改时间</li>
+<li>索引节点(inode)状态变化</li>
+</ul>
+</li>
+<li>time of last data modification<ul>
+<li>modify</li>
+<li>最近更改</li>
+<li>最后一次被写入</li>
+<li>索引节点(inode)所指向的块(block)中数据的变化</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663213772880.png" /></p>
+<ul>
+<li>windows系统也是这套说法</li>
+<li>可以在ls中查询到时间的细节么？</li>
+</ul>
+<h3 id="_10">时间风格</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663216654109.jpg" /></p>
+<ul>
+<li>可以用--time-style设置得到时间的参数</li>
+<li>ls 显示的时间究竟是哪个时间呢？</li>
+</ul>
+<h3 id="_11">实验</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663216767242.jpg" /></p>
+<ul>
+<li>默认显示的时间是最近更改<ul>
+<li>也就是最近写过文件内容的时间</li>
+<li>modify的时间</li>
+</ul>
+</li>
+<li>可以显示其他类型的时间么？</li>
+</ul>
+<h3 id="_12">查看文档</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663216883984.jpg" /></p>
+<ul>
+<li>观察</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663217046187.jpg" /></p>
+<ul>
+<li>--time=atime  <ul>
+<li>access 上次读取时间</li>
+</ul>
+</li>
+<li>--time=ctime<ul>
+<li>change 上次状态(status)变化时间</li>
+</ul>
+</li>
+<li>不设置--time<ul>
+<li>modify 上次文件内容修改时间</li>
+</ul>
+</li>
+<li>输出时间的格式可以自定义么？</li>
+</ul>
+<h3 id="_13">输出日期形式自定义</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663241192072.jpg" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20220915-1663241203272.png" /></p>
+<h3 id="_14">总结</h3>
+<ul>
+<li>我们这次研究了date日期</li>
+<li>用各种方式显示日期时间<ul>
+<li>可以用现成的套路<ul>
+<li>date -R</li>
+</ul>
+</li>
+<li>也可以自定义<ul>
+<li>date "+%D-%T %z"</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>每个文件都有三个时间元数据<ul>
+<li>access 最近访问 上次读取时间</li>
+<li>change 最近更改 上次状态变化时间</li>
+<li>modify 最近改动 上次写文件时间</li>
+</ul>
+</li>
+<li>我们这次都研究时间日期</li>
+<li>可以有个日历来看看吗？🤔</li>
+<li>下次再说👋</li>
+</ul>
+    </div>
+</body>
+</html>

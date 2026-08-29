@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：给用户组发消息wall，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解给用户组发信息 wall。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 给用户组发信息, wall, 给用户组发消息wall">
+    <meta property="og:title" content="oeasy Linux系统教程：给用户组发消息wall，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解给用户组发信息 wall。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="wall">给用户组发消息(wall)</h1>
+<h2 id="_1">回忆</h2>
+<ul>
+<li>我们上次新建了组(group)<ul>
+<li>addgroup</li>
+</ul>
+</li>
+<li>有addgroup就有delgroup</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221006-1665049368263.jpg" /></p>
+<ul>
+<li>可以将用户放到用户组中<ul>
+<li>add oeasy ogroup</li>
+</ul>
+</li>
+<li>我们可以用wall</li>
+<li>给oeasy、o2z发消息吗？</li>
+</ul>
+<h3 id="ip">查看ip</h3>
+<ul>
+<li>先新建用户oeasy</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240808-1723113453115.png" /></p>
+<h3 id="_2">加入组</h3>
+<p><img alt="图片描述" src="images/uid1190679-20240808-1723111952804.png" /></p>
+<ul>
+<li>并将其加入ogroup</li>
+</ul>
+<h3 id="ip_1">然后查看ip</h3>
+<p><img alt="图片描述" src="images/uid1190679-20221006-1665049718552.png" /></p>
+<h3 id="_3">登录用户</h3>
+<ul>
+<li>开两个终端<ul>
+<li>分别用oeasy、shiyanlou</li>
+<li>登录本机ip</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240808-1723111698166.png" /></p>
+<h3 id="_4">查看谁登陆</h3>
+<ul>
+<li>我们可以看到两个登录的用户</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240808-1723111676718.png" /></p>
+<ul>
+<li>现在给他们发消息</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221006-1665050174885.png" /></p>
+<h3 id="wall_1">wall</h3>
+<div class="highlight"><pre><span></span><code>sudo wall system halt
+sudo wall -g ogroup you are og
+sudo wall -g oeasy you are oeasy
+</code></pre></div>
+
+<ul>
+<li>用管理员权限分别对三种类型的用户发消息<ul>
+<li>全体</li>
+<li>ogroup组成员</li>
+<li>oeasy用户</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240808-1723114566456.png" /></p>
+<ul>
+<li>注意要有sudo权限<ul>
+<li>才能write to all</li>
+</ul>
+</li>
+</ul>
+<h3 id="wall_2">wall</h3>
+<ul>
+<li>这也是wall名字的由来</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221006-1665063638344.png" /></p>
+<ul>
+<li>给所有人写消息</li>
+</ul>
+<h3 id="_5">总结 🤨</h3>
+<ul>
+<li>这次我们研究了 wall 这个命令</li>
+<li>这个命令可以给当前登录本服务的用户发消息<ul>
+<li>给指定某个组发消息</li>
+<li>给指定的用户发消息</li>
+<li>给所有用户发消息</li>
+</ul>
+</li>
+<li>who可以查询到有哪些用户在线</li>
+<li>为什么要有用户和用户组呢？</li>
+<li>都用一个账号登录不是更简单吗？</li>
+<li>这背后有什么样的考虑呢？🤔</li>
+<li>先总结一下用户和用户组去</li>
+<li>下次再说！👋</li>
+</ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：文本框前端验证，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解文本框前端验证。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖} 		} catch Exception e { 			e.printStackTrace; 			System.err.printlne.getClass.getName + ": " + e.g...">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 文本框前端验证">
+    <meta property="og:title" content="oeasy Linux系统教程：文本框前端验证，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解文本框前端验证。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖} 		} catch Exception e { 			e.printStackTrace; 			System.err.printlne.getClass.getName + ": " + e.g...">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="_1">文本框前端验证</h1>
+<h3 id="_2">回忆</h3>
+<ul>
+<li>这次解决了重复用户名的问题</li>
+<li>但是还是可能有问题的</li>
+<li>比如数据库中我们的数据存储宽度是30</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20211130-1638244120503.png" /></p>
+<ul>
+<li>如果提交的字符串长度大于30，会如何呢?🤔</li>
+<li>30有点太大了</li>
+<li>把列宽直接干到10</li>
+<li>错误就很容易发生了😏</li>
+</ul>
+<h3 id="_3">修改字段长度</h3>
+<div class="highlight"><pre><span></span><code><span class="n">alter</span><span class="w"> </span><span class="n">table</span><span class="w"> </span><span class="n">login</span><span class="w"> </span><span class="n">alter</span><span class="w"> </span><span class="n">column</span><span class="w"> </span><span class="n">username</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+</code></pre></div>
+
+<p><img alt="图片描述" src="images/uid1190679-20220427-1651027759381.jpg" /></p>
+<ul>
+<li>修改之后想要插入超过10个字符的内容</li>
+<li>果然就无法插入了</li>
+<li>不过，程序插入的时候会报错</li>
+<li>我们需要在insert里面进行验证</li>
+<li>并且报错</li>
+</ul>
+<h3 id="insertservletjava">InsertServlet.java</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220427-1651056214844.jpg" /></p>
+<ul>
+<li>这样就可以重定向到/error</li>
+<li>msg=usernameTooLong</li>
+<li>这个消息需要在ErrorServlet里面处理</li>
+</ul>
+<h3 id="erroservletjava">ErroServlet.java</h3>
+<p><img alt="图片描述" src="images/uid1190679-20211130-1638255977300.png" /></p>
+<ul>
+<li>我再去注册一个特别长的用户名</li>
+</ul>
+<h3 id="_4">重新注册</h3>
+<p><img alt="图片描述" src="images/uid1190679-20211130-1638257480923.png" /></p>
+<ul>
+<li>如果提交的用户名大于10的话</li>
+<li>会直接重定向/error</li>
+<li>不过如果用户名大于10的话应该直接跳转</li>
+<li>还需要执行查询么？</li>
+</ul>
+<h3 id="_5">目前次序</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220427-1651057329152.jpg" /></p>
+<ul>
+<li>不用去执行红框中的查询</li>
+<li>代码顺序需要调整</li>
+</ul>
+<h3 id="_6">修改代码</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.Connection</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.DriverManager</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.ResultSet</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.Statement</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.PrintWriter</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.ServletException</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.http.HttpServlet</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.http.HttpServletRequest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.http.HttpServletResponse</span><span class="p">;</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">InsertServlet</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HttpServlet</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">serialVersionUID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1L</span><span class="p">;</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doPost</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span>
+<span class="w">            </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">)</span>
+<span class="w">        </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="p">,</span><span class="w"> </span><span class="n">ServletException</span><span class="p">{</span>
+<span class="w">        </span><span class="n">request</span><span class="p">.</span><span class="na">setCharacterEncoding</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">);</span>
+<span class="w">        </span><span class="n">response</span><span class="p">.</span><span class="na">setContentType</span><span class="p">(</span><span class="s">"text/html"</span><span class="p">);</span>
+<span class="w">        </span><span class="n">response</span><span class="p">.</span><span class="na">setCharacterEncoding</span><span class="p">(</span><span class="s">"UTF-8"</span><span class="p">);</span>
+<span class="w">        </span><span class="n">PrintWriter</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">response</span><span class="p">.</span><span class="na">getWriter</span><span class="p">();</span>
+<span class="w">        </span><span class="n">Connection</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">        </span><span class="n">Statement</span><span class="w"> </span><span class="n">stmt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Class</span><span class="p">.</span><span class="na">forName</span><span class="p">(</span><span class="s">"org.postgresql.Driver"</span><span class="p">);</span>
+<span class="w">            </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DriverManager</span><span class="p">.</span><span class="na">getConnection</span><span class="p">(</span>
+<span class="w">                    </span><span class="s">"jdbc:postgresql://localhost:5432/oeasy"</span><span class="p">,</span><span class="w"> </span><span class="s">"postgres"</span><span class="p">,</span>
+<span class="w">                    </span><span class="s">"oeasy@pg"</span><span class="p">);</span>
+<span class="w">            </span><span class="n">c</span><span class="p">.</span><span class="na">setAutoCommit</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+<span class="w">            </span><span class="n">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"db connection is ok!!&lt;br/&gt;"</span><span class="p">);</span>
+<span class="w">            </span><span class="n">stmt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="p">.</span><span class="na">createStatement</span><span class="p">();</span>
+<span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">Username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getParameter</span><span class="p">(</span><span class="s">"username"</span><span class="p">);</span>
+<span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">Password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getParameter</span><span class="p">(</span><span class="s">"password"</span><span class="p">);</span>
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="kc">null</span><span class="o">!=</span><span class="n">Username</span><span class="o">&amp;&amp;</span><span class="n">Username</span><span class="p">.</span><span class="na">length</span><span class="p">()</span><span class="o">&gt;</span><span class="mi">10</span><span class="p">){</span>
+<span class="w">                </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"=====yes username too loog"</span><span class="p">);</span>
+<span class="w">                </span><span class="n">stmt</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+<span class="w">                </span><span class="n">c</span><span class="p">.</span><span class="na">commit</span><span class="p">();</span>
+<span class="w">                </span><span class="n">c</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+<span class="w">                </span><span class="n">response</span><span class="p">.</span><span class="na">sendRedirect</span><span class="p">(</span><span class="s">"http://localhost:8080/oeasy/error?msg=usernameTooLong"</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">else</span><span class="p">{</span>
+<span class="w">                </span><span class="n">ResultSet</span><span class="w"> </span><span class="n">rs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stmt</span><span class="p">.</span><span class="na">executeQuery</span><span class="p">(</span><span class="s">"select * from login where Username='"</span><span class="o">+</span><span class="n">Username</span><span class="o">+</span><span class="s">"'"</span><span class="p">);</span>
+<span class="w">                </span><span class="k">if</span><span class="p">(</span><span class="n">rs</span><span class="p">.</span><span class="na">next</span><span class="p">()){</span>
+<span class="w">                    </span><span class="n">stmt</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+<span class="w">                    </span><span class="n">c</span><span class="p">.</span><span class="na">commit</span><span class="p">();</span>
+<span class="w">                    </span><span class="n">c</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+<span class="w">                    </span><span class="n">response</span><span class="p">.</span><span class="na">sendRedirect</span><span class="p">(</span><span class="s">"http://localhost:8080/oeasy/error?msg=usernameExists"</span><span class="p">);</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">                </span><span class="k">else</span><span class="p">{</span>
+<span class="w">                    </span><span class="n">String</span><span class="w"> </span><span class="n">sql</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"insert into login(username,password) values('"</span><span class="o">+</span><span class="n">Username</span><span class="o">+</span><span class="s">"','"</span><span class="o">+</span><span class="n">Password</span><span class="o">+</span><span class="s">"');"</span><span class="p">;</span>
+<span class="w">                    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">"sql======================"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sql</span><span class="p">);</span>
+<span class="w">                    </span><span class="n">stmt</span><span class="p">.</span><span class="na">executeUpdate</span><span class="p">(</span><span class="n">sql</span><span class="p">);</span>
+<span class="w">                    </span><span class="n">stmt</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+<span class="w">                    </span><span class="n">c</span><span class="p">.</span><span class="na">commit</span><span class="p">();</span>
+<span class="w">                    </span><span class="n">c</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+<span class="w">                    </span><span class="n">response</span><span class="p">.</span><span class="na">sendRedirect</span><span class="p">(</span><span class="s">"http://localhost:8080/oeasy/select"</span><span class="p">);</span>
+<span class="w">                </span><span class="p">}</span>
+
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">err</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="na">getClass</span><span class="p">().</span><span class="na">getName</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">": "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">getMessage</span><span class="p">());</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<ul>
+<li>但是如果在网页前端就可以报错的话<ul>
+<li>可以降低后台的读写压力</li>
+<li>可以降低网络传输压力</li>
+<li>可以第一时间进行提示</li>
+<li>因为浏览器直接就报了错了</li>
+</ul>
+</li>
+</ul>
+<h3 id="_7">前端验证</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220427-1651058215116.png" /></p>
+<ul>
+<li>可以找到用户名文本框对应的字符串长度</li>
+<li>我在提交的时候</li>
+<li>需要先在前端验证</li>
+<li>然后再提交</li>
+</ul>
+<h3 id="prepareinserthtml">prepareInsert.html</h3>
+<div class="highlight"><pre><span></span><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">"zh-CN"</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">"content-Type"</span> <span class="na">content</span><span class="o">=</span><span class="s">"text/html;charset=utf-8"</span><span class="p">/&gt;</span>
+        <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>prepareInsert<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">form</span> <span class="na">id</span><span class="o">=</span><span class="s">"RegistForm"</span> <span class="na">onsubmit</span><span class="o">=</span><span class="s">"return doSubmit()"</span> <span class="na">action</span><span class="o">=</span><span class="s">"./insert"</span> <span class="na">method</span><span class="o">=</span><span class="s">"post"</span><span class="p">&gt;</span>
+            用户名:<span class="p">&lt;</span><span class="nt">input</span> <span class="na">id</span><span class="o">=</span><span class="s">"username"</span> <span class="na">name</span><span class="o">=</span><span class="s">"username"</span> <span class="na">type</span><span class="o">=</span><span class="s">"text"</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nt">br</span><span class="p">/&gt;</span>
+            密码:<span class="p">&lt;</span><span class="nt">input</span> <span class="na">id</span><span class="o">=</span><span class="s">"password"</span> <span class="na">name</span><span class="o">=</span><span class="s">"password"</span> <span class="na">type</span><span class="o">=</span><span class="s">"text"</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nt">br</span><span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"submit"</span>  <span class="na">value</span><span class="o">=</span><span class="s">"注册"</span> <span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"reset"</span> <span class="na">value</span><span class="o">=</span><span class="s">"重置"</span> <span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="w">        </span><span class="kd">function</span><span class="w"> </span><span class="nx">doSubmit</span><span class="p">(){</span>
+<span class="w">            </span><span class="kd">var</span><span class="w"> </span><span class="nx">username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"username"</span><span class="p">);</span>
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="nx">username</span><span class="p">.</span><span class="nx">value</span><span class="p">.</span><span class="nx">length</span><span class="o">&gt;</span><span class="mf">10</span><span class="p">){</span>
+<span class="w">                </span><span class="nx">alert</span><span class="p">(</span><span class="s2">"用户名有"</span><span class="o">+</span><span class="nx">username</span><span class="p">.</span><span class="nx">value</span><span class="p">.</span><span class="nx">length</span><span class="o">+</span><span class="s2">",请不要超过10位"</span><span class="p">);</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">else</span><span class="p">{</span>
+<span class="w">                </span><span class="kd">var</span><span class="w"> </span><span class="nx">form</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"RegistForm"</span><span class="p">);</span>
+<span class="w">                </span><span class="nx">form</span><span class="p">.</span><span class="nx">submit</span><span class="p">();</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<ul>
+<li>有的时候不是弹窗报错</li>
+<li>而是在网页上报错</li>
+<li>应该怎么办呢？</li>
+</ul>
+<h3 id="_8">网页报错</h3>
+<div class="highlight"><pre><span></span><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">"zh-CN"</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">"content-Type"</span> <span class="na">content</span><span class="o">=</span><span class="s">"text/html;charset=utf-8"</span><span class="p">/&gt;</span>
+        <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>prepareInsert<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">form</span> <span class="na">id</span><span class="o">=</span><span class="s">"RegistForm"</span> <span class="na">onsubmit</span><span class="o">=</span><span class="s">"return doSubmit()"</span> <span class="na">action</span><span class="o">=</span><span class="s">"./insert"</span> <span class="na">method</span><span class="o">=</span><span class="s">"post"</span><span class="p">&gt;</span>
+            用户名:<span class="p">&lt;</span><span class="nt">input</span> <span class="na">id</span><span class="o">=</span><span class="s">"username"</span> <span class="na">name</span><span class="o">=</span><span class="s">"username"</span> <span class="na">type</span><span class="o">=</span><span class="s">"text"</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nt">br</span><span class="p">/&gt;</span>
+            密码:<span class="p">&lt;</span><span class="nt">input</span> <span class="na">id</span><span class="o">=</span><span class="s">"password"</span> <span class="na">name</span><span class="o">=</span><span class="s">"password"</span> <span class="na">type</span><span class="o">=</span><span class="s">"text"</span> <span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nt">br</span><span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"submit"</span>  <span class="na">value</span><span class="o">=</span><span class="s">"注册"</span> <span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"reset"</span> <span class="na">value</span><span class="o">=</span><span class="s">"重置"</span> <span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">span</span> <span class="na">id</span><span class="o">=</span><span class="s">"errormsg"</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="w">        </span><span class="kd">function</span><span class="w"> </span><span class="nx">doSubmit</span><span class="p">(){</span>
+<span class="w">            </span><span class="kd">var</span><span class="w"> </span><span class="nx">username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"username"</span><span class="p">);</span>
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="nx">username</span><span class="p">.</span><span class="nx">value</span><span class="p">.</span><span class="nx">length</span><span class="o">&gt;</span><span class="mf">10</span><span class="p">){</span>
+<span class="w">                </span><span class="nx">errormsg</span><span class="p">.</span><span class="nx">innerHTML</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"用户名有"</span><span class="o">+</span><span class="nx">username</span><span class="p">.</span><span class="nx">value</span><span class="p">.</span><span class="nx">length</span><span class="o">+</span><span class="s2">"位,请不要超过10位"</span><span class="p">;</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">else</span><span class="p">{</span>
+<span class="w">                </span><span class="kd">var</span><span class="w"> </span><span class="nx">form</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"RegistForm"</span><span class="p">);</span>
+<span class="w">                </span><span class="nx">form</span><span class="p">.</span><span class="nx">submit</span><span class="p">();</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<ul>
+<li>前端已经验证了</li>
+<li>还有必要在后端再验证一次么？🤔</li>
+</ul>
+<h3 id="_9">前后端</h3>
+<ul>
+<li>前端是堂倌明确地拒绝了客人<ul>
+<li>不能点蒸熊掌</li>
+<li>第一时间在本地就告诉了客人</li>
+<li>节省时间和带宽</li>
+<li>但是客人可能直接去找初始</li>
+<li>强制构造表单并提交</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220522-1653178016502.png" /></p>
+<ul>
+<li>后端是厨师<ul>
+<li>让厨师牢记不能做蒸熊掌</li>
+<li>这样就在后厨立下规矩</li>
+<li>避免对数据库做不规范操作</li>
+</ul>
+</li>
+</ul>
+<h3 id="_10">总结</h3>
+<ul>
+<li>这次解决了用户名字符串长度控制问题<ul>
+<li>后端控制了之后</li>
+<li>再在前端先验证</li>
+<li>这样前后端都验证</li>
+<li>前端负责高效</li>
+<li>后端负责保险</li>
+</ul>
+</li>
+<li>但是有的时候密码要求比较高<ul>
+<li>不但要求有大写小写数字和符号</li>
+<li>还要求输入两次比对一下</li>
+</ul>
+</li>
+<li>这怎么做呢?🤔</li>
+<li>下次再说！👋</li>
+</ul>
+    </div>
+</body>
+</html>

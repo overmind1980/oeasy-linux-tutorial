@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：使用servlet向数据库中插入数据，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解响应重定向。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖} catch Exception e {             e.printStackTrace;             System.err.printlne.getClass.getName ...">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 响应重定向, 使用servlet向数据库中插入数据">
+    <meta property="og:title" content="oeasy Linux系统教程：使用servlet向数据库中插入数据，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解响应重定向。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖} catch Exception e {             e.printStackTrace;             System.err.printlne.getClass.getName ...">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="servlet">使用servlet向数据库中插入数据</h1>
+<h2 id="_1">回忆</h2>
+<ul>
+<li>上次研究了插入数据<ul>
+<li>而且是从网页的位置插入数据</li>
+<li>让tomcat接收到/insert请求后</li>
+<li>执行InsertServlet.class</li>
+<li>从而插入数据</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220717-1658065746418.png" /></p>
+<ul>
+<li>在这个过程中<ul>
+<li>out输出到浏览器得到响应response</li>
+<li>System.out输出到服务器的日志</li>
+</ul>
+</li>
+<li>如果插入之后<ul>
+<li>其实最好展示的是插入结果</li>
+<li>如何展示插入结果呢？🤔</li>
+</ul>
+</li>
+</ul>
+<h3 id="_2">搜索</h3>
+<p><img alt="图片描述" src="images/uid1190679-20211128-1638105328982.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20211128-1638105340016.png" /></p>
+<ul>
+<li>在服务器端</li>
+<li>让response重定向到/select 然后直接把结果给过去好像就行了</li>
+<li>试试去</li>
+</ul>
+<h3 id="_3">重定向</h3>
+<ul>
+<li>我们首先确认一下/select能否出来</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658127690540.png" /></p>
+<ul>
+<li>库里面有东西</li>
+<li>但是查不出来</li>
+<li>为什么？</li>
+</ul>
+<h3 id="_4">查看日志</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658127719788.png" /></p>
+<ul>
+<li>我们改过列名<ul>
+<li>把topic修改成了name</li>
+<li>但是程序还没有来得及修改</li>
+</ul>
+</li>
+<li>可见数据库一改<ul>
+<li>程序都得跟着修改</li>
+</ul>
+</li>
+</ul>
+<h3 id="_5">修改</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658127948636.png" /></p>
+<ul>
+<li>修改之后</li>
+<li>保存并编译</li>
+<li>通过浏览器访问</li>
+</ul>
+<h3 id="_6">浏览器访问</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658127986249.png" /></p>
+<ul>
+<li>/select这个url修复成功</li>
+<li>如何跳转页面呢？</li>
+</ul>
+<h3 id="_7">跳转</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658128693537.png" /></p>
+<ul>
+<li>执行跳转的是InsertServlet.class</li>
+<li>正常他应该返回/insert页面对应的响应response</li>
+<li>在执行完插入数据的任务后</li>
+<li>在最后一刻</li>
+<li>他跳转了</li>
+<li>跳转到了http://localhost/oeasy/select</li>
+<li>然后执行SelectServlet.class的代码</li>
+<li>然后把这个代码执行结果的response作为最终的response</li>
+<li>发送给浏览器</li>
+<li>浏览器什么结果呢？</li>
+</ul>
+<h3 id="_8">浏览器结果</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658128998401.png" /></p>
+<ul>
+<li>浏览器跳过去了</li>
+<li>而且url也显示/select</li>
+<li>如果SelectServlet.class自己最后跳转到自己会如何呢？</li>
+</ul>
+<h3 id="_9">自我跳转</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658129117113.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658129232631.png" /></p>
+<ul>
+<li>果不其然出错了</li>
+<li>自我循环了等于是</li>
+<li>关于这个函数的定义在哪呢？</li>
+</ul>
+<h3 id="api">查找api</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658129284075.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658129407311.png" /></p>
+<ul>
+<li>可以接受相对路径</li>
+<li>但是会把相对路径转化为绝对路径</li>
+<li>把最终完成代码写出来</li>
+</ul>
+<h3 id="_10">最终代码</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.</span><span class="o">*</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.PrintWriter</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.ServletException</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.http.HttpServlet</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.http.HttpServletRequest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.http.HttpServletResponse</span><span class="p">;</span>
+<span class="n">public</span> <span class="n">final</span> <span class="k">class</span><span class="w"> </span><span class="nc">InsertServlet</span> <span class="n">extends</span> <span class="n">HttpServlet</span> <span class="p">{</span>
+    <span class="n">private</span> <span class="n">static</span> <span class="n">final</span> <span class="n">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="mi">1</span><span class="n">L</span><span class="p">;</span>
+    <span class="nd">@Override</span>
+    <span class="n">public</span> <span class="n">void</span> <span class="n">doGet</span><span class="p">(</span><span class="n">HttpServletRequest</span> <span class="n">request</span><span class="p">,</span>
+                      <span class="n">HttpServletResponse</span> <span class="n">response</span><span class="p">)</span>
+      <span class="n">throws</span> <span class="n">IOException</span><span class="p">,</span> <span class="n">ServletException</span> <span class="p">{</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">setContentType</span><span class="p">(</span><span class="s2">"text/html"</span><span class="p">);</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">setCharacterEncoding</span><span class="p">(</span><span class="s2">"UTF-8"</span><span class="p">);</span>
+        <span class="n">PrintWriter</span> <span class="n">out</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">getWriter</span><span class="p">();</span>
+        <span class="n">Connection</span> <span class="n">c</span> <span class="o">=</span> <span class="n">null</span><span class="p">;</span>
+        <span class="n">Statement</span> <span class="n">stmt</span> <span class="o">=</span> <span class="n">null</span><span class="p">;</span>
+        <span class="k">try</span> <span class="p">{</span>
+            <span class="n">Class</span><span class="o">.</span><span class="n">forName</span><span class="p">(</span><span class="s2">"org.postgresql.Driver"</span><span class="p">);</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="n">DriverManager</span><span class="o">.</span><span class="n">getConnection</span><span class="p">(</span>
+                    <span class="s2">"jdbc:postgresql://localhost:5432/oeasy"</span><span class="p">,</span> <span class="s2">"postgres"</span><span class="p">,</span>
+                    <span class="s2">"oeasy@pg"</span><span class="p">);</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">"Pq Connection success!&lt;br/&gt;"</span><span class="p">);</span>
+            <span class="n">stmt</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">createStatement</span><span class="p">();</span>
+            <span class="n">String</span> <span class="n">sql</span> <span class="o">=</span> <span class="s2">"insert into urls(name,url) values('baidu','http://baidu.com')"</span><span class="p">;</span>
+            <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="s2">"[oeasy]debug=InsertServlet.java===</span><span class="se">\n</span><span class="s2">"</span><span class="o">+</span><span class="n">sql</span><span class="o">+</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">);</span>
+            <span class="n">stmt</span><span class="o">.</span><span class="n">executeUpdate</span><span class="p">(</span><span class="n">sql</span><span class="p">);</span>
+            <span class="n">stmt</span><span class="o">.</span><span class="n">close</span><span class="p">();</span>
+            <span class="n">c</span><span class="o">.</span><span class="n">close</span><span class="p">();</span>
+
+        <span class="p">}</span> <span class="n">catch</span> <span class="p">(</span><span class="ne">Exception</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="n">printStackTrace</span><span class="p">();</span>
+            <span class="n">System</span><span class="o">.</span><span class="n">err</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">getClass</span><span class="p">()</span><span class="o">.</span><span class="n">getName</span><span class="p">()</span> <span class="o">+</span> <span class="s2">": "</span> <span class="o">+</span> <span class="n">e</span><span class="o">.</span><span class="n">getMessage</span><span class="p">());</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">getClass</span><span class="p">()</span><span class="o">.</span><span class="n">getName</span><span class="p">()</span> <span class="o">+</span> <span class="s2">": "</span> <span class="o">+</span> <span class="n">e</span><span class="o">.</span><span class="n">getMessage</span><span class="p">());</span>
+        <span class="p">}</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">sendRedirect</span><span class="p">(</span><span class="s2">"select"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<ul>
+<li>修改代码</li>
+<li>插个数据试试</li>
+</ul>
+<h3 id="_11">修改</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658129793686.png" /></p>
+<h3 id="_12">刷新网页</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658129232631.png" /></p>
+<ul>
+<li>插没插成功数据不清楚</li>
+<li>跳转完成了</li>
+<li>但是SelectServlet.class还陷在自我跳转的循环中</li>
+</ul>
+<h3 id="_13">跳出循环</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658129930678.png" /></p>
+<ul>
+<li>删除自我跳转</li>
+<li>保存并编译</li>
+<li>tomcat后台自动加载</li>
+<li>展示数据</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658129973895.png" /></p>
+<ul>
+<li>基本完成！</li>
+</ul>
+<h3 id="_14">总结</h3>
+<ul>
+<li>我们这次研究了响应重定向<ul>
+<li>从网页的位置插入数据后</li>
+<li>进行页面的跳转</li>
+</ul>
+</li>
+<li>不过如果我想要的是从网页里面文本框提交数据<ul>
+<li>post到指定的处理InsertServlet.class</li>
+<li>然后把数据插入数据库</li>
+<li>这应该怎么办呢？🤔</li>
+</ul>
+</li>
+<li>下次再说！👋</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658130065504.png" /></p>
+    </div>
+</body>
+</html>

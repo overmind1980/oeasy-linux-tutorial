@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：本章回顾，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解持续输出 yes。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖This program is free software: you can redistribute it and/or modify    it under the terms of the G...">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 持续输出, yes, 本章回顾">
+    <meta property="og:title" content="oeasy Linux系统教程：本章回顾，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解持续输出 yes。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖This program is free software: you can redistribute it and/or modify    it under the terms of the G...">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="_1">本章回顾</h1>
+<h2 id="_2">我们来回顾一下 😌</h2>
+<ul>
+<li>
+<p>上一部分我们都讲了什么？</p>
+<ul>
+<li>历史</li>
+<li>命令</li>
+<li>终端快捷键</li>
+</ul>
+</li>
+<li>
+<p>接下来</p>
+<ul>
+<li>我们怎么玩呢</li>
+<li>快跟我一起去看看那个</li>
+<li>yes～</li>
+</ul>
+</li>
+</ul>
+<h2 id="yes">yes 🤔</h2>
+<ul>
+<li>没错</li>
+<li>这次我们来看看这个 yes<ul>
+<li>yes 是什么呢？</li>
+</ul>
+</li>
+<li>让我们来试试吧！👊</li>
+</ul>
+<div class="highlight"><pre><span></span><code>yes
+</code></pre></div>
+
+<ul>
+<li>我们发现只能看见屏幕上闪动的 y</li>
+<li>没错<ul>
+<li>这个命令就是要持续输出 y！</li>
+<li>还有这么变态的命令吗？</li>
+</ul>
+</li>
+<li>
+<p>😱 是的！🤪</p>
+</li>
+<li>
+<p>那怎么让他停下来？😫 </p>
+<ul>
+<li>我们可以这样做：</li>
+</ul>
+</li>
+<li><kbd>ctrl</kbd>+<kbd>c</kbd></li>
+<li>就可以让他取消 (cancel)</li>
+<li>赶紧去拷问他的灵魂！！！</li>
+</ul>
+<h3 id="_3">灵魂三问 😇</h3>
+<div class="highlight"><pre><span></span><code>whatis<span class="w"> </span>yes
+whereis<span class="w"> </span>yes
+which<span class="w"> </span>yes
+</code></pre></div>
+
+<ul>
+<li>
+<p>下面我们来解析一下：</p>
+</li>
+<li>
+<p>yes 就是持续输出</p>
+</li>
+<li>想查看源文件？</li>
+<li>dpkg -S /usr/bin/yes</li>
+<li>这个也属于 coreutils</li>
+<li>可以找到源代码看看</li>
+<li>方法可见 whereis 那个实验</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220901-1661997164199.png" /></p>
+<ul>
+<li>更新源之后</li>
+<li>下载源</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220901-1661997277113.png" /></p>
+<ul>
+<li>需要找到源文件</li>
+</ul>
+<h3 id="_4">找到位置</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220901-1661997379713.png" /></p>
+<ul>
+<li>打开yes.c</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220901-1661997415459.png" /></p>
+<ul>
+<li>134行代码</li>
+<li>yes具体还能干什么呢？</li>
+</ul>
+<h3 id="_5">手册</h3>
+<ul>
+<li>想了解 yes 命令更多？😉 <ul>
+<li>首选肯定是查手册啊！📕</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>man<span class="w"> </span>yes
+</code></pre></div>
+
+<p><img alt="图片描述" src="images/uid1190679-20210910-1631244793877.png" /></p>
+<h3 id="yes_1">yes 可以带两个选项 🎛</h3>
+<ul>
+<li>--help</li>
+<li>
+<p>--version</p>
+</li>
+<li>
+<p>比如：</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>yes<span class="w"> </span>--help
+</code></pre></div>
+
+<ul>
+<li>
+<p>我们可以得出结论：</p>
+</li>
+<li>
+<p><code>手册 man</code> 📕 最详尽 👍</p>
+</li>
+<li><code>yes --help</code> 稍显简略</li>
+<li><code>whatis yes</code> 一句话最简略</li>
+</ul>
+<h3 id="_6">可以带一个字符串参数</h3>
+<div class="highlight"><pre><span></span><code>yes<span class="w"> </span>oeasy
+yes<span class="w"> </span><span class="s2">"oeasy o2z"</span>
+</code></pre></div>
+
+<p><img alt="yeso1zo2z" src="images/yeso1zo2z.jpg" /></p>
+<ul>
+<li>
+<p><code>oeasy o2z</code> 是作为一个字符串一起被输出的</p>
+</li>
+<li>
+<p>去找找</p>
+</li>
+</ul>
+<h3 id="_7">下载源码</h3>
+<ul>
+<li>如果重启了</li>
+<li>就要重新允许下载src文件</li>
+<li>并更新源</li>
+<li>然后下载coreutils的源文件<ul>
+<li>sudo apt source coreutils</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20211017-1634478443143.png" /></p>
+<h3 id="_8">找到所有原文件</h3>
+<ul>
+<li>find ./ -name "*.c"</li>
+<li>筛出一些熟悉的</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20211017-1634478567964.png" /></p>
+<h3 id="yes_2">yes的源码</h3>
+<p><img alt="图片描述" src="images/uid1190679-20211017-1634478613918.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="cm">/* yes - output a string repeatedly until killed</span>
+<span class="cm">   Copyright (C) 1991-2016 Free Software Foundation, Inc.</span>
+
+<span class="cm">   This program is free software: you can redistribute it and/or modify</span>
+<span class="cm">   it under the terms of the GNU General Public License as published by</span>
+<span class="cm">   the Free Software Foundation, either version 3 of the License, or</span>
+<span class="cm">   (at your option) any later version.</span>
+
+<span class="cm">   This program is distributed in the hope that it will be useful,</span>
+<span class="cm">   but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="cm">   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="cm">   GNU General Public License for more details.</span>
+
+<span class="cm">   You should have received a copy of the GNU General Public License</span>
+<span class="cm">   along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.  */</span>
+
+<span class="cm">/* David MacKenzie &lt;djm@gnu.ai.mit.edu&gt; */</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;config.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sys/types.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;getopt.h&gt;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"system.h"</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"error.h"</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"long-options.h"</span>
+
+<span class="cm">/* The official name of this program (e.g., no 'g' prefix).  */</span>
+<span class="cp">#define PROGRAM_NAME "yes"</span>
+
+<span class="cp">#define AUTHORS proper_name ("David MacKenzie")</span>
+
+<span class="kt">void</span>
+<span class="nf">usage</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">status</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">EXIT_SUCCESS</span><span class="p">)</span>
+<span class="w">    </span><span class="n">emit_try_help</span><span class="w"> </span><span class="p">();</span>
+<span class="w">  </span><span class="k">else</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="n">printf</span><span class="w"> </span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s">"\</span>
+<span class="s">Usage: %s [STRING]...</span><span class="se">\n</span><span class="s">\</span>
+<span class="s">  or:  %s OPTION</span><span class="se">\n</span><span class="s">\</span>
+<span class="s">"</span><span class="p">),</span>
+<span class="w">              </span><span class="n">program_name</span><span class="p">,</span><span class="w"> </span><span class="n">program_name</span><span class="p">);</span>
+
+<span class="w">      </span><span class="n">fputs</span><span class="w"> </span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s">"\</span>
+<span class="s">Repeatedly output a line with all specified STRING(s), or 'y'.</span><span class="se">\n</span><span class="s">\</span>
+<span class="se">\n</span><span class="s">\</span>
+<span class="s">"</span><span class="p">),</span><span class="w"> </span><span class="n">stdout</span><span class="p">);</span>
+<span class="w">      </span><span class="n">fputs</span><span class="w"> </span><span class="p">(</span><span class="n">HELP_OPTION_DESCRIPTION</span><span class="p">,</span><span class="w"> </span><span class="n">stdout</span><span class="p">);</span>
+<span class="w">      </span><span class="n">fputs</span><span class="w"> </span><span class="p">(</span><span class="n">VERSION_OPTION_DESCRIPTION</span><span class="p">,</span><span class="w"> </span><span class="n">stdout</span><span class="p">);</span>
+<span class="w">      </span><span class="n">emit_ancillary_info</span><span class="w"> </span><span class="p">(</span><span class="n">PROGRAM_NAME</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="n">exit</span><span class="w"> </span><span class="p">(</span><span class="n">status</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span>
+<span class="nf">main</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">buf</span><span class="p">[</span><span class="n">BUFSIZ</span><span class="p">];</span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">pbuf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">buf</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">initialize_main</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">argv</span><span class="p">);</span>
+<span class="w">  </span><span class="n">set_program_name</span><span class="w"> </span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+<span class="w">  </span><span class="n">setlocale</span><span class="w"> </span><span class="p">(</span><span class="n">LC_ALL</span><span class="p">,</span><span class="w"> </span><span class="s">""</span><span class="p">);</span>
+<span class="w">  </span><span class="n">bindtextdomain</span><span class="w"> </span><span class="p">(</span><span class="n">PACKAGE</span><span class="p">,</span><span class="w"> </span><span class="n">LOCALEDIR</span><span class="p">);</span>
+<span class="w">  </span><span class="n">textdomain</span><span class="w"> </span><span class="p">(</span><span class="n">PACKAGE</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">atexit</span><span class="w"> </span><span class="p">(</span><span class="n">close_stdout</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">parse_long_options</span><span class="w"> </span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">,</span><span class="w"> </span><span class="n">PROGRAM_NAME</span><span class="p">,</span><span class="w"> </span><span class="n">PACKAGE_NAME</span><span class="p">,</span><span class="w"> </span><span class="n">Version</span><span class="p">,</span>
+<span class="w">                      </span><span class="n">usage</span><span class="p">,</span><span class="w"> </span><span class="n">AUTHORS</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">getopt_long</span><span class="w"> </span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">,</span><span class="w"> </span><span class="s">"+"</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">-1</span><span class="p">)</span>
+<span class="w">    </span><span class="n">usage</span><span class="w"> </span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">argc</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">optind</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="n">optind</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">argc</span><span class="p">;</span>
+<span class="w">      </span><span class="n">argv</span><span class="p">[</span><span class="n">argc</span><span class="o">++</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bad_cast</span><span class="w"> </span><span class="p">(</span><span class="s">"y"</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">  </span><span class="cm">/* Buffer data locally once, rather than having the</span>
+<span class="cm">     large overhead of stdio buffering each item.  */</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">optind</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">argc</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="kt">size_t</span><span class="w"> </span><span class="n">len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strlen</span><span class="w"> </span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">BUFSIZ</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">len</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">BUFSIZ</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">len</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">pbuf</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">buf</span><span class="p">)</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">      </span><span class="n">memcpy</span><span class="w"> </span><span class="p">(</span><span class="n">pbuf</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">len</span><span class="p">);</span>
+<span class="w">      </span><span class="n">pbuf</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">len</span><span class="p">;</span>
+<span class="w">      </span><span class="o">*</span><span class="n">pbuf</span><span class="o">++</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">argc</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="sc">'\n'</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="sc">' '</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">argc</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="kt">size_t</span><span class="w"> </span><span class="n">line_len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pbuf</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">buf</span><span class="p">;</span>
+<span class="w">      </span><span class="kt">size_t</span><span class="w"> </span><span class="n">lines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BUFSIZ</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">line_len</span><span class="p">;</span>
+<span class="w">      </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">--</span><span class="n">lines</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="n">memcpy</span><span class="w"> </span><span class="p">(</span><span class="n">pbuf</span><span class="p">,</span><span class="w"> </span><span class="n">pbuf</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">line_len</span><span class="p">,</span><span class="w"> </span><span class="n">line_len</span><span class="p">);</span>
+<span class="w">          </span><span class="n">pbuf</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">line_len</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">  </span><span class="cm">/* The normal case is to continuously output the local buffer.  */</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">argc</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">write</span><span class="w"> </span><span class="p">(</span><span class="n">STDOUT_FILENO</span><span class="p">,</span><span class="w"> </span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="n">pbuf</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">buf</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">-1</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="n">error</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">errno</span><span class="p">,</span><span class="w"> </span><span class="n">_</span><span class="p">(</span><span class="s">"standard output"</span><span class="p">));</span>
+<span class="w">          </span><span class="k">return</span><span class="w"> </span><span class="n">EXIT_FAILURE</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">  </span><span class="cm">/* If the data doesn't fit in BUFSIZ then output</span>
+<span class="cm">     what we've buffered, and iterate over the remaining items.  */</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nb">true</span><span class="w"> </span><span class="cm">/* i != argc */</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="p">;</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="n">pbuf</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">buf</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">fwrite</span><span class="w"> </span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="n">pbuf</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">stdout</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="n">error</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">errno</span><span class="p">,</span><span class="w"> </span><span class="n">_</span><span class="p">(</span><span class="s">"standard output"</span><span class="p">));</span>
+<span class="w">          </span><span class="k">return</span><span class="w"> </span><span class="n">EXIT_FAILURE</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">argc</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">fputs</span><span class="w"> </span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="w"> </span><span class="n">stdout</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">EOF</span>
+<span class="w">            </span><span class="o">||</span><span class="w"> </span><span class="n">putchar</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">argc</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="sc">'\n'</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="sc">' '</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">EOF</span><span class="p">)</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">            </span><span class="n">error</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">errno</span><span class="p">,</span><span class="w"> </span><span class="n">_</span><span class="p">(</span><span class="s">"standard output"</span><span class="p">));</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">EXIT_FAILURE</span><span class="p">;</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<ul>
+<li>这种全小写<ul>
+<li>配合下划线的c语言编程风格</li>
+<li>在这个领域很流行</li>
+<li>Python的源代码也是这个风格的</li>
+<li>snake_style</li>
+</ul>
+</li>
+<li>写这个代码的是谁呢？</li>
+</ul>
+<h3 id="david-mackenzie">David MacKenzie</h3>
+<ul>
+<li>是David MacKenzie等前辈的努力</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20211018-1634515759527.png" /></p>
+<ul>
+<li>才使得我们有可能使用开源软件</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20211018-1634516216949.png" /></p>
+<ul>
+<li>向前辈致敬</li>
+</ul>
+<h3 id="_9">总结</h3>
+<ul>
+<li>这yes有什么意义么？</li>
+<li>写个c语言程序不是很容易么？</li>
+<li>别着急</li>
+<li>我们先往下看？😉</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220901-1661998915312.png" />
+- 下次再说！👋</p>
+    </div>
+</body>
+</html>

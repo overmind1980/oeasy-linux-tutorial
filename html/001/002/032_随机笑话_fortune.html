@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：fortune 笑话，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解随机笑话 fortune。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 随机笑话, fortune, 笑话">
+    <meta property="og:title" content="oeasy Linux系统教程：fortune 笑话，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解随机笑话 fortune。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="fortune">fortune 笑话</h1>
+<h2 id="_1">中文笑话 😌</h2>
+<ul>
+<li>asciiview把图像转化为了 ascii🅰️ 字符画</li>
+<li>并且修改了 cowsay 的图像素材 💡</li>
+<li>我们能让 cowsay 随机讲讲笑话吗？</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20211008-1633663823279.png" /></p>
+<h2 id="_2">我们想要让牛讲一个随机的笑话</h2>
+<ul>
+<li>首先我们要有个说笑话的软件包：</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># 下载 fortune</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>fortune
+<span class="c1">#使用 fortune</span>
+fortune
+</code></pre></div>
+
+<ul>
+<li>安装了之后<ul>
+<li>会随机给我们一些经典名言</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20230417-1681731116203.png" /></p>
+<ul>
+<li>名言分成几类<ul>
+<li>fortune 提示</li>
+<li>riddles 对话</li>
+<li>literature 文学</li>
+</ul>
+</li>
+</ul>
+<h3 id="_3">指定文字来源</h3>
+<p><img alt="图片描述" src="images/uid1190679-20230417-1681731383627.png" /></p>
+<h3 id="_4">深入重定向</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># 把本该输出到屏幕的 fortune 的结果，输出到 cowsay</span>
+fortune<span class="w"> </span><span class="p">|</span><span class="w"> </span>cowsay
+</code></pre></div>
+
+<ul>
+<li>fortune 输出重定向到 figlet</li>
+<li>figlet 输出重定向到 cowsay</li>
+</ul>
+<p><img alt="Image text" src="images/fortune_pipe.png" /></p>
+<h3 id="_5">三重重定向</h3>
+<div class="highlight"><pre><span></span><code>fortune
+fortune<span class="w"> </span><span class="p">|</span><span class="w"> </span>boxes<span class="w"> </span>-d<span class="w"> </span>cat<span class="w"> </span>
+fortune<span class="w"> </span><span class="p">|</span><span class="w"> </span>boxes<span class="w"> </span>-d<span class="w"> </span>cat<span class="w"> </span><span class="p">|</span><span class="w"> </span>pv<span class="w"> </span>-qL<span class="w"> </span><span class="m">10</span>
+fortune<span class="w"> </span><span class="p">|</span><span class="w"> </span>boxes<span class="w"> </span>-d<span class="w"> </span>cat<span class="w"> </span><span class="p">|</span><span class="w"> </span>lolcat
+fortune<span class="w"> </span><span class="p">|</span><span class="w"> </span>boxes<span class="w"> </span>-d<span class="w"> </span>cat<span class="w"> </span><span class="p">|</span><span class="w"> </span>pv<span class="w"> </span>-qL<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="p">|</span>lolcat
+</code></pre></div>
+
+<p><img alt="图片描述" src="images/uid1190679-20210629-1624976312502.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20210629-1624976590337.png" /></p>
+<h3 id="boxes">boxes的细节</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">#查询详细帮助</span>
+man<span class="w"> </span>boxes
+<span class="c1">#列出所有图形</span>
+boxes<span class="w"> </span>-l
+</code></pre></div>
+
+<p><img alt="图片描述" src="images/uid1190679-20210727-1627352147045.png" /></p>
+<ul>
+<li>有些还挺好看的</li>
+<li>还有很多适合于制作注释之类的</li>
+</ul>
+<h3 id="_6">内边距</h3>
+<ul>
+<li>可以设置一些padding 内边距</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210727-1627353212523.png" /></p>
+<h3 id="_7">大小</h3>
+<ul>
+<li>可以控制大小</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210727-1627353415803.png" /></p>
+<h3 id="_8">对齐</h3>
+<ul>
+<li>还可以控制对齐方式 <ul>
+<li>垂直方向</li>
+<li>水平方向</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210727-1627353638371.png" /></p>
+<ul>
+<li>可以居中</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220903-1662191057883.png" /></p>
+<h2 id="fortune_1">fortune 的细节 📒</h2>
+<ul>
+<li>具体笑话文件在/usr/share/games/fortunes</li>
+<li>可以用 cat 查看相应的字典 dat📒 文件</li>
+<li>攻击性笑话在/usr/share/games/fortunes/off</li>
+<li>想删除某类的笑话，就删除相应的 dat 文件</li>
+<li>可以用-f 列出所有列表</li>
+<li>可以用百分比控制笑话来源</li>
+</ul>
+<p><img alt="Image text" src="images/fortune.png" /></p>
+<h3 id="_9">总结 🤨</h3>
+<ul>
+<li>fortune是英文的</li>
+<li>如果想来点中文的笑话或者诗歌可以么？</li>
+<li>怎么来呢？🤔</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220903-1662193886249.png" /></p>
+<ul>
+<li>下次再说！👋</li>
+</ul>
+    </div>
+</body>
+</html>

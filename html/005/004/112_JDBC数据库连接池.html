@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：封装数据库连接，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解JDBC数据库连接池。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖DataSource ds = DataSource cxt.lookup "java:/comp/env/jdbc/postgres" ;等内容，搜索oeasy即可学习。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, JDBC数据库连接池, 封装数据库连接">
+    <meta property="og:title" content="oeasy Linux系统教程：封装数据库连接，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解JDBC数据库连接池。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖DataSource ds = DataSource cxt.lookup "java:/comp/env/jdbc/postgres" ;等内容，搜索oeasy即可学习。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="_1">封装数据库连接</h1>
+<h2 id="_2">回忆</h2>
+<ul>
+<li>jndi<ul>
+<li>java Naming and Directory Interface</li>
+<li>可以配置一些通用的信息</li>
+</ul>
+</li>
+<li>通过指定的四步<ol>
+<li>构建资源类com.mycompany.MyBean</li>
+<li>声明资源引用</li>
+<li>在代码中引用</li>
+<li>配置资源工厂</li>
+</ol>
+</li>
+<li>经过这四步<ul>
+<li>我们就为每个具体web应用配置一些通用资源</li>
+</ul>
+</li>
+<li>数据库连接貌似有专门的配置方法😲</li>
+<li>怎么配置呢？🤔</li>
+</ul>
+<h3 id="_3">文档</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651670506568.png" /></p>
+<ul>
+<li>JDBC数据源属于jndi资源</li>
+<li>这里面提到了一个connection pool的概念<ul>
+<li>也就是数据库连接池</li>
+</ul>
+</li>
+<li>什么是数据库连接池的概念呢？<ul>
+<li>我们先来看看什么是池(pool)</li>
+</ul>
+</li>
+</ul>
+<h3 id="_4">水池</h3>
+<ul>
+<li>池的概念我们经常听说<ul>
+<li>流量池</li>
+<li>艺人池</li>
+<li>资金池</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220616-1655338141396.png" /></p>
+<ul>
+<li>这有点抽象啊</li>
+<li>池来自于什么呢？</li>
+</ul>
+<h2 id="pool">pool</h2>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651670572324.png" /></p>
+<ul>
+<li>把水先蓄起来</li>
+<li>想要用的时候直接就能用</li>
+<li>就是水池</li>
+</ul>
+<h3 id="_5">酒池</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651672985356.png" /></p>
+<ul>
+<li>把酒先蓄起来</li>
+<li>想要用的时候直接就能用</li>
+<li>就是酒池</li>
+</ul>
+<h3 id="_6">电池</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651670830918.png" /></p>
+<ul>
+<li>把电先蓄起来</li>
+<li>想用的时候直接就能用</li>
+<li>就是电池</li>
+</ul>
+<h3 id="_7">小便池</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220522-1653183199629.png" /></p>
+<ul>
+<li>把小便蓄起来</li>
+<li>想用的时候直接就能用</li>
+<li>就是小便池</li>
+<li>啊，并不是...😶</li>
+</ul>
+<h3 id="_8">数据库连接池</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651673447778.jpg" /></p>
+<ul>
+<li>把数据库连接先蓄起来</li>
+<li>想用的时候直接就能用</li>
+<li>就是数据库连接池</li>
+<li>可是蓄数据库连接有什么用呢？</li>
+</ul>
+<h3 id="_9">数据库连接</h3>
+<ul>
+<li>Connection是一个类的对象<ul>
+<li>每次实例化都要分配内存</li>
+<li>使用之后就要释放内存</li>
+<li>频繁的分配释放反而浪费系统资源</li>
+</ul>
+</li>
+<li>干脆先蓄着100个数据库连接</li>
+<li>没有人来<ul>
+<li>也先把内存分配了</li>
+<li>先占着位置</li>
+</ul>
+</li>
+<li>有人来<ul>
+<li>就从池子里面拿一个现成的</li>
+<li>用完了放回到池子</li>
+<li>省的来回来去申请释放内存</li>
+</ul>
+</li>
+<li>这种预先蓄起来的方式<ul>
+<li>就是池化</li>
+<li>类似的还有<ul>
+<li>线程池</li>
+<li>字符串常量池</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>具体怎么配置JDBC数据源呢？</li>
+</ul>
+<h3 id="_10">文档</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651673888008.png" /></p>
+<ul>
+<li>tomcat默认的数据源是DBCP2连接池</li>
+<li>方法是要写自己的资源工厂</li>
+<li>这些方法都通用于各种数据库</li>
+<li>后面的文档有专门介绍postgresql的数据库连接池配置方法</li>
+<li>我们直接跳过去</li>
+</ul>
+<h3 id="_11">第一步</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651674281640.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651674227924.png" /></p>
+<ul>
+<li>把pg的jdbc驱动下载到$CATALINA_HOME的lib下</li>
+</ul>
+<h3 id="_12">第二步</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651674588556.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651674867911.png" /></p>
+<ul>
+<li>配置资源上下文</li>
+</ul>
+<h3 id="_13">第三步</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651674983340.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651674965141.png" /></p>
+<ul>
+<li>配置资源引用</li>
+</ul>
+<h3 id="_14">第四步</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651675935769.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651675944498.png" /></p>
+<ul>
+<li>使用JDBC数据源</li>
+<li>开始编辑ConnectionPool.java</li>
+</ul>
+<h3 id="_15">代码</h3>
+<ul>
+<li>应用数据源连接池</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651676060739.jpg" /></p>
+<h3 id="_16">源码</h3>
+<ul>
+<li>修改后的代码</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.*</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.*</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.*</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.http.*</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.sql.*</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.naming.*</span><span class="p">;</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ConnectionPool</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HttpServlet</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">serialVersionUID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1L</span><span class="p">;</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doGet</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span>
+<span class="w">            </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">)</span>
+<span class="w">        </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="p">,</span><span class="w"> </span><span class="n">ServletException</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">response</span><span class="p">.</span><span class="na">setContentType</span><span class="p">(</span><span class="s">"text/html"</span><span class="p">);</span>
+<span class="w">        </span><span class="n">response</span><span class="p">.</span><span class="na">setCharacterEncoding</span><span class="p">(</span><span class="s">"UTF-8"</span><span class="p">);</span>
+<span class="w">        </span><span class="n">PrintWriter</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">response</span><span class="p">.</span><span class="na">getWriter</span><span class="p">();</span>
+<span class="w">        </span><span class="n">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;body&gt;"</span><span class="p">);</span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">InitialContext</span><span class="w"> </span><span class="n">cxt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">InitialContext</span><span class="p">();</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">cxt</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Exception</span><span class="p">(</span><span class="s">"Uh oh -- no context!"</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="n">DataSource</span><span class="w"> </span><span class="n">ds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">DataSource</span><span class="p">)</span><span class="w"> </span><span class="n">cxt</span><span class="p">.</span><span class="na">lookup</span><span class="p">(</span><span class="w"> </span><span class="s">"java:/comp/env/jdbc/postgres"</span><span class="w"> </span><span class="p">);</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">ds</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Exception</span><span class="p">(</span><span class="s">"Data source not found!"</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="n">Connection</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ds</span><span class="p">.</span><span class="na">getConnection</span><span class="p">();</span>
+<span class="w">            </span><span class="n">c</span><span class="p">.</span><span class="na">setAutoCommit</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+<span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">SearchName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">""</span><span class="p">;</span>
+<span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">sql2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"select * from login where username like ?"</span><span class="p">;</span>
+<span class="w">            </span><span class="n">PreparedStatement</span><span class="w"> </span><span class="n">pstmt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="p">.</span><span class="na">prepareStatement</span><span class="p">(</span><span class="n">sql2</span><span class="p">);</span>
+<span class="w">            </span><span class="n">pstmt</span><span class="p">.</span><span class="na">setString</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s">"%"</span><span class="o">+</span><span class="n">SearchName</span><span class="o">+</span><span class="s">"%"</span><span class="p">);</span>
+<span class="w">            </span><span class="n">ResultSet</span><span class="w"> </span><span class="n">rs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pstmt</span><span class="p">.</span><span class="na">executeQuery</span><span class="p">();</span>
+<span class="w">            </span><span class="k">while</span><span class="p">(</span><span class="n">rs</span><span class="p">.</span><span class="na">next</span><span class="p">()){</span>
+<span class="w">                </span><span class="n">String</span><span class="w"> </span><span class="n">username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rs</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">"username"</span><span class="p">);</span>
+<span class="w">                </span><span class="n">String</span><span class="w"> </span><span class="n">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rs</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">"password"</span><span class="p">);</span>
+<span class="w">                </span><span class="n">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="n">username</span><span class="o">+</span><span class="s">":"</span><span class="o">+</span><span class="n">password</span><span class="o">+</span><span class="s">"&lt;br/&gt;"</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="n">DBConUtil</span><span class="p">.</span><span class="na">close</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">pstmt</span><span class="p">,</span><span class="kc">null</span><span class="p">,</span><span class="n">rs</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">err</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="na">getClass</span><span class="p">().</span><span class="na">getName</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">": "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">getMessage</span><span class="p">());</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"select query is ok!&lt;br/&gt;"</span><span class="p">);</span>
+<span class="w">        </span><span class="n">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"&lt;/body&gt;&lt;/html&gt;"</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="_17">配置路由</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651676119839.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20220504-1651676128106.png" /></p>
+<ul>
+<li>访问成功！！！</li>
+</ul>
+<h2 id="_18">总结</h2>
+<ul>
+<li>jdbc connection pool<ul>
+<li>jdbc 数据库连接池</li>
+<li>首先是一种池子</li>
+</ul>
+</li>
+<li>通过指定的四步<ol>
+<li>配置jdbc数据库连接池的jar包</li>
+<li>资源配置(context.xml中设置关于pg的Resource)</li>
+<li>在本应用的web.xml中使用相应的资源引用</li>
+<li>在程序中使用jndi调用数据库连接资源</li>
+</ol>
+</li>
+<li>经过这四步我们就构建了一个可用的数据库连接池</li>
+<li>我们用这个数据库连接池可以做怎样的操作呢<ul>
+<li>比如删除？🤔</li>
+</ul>
+</li>
+<li>下次再说！👋</li>
+</ul>
+    </div>
+</body>
+</html>

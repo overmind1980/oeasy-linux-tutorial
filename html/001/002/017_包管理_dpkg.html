@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：本章回顾，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解包管理 dpkg。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 包管理, dpkg, 本章回顾">
+    <meta property="og:title" content="oeasy Linux系统教程：本章回顾，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解包管理 dpkg。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="_1">本章回顾</h1>
+<h2 id="_2">我们来回顾一下 😌</h2>
+<ul>
+<li>上一部分我们都讲了什么？🤔<ul>
+<li>yes 命令</li>
+<li>持续输出某字符串</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>yes<span class="w"> </span>oeasy
+</code></pre></div>
+
+<ul>
+<li>这yes有什么意义么？</li>
+<li>写个c语言程序不是很容易么？</li>
+<li>别着急</li>
+<li>我们先往下看？😉</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220901-1661998915312.png" /></p>
+<ul>
+<li>还有什么好玩的命令吗？🤔</li>
+</ul>
+<h3 id="_3">列出所有包</h3>
+<div class="highlight"><pre><span></span><code>apt<span class="w"> </span>list
+</code></pre></div>
+
+<ul>
+<li>好多文件啊</li>
+<li>能找到yes命令么？</li>
+<li>找不到啊</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210910-1631245029533.png" /></p>
+<h3 id="dpkg">dpkg</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># 找到 yes 对应位置</span>
+which<span class="w"> </span>yes
+<span class="c1"># /usr/bin/yes 属于哪个包</span>
+dpkg<span class="w"> </span>-S<span class="w"> </span>/usr/bin/yes
+<span class="c1"># 在已经安装的包里面找到 coreutils</span>
+<span class="c1"># coreutils 到底是干什么的？</span>
+dpkg<span class="w"> </span>-l<span class="w"> </span>coreutils
+<span class="c1"># 在已安装列表中搜索 coreutils的状态</span>
+dpkg<span class="w"> </span>-s<span class="w"> </span>coreutils
+</code></pre></div>
+
+<p><img alt="图片描述" src="images/uid1190679-20210910-1631245089560.png" /></p>
+<ul>
+<li><code>yes命令</code> 属于 <code>coreutils包</code> <ul>
+<li>具体的命令就是可执行文件</li>
+<li>他是被打到一个包里面的</li>
+<li>包是存储在镜像站点的文件夹下的</li>
+<li>如何查询dpkg命令的选项呢？</li>
+</ul>
+</li>
+</ul>
+<h3 id="_4">查看帮助</h3>
+<p><img alt="图片描述" src="images/uid1190679-20211017-1634464535230.png" /></p>
+<ul>
+<li>那么具体什么是coreutils呢？</li>
+</ul>
+<h3 id="coreutils">coreutils</h3>
+<p><img alt="图片描述" src="images/uid1190679-20211017-1634464663520.png" /></p>
+<ul>
+<li>coreutils<ul>
+<li>core是核心</li>
+<li>utils是utilities应用<ul>
+<li>对应一些核心应用</li>
+<li>是gnu制作的linux内核之上的一层</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>常用的命令都在这里</li>
+<li>都有哪些命令呢？</li>
+</ul>
+<h3 id="_5">包的细节</h3>
+<p><img alt="图片描述" src="images/uid1190679-20211017-1634465116706.png" /></p>
+<ul>
+<li>https://wiki.debian.org/coreutils</li>
+<li>cat、ls、cp、mv、rm、mkdir都属于这个包</li>
+</ul>
+<h3 id="_6">新的包管理方式</h3>
+<ul>
+<li>dpkg 对应 <ul>
+<li>Debian Package 是传统包管理</li>
+<li>dpkg 更多的是本地包的各种安装卸载查看</li>
+</ul>
+</li>
+<li>早年间都是通过 ftp工具 将包整个下载到本地<ul>
+<li>再用 dkpg 安装</li>
+</ul>
+</li>
+<li>现在通过http <ul>
+<li>连下载带安装一条龙</li>
+<li>用什么命令呢</li>
+</ul>
+</li>
+</ul>
+<h3 id="apt">apt</h3>
+<div class="highlight"><pre><span></span><code>apt list coreutils
+# 在源中搜索 coreutils
+apt search coreutils
+</code></pre></div>
+
+<ul>
+<li>apt 是新的包管理工具 😍</li>
+<li>apt 是 advanced package tools 的意思</li>
+<li>apt 是 debian 系发行版的软件包管理工具</li>
+<li>apt和dpkg有什么区别</li>
+<li>先看dpkg</li>
+</ul>
+<h3 id="dpkg_1">dpkg</h3>
+<ul>
+<li>dpkg<ul>
+<li>dpkg 是管理本地包安装卸载的</li>
+<li>apt 可以从远程镜像查询然后下载到本地并安装，一条龙的</li>
+</ul>
+</li>
+<li>软件获得方式<ul>
+<li>dkpg没有使用互联网<ul>
+<li>通过光盘获取</li>
+<li>借助ftp工具下载</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220901-1662004888813.png" /></p>
+<ul>
+<li>传统方式dkpg下载的东西还有可能不能用</li>
+</ul>
+<h3 id="_7">工具链</h3>
+<ul>
+<li>得到的二进制文件可能不能用</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20211017-1634465711818.png" /></p>
+<ul>
+<li>软件包之间是有依赖关系的<ul>
+<li>这个软件包依赖的软件包不存在</li>
+<li>甚至被依赖的软件包所依赖的软件包不存在</li>
+<li>这就形成了一条链路</li>
+<li>我们就需要把这条链路上所有的软件包都下载下来</li>
+</ul>
+</li>
+<li>有没有更便捷的方法呢？</li>
+</ul>
+<h3 id="_8">总结</h3>
+<ul>
+<li>我们这里了解了dpkg<ul>
+<li>查看包(package)</li>
+<li>安装包</li>
+</ul>
+</li>
+<li>这个命令是ubuntu从他的上游debian上获得的</li>
+<li>不过下载包、管理包真的好麻烦</li>
+<li>能否连下载带管理一条龙都给做了呢？</li>
+<li>下回再说！👋</li>
+</ul>
+    </div>
+</body>
+</html>

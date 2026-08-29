@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：调试模式，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解调试模式 debug mode log日志。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 调试模式, debug, mode, log日志">
+    <meta property="og:title" content="oeasy Linux系统教程：调试模式，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解调试模式 debug mode log日志。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="_1">调试模式</h1>
+<h2 id="_2">回顾 😌</h2>
+<ul>
+<li>我们上次搭建了开发环境</li>
+<li>使用tmux建立了2个子标签页<ul>
+<li>一个负责执行命令</li>
+<li>一个负责编辑文件</li>
+</ul>
+</li>
+<li>这里面的路由核心是web.xml<ul>
+<li>web.xml是从url路由到class的核心</li>
+<li>web.xml是后端程序的核心</li>
+<li>出了错就层层排错</li>
+</ul>
+</li>
+<li>可是有这样一个问题</li>
+<li>就是出了预想不到的错误</li>
+<li>去哪里查看报错信息呢？🤔</li>
+</ul>
+<h3 id="_3">搜索</h3>
+<p><img alt="图片描述" src="images/uid1190679-20211123-1637637457953.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20211123-1637637522007.png" /></p>
+<h3 id="webxml">web.xml</h3>
+<ul>
+<li>在tomcat10中<ul>
+<li>找到conf/web.xml</li>
+<li>进行修改</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220425-1650885852801.png" /></p>
+<ul>
+<li>什么是debug呢？</li>
+</ul>
+<h3 id="debug">debug</h3>
+<ul>
+<li>晶体管计算机之前用的是电子管计算机</li>
+<li>电子管之前用的是继电器计算机<ul>
+<li>那个时代编程就是打孔和插线</li>
+<li>程序的错误无论如何找不到原因的时候</li>
+<li>发现原来是一只bug<ul>
+<li>以血肉之躯让理性的计算产生了错误</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220511-1652259822261.png" /></p>
+<ul>
+<li>从此在编程中找错误原因有了新的名称<ul>
+<li>捉虫(debug)</li>
+</ul>
+</li>
+<li>我们要做的就是让tomcat开启捉虫模式<ul>
+<li>我们就可以跟踪着线索(trace into)</li>
+<li>哪里出了问题(bug)</li>
+<li>怎么把线索埋在我们的程序里面呢？</li>
+</ul>
+</li>
+</ul>
+<h3 id="java">修改java源文件</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220511-1652260275215.jpg" /></p>
+<ul>
+<li>红框的部分就是debug信息<ul>
+<li>System.out输出到后台的日志当中</li>
+<li>不但可以输出文本</li>
+<li>还可以输出变量表达式</li>
+<li>这样我们就更容易定位问题所在！</li>
+</ul>
+</li>
+<li>
+<p>保存并编译</p>
+<ul>
+<li>重启tomcat</li>
+</ul>
+</li>
+<li>
+<p>访问指定的url确实可以运行路由到的class</p>
+<ul>
+<li>class输出到控制台的输出流写入日志了么？</li>
+<li>什么是日志呢？</li>
+</ul>
+</li>
+</ul>
+<h3 id="_4">砍树</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220511-1652260918999.png" /></p>
+<ul>
+<li>log本意是原木</li>
+<li>就是砍下来没有处理的树</li>
+<li>作为动词也有砍的意思</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220511-1652260931803.png" /></p>
+<ul>
+<li>可是这和日志有什么关系？🤔</li>
+</ul>
+<h3 id="_5">大帆船</h3>
+<ul>
+<li>这些大树被做成了帆船</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220511-1652261673755.png" /></p>
+<ul>
+<li>在地中海上<ul>
+<li>水手成天头枕着波涛</li>
+<li>想家了</li>
+<li>就在船身上、甲板上甚至桅杆上</li>
+<li>轻轻滴划小道道</li>
+<li>早年间知识有限只能记录天数</li>
+</ul>
+</li>
+<li>这就是航海日志   </li>
+</ul>
+<h3 id="_6">航海日志</h3>
+<ul>
+<li>后来大航海时代<ul>
+<li>在苍茫的大海上</li>
+<li>狂风卷积着乌云</li>
+<li>要对航海日志这个事情量化</li>
+<li>不但要记录天数</li>
+<li>而且要记录<ul>
+<li>日期</li>
+<li>位置</li>
+<li>天气</li>
+<li>甚至速度</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220511-1652261950334.png" /></p>
+<ul>
+<li>上面这个就是一个测速用的log<ul>
+<li>当时水手们将一根连接在一根绳子上的原木(log)扔在水里</li>
+<li>绳子上定期打结</li>
+<li>水手们计算在给定时间内(一个沙漏)<ul>
+<li>通过他们手中的节数</li>
+<li>给定时间用的是沙漏</li>
+<li>以确定船的速度</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>今天水手和飞行员仍然用节(knot)来表示速度</li>
+</ul>
+<h3 id="_7">航海日志进化</h3>
+<ul>
+<li>沙漏和测速log虽然简陋<ul>
+<li>但是总比没有强</li>
+<li>根据罗盘和速度大致估算出船在地图的位置</li>
+<li>所以会发生找不到藏宝岛屿山洞的事情</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220511-1652272413548.png" /></p>
+<ul>
+<li>随着时间的推进<ul>
+<li>测量精度大幅提高</li>
+</ul>
+</li>
+</ul>
+<h3 id="_8">航海日志再进化</h3>
+<ul>
+<li>和根据太阳高度和罗盘<ul>
+<li>配合六分仪判断当前的经纬度</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220511-1652272905648.webp" /></p>
+<ul>
+<li>和Harrison的航海钟表等更精准的设备</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220511-1652273173433.gif" /></p>
+<ul>
+<li>又如何记录航海日志呢？</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220511-1652273224213.png" /></p>
+<ul>
+<li>日志有了自己的格式<ul>
+<li>有了标准的表格</li>
+</ul>
+</li>
+</ul>
+<h3 id="_9">目前</h3>
+<ul>
+<li>最新科技<ul>
+<li>基于原子钟的时间记录</li>
+<li>基于gps和北斗导航的定位系统</li>
+<li>各种仪表的参数记录</li>
+<li>都可以用电磁波同步到卫星或者地面站</li>
+<li>实时报告、实时监测</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220511-1652273516640.png" /></p>
+<ul>
+<li>同时也记录到黑匣子里<ul>
+<li>从电子化到数字化</li>
+<li>更多更详细的东西都被记录到持久的媒体中</li>
+<li>作为军事、法律和商务的重要证据</li>
+<li>工业化普及之后</li>
+<li>一般的机器操作都有工作日志</li>
+<li>那么计算机时代呢</li>
+</ul>
+</li>
+<li>如何理解log</li>
+</ul>
+<h3 id="_10">计算机时代</h3>
+<ul>
+<li>开了机器就自动写日志了<ul>
+<li>如果有用户登录更要写清楚</li>
+<li>登录叫做login</li>
+<li>意思是logging in</li>
+<li>写日志</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220511-1652274179329.png" /></p>
+<ul>
+<li>退出的时候叫做 log out (log off). <ul>
+<li>1960s开始有大型分时操作系统</li>
+<li>这个专业术语也慢慢流行起来</li>
+<li>日志有几种呢？</li>
+</ul>
+</li>
+</ul>
+<h3 id="_11">日志种类</h3>
+<ul>
+<li>日志种类<ul>
+<li>事件日志(Event logs)</li>
+<li>交易记录(Transaction log)</li>
+<li>消息日志(Message logs)</li>
+</ul>
+</li>
+<li>云时代能记录的都给记录了下来</li>
+<li>电脑把自己干过的事</li>
+<li>一桩桩</li>
+<li>一件件</li>
+<li>都像写日记一样写成日志</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220511-1652275018584.png" /></p>
+<ul>
+<li>tomcat的日志属于什么类型？</li>
+</ul>
+<h3 id="web">web服务器日志</h3>
+<ul>
+<li>tomcat是动态网页服务器</li>
+<li>肯定记录的都是动态网页那些事<ul>
+<li>谁来了<ul>
+<li>什么ip地址</li>
+</ul>
+</li>
+<li>什么时候来的</li>
+<li>都发送了什么请求</li>
+<li>都给他记录下来</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220511-1652275459114.png" /></p>
+<ul>
+<li>这个日志在哪呢？</li>
+</ul>
+<h3 id="tomcat">tomcat日志</h3>
+<ul>
+<li>再开个窗口<ul>
+<li>专门查看日志</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220511-1652275683972.png" /></p>
+<ul>
+<li>log都在logs里面<ul>
+<li>有主机管理日志</li>
+<li>有本地主机日志</li>
+<li>有主机访问日志</li>
+<li>管理日志</li>
+</ul>
+</li>
+<li>日志分日期而且分类型</li>
+<li>我们打开一个看看</li>
+</ul>
+<h3 id="_12">主机访问日志</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220511-1652276069285.png" /></p>
+<ul>
+<li>这就是所有ip地址对于主机在2022-02-12的访问记录<ul>
+<li>都有记录</li>
+<li>即使你访问了一个没有路由的页面也有记录</li>
+<li>任何访问都有记录！！！</li>
+</ul>
+</li>
+<li>当然现在的网站不只记录这些<ul>
+<li>毕竟日志不适合大规模的查询</li>
+<li>现在的网站和应用还使用数据库记录着<ul>
+<li>你的所有操作</li>
+<li>你的喜好</li>
+<li>你的习惯</li>
+<li>你的性别等</li>
+<li>特别是通过怎么样的链路进入充值页面</li>
+<li>以及在充值会员的页面停留了多久这件事情</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>而且会给用户贴上各种各样的标签<ul>
+<li>从而推荐不同的内容</li>
+</ul>
+</li>
+<li>我们的自定义日志要看到在哪呢？</li>
+</ul>
+<h3 id="_13">验证</h3>
+<ul>
+<li>catalina.out</li>
+<li>所有东西都在这里</li>
+<li>我们打开看一下</li>
+<li>日志是如何输出的</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220425-1650886452448.png" /></p>
+<ul>
+<li>所以可以在程序里面写一些调试信息了</li>
+<li>最终可以在日志里面看到出错的位置</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220425-1650886531833.png" /></p>
+<h3 id="_14">刷新</h3>
+<ul>
+<li>在vim中:e可以刷新当前文件</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220425-1650886614223.png" /></p>
+<ul>
+<li>报错应该每个一行</li>
+</ul>
+<h3 id="_15">修改</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220511-1652276444270.png" /></p>
+<ul>
+<li>编辑窗口<ul>
+<li>完成替换修改</li>
+<li>保存并编译</li>
+</ul>
+</li>
+<li>bin窗口<ul>
+<li>重启服务器</li>
+<li>并打开网页</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220425-1650886983915.png" /></p>
+<ul>
+<li>这些都是在后端完成的</li>
+</ul>
+<h3 id="_16">总结 🤨</h3>
+<ul>
+<li>这次搭建了debug的开发环境<ul>
+<li>可以在程序里面向日志中输出debug相关信息</li>
+<li>这些信息写到了日志(logs)里</li>
+<li>logs都在后端(后台)</li>
+<li>servlet源程序也在后端(后台)</li>
+<li>web.xml是后端程序路由的核心</li>
+</ul>
+</li>
+<li>可是<ul>
+<li>究竟什么是后端呢？🤔</li>
+</ul>
+</li>
+<li>下次再说！👋</li>
+</ul>
+    </div>
+</body>
+</html>

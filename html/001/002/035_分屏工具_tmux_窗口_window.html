@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：分屏工具tmux，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解分屏工具 tmux 窗口 window。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 分屏工具, tmux, 窗口, window, 分屏工具tmux">
+    <meta property="og:title" content="oeasy Linux系统教程：分屏工具tmux，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解分屏工具 tmux 窗口 window。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="tmux">分屏工具tmux</h1>
+<h2 id="_1">总结</h2>
+<ul>
+<li>新建会话<ul>
+<li>tmux</li>
+<li>tmux new -s session_name</li>
+</ul>
+</li>
+<li>列出所有会话<ul>
+<li>tmux ls</li>
+</ul>
+</li>
+<li>进入会话<ul>
+<li>tmux attach -t session_name</li>
+</ul>
+</li>
+<li>切换会话<ul>
+<li>tmux switch -t session_name </li>
+</ul>
+</li>
+<li>退出会话<ul>
+<li>tmux detach </li>
+<li><kbd>ctrl</kbd>+<kbd>b</kbd> <kbd>d</kbd></li>
+</ul>
+</li>
+<li>删除会话<ul>
+<li>tmux kill-session -t session_name</li>
+</ul>
+</li>
+<li>会话改名<ul>
+<li>tmux rename-session -t old new    </li>
+<li>当前会话改名<ul>
+<li><kbd>ctrl</kbd>+<kbd>b</kbd> <kbd>$</kbd></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>会话管理器<ul>
+<li><kbd>ctrl</kbd>+<kbd>b</kbd> <kbd>s</kbd></li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220903-1662208792424.png" /></p>
+<ul>
+<li>每个session后面有个<code>1 windows</code>是什么意思?🤔</li>
+</ul>
+<h3 id="windows">windows 窗口</h3>
+<ul>
+<li>可以在当前session中添加window<ul>
+<li>tmux new-window</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220903-1662209146134.jpg" /></p>
+<ul>
+<li>红框中就出现新的window</li>
+</ul>
+<h3 id="_2">会话管理器</h3>
+<ul>
+<li>会话管理器<ul>
+<li><kbd>ctrl</kbd>+<kbd>b</kbd> <kbd>s</kbd></li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220903-1662209514515.jpg" /></p>
+<ul>
+<li>可以用方向键和回车选中会话中的窗口(window)</li>
+<li>一个窗口对应下方绿条上的一个标签页</li>
+<li>当前窗口后面有个星号*</li>
+<li>会话(session)和窗口(window)之间有什么关系呢？</li>
+</ul>
+<h3 id="tmux_1">tmux结构</h3>
+<p><img alt="图片描述" src="images/uid1190679-20211209-1639025794089.png" /></p>
+<ul>
+<li>session可以切换</li>
+<li>window可以么？</li>
+</ul>
+<h3 id="windows_1">切换windows</h3>
+<ul>
+<li>用会话管理器切换<ul>
+<li><kbd>ctrl</kbd>+<kbd>b</kbd> <kbd>s</kbd></li>
+<li>s对应session</li>
+<li>所有窗口默认关闭</li>
+<li>可以用方向键切换</li>
+</ul>
+</li>
+<li>用窗口管理器切换<ul>
+<li><kbd>ctrl</kbd>+<kbd>b</kbd> <kbd>w</kbd></li>
+<li>w代表window</li>
+<li>所有窗口默认打开</li>
+<li>列出当前session所有window</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20211209-1639025528142.png" /></p>
+<ul>
+<li>选择<ul>
+<li>然后用方向键选择</li>
+<li>回车键确认</li>
+</ul>
+</li>
+<li>命令方式<ul>
+<li>tmux select-window -t <window-number></li>
+</ul>
+</li>
+<li>不过还是比较复杂的</li>
+<li>window的增删改名可以用快捷键么？</li>
+</ul>
+<h3 id="window">window相关快捷键</h3>
+<ul>
+<li><kbd>ctrl</kbd>+<kbd>b</kbd> <kbd>c</kbd><ul>
+<li>意思是create</li>
+<li>创建一个新window窗口</li>
+<li>状态栏会显示多个窗口的信息</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210927-1632747599174.png" /></p>
+<ul>
+<li><kbd>ctrl</kbd>+<kbd>b</kbd> <kbd>p</kbd><ul>
+<li>切换到上一个窗口（按照状态栏上的顺序）previous</li>
+</ul>
+</li>
+<li><kbd>ctrl</kbd>+<kbd>b</kbd> <kbd>n</kbd><ul>
+<li>切换到下一个窗口 next</li>
+</ul>
+</li>
+<li><kbd>ctrl</kbd>+<kbd>b</kbd> <kbd>数字</kbd><ul>
+<li>切换到指定编号的窗口</li>
+<li>其中的<number>是状态栏上的窗口编号</li>
+</ul>
+</li>
+<li>tmux之后，窗口内的东西就不能向上翻着看了</li>
+<li>怎么办？</li>
+</ul>
+<h3 id="_3">向上翻页</h3>
+<ul>
+<li><kbd>ctrl</kbd>+<kbd>b</kbd> <kbd>[</kbd><ul>
+<li>可以进入翻页模式</li>
+<li>左上角有标记</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210929-1632865488365.png" /></p>
+<ul>
+<li>用方向键就可以往上翻了<ul>
+<li>鼠标也可以</li>
+<li>结束翻页状态按q</li>
+</ul>
+</li>
+<li>窗口可以删除么？</li>
+</ul>
+<h3 id="_4">删除窗口</h3>
+<ul>
+<li>思路<ul>
+<li><kbd>ctrl</kbd>+<kbd>b</kbd> <kbd>&amp;</kbd><ul>
+<li>c 是 close</li>
+</ul>
+</li>
+<li>删除窗口应该和删除会话一样<ul>
+<li>也是kill </li>
+</ul>
+</li>
+<li>只不过这次不是kill-session</li>
+<li>而是kill-window</li>
+</ul>
+</li>
+<li>试试</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210927-1632748022383.png" /></p>
+<ul>
+<li>删除session和window的方式都是kill</li>
+<li>那session和window的改名方式都是rename么？</li>
+</ul>
+<h3 id="_5">窗口改名</h3>
+<ul>
+<li>改名可以按为先删除再重建的方式完成</li>
+<li>不过有没有直接改名的方式呢</li>
+<li>tmux rename-window -t 3 o3z</li>
+<li>试试</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210927-1632748030343.png" /></p>
+<ul>
+<li>注意底下绿条的变化</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210927-1632748406379.png" /></p>
+<ul>
+<li><kbd>ctrl</kbd>+<kbd>b</kbd> <kbd>,</kbd><ul>
+<li>可以修改当前窗口的名字</li>
+<li>给窗口一个记得住的名字很重要</li>
+</ul>
+</li>
+<li>既然有了session为什么又要有window呢？</li>
+<li>这不是重复了么？</li>
+</ul>
+<h3 id="sessionwindow">session和window之间的区别</h3>
+<ul>
+<li><kbd>ctrl</kbd>+<kbd>b</kbd> <kbd>s</kbd></li>
+<li>可以列出当前的用户的所有session</li>
+<li>还可以展开</li>
+<li>我们有的时候需要连好几个服务器<ul>
+<li>oeasy.org</li>
+<li>o2z.org</li>
+</ul>
+</li>
+<li>这就需要两个sessions吗？</li>
+<li>其实不用我们只要同一个session中开两个window</li>
+<li>然后分别ssh到指定的服务器就可以了</li>
+<li>同一个服务器也可以开不同的window</li>
+<li>上面进行不同的操作<ul>
+<li>postgresql</li>
+<li>python</li>
+<li>tomcat</li>
+<li>minecraft server</li>
+</ul>
+</li>
+<li>那为什么有session呢？</li>
+<li>session我理解就是工作区 workspace<ul>
+<li>可以把工作的环境保留下来</li>
+<li>这一个session是干这套活的</li>
+<li>那一个session是干那套活的</li>
+<li>这样就可以通过切换session进行任务的切换</li>
+</ul>
+</li>
+<li>不过这个tmux始终在服务运行着</li>
+<li>还是比较占用资源的</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210929-1632865111649.png" /></p>
+<ul>
+<li>window之下还有可以分的么？</li>
+</ul>
+<h3 id="_6">总结</h3>
+<ul>
+<li>新建窗口<ul>
+<li>tmux new-window -n window_name</li>
+</ul>
+</li>
+<li>切换窗口<ul>
+<li><kbd>ctrl</kbd>+<kbd>b</kbd> <kbd>数字</kbd></li>
+</ul>
+</li>
+<li>关闭当前窗口<ul>
+<li><kbd>ctrl</kbd>+<kbd>b</kbd> <kbd>&amp;</kbd></li>
+<li>tmux kill-session -t session_name</li>
+</ul>
+</li>
+<li>会话窗口<ul>
+<li>tmux rename-session -t old new    </li>
+<li><kbd>ctrl</kbd>+<kbd>b</kbd> <kbd>$</kbd></li>
+</ul>
+</li>
+<li>窗口管理器<ul>
+<li><kbd>ctrl</kbd>+<kbd>b</kbd> <kbd>s</kbd></li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220903-1662210670959.png" /></p>
+<ul>
+<li>窗口下面还有什么？🤔</li>
+<li>下次再说！👋🏻</li>
+</ul>
+    </div>
+</body>
+</html>

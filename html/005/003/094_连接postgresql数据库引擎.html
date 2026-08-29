@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：连接postgres，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解连接postgresql数据库引擎。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 连接postgresql数据库引擎, 连接postgres">
+    <meta property="og:title" content="oeasy Linux系统教程：连接postgres，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解连接postgresql数据库引擎。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="postgres">连接postgres</h1>
+<h2 id="_1">回顾</h2>
+<ul>
+<li>我们处理了后台加法运算中<ul>
+<li>可能出现的异常</li>
+</ul>
+</li>
+<li>不过后台最重要的还是操作数据库！</li>
+<li>这后台数据库究竟如何操作怎么做？🤔</li>
+<li>首先是确保pg已经安装</li>
+</ul>
+<h3 id="_2">安装并启动</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220521-1653120899102.png" /></p>
+<ul>
+<li>如果没有装好postgres</li>
+<li>就需要再重新装一下</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210912-1631442687451.png" /></p>
+<ul>
+<li>装好之后<ul>
+<li>sudo -u postgres psql<ul>
+<li>sudo管理员运行</li>
+<li>-u postgres 用postgres这个用户的身份运行</li>
+<li>使用psql (postgres的终端连接程序) 连接服务器</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>回忆之前建立的database oeasy</li>
+</ul>
+<h3 id="_3">建立数据库</h3>
+<p><img alt="图片描述" src="images/uid1190679-20211120-1637413460340.png" /></p>
+<ul>
+<li>有了数据库</li>
+<li>就相当于有了厨房</li>
+<li>还需要装食材的容器</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220521-1653121693717.png" /></p>
+<ul>
+<li>需要建表</li>
+</ul>
+<h3 id="_4">建表</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220521-1653121868313.png" /></p>
+<ul>
+<li>我们在oeasy这个数据库里面建了表</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220521-1653121644119.png" /></p>
+<ul>
+<li>准备好食材的容器</li>
+</ul>
+<h3 id="_5">插入数据</h3>
+<ul>
+<li>并且插入数据</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220521-1653121885451.png" /></p>
+<ul>
+<li>备好食材</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220521-1653121927301.png" /></p>
+<h3 id="_6">查询</h3>
+<p><img alt="图片描述" src="images/uid1190679-20211120-1637414088489.png" /></p>
+<ul>
+<li>我们来查询一下</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220521-1653122140253.png" /></p>
+<ul>
+<li>大师傅根据食材来产出内容</li>
+<li>使用psql查询数据一点问题没有</li>
+<li>不过重启之后我这些数据库啥的都没了</li>
+<li>我可以自己把这个流程做个批处理么？</li>
+<li>以后只要运行这个批处理一下子就都能恢复了</li>
+</ul>
+<h3 id="sql">sql文件</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220717-1658022906539.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">oeasy</span><span class="p">;</span>
+<span class="err">\</span><span class="k">c</span><span class="w"> </span><span class="n">oeasy</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">urls</span><span class="p">(</span>
+<span class="w">    </span><span class="n">topic</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">url</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="p">);</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span>
+<span class="w">    </span><span class="n">urls</span><span class="p">(</span><span class="n">topic</span><span class="p">,</span><span class="n">url</span><span class="p">)</span>
+<span class="k">VALUES</span>
+<span class="w">    </span><span class="p">(</span><span class="s1">'sina'</span><span class="p">,</span><span class="s1">'http://sina.com'</span><span class="p">),</span>
+<span class="w">    </span><span class="p">(</span><span class="s1">'sohu'</span><span class="p">,</span><span class="s1">'http://sohu.com'</span><span class="p">),</span>
+<span class="w">    </span><span class="p">(</span><span class="s1">'netease'</span><span class="p">,</span><span class="s1">'http://163.com'</span><span class="p">)</span>
+<span class="p">;</span>
+</code></pre></div>
+
+<ul>
+<li>然后把这个文件放在Code下</li>
+<li>可以把这个数据库语句放到本地来备份</li>
+<li>下次通过这个sql就可以一把恢复数据库了 </li>
+<li>这其实是一个备货的过程</li>
+</ul>
+<h3 id="_7">备货</h3>
+<ul>
+<li>数据库结构、表结构、数据都是我们的各种食材</li>
+<li>有食材才能做饭炒菜</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220718-1658116050436.png" /></p>
+<ul>
+<li>管着这一切仓库结构和食材的是</li>
+<li>postgres</li>
+<li>是数据库引擎</li>
+<li>具体来说什么是引擎呢？</li>
+</ul>
+<h3 id="_8">引擎</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220501-1651358775158.png" /></p>
+<ul>
+<li>引擎(engine)也叫发动机</li>
+<li>能够让一个火车动起来的主动力来源</li>
+<li>各种引擎<ul>
+<li>搜索引擎</li>
+<li>游戏引擎</li>
+<li>渲染引擎</li>
+</ul>
+</li>
+<li>玩引擎的人是什么人呢？</li>
+</ul>
+<h3 id="_9">工程师</h3>
+<ul>
+<li>engineer</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220501-1651357965424.png" /></p>
+<ul>
+<li>这些搞engine的人<ul>
+<li>数据库工程师</li>
+<li>系统工程师</li>
+<li>电气工程师</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220501-1651359321990.png" /></p>
+<ul>
+<li>他们玩的是不同的engine<ul>
+<li>形成了专业术语、行业</li>
+<li>甚至是俗语</li>
+</ul>
+</li>
+</ul>
+<h3 id="steam">steam成语</h3>
+<ul>
+<li>run out of steam<ul>
+<li>to suddenly lose the energy or interest to continue doing what you are doing</li>
+<li>精疲力竭，丧失热情</li>
+<li>当锅炉的火太低时，就可能难以产生蒸汽了，因此蒸汽机就会逐渐减速直至停止</li>
+<li>后来人们把这句习语引申到人身上，比喻人像蒸汽机这种情况一样，没有精力，精疲力尽</li>
+<li>甚至变成了铅字</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220817-1660721929033.png" /></p>
+<ul>
+<li>let off steam<ul>
+<li>to do or say something that helps you to get rid of strong feelings or energy</li>
+<li>释放精力，发泄怒气，宣泄感情</li>
+</ul>
+</li>
+</ul>
+<h3 id="_10">不同工程专业</h3>
+<ul>
+<li>各种engineering<ul>
+<li>电子工程</li>
+<li>车辆工程</li>
+<li>软件工程</li>
+<li>数据工程</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220501-1651359804781.jpg" /></p>
+<ul>
+<li>如何理解通过servlet链接postgres</li>
+</ul>
+<h3 id="engine">engine</h3>
+<ul>
+<li>我们现在就是数据库工程师</li>
+<li>需要选择一个数据库引擎</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220501-1651360247590.png" /></p>
+<ul>
+<li>我们选择postgresql数据库</li>
+<li>然后就要想办法让这个引擎运行起来</li>
+<li>也就是找这个引擎(engine)的驱动(driver)</li>
+<li>使用这个驱动driver就可以驱动postgres数据库这个数据库引擎</li>
+<li>让这个程序能跑起来</li>
+</ul>
+<h2 id="_11">回顾</h2>
+<ul>
+<li>我们设置了postgres引擎</li>
+<li>添加了<ul>
+<li>数据库</li>
+<li>数据表</li>
+<li>数据</li>
+</ul>
+</li>
+<li>但是这一切都是在postgres的客户端psql上完成的</li>
+<li>那我可以使用java来读写postgres数据库中的数据么？</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220717-1658022536351.gif" /></p>
+    </div>
+</body>
+</html>

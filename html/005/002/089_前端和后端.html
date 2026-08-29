@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：前端和后端，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解前端和后端。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 前端和后端">
+    <meta property="og:title" content="oeasy Linux系统教程：前端和后端，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解前端和后端。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="_1">前端和后端</h1>
+<h2 id="_2">我们来回顾一下 😌</h2>
+<ul>
+<li>我们上次搭建了debug的开发环境<ul>
+<li>可以在程序里面向日志中输出debug相关信息</li>
+<li>这些logs都在后端(后台)</li>
+<li>servlet源程序也在后端(后台)</li>
+<li>web.xml是后端程序路由的核心</li>
+</ul>
+</li>
+<li>可是<ul>
+<li>究竟什么是后端呢？🤔</li>
+</ul>
+</li>
+<li>这怎么理解呢？</li>
+</ul>
+<h3 id="_3">客户与堂倌</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220510-1652136095930.png" /></p>
+<ul>
+<li>客户(client)来到饭馆</li>
+<li>堂倌(server)进行服务<ul>
+<li>堂倌负责招呼客人</li>
+<li>哪些是散座</li>
+<li>四人一起的不能安排在八人的大桌</li>
+<li>谁有什么朋友</li>
+<li>爱坐什么位置</li>
+<li>还有处理各种异常情况</li>
+<li>比如收保护费的</li>
+</ul>
+</li>
+<li>所以说<ul>
+<li>一堂、二柜、三灶、四案</li>
+<li>堂倌是多么重要</li>
+</ul>
+</li>
+</ul>
+<h3 id="_4">服务器浏览器</h3>
+<ul>
+<li>今天的server服务器也和堂倌一样<ul>
+<li>明确客人的需求(request)</li>
+<li>提供客人的菜品(response)</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220505-1651719823609.png" /></p>
+<ul>
+<li>这个Clinet/Server的结构是从什么时候开始有的呢？</li>
+</ul>
+<h3 id="server">早期Server</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220505-1651726292379.png" /></p>
+<ul>
+<li>早期计算资源非常宝贵</li>
+<li>只有主机具有算力</li>
+<li>其他的人使用的都是tty(电传打字机)</li>
+<li>那个时候的结构就是Client/Host<ul>
+<li>Host主机也就是Server服务器</li>
+</ul>
+</li>
+</ul>
+<h3 id="_5">后端</h3>
+<ul>
+<li>修改OeasyServlet.java</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220519-1652929142561.png" /></p>
+<ul>
+<li>然后保存并编译<ul>
+<li>w|!javac %</li>
+</ul>
+</li>
+</ul>
+<h3 id="_6">重启服务器</h3>
+<p><img alt="图片描述" src="images/uid1190679-20211114-1636885349653.png" /></p>
+<ul>
+<li>重启tomcat</li>
+</ul>
+<h3 id="_7">浏览器观察</h3>
+<p><img alt="图片描述" src="images/uid1190679-20211114-1636885445484.png" /></p>
+<ul>
+<li>所有后端的运算过程我们都看不见</li>
+<li>只能看到最终输出的结果</li>
+<li>这就是把计算量放到了后端</li>
+<li>和后端相对的是前端</li>
+<li>那什么又是前端呢？</li>
+</ul>
+<h3 id="_8">前端</h3>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">"zh"</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">"Content-Type"</span> <span class="na">content</span><span class="o">=</span><span class="s">"text/html; charset=utf-8"</span><span class="p">/&gt;</span>
+        <span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">"text/javascript"</span><span class="p">&gt;</span>
+<span class="w">            </span><span class="kd">function</span><span class="w"> </span><span class="nx">init</span><span class="p">(){</span>
+<span class="w">                </span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">innerHTML</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"hello front!"</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">body</span> <span class="na">onload</span><span class="o">=</span><span class="s">"init()"</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<ul>
+<li>我们可以在oeasy这个web-app的根下</li>
+<li>写这样一个文件front-end.html</li>
+</ul>
+<h3 id="_9">浏览</h3>
+<p><img alt="图片描述" src="images/uid1190679-20211114-1636894633377.png" /></p>
+<ul>
+<li>可以看到body里面本来没有内容</li>
+<li>最终的输出结果来自于前端的js脚本</li>
+<li>这一切都发生在浏览器端</li>
+<li>是浏览器下载了前端脚本</li>
+<li>并且在前端执行的</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20211114-1636895273769.png" /></p>
+<ul>
+<li>前端的控制流程完全可见</li>
+</ul>
+<h3 id="_10">前后端的共性</h3>
+<p><img alt="图片描述" src="images/uid1190679-20211114-1636895418986.png" /></p>
+<p><img alt="图片描述" src="images/uid1190679-20211114-1636895457581.png" /></p>
+<ul>
+<li>不论前端还是后端<ul>
+<li>都是浏览器发请求requests</li>
+<li>服务器接收并返回响应response</li>
+<li>最终在浏览器里面查看渲染后的最终结果</li>
+</ul>
+</li>
+<li>那前后端的区别是什么呢？</li>
+</ul>
+<h3 id="_11">前后端的区别</h3>
+<ul>
+<li>前端<ul>
+<li>浏览器(客户)</li>
+<li>负责发送请求(requests)</li>
+<li>负责接收响应(response)</li>
+<li>主要靠javascript等前端代码执行前端动画</li>
+<li>前端代码浏览器里面都能看到</li>
+</ul>
+</li>
+<li>后端    <ul>
+<li>服务器(堂倌)</li>
+<li>负责接收请求(requests)</li>
+<li>负责发送响应(response)</li>
+<li>主要靠java、python、php等服务器语言在服务器执行</li>
+<li>后端代码在浏览器里面看不到</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210831-1630412050376.png" /></p>
+<ul>
+<li>发送和接收都有相应的规则<ul>
+<li>用的规则就是协议</li>
+</ul>
+</li>
+</ul>
+<h3 id="_12">协议</h3>
+<ul>
+<li>我们用的是http协议       <ul>
+<li>发请求</li>
+<li>接响应</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220515-1652619858891.png" /></p>
+<ul>
+<li>http协议处于最高的应用层<ul>
+<li>下层的基础就是tcp/ip</li>
+<li>tcp/ip下面基于以太网协议和wifi协议</li>
+<li>底层协议都被抽象了</li>
+<li>我们只关心发送请求和接收响应就可以了</li>
+</ul>
+</li>
+<li>我们总结一下吧</li>
+</ul>
+<h3 id="_13">总结 🤨</h3>
+<ul>
+<li>这次了解了 <ul>
+<li>什么是后端</li>
+<li>什么又是前端？🤔</li>
+</ul>
+</li>
+<li>前端<ul>
+<li>负责发送请求(requests)</li>
+<li>负责接收响应(response)</li>
+</ul>
+</li>
+<li>后端<ul>
+<li>负责接收请求(requests)</li>
+<li>负责发送响应(response)</li>
+</ul>
+</li>
+<li>可是为什么要分出前后端呢？🤔</li>
+<li>下次再说！👋</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220505-1651720659939.png" /></p>
+    </div>
+</body>
+</html>

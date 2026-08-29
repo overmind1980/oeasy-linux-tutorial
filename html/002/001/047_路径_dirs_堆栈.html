@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：路径堆栈，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解路径 dirs 堆栈。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 路径, dirs, 堆栈, 路径堆栈">
+    <meta property="og:title" content="oeasy Linux系统教程：路径堆栈，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解路径 dirs 堆栈。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="_1">路径堆栈</h1>
+<h2 id="_2">回忆</h2>
+<ul>
+<li>上次研究了 <ul>
+<li>realpath<ul>
+<li>可以将相对路径输出为绝对路径</li>
+</ul>
+</li>
+<li>find<ul>
+<li>可以根据文件名来查询文件</li>
+<li>通配符有两个<ul>
+<li>
+<ul>
+<li></li>
+</ul>
+</li>
+<li>?</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>路径好多好复杂<ul>
+<li>可以把曾经进入过的路径记录下来吗？</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20221231-1672495036313.png" /></p>
+<h3 id="_3">用户文件夹~</h3>
+<ul>
+<li>~就是当前用户的用户文件夹</li>
+<li>当前用户是shiyanlou</li>
+<li>用户文件夹是<ul>
+<li>/home/shiyanlou</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220914-1663150708359.png" /></p>
+<ul>
+<li>cd ~ <ul>
+<li>可以进入用户文件夹</li>
+</ul>
+</li>
+<li>ls ~<ul>
+<li>可以查看~下的文件和文件夹</li>
+</ul>
+</li>
+</ul>
+<h3 id="-">上一个文件夹 -</h3>
+<ul>
+<li>
+<ul>
+<li>就是上一个路径</li>
+</ul>
+</li>
+<li>就是cd之前的路径</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220914-1663150830017.png" /></p>
+<ul>
+<li>这样很容易来回跳转</li>
+<li>但是很久之前的路径找不到了怎么办？</li>
+</ul>
+<h3 id="dirs">dirs</h3>
+<ul>
+<li>我们可以试一下这个路径堆栈</li>
+<li>dirs可以查询目前路径堆栈中所有的路径</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220914-1663151624187.png" /></p>
+<ul>
+<li>可以支持绝对路径么？</li>
+</ul>
+<h3 id="_4">绝对路径</h3>
+<ul>
+<li>尝试</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220914-1663151694787.png" /></p>
+<ul>
+<li>绝对路径也是支持的</li>
+<li>通过这个路径堆栈如何调转呢？</li>
+</ul>
+<h3 id="_5">跳转</h3>
+<ul>
+<li>可以用编号来跳转</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220914-1663151764021.png" /></p>
+<ul>
+<li>那如何调整路径堆栈呢？</li>
+</ul>
+<h3 id="popd">popd弹栈</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220914-1663151864064.png" /></p>
+<ul>
+<li>可以把前面的路径删除掉</li>
+<li>如果我想只删除某个路径呢？</li>
+</ul>
+<h3 id="_6">指定路径删除</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220914-1663152037191.jpg" /></p>
+<ul>
+<li>可以删除指定路径<ul>
+<li>1号路径autumn</li>
+</ul>
+</li>
+</ul>
+<h3 id="_7">总结</h3>
+<ul>
+<li>我们这次研究了路径堆栈<ul>
+<li>dirs</li>
+<li>pushd</li>
+<li>popd</li>
+</ul>
+</li>
+<li>可以控制一个路径堆栈</li>
+<li>这样跳转的时候就可以快速进行跳转</li>
+<li>不用来回来打路径了</li>
+<li>可以文件夹和文件可以复制么?🤔</li>
+<li>下次再说👋</li>
+</ul>
+    </div>
+</body>
+</html>

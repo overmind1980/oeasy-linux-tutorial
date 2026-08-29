@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：我在哪，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解我在哪 pwd。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖我们如何在各个文件夹之间任意跳跃呢？等内容，搜索oeasy即可学习。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 我在哪, pwd">
+    <meta property="og:title" content="oeasy Linux系统教程：我在哪，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解我在哪 pwd。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖我们如何在各个文件夹之间任意跳跃呢？等内容，搜索oeasy即可学习。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="_1">我在哪？</h1>
+<h2 id="_2">回忆上次内容 😌</h2>
+<ul>
+<li>我们上次研究了三大发行版家族<ul>
+<li>debian</li>
+<li>红帽</li>
+<li>suse</li>
+</ul>
+</li>
+<li><code>ls</code><ul>
+<li>是<code>list</code>的意思</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>ls<span class="w"> </span>/etc/*release
+cat<span class="w"> </span>/etc/*release
+</code></pre></div>
+
+<ul>
+<li><code>cat</code> <ul>
+<li>是 <code>concatenate</code> 的命令的缩写</li>
+</ul>
+</li>
+<li><code>/etc/*release</code> <ul>
+<li>是参数</li>
+<li>指的是根（<code>root</code>）下的<ul>
+<li>etc 文件夹下的<ul>
+<li>所有以 <code>release</code> 结尾的文件</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>整个命令是要把根（<code>root</code>）下的 <ul>
+<li><code>etc</code> 文件夹下的<ul>
+<li>所有以 <code>release</code> 结尾的文件内容</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>拼合输出</li>
+<li>这样我们就知道当前发行版的版本了。👍</li>
+<li>那我怎么知道我目前在哪呢？🤔</li>
+</ul>
+<h3 id="_3">做起来</h3>
+<ul>
+<li><strong>我们上次列出了关于发行版详细信息文件的位置。</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code>ls<span class="w"> </span>/etc/*release
+</code></pre></div>
+
+<p><img alt="图片描述" src="images/uid1190679-20210909-1631157062687.png" /></p>
+<ul>
+<li>
+<p>这样我们就可以得到</p>
+<ul>
+<li>当前发行版的详细信息了 🤗</li>
+</ul>
+</li>
+<li>
+<p>我们可以跳跃到<code>/etc</code> 那个位置上么？🤔</p>
+</li>
+</ul>
+<h3 id="hop">跳跃hop</h3>
+<p><strong>我们如何在各个文件夹之间任意跳跃呢？</strong></p>
+<ul>
+<li><code>cd</code> <ul>
+<li><code>c</code>hange <code>d</code>irectory` </li>
+<li>改变文件夹。</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/etc
+ls<span class="w"> </span>*release
+cat<span class="w"> </span>*release
+</code></pre></div>
+
+<ul>
+<li>cd /etc <ul>
+<li>把当前文件夹</li>
+<li>跳到 <code>/etc</code>（根下的 etc 下）</li>
+</ul>
+</li>
+<li>ls *release <ul>
+<li>查看当前目录下所有以 release 结尾文件</li>
+</ul>
+</li>
+<li>cat *release <ul>
+<li>把所有以 release 结尾的文件内容合并输出</li>
+</ul>
+</li>
+<li><strong>我们如何知道当前在什么文件夹下呢？</strong>🤔</li>
+</ul>
+<h3 id="pwd">pwd 的用法</h3>
+<ul>
+<li>
+<p><code>pwd</code></p>
+<ul>
+<li><code>p</code>rint <code>w</code>orking <code>d</code>irectory </li>
+<li>输出当前文件夹</li>
+</ul>
+</li>
+<li>
+<p>比如</p>
+</li>
+<li>这次我们跳到根下的 <code>/boot</code> 文件夹</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/boot
+ls
+<span class="nb">pwd</span>
+</code></pre></div>
+
+<h3 id="boot">boot 的用法</h3>
+<ul>
+<li><strong>这个 <code>boot</code> 文件夹是干什么的呢？</strong>🤔</li>
+</ul>
+<p><img alt="Image text" src="images/bootstrap.png" /></p>
+<ul>
+<li>boot 是靴子<ul>
+<li>bootstrap 是靴子后边的带子 </li>
+<li>功能相当于鞋拔子</li>
+</ul>
+</li>
+</ul>
+<h4 id="_4">在计算机系统中</h4>
+<ul>
+<li>boot 是启动<ul>
+<li>bootstrap 是引导程序</li>
+<li>怎么启动的呢？</li>
+<li>首先是从读硬盘开始的</li>
+</ul>
+</li>
+</ul>
+<h3 id="_5">硬盘</h3>
+<ul>
+<li>那我们是如何读硬盘的呢？🤔<ul>
+<li>硬盘本身是存储0101之类的数据</li>
+<li>而且需要驱动起来</li>
+<li>但是系统都没有加载哪里来的驱动？</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210909-1631157650603.png" /></p>
+<h3 id="boot_1">启动 boot</h3>
+<ul>
+<li>是这样的...🤭</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220326-1648293157048.png" /></p>
+<ol>
+<li>关机状态中，内核和整个系统最开始在硬盘里</li>
+<li>引导程序通过 cpu 把内核从硬盘的 /boot 目录加载到内存中</li>
+<li>cpu 开始执行内存中的内核(kernel)对应的指令</li>
+<li>内核(kernal)完成初始化</li>
+<li>内核接管了系统资源（cpu、内存、外设）</li>
+<li>操作系统完成启动过程</li>
+<li>进入某个壳(shell)</li>
+<li>等待下一步输入给壳的指令</li>
+</ol>
+<p><img alt="图片描述" src="images/uid1190679-20220326-1648293939639.png" /></p>
+<h3 id="_6">壳子</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220326-1648293230011.png" /></p>
+<ul>
+<li>系统原来装在裸金属之上<ul>
+<li>裸金属(Bare Metal) 是 直接的硬件</li>
+<li>内核(kernel) 让硬件有了灵魂</li>
+<li>在此之上 可以运行shell</li>
+</ul>
+</li>
+<li>我们运行的是什么shell?</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220326-1648294431632.png" /></p>
+<ul>
+<li>默认的是zsh<ul>
+<li>当然我们可以改成bash</li>
+<li>这些shell之间是什么关系？</li>
+</ul>
+</li>
+</ul>
+<h3 id="shell">shell</h3>
+<ul>
+<li>各种shell<ul>
+<li>是各种壳</li>
+<li>是我们用户间接通过操作核的界面</li>
+<li>操作核的目的是控制硬件进行io读写</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220326-1648293259752.png" /></p>
+<ul>
+<li>各种各样的用户(user)<ul>
+<li>通过各种各样的壳(shell)<ul>
+<li>在系统上运行各种各样的程序</li>
+<li>对于存储器进行运算和读写操作</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220326-1648293208117.png" /></p>
+<h3 id="_7">启动之后</h3>
+<ul>
+<li>
+<p>shell上有命令要求运行某个程序</p>
+</li>
+<li>
+<p>分配内存</p>
+</li>
+<li>把程序从硬盘加载到内存中</li>
+<li>分配 cpu 资源去执行程序</li>
+</ul>
+<h2 id="_8">内存</h2>
+<h3 id="_9">什么是内存 🤔</h3>
+<ul>
+<li><strong>内存也称主存 Main Memory</strong></li>
+<li>
+<p>内存是能够直接被 cpu 操作的存储器</p>
+<ul>
+<li>而硬盘光驱是外存</li>
+<li>外存中的数据只有先调入内存后</li>
+<li>才能被中央处理器访问、处理</li>
+</ul>
+</li>
+<li>
+<p>即使是超级计算机，原理也是一样的</p>
+<ul>
+<li><a href="https://top500.org/lists/top500">世界上前 500 的计算机</a> 中</li>
+<li>90% 以上使用的是 linux </li>
+<li>目前居于第四位的是 <a href="http://www.nsccwx.cn/">无锡国家超算中心</a> 的 <a href="https://top500.org/system/178764/">神威·太湖之光</a>，</li>
+<li>我们可以去看看他有多少的 cpu 核心、内存</li>
+</ul>
+</li>
+</ul>
+<p><img alt="Image text" src="images/shenwei.png" /></p>
+<ul>
+<li>这么多 cpu 核心，这么大内存，而且是国内第一台全部采用国产处理器 <a href="https://baike.baidu.com/item/%E7%94%B3%E5%A8%81%E5%A4%84%E7%90%86%E5%99%A8/9468374">申威 26010</a> 构建的超算！</li>
+<li>使用的内核原理和我们的小服务器也是相通的</li>
+</ul>
+<h3 id="_10">在哪可以查看内存 🤔</h3>
+<ul>
+<li>这个我们要进入根下的/proc 文件夹</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/proc
+cat<span class="w"> </span>meminfo
+<span class="nb">pwd</span>
+</code></pre></div>
+
+<ul>
+<li><strong>proc 是什么意思？</strong>🤔</li>
+</ul>
+<h3 id="proc">proc</h3>
+<ul>
+<li>
+<p>proc 指的是 process（进程）</p>
+<ul>
+<li>进程就是被内核从硬盘加载到内存的</li>
+<li>正在运行着的程序</li>
+</ul>
+</li>
+<li>
+<p>程序不是在硬盘</p>
+<ul>
+<li>然后被加载到内存才算进程么？</li>
+<li>理论上说进程应该在内存啊</li>
+<li>怎么进程又在硬盘里了？</li>
+</ul>
+</li>
+</ul>
+<h3 id="_11">进程备份</h3>
+<ul>
+<li>内存里面的进程<ul>
+<li>会同步到硬盘里面的 pro文件夹做记录</li>
+<li>有的时候内存不够</li>
+<li>还需要一部分硬盘做为虚拟内存使用</li>
+</ul>
+</li>
+<li>那这里到底有什么？</li>
+<li>我们用 ls 来 list 一下 😎</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/proc
+ls
+</code></pre></div>
+
+<p><img alt="图片描述" src="images/uid1190679-20210910-1631236686233.png" /></p>
+<ul>
+<li>那怎么能查看到目前所有的进程呢？</li>
+</ul>
+<h3 id="_12">查看进程</h3>
+<ul>
+<li><code>ps -ef</code></li>
+<li><code>ps</code><ul>
+<li>意思是<code>p</code>rocesse<code>s</code></li>
+<li>查询进程</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20211205-1638711376589.png" /></p>
+<ul>
+<li>我们来分析一下列名<ul>
+<li>UID //用户ID，但输出的是用户名</li>
+<li>PID //进程的ID</li>
+<li>PPID //父进程ID</li>
+<li>C //进程占用CPU的百分比</li>
+<li>STIME //进程启动到现在的时间</li>
+<li>TTY //该进程在那个终端上运行<ul>
+<li>若与终端无关，则显示? </li>
+<li>若为pts/0等，则表示由网络连接主机进程</li>
+</ul>
+</li>
+<li>CMD //命令的名称和参数</li>
+<li>那查看进程有什么用呢？</li>
+</ul>
+</li>
+</ul>
+<h3 id="ps">ps</h3>
+<ul>
+<li>这样就可以知道<ul>
+<li>有没有什么进程偷偷摸摸地占用cpu和内存</li>
+</ul>
+</li>
+<li>还可以看到各个进程占用cpu和内存的情况</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20211205-1638712116786.png" /></p>
+<ul>
+<li>显示当前进程的快照<ul>
+<li>除了上述的方式</li>
+</ul>
+</li>
+<li>除了<code>ps -ef</code>之外<ul>
+<li>还有什么方式查询进程么？</li>
+</ul>
+</li>
+</ul>
+<h3 id="_13">查看进程</h3>
+<ul>
+<li><code>ps aux</code></li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20211205-1638711291007.png" /></p>
+<ul>
+<li>列名解析<ul>
+<li>USER //用户名</li>
+<li>%CPU //CPU百分比</li>
+<li>%MEM //内存的百分比</li>
+<li>VSZ //该进程使用的虚拟內存量（KB）</li>
+<li>RSS //该进程占用的固定內存量（KB）（驻留中页的数量）</li>
+<li>STAT //进程的状态</li>
+<li>START //该进程被触发启动时间</li>
+<li>TIME //该进程实际使用CPU运行的时间</li>
+</ul>
+</li>
+<li>其中STAT有如下几种状态<ul>
+<li>这些缩写都是什么意思呢？</li>
+</ul>
+</li>
+</ul>
+<h3 id="stat">STAT</h3>
+<ul>
+<li>ps --help<ul>
+<li>查询帮助</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20211205-1638711890503.png" /></p>
+<ul>
+<li>缩写含义<ul>
+<li>D //无法中断的休眠状态（通常 IO 的进程）；</li>
+<li>R //正在运行可中在队列中可过行的；</li>
+<li>S //处于休眠状态；</li>
+<li>T //停止或被追踪；</li>
+<li>W //进入内存交换 （从内核2.6开始无效）；</li>
+<li>X //死掉的进程 （基本很少见）；</li>
+<li>Z //僵尸进程；</li>
+<li>&lt; //优先级高的进程</li>
+<li>N //优先级较低的进程</li>
+<li>L //有些页被锁进内存；</li>
+<li>s //进程的领导者（在它之下有子进程）；</li>
+<li>l //多线程，克隆线程(使用 CLONE_THREAD, 类似 NPTL pthreads)</li>
+<li><code>+ //位于后台的进程组</code></li>
+</ul>
+</li>
+<li>上述的这些进程和/proc里的文件夹有关系吗？</li>
+</ul>
+<h3 id="_14">文件夹</h3>
+<ul>
+<li>我们可以发现有些蓝色的数字对应的文件夹</li>
+<li>这些蓝色数字文件夹对应着进程</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220831-1661942382938.jpg" /></p>
+<ul>
+<li>
+<p>这里我们可以发现一些好像能看懂的单词</p>
+</li>
+<li>
+<p>发现：</p>
+</li>
+<li>version</li>
+<li>dmazoneinfo</li>
+<li>cpuinfo</li>
+<li>这些文件里面有什么信息呢？</li>
+</ul>
+<h3 id="_15">总结</h3>
+<ul>
+<li>我们这次了解路径操作<ul>
+<li>cd</li>
+<li>pwd</li>
+</ul>
+</li>
+<li>找到进程文件夹<ul>
+<li>proc</li>
+</ul>
+</li>
+<li>还了解了进程观察<ul>
+<li>ps -ef</li>
+<li>ps aux</li>
+</ul>
+</li>
+<li>进程文件夹里面有些看得懂的单词</li>
+<li>version</li>
+<li>dmazoneinfo</li>
+<li>cpuinfo</li>
+<li>这里面是什么？</li>
+<li>看看去？</li>
+<li>走！🤪</li>
+</ul>
+    </div>
+</body>
+</html>

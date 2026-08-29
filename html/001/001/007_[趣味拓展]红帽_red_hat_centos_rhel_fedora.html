@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：查看发行版 distro，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解趣味拓展 红帽 red hat centos rhel fedora。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 趣味拓展, 红帽, red, hat, centos, 查看发行版">
+    <meta property="og:title" content="oeasy Linux系统教程：查看发行版 distro，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解趣味拓展 红帽 red hat centos rhel fedora。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="distro">查看发行版 distro</h1>
+<h2 id="_1">回忆上次内容 😌</h2>
+<ul>
+<li>
+<ul>
+<li>我们使用</li>
+<li>uname -a</li>
+<li>可以查看系统详细信息</li>
+<li>除了内核之外</li>
+<li>还有发行版</li>
+</ul>
+</li>
+<li>研究了linux发行版<ul>
+<li>distro</li>
+</ul>
+</li>
+<li>研究了Debian家族<ul>
+<li>以及ubuntu</li>
+</ul>
+</li>
+<li>ubuntu来自于canonical(经典)公司</li>
+<li>这个公司怎么挣钱呢？🤔<ul>
+<li>那资金从哪里来？</li>
+</ul>
+</li>
+</ul>
+<h3 id="_2">现金来源</h3>
+<ul>
+<li>Canonical 公司的现金主要来源于</li>
+<li>
+<p>服务器集群管理工具 Landscape 的服务支持</p>
+<ul>
+<li>oem 设备的预装系统费用</li>
+<li>Ubuntu 软件中心的付费位</li>
+<li>代码托管平台 launchpad.net 服务费用</li>
+<li>亚马逊云的相关广告</li>
+<li>Ubuntu 手机预装软件收费</li>
+<li><a href="https://sourceforge.net/projects/uck/">甚至 CD 包内容都可以自己定制</a></li>
+</ul>
+</li>
+<li>
+<p>Ubuntu定位是</p>
+<ul>
+<li>easy-to-use Linux desktop</li>
+<li>好用的linux桌面</li>
+<li>难怪我们的实验楼选这个</li>
+</ul>
+</li>
+<li>
+<p>Ubuntu 是非常流行的发行版</p>
+<ul>
+<li>整体上来说善于推广</li>
+<li>比较讨巧</li>
+</ul>
+</li>
+</ul>
+<h3 id="logo">logo</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220831-1661937048899.png" /></p>
+<ul>
+<li>Ubuntu 是 Canonical 公司</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220831-1661937060164.png" /></p>
+<ul>
+<li>在 debian 稳定版 (stable) 基础上做出的发行版</li>
+<li>私营公司做开源软件为什么许的呢？</li>
+</ul>
+<h3 id="_3">开源和商业</h3>
+<ul>
+<li>开源和商业并不是非黑即白的<ul>
+<li>ubuntu 在免费的debian的基础上开发了收费的版本</li>
+<li>收费有利于市场扩张</li>
+<li>增大份额</li>
+<li>有助于debian家族的存在与发展</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220831-1661938119881.png" /></p>
+<ul>
+<li>著名的黑客埃里克·雷蒙德（Eric S. Raymond）曾说<blockquote>
+<p>足够多的眼睛，就可让所有问题浮现。”Linux开放源代码，全世界的程序员都看得到，有什么缺陷和漏洞，很快就会被发现，从而成就了它的稳定性和安全性。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="flavor">风味(Flavor)</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220831-1661937112198.png" /></p>
+<ul>
+<li>ubuntu再派生出各种倾向性的风味distro<ul>
+<li>各种桌面的风味</li>
+<li>面向设计师的<ul>
+<li>Ubuntu Studio</li>
+</ul>
+</li>
+<li>中文风味<ul>
+<li>优麒麟</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>很流行的发行版都基于ubuntu<ul>
+<li>Pop！</li>
+<li>Mint</li>
+</ul>
+</li>
+</ul>
+<h3 id="mint">Mint</h3>
+<ul>
+<li>前十基本都出自debian家族</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220831-1661938842060.png" /></p>
+<ul>
+<li>
+<p>Mint 是基于 Ubuntu 的</p>
+<ul>
+<li>Ubuntu 是基于 Debian 的</li>
+<li>所以 ... Mint 很年轻</li>
+<li>Mint 也是长期霸榜的存在</li>
+<li>收入主要靠 t 恤和赞助</li>
+</ul>
+</li>
+<li>
+<p><strong>你想过做自己的发行版吗？</strong>🤔</p>
+</li>
+</ul>
+<h3 id="deepin">国产 Deepin 深度</h3>
+<h4 id="_4">优点</h4>
+<ul>
+<li>好看，特效非常好，渲染的也非常棒。</li>
+<li>贴合 🇨🇳 国人的使用习惯，有专门的软件商店，轻松安装 QQ、搜狗输入法、WPS 等</li>
+<li>也曾常年前十，靠得住，爱酷炫界面人士可以用</li>
+<li>仓库从 Ubuntu 切换到了 Debian,更稳定</li>
+<li>统信Uos是基于deepin的</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220831-1661938469726.png" /></p>
+<h4 id="_5">缺点</h4>
+<ul>
+<li>绚丽的 图形效果需要占用 cpu 内存<ul>
+<li>不要被眼睛迷住</li>
+<li>忘了其实 Linux 的最关键的是命令行⌨️</li>
+</ul>
+</li>
+</ul>
+<h3 id="_6">深度背景</h3>
+<ul>
+<li>这个发行版背后的公司是武汉深之度科技有限公司<ul>
+<li>成立于 2011 年</li>
+<li>是专注基于 Linux 的操作系统研发与服务的商业公司</li>
+<li>公司的主要产品为深度操作系统</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220831-1661938628347.png" /></p>
+<ul>
+<li>诚迈科技和原来的深之度<ul>
+<li>股权由<ul>
+<li>星辉 360</li>
+<li>深度</li>
+<li>绿盟</li>
+</ul>
+</li>
+<li>合成了新公司</li>
+</ul>
+</li>
+</ul>
+<h3 id="kali">Kali🤪</h3>
+<ul>
+<li>Kali <ul>
+<li>是一个基于 Debian 的 Linux 发行版。</li>
+<li>他在 Debian 的基础上装了好多工具</li>
+<li>把你的笔记本变成黑客工具。</li>
+<li>Kali 可以有效的学习相关知识</li>
+<li>不过要小心：<ul>
+<li>Kali 用的好</li>
+<li>牢饭吃到饱</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210909-1631194786703.png" /></p>
+<ul>
+<li>debian家族就说到这里</li>
+<li>我们看看下一个家族</li>
+</ul>
+<h2 id="red-hat-rhel">Red Hat 家族 Rhel⛑</h2>
+<ul>
+<li>Rhel 就是<ul>
+<li>Red hat enterprise linux</li>
+<li>是最早的商业发行版 <ul>
+<li>1994 出现</li>
+<li>99 年上市</li>
+</ul>
+</li>
+<li>首日收益历史第八</li>
+<li>2012 年 10 亿美元回报</li>
+</ul>
+</li>
+<li>在商用服务器上使用非常多<ul>
+<li>Centos、Fedora、Mandriva 等免费发行版都基于 Rhel 企业版收费版的</li>
+<li>免费版还能基于收费版？</li>
+<li>我们来看看：</li>
+</ul>
+</li>
+</ul>
+<h3 id="fedora">Fedora</h3>
+<ul>
+<li>
+<p><strong>Fedora 是 Rhel 的实验室。</strong></p>
+<ul>
+<li>学了 Fedora 就等于学了 Rhel</li>
+<li>各种靠谱不靠谱的功能都往上招呼</li>
+<li>你可充分的尝鲜</li>
+<li>社区很强大</li>
+</ul>
+</li>
+<li>
+<p>Fedora 一直沿着开源思想之路</p>
+<ul>
+<li>发展</li>
+<li>开放</li>
+<li>测试</li>
+<li>改进</li>
+</ul>
+</li>
+<li>最终稳定下来、靠得住的新特性<ul>
+<li>进入 Rhel</li>
+</ul>
+</li>
+</ul>
+<h3 id="rhel">Rhel红帽本体</h3>
+<ul>
+<li>红帽的名字跟它的创始人有关<ul>
+<li>它的创始人 Marc Ewing 在 cmu 读书的时候</li>
+<li>就以在校园里面帮人解决 Linux 问题而闻名</li>
+</ul>
+</li>
+</ul>
+<p><img alt="Image text" src="images/redhat.jpg" /></p>
+<ul>
+<li>所以当时 cmu 校园里面流传着一句话<ul>
+<li>遇到了 Linux 问题</li>
+<li>就去找那个戴着红帽子的人来解决👍</li>
+<li>MarcEwing 和 Bob Young 一起创建了自己的 Linux 发行版</li>
+<li>并将其命名为红帽。</li>
+</ul>
+</li>
+</ul>
+<h3 id="_7">红帽的共享</h3>
+<ul>
+<li>
+<p>红帽技术很强</p>
+<ul>
+<li>对各种开源技术贡献都很大</li>
+<li>对于内核有很大贡献</li>
+<li>用商业推动各种硬件的 Linux 驱动</li>
+<li>红帽加入 RISC-V 基金会</li>
+<li>红帽有自己的认证</li>
+<li>这个对于从业人员是一个涨工资的说法</li>
+<li>各种教材资料也特别多</li>
+</ul>
+</li>
+<li>
+<p>红帽工作时间可以答疑的那种标准服务 799 美元一年</p>
+<ul>
+<li>高级会员 1299 美元一年</li>
+</ul>
+</li>
+<li>
+<p>当然还有更厉害的企业级别的合作</p>
+<ul>
+<li>总之红帽年收入超过 20 亿美元</li>
+</ul>
+</li>
+<li>
+<p>红帽市值非常高</p>
+<ul>
+<li>已经被 ibm 的 340 亿所收购</li>
+<li>免费的发行版怎么还能基于这么成功的商业公司</li>
+</ul>
+</li>
+<li>不侵权吗？</li>
+</ul>
+<h3 id="centos">Centos</h3>
+<ul>
+<li>Linux 发行版本身是没法收费的<ul>
+<li>因为根据 GPL 协议你必须公开源代码</li>
+<li>你收费了</li>
+<li>别人直接拿源代码自己编译一个用就完了</li>
+</ul>
+</li>
+<li>
+<p>Centos 就是编译之后的 Rhel</p>
+</li>
+<li>
+<p>把开源软件 <strong>Rhel</strong> 编译之后形成的东西</p>
+<ul>
+<li>再做成一个发行版就是 <strong>Centos</strong></li>
+<li>一般来说社区版 Community 开源免费</li>
+<li>企业版 ENTerprise 收费</li>
+</ul>
+</li>
+<li>而 centos 想把强大的企业版功能和免费开源的社区放在一起<ul>
+<li>Centos 都是在对应版本的 Rhel 出来后隔段时间才出的</li>
+<li>Centos 的代码与 Rhel 完全一致</li>
+<li>只是修改为符合开源协议的版本</li>
+<li>以及修改发行版名称和源等内容    </li>
+<li>把收费的组件和客户的支持都去掉了</li>
+</ul>
+</li>
+</ul>
+<h3 id="_8">支持</h3>
+<ul>
+<li>目前centos现状<ul>
+<li>国内云服务器对 Centos 支持很好</li>
+<li>国内的云服务器 Centos 数量居多</li>
+<li>对于运维人员的培训，Centos 居多</li>
+</ul>
+</li>
+<li>Centos 影响力太大<ul>
+<li>红帽把他收购了</li>
+<li>里面有什么交易不知道</li>
+<li>反正 Centos 加入了红帽公司。</li>
+<li>Centos 作为免费的基础部分</li>
+<li>获得大量用户基础和好评</li>
+<li>为 Rhel 占下市场份额</li>
+<li>降低学习成本</li>
+<li>这样的话，Centos 和 Rhel 越来越一致也就很正常了</li>
+</ul>
+</li>
+</ul>
+<h3 id="centos_1">centos 的演化</h3>
+<ul>
+<li>原来centos是rhel的下游<ul>
+<li>很多人都可以免费使用rhel</li>
+<li>但是这样的生态对于rhel没有办法形成反哺</li>
+<li>一些用户反馈和测试无法回馈社区</li>
+<li>而是纯吸血</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210323-1616505242931.jpg" /></p>
+<ul>
+<li>ibm收购红帽之后<ul>
+<li>centos无法提供kpi</li>
+<li>需要centos给rhel有益反馈</li>
+</ul>
+</li>
+</ul>
+<h3 id="_9">最新变化</h3>
+<ul>
+<li>这样会引来更多的进一步开发</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210323-1616505610678.jpg" /></p>
+<ul>
+<li>这样centos就可以进行版本测试<ul>
+<li>回馈社区了</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210909-1631156582842.png" /></p>
+<h2 id="suse">Suse 家族</h2>
+<h3 id="susesus">Suse[ˈsuːsə]</h3>
+<ul>
+<li>
+<p>Suse 是德国 🇩🇪 SUSE Linux AG 公司发行维护的 Linux 发行版</p>
+<ul>
+<li>是属于此公司的注册商标</li>
+<li>第一个版本出现在 1994 年年初</li>
+<li>2004 年这家公司被 Novell 公司收购</li>
+</ul>
+</li>
+<li>
+<p>Suse 最早基于 slackware, 后来就不是了</p>
+<ul>
+<li>公司位于德国</li>
+<li>代码严谨，质量高。</li>
+<li>华为、中兴、腾讯背书</li>
+<li>不太重视中国市场</li>
+<li>openSUSE 是 Suse 的社区版本</li>
+</ul>
+</li>
+</ul>
+<h3 id="linux">其他Linux</h3>
+<ul>
+<li>Google 的安卓</li>
+<li>三星的 Tizen</li>
+<li>Ubuntu touch📱</li>
+<li>Lg 的 webos</li>
+<li>Firefox OS🦊</li>
+<li>太多了</li>
+</ul>
+<h4 id="unixunix-like">也还有其他类 UNIX（Unix-like）系统 🖥</h4>
+<ul>
+<li>UNIX</li>
+<li>Bsd</li>
+<li>
+<p>Solaris</p>
+</li>
+<li>
+<p>那我们怎么才能知道当前发行版的版本呢？</p>
+</li>
+</ul>
+<h3 id="_10">版本号</h3>
+<h4 id="_11">首先要知道发行版的版本号在哪里</h4>
+<div class="highlight"><pre><span></span><code>ls
+</code></pre></div>
+
+<ul>
+<li><code>ls</code> 就是 <code>list</code>列表 命令<ul>
+<li>列出目录下有什么</li>
+<li>把哪里的文件列表呢？</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>ls<span class="w"> </span>/etc/*release
+</code></pre></div>
+
+<ul>
+<li>release<ul>
+<li>是编译之后的发布版</li>
+</ul>
+</li>
+</ul>
+<h3 id="_12">发现</h3>
+<ul>
+<li><code>ls</code> 是 <code>list</code> 命令的缩写</li>
+<li>
+<p><code>/etc/*release</code> 是 <code>ls</code> 命令的参数</p>
+<ul>
+<li><code>/</code>是整个文件目录的根（<code>root</code>）下<ul>
+<li><code>/etc</code> 是根（<code>root</code>）下的 <code>etc</code> 文件夹下<ul>
+<li><code>/etc/*release</code> 是根（<code>root</code>）下的 <code>etc</code> 文件夹下的</li>
+<li>所有以 <code>release</code> 结尾的文件</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>这条命令就是</p>
+<ul>
+<li>列出根（root）下的 etc 文件夹下的</li>
+<li>所有以 release 结尾的文件</li>
+<li>发布版信息</li>
+</ul>
+</li>
+</ul>
+<p><img alt="Image text" src="images/release.png" /></p>
+<h4 id="_13">我们可以发现有两个文件</h4>
+<ul>
+<li>/etc/lsb-release<ul>
+<li>Linux Standard Base </li>
+</ul>
+</li>
+<li>/etc/os-release<ul>
+<li>Operating System</li>
+</ul>
+</li>
+</ul>
+<h3 id="cat">cat 命令</h3>
+<ul>
+<li>然后我们要看这些文件里面的内容</li>
+<li>cat 就是可以查看文件的内容</li>
+</ul>
+<div class="highlight"><pre><span></span><code>cat<span class="w"> </span>/etc/lsb-release
+cat<span class="w"> </span>/etc/os-release
+</code></pre></div>
+
+<ul>
+<li>我们也可以把这两个拼合在一起查看</li>
+</ul>
+<div class="highlight"><pre><span></span><code>cat<span class="w"> </span>/etc/*release
+</code></pre></div>
+
+<h4 id="_14">发行版解析</h4>
+<p><img alt="图片描述" src="images/uid1190679-20210909-1631156895312.png" /></p>
+<ul>
+<li>我们可以看到当前的发行版是Ubuntu</li>
+<li>ubuntu是基于debian的</li>
+<li>Ubuntu的版本是20.04.2 LTS</li>
+</ul>
+<h3 id="_15">总结</h3>
+<ul>
+<li>我们研究了三大发行版家族<ul>
+<li>debian</li>
+<li>红帽</li>
+<li>suse</li>
+</ul>
+</li>
+<li><code>ls</code><ul>
+<li>是<code>list</code>的意思</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>ls<span class="w"> </span>/etc/*release
+cat<span class="w"> </span>/etc/*release
+</code></pre></div>
+
+<ul>
+<li><code>cat</code> <ul>
+<li>是 <code>concatenate</code> 的命令的缩写</li>
+</ul>
+</li>
+<li><code>/etc/*release</code> <ul>
+<li>是参数</li>
+<li>指的是根（<code>root</code>）下的<ul>
+<li>etc 文件夹下的<ul>
+<li>所有以 <code>release</code> 结尾的文件</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>整个命令是要把根（<code>root</code>）下的 <ul>
+<li><code>etc</code> 文件夹下的<ul>
+<li>所有以 <code>release</code> 结尾的文件内容</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>拼合输出</li>
+<li>这样我们就知道当前发行版的版本了。👍</li>
+<li>那我怎么知道我目前在哪呢？🤔</li>
+<li>下次再说👋🏻</li>
+</ul>
+    </div>
+</body>
+</html>

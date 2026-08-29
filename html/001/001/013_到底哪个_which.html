@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：到底哪个 which，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解到底哪个 which。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖比如我们想知道我们使用的 java 在哪里？等内容，搜索oeasy即可学习。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 到底哪个, which">
+    <meta property="og:title" content="oeasy Linux系统教程：到底哪个 which，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解到底哪个 which。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖比如我们想知道我们使用的 java 在哪里？等内容，搜索oeasy即可学习。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="which">到底哪个 which</h1>
+<h2 id="_1">回忆上次内容 😌</h2>
+<ul>
+<li>上次了解了where<ul>
+<li>可以找到命令的位置</li>
+</ul>
+</li>
+<li>命令有三种位置<ul>
+<li>二进制代码 binary</li>
+<li>源代码 source</li>
+<li>帮助手册 manual</li>
+</ul>
+</li>
+<li>我们真的可以获得 ls 源代码<ul>
+<li>这太棒了！👊 </li>
+</ul>
+</li>
+<li>可是如果有多个版本的命令比如：<ul>
+<li>python2</li>
+<li>python3 </li>
+</ul>
+</li>
+<li>又比如java有很多版本<ul>
+<li>我到底用的是那个版本的 java 呢？</li>
+</ul>
+</li>
+</ul>
+<h3 id="which_1">到底是哪个 which 🤔</h3>
+<p><strong>比如我们想知道我们使用的 java 在哪里？</strong></p>
+<div class="highlight"><pre><span></span><code>whereis<span class="w"> </span>java
+</code></pre></div>
+
+<p><strong>那么我只想查 java 的二进制文件呢？</strong></p>
+<div class="highlight"><pre><span></span><code>whereis<span class="w"> </span>-b<span class="w"> </span>java
+</code></pre></div>
+
+<ul>
+<li>这个-b的意思就是binary</li>
+<li>这些java都可以运行</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210910-1631240367741.png" /></p>
+<ul>
+<li>可是默认的这个java到底是哪个呢？</li>
+</ul>
+<h3 id="_2">到底哪个</h3>
+<ul>
+<li>发现查询结果出现了很多</li>
+<li>分别是什么版本呢?</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210915-1631695546448.png" /></p>
+<ul>
+<li>一样的</li>
+<li>那么我们真正运行的到底是哪个呢？🤔</li>
+</ul>
+<div class="highlight"><pre><span></span><code>which java
+</code></pre></div>
+
+<p><img alt="图片描述" src="images/uid1190679-20210910-1631243062105.png" /></p>
+<ul>
+<li>目前是<ul>
+<li>/usr/lib/jvm/java-8-openjdk-amd64/bin/java</li>
+</ul>
+</li>
+<li>我们比较一下whereis和 which的区别</li>
+</ul>
+<h3 id="_3">区别</h3>
+<ul>
+<li>whereis和which之间的区别是什么呢？<ul>
+<li>whereis 里面包括很多东西 <ul>
+<li>源文件位置</li>
+<li>共享文件</li>
+<li>二进制文件</li>
+<li>帮助等等</li>
+</ul>
+</li>
+<li>which指的就是<ul>
+<li>可以直接运行的二进制文件的位置</li>
+<li>只有一个</li>
+<li>运行哪个就返回哪个</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>我们来看看python</li>
+</ul>
+<h3 id="whereis">whereis</h3>
+<p><img alt="图片描述" src="images/uid1190679-20210910-1631242272306.png" /></p>
+<ul>
+<li>不过这个是2.7的python</li>
+<li>每次想运行的都是python3</li>
+<li>都得多打一个3</li>
+<li>能不能直接python就到python3？</li>
+<li>先看看这python到底是什么</li>
+</ul>
+<h3 id="python3">python3</h3>
+<p><img alt="图片描述" src="images/uid1190679-20210910-1631242567946.png" /></p>
+<ul>
+<li>看起来像一个软连接</li>
+<li>什么是软连接呢？</li>
+</ul>
+<h3 id="_4">软连接</h3>
+<ul>
+<li>软链接又叫符号链接<ul>
+<li>这个文件包含了另一个文件的路径名</li>
+<li>可以是任意文件或目录</li>
+<li>可以链接不同文件系统的文件</li>
+<li>本质上不是可执行文件</li>
+<li>而是一个快捷的链接</li>
+</ul>
+</li>
+<li>硬链接就是一个文件的一个或多个文件名<ul>
+<li>把文件名和计算机文件系统使用的节点号链接起来</li>
+<li>因此我们可以用多个文件名与同一个文件进行链接</li>
+<li>这些文件名可以在同一目录或不同目录</li>
+</ul>
+</li>
+<li>怎么修改软连接呢？</li>
+</ul>
+<h3 id="_5">修改软连接</h3>
+<p><img alt="图片描述" src="images/uid1190679-20210910-1631242499020.png" /></p>
+<ul>
+<li>目前链接到python2.7</li>
+<li>我想把他链接到python3</li>
+<li>python3在哪里呢？</li>
+</ul>
+<h3 id="_6">查看</h3>
+<p><img alt="图片描述" src="images/uid1190679-20210910-1631242944034.png" /></p>
+<ul>
+<li>这样默认python就是python3了</li>
+</ul>
+<h3 id="which_2">which还有什么好玩的</h3>
+<ul>
+<li>
+<p>我们来玩转 which 吧 🤗</p>
+</li>
+<li>
+<p>各种命令都来当 which 的参数</p>
+<ul>
+<li>which pwd</li>
+<li>which uname</li>
+<li>which whatis</li>
+<li>which whereis</li>
+</ul>
+</li>
+<li>
+<p>现在我们有了三个灵魂问题了： ✊</p>
+<ul>
+<li>whatis 你是谁</li>
+<li>whereis 你在哪</li>
+<li>which 到底在哪</li>
+</ul>
+</li>
+<li>
+<p>通过这三个命令我们可以知道</p>
+<ul>
+<li>任何命令的作用、位置</li>
+</ul>
+</li>
+<li>我们给这三个问题起名叫<ul>
+<li><strong>灵魂三问</strong>！👊</li>
+</ul>
+</li>
+</ul>
+<h3 id="_7">灵魂三问</h3>
+<ul>
+<li>接下来我们来对 <code>cat</code> 命令<ul>
+<li>试试这个灵魂三问：</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>whatis<span class="w"> </span>cat
+whereis<span class="w"> </span>cat
+which<span class="w"> </span>cat
+</code></pre></div>
+
+<h3 id="_8">总结</h3>
+<ul>
+<li>有了这三个命令<ul>
+<li>也就是灵魂三问</li>
+<li>我们就可以了解任何命令的基本信息了！</li>
+</ul>
+</li>
+<li>我们再去问问什么命令呢？🤔 </li>
+<li>下次再说！👋</li>
+</ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：本章回顾，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解标志 linuxlogo。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖我们通过之前学的“灵魂三问”来查询：等内容，搜索oeasy即可学习。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 标志, linuxlogo, 本章回顾">
+    <meta property="og:title" content="oeasy Linux系统教程：本章回顾，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解标志 linuxlogo。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 本课程涵盖我们通过之前学的“灵魂三问”来查询：等内容，搜索oeasy即可学习。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="_1">本章回顾</h1>
+<h2 id="_2">我们来回顾一下 😌</h2>
+<ul>
+<li>上次编译安装了俄罗斯方块</li>
+<li>比较两种安装软件的方法<ul>
+<li>编译安装</li>
+<li>apt安装</li>
+</ul>
+</li>
+<li>各有优劣</li>
+<li>我们去下载一些好玩的软件吧？！🤔 </li>
+</ul>
+<h3 id="_3">两种包管理方法</h3>
+<ul>
+<li>dpkg <ul>
+<li>本地包管理</li>
+</ul>
+</li>
+<li>
+<p>apt </p>
+<ul>
+<li>高级包管理</li>
+</ul>
+</li>
+<li>
+<p>我们去搜着玩玩</p>
+</li>
+</ul>
+<h3 id="_4">搜索包</h3>
+<div class="highlight"><pre><span></span><code># 搜索源里面有没有 linuxlogo 这个软件包
+apt search linuxlogo
+</code></pre></div>
+
+<ul>
+<li>搜索这个包</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220901-1662024724718.png" /></p>
+<h3 id="_5">查看包</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># 看看镜像站上面对于这个软件包的描述</span>
+apt<span class="w"> </span>show<span class="w"> </span>linuxlogo
+</code></pre></div>
+
+<ul>
+<li>查看这个包</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220901-1662024793146.png" /></p>
+<ul>
+<li>各种软件包有时候有依赖关系</li>
+</ul>
+<h3 id="_6">依赖关系</h3>
+<p><img alt="图片描述" src="images/uid1190679-20220901-1662024930041.png" /></p>
+<ul>
+<li><code>show</code> 显示开发者 简介 大小 所在的源的位置</li>
+<li>我们可以 <code>apt show apt</code> 看看 apt 的依赖关系</li>
+<li>(A 或 B) 且 C 的关系写作 A | B, C</li>
+<li>我们还是回到主线linuxlogo</li>
+</ul>
+<h3 id="_7">安装包</h3>
+<ul>
+<li>那我们怎么安装他呢？</li>
+<li>查一下手册</li>
+<li>📕 应该是这样：</li>
+</ul>
+<div class="highlight"><pre><span></span><code>apt<span class="w"> </span>install<span class="w"> </span>linuxlogo
+</code></pre></div>
+
+<p><img alt="图片描述" src="images/uid1190679-20220901-1662025043601.png" /></p>
+<ul>
+<li>但是系统提示权限不够</li>
+<li>如何提权限呢？🤔</li>
+</ul>
+<h2 id="_8">权限问题 👺</h2>
+<ul>
+<li>
+<p>权限不够的问题如何解决？ 🤫</p>
+</li>
+<li>
+<p>我目前的用户身份</p>
+<ul>
+<li>不能执行这条命令</li>
+</ul>
+</li>
+<li>谁能执行呢？<ul>
+<li>root!</li>
+</ul>
+</li>
+<li>root 用户是系统最<strong>根本</strong>的用户</li>
+<li>root 用户有权限执行任何命令</li>
+<li>所以如果我们戴上了 root 用户的面具 👺<ul>
+<li>我们就是 root 用户了</li>
+<li>那么我们 👺 也就能执行任何命令啦～</li>
+</ul>
+</li>
+<li>那什么怎么带上面具👺呢？</li>
+</ul>
+<h3 id="_9">戴上面具</h3>
+<ul>
+<li><code>sudo</code> 命令可以让我带上 root 的面具</li>
+<li>像这样：👺</li>
+</ul>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>linuxlogo
+</code></pre></div>
+
+<ul>
+<li>我们使用 sudo 戴上了面具</li>
+<li>然后 apt 成功从源下载软件包并下载到硬盘里</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220901-1662024999601.png" /></p>
+<ul>
+<li>那么这个东西能用吗？🤪 </li>
+<li>我们来试试：</li>
+</ul>
+<h3 id="_10">运行包</h3>
+<div class="highlight"><pre><span></span><code>linuxlogo
+</code></pre></div>
+
+<p><img alt="图片描述" src="images/uid1190679-20220901-1662025392063.png" /></p>
+<ul>
+<li>真的可以看到发行版的 logo!🍥 </li>
+<li>包括了：<ul>
+<li>内核版本</li>
+<li>发行版版本</li>
+<li>编译日期</li>
+<li>cpu 速度</li>
+</ul>
+</li>
+</ul>
+<h3 id="logo">遍历所有的logo</h3>
+<div class="highlight"><pre><span></span><code>for i in {1..30};do linux_logo -f -L $i;sleep 0.5;done
+</code></pre></div>
+
+<ul>
+<li>暗中观察</li>
+</ul>
+<h3 id="_11">类似命令</h3>
+<ul>
+<li>这个screenfetch 和 linuxlogo有点像</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210629-1624976928030.png" /></p>
+<ul>
+<li>那么这个文件放在哪里了呢？</li>
+</ul>
+<h3 id="_12">灵魂三问 🤔</h3>
+<p>我们通过之前学的“灵魂三问”来查询：</p>
+<div class="highlight"><pre><span></span><code>whatis<span class="w"> </span>linuxlogo
+whereis<span class="w"> </span>-b<span class="w"> </span>linuxlogo
+which<span class="w"> </span>linuxlogo
+</code></pre></div>
+
+<ul>
+<li>大家还记得Python版本选择吗？</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220901-1662025483175.png" /></p>
+<ul>
+<li>其实是一个意思</li>
+</ul>
+<h3 id="_13">观察文件</h3>
+<p><img alt="图片描述" src="images/uid1190679-20211017-1634474563456.png" /></p>
+<ul>
+<li>linuxlogo其实也是一个软连接</li>
+<li>最终指向同一个文件夹下的linux_logo</li>
+<li>linux_logo 123K</li>
+</ul>
+<h3 id="_14">运行起来</h3>
+<p><img alt="图片描述" src="images/uid1190679-20210629-1624976863533.png" /></p>
+<ul>
+<li>我们可以查看到 linuxlogo 的硬盘位置<ul>
+<li>想要更多细节可以查询手册～📕</li>
+<li>可以下载吗？🤪可以灵魂三问吗？</li>
+<li>🤪可以手册吗？</li>
+</ul>
+</li>
+<li>🤪玩起来吧！🎲</li>
+</ul>
+<div class="highlight"><pre><span></span><code>man<span class="w"> </span>linuxlogo
+linuxlogo<span class="w"> </span>-F<span class="w"> </span>oeasy
+</code></pre></div>
+
+<ul>
+<li>为什么能够彩色呢？</li>
+<li>查看一下源代码吧</li>
+</ul>
+<h3 id="_15">找到源头</h3>
+<p><img alt="图片描述" src="images/uid1190679-20210910-1631261818922.png" /></p>
+<ul>
+<li>他的版本是5.11-8</li>
+<li>找到他的homepage</li>
+<li>然后进去</li>
+</ul>
+<h3 id="_16">下载</h3>
+<p><img alt="图片描述" src="images/uid1190679-20210910-1631261843641.png" /></p>
+<ul>
+<li>
+<p>下载那个红色的linux.tar.gz文件到本地</p>
+</li>
+<li>
+<p>http://www.deater.net/weave/vmwprod/linux_logo/</p>
+</li>
+<li>
+<p>非会员可以先下载到本地再上传到Code</p>
+</li>
+</ul>
+<h3 id="_17">解压</h3>
+<p><img alt="图片描述" src="images/uid1190679-20210910-1631261928110.png" /></p>
+<ul>
+<li>解压</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220901-1662025824651.png" /></p>
+<ul>
+<li>tar -zxvf  <kbd>Tab</kbd></li>
+</ul>
+<h3 id="_18">打开源文件</h3>
+<p><img alt="图片描述" src="images/uid1190679-20210910-1631261907189.png" /></p>
+<ul>
+<li>vi linux_logo.c</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210910-1631262481224.png" /></p>
+<ul>
+<li>:q!退出</li>
+<li>这个下载方法还是有点麻烦啊</li>
+<li>我能直接下载源文件么？</li>
+</ul>
+<h3 id="_19">更新源</h3>
+<ul>
+<li>先重启系统</li>
+<li>进入到没有linuxlogo的状态</li>
+<li>在shell中用vi打开list文件</li>
+</ul>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>vi<span class="w"> </span>/etc/apt/sources.list
+</code></pre></div>
+
+<ul>
+<li>这里显示的是更新软件的下载源头</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20211017-1634473555693.png" /></p>
+<ul>
+<li>:%s/# deb-src/deb-src/g<ul>
+<li>把 <code># deb-src</code> 更新为 <code>deb-src</code></li>
+<li>去掉对于src源的注释</li>
+</ul>
+</li>
+<li>:wq<ul>
+<li>保存并更新</li>
+</ul>
+</li>
+<li>sudo apt update <ul>
+<li>更新源</li>
+</ul>
+</li>
+</ul>
+<h3 id="_20">下载源文件</h3>
+<ul>
+<li>sudo apt source linuxlogo</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20211017-1634474060864.png" /></p>
+<h3 id="_21">查看下载文件</h3>
+<p><img alt="图片描述" src="images/uid1190679-20211017-1634474113730.png" /></p>
+<ul>
+<li>这里面有c文件</li>
+<li>还有h文件</li>
+<li>linuxlogo的二进制可执行文件是不存在的</li>
+<li>linux_logo的二进制可执行文件也是不存在的</li>
+<li>我们试试编译出linuxlogo的二进制可执行文件</li>
+</ul>
+<h3 id="_22">配置</h3>
+<ul>
+<li>./configure<ul>
+<li>一般用来生成 Makefile，为下一步的编译做准备。</li>
+</ul>
+</li>
+<li>sudo ./configure --prefix=/usr<ul>
+<li>意思是将该软件安装在 /usr 下面</li>
+<li>执行文件就会安装在 /usr/bin <ul>
+<li>而不是默认的 /usr/local/bin</li>
+</ul>
+</li>
+<li>资源文件就会安装在 /usr/share<ul>
+<li>而不是默认的/usr/local/share </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20211017-1634477659579.png" /></p>
+<h3 id="_23">编译并配置</h3>
+<ul>
+<li>sudo make install</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20211017-1634477671468.png" /></p>
+<ul>
+<li>可以看到他在使用gcc编译程序</li>
+</ul>
+<h3 id="_24">运行程序</h3>
+<p><img alt="图片描述" src="images/uid1190679-20211017-1634477693531.png" /></p>
+<ul>
+<li>编译之后的二进制文件送进了/usr/bin</li>
+</ul>
+<h3 id="_25">名字文件</h3>
+<ul>
+<li>cat 打开名字文件</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210910-1631262497840.png" /></p>
+<h3 id="_26">细节</h3>
+<ul>
+<li>vi打开名字文件</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210910-1631263133305.png" /></p>
+<ul>
+<li>看不懂<ul>
+<li>但是隐约感觉到那就是控制颜色的东西</li>
+<li>以后也许能懂</li>
+</ul>
+</li>
+<li>有机会可以去看看oeasy的python教程<ul>
+<li>很适合编程入门</li>
+</ul>
+</li>
+</ul>
+<h3 id="_27">企鹅的由来</h3>
+<ul>
+<li>https://www.landley.net/history/mirror/linux/tux.html</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20240404-1712199822171.png" /></p>
+<h3 id="_28">总结</h3>
+<ul>
+<li>这次研究的是linuxlogo</li>
+<li>可以下载二进制文件</li>
+<li>也可以下载源文件</li>
+<li>apt 有一些 参数<ul>
+<li><code>search</code> <ul>
+<li>查找到你的当前架构是否可以有这个软件包</li>
+</ul>
+</li>
+<li><code>show</code><ul>
+<li>查看软件包的具体细节<ul>
+<li>依赖关系</li>
+<li>所属位置</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>install</code><ul>
+<li>具体安装</li>
+<li>主要有sudo才能得到root权限</li>
+</ul>
+</li>
+<li><code>source</code><ul>
+<li>下载源代码</li>
+<li>可以查看和编译</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>甚至coreutils里面的基本命令的源代码都可以下载</li>
+<li>还有什么好玩的命令吗？🤔</li>
+<li>我们下次再说！👋</li>
+</ul>
+    </div>
+</body>
+</html>

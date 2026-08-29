@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oeasy Linux系统教程：灵魂之问 whatis，零基础系统学习</title>
+    <meta name="description" content="oeasy系统化教程，详解灵魂之问 whatis。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta name="keywords" content="oeasy, Linux教程, Linux命令, Linux入门, 系统管理, Shell脚本, Linux服务配置, 零基础学Linux, oeasy教程, 灵魂之问, whatis">
+    <meta property="og:title" content="oeasy Linux系统教程：灵魂之问 whatis，零基础系统学习">
+    <meta property="og:description" content="oeasy系统化教程，详解灵魂之问 whatis。oeasy系统化Linux系统教程，涵盖命令行操作、文件管理、权限控制、网络服务、数据库配置等核心内容，带你从零掌握Linux系统管理技能。 搜索oeasy，获取全套教程，快速掌握相关技能。">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <div class="container">
+        
+<h1 id="whatis">灵魂之问 whatis</h1>
+<h2 id="_1">回忆上节课 😌</h2>
+<ul>
+<li>我们上次了解路径操作<ul>
+<li>cd</li>
+<li>pwd</li>
+</ul>
+</li>
+<li>找到进程文件夹<ul>
+<li>proc</li>
+</ul>
+</li>
+<li>还了解了进程观察<ul>
+<li>ps -ef</li>
+<li>ps aux</li>
+</ul>
+</li>
+<li>进程文件夹里面有些东西</li>
+<li>version</li>
+<li>dmazoneinfo</li>
+<li>cpuinfo </li>
+<li>接下来咱们用 cat，看看去？</li>
+<li>走！🤪</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220831-1661942382938.jpg" /></p>
+<h3 id="_2">探索</h3>
+<ul>
+<li>我们上次在系统里面乱转</li>
+<li>🤣 </li>
+<li>发现了各种信息各种信息</li>
+<li>比如 <ul>
+<li>cpuinfo</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/proc
+ls
+cat<span class="w"> </span>cpuinfo
+</code></pre></div>
+
+<p><img alt="图片描述" src="images/uid1190679-20211205-1638713413409.png" /></p>
+<ul>
+<li>cpuinfo就是/proc下面的文件</li>
+<li>里面存储cpu的信息</li>
+<li>可以用cat把里面内容输出到标准输出流</li>
+</ul>
+<h3 id="_3">回忆学习过的命令</h3>
+<ul>
+<li>
+<p>回忆一下我们现在总共学了多少命令？😋</p>
+<ul>
+<li>cd</li>
+<li>pwd</li>
+<li>ls</li>
+<li>cat</li>
+<li>uname</li>
+</ul>
+</li>
+<li>
+<p>那Linux 总共有多少条命令呢？🤔</p>
+</li>
+</ul>
+<h3 id="_4">总共</h3>
+<ul>
+<li>
+<ol>
+<li>首先切换到 bash 状态</li>
+</ol>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1">#bash是另一个常用的shell</span>
+bash
+</code></pre></div>
+
+<ul>
+<li>
+<ol>
+<li>连续按两下 <kbd>tab</kbd></li>
+</ol>
+</li>
+<li>
+<p>我们就可以看到所有命令的总量</p>
+<ul>
+<li>大概 1900+ 🤪</li>
+<li>然后他就问你是否都列出来</li>
+<li>选择 yes，一行一行往下看</li>
+<li>这可太多了</li>
+</ul>
+</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20220831-1661942721836.png" /></p>
+<ul>
+<li>我们还是从bash退回到zsh吧</li>
+</ul>
+<h3 id="zsh">zsh</h3>
+<ul>
+<li>使用 <kbd>ctrl</kbd>+<kbd>c</kbd> 退出<ul>
+<li>然后我们用 <b>zsh</b> 切换回到 zsh</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1">#zsh是我们这个环境里面的默认shell</span>
+zsh
+</code></pre></div>
+
+<p><img alt="图片描述" src="images/uid1190679-20220831-1661942766272.png" /></p>
+<h3 id="_5">命令太多，记不下来怎么办？🤔</h3>
+<ul>
+<li>
+<p>用命令去记住命令</p>
+<ul>
+<li>用魔法打败魔法 😎</li>
+</ul>
+</li>
+<li>
+<p><code>whatis</code> 就是我们今天要学的新命令</p>
+<ul>
+<li>顾名思义 <code>whatis</code> </li>
+<li>你是干嘛的？</li>
+</ul>
+</li>
+<li><code>whatis</code> 可以告我们某条命令是干什么用的</li>
+</ul>
+<div class="highlight"><pre><span></span><code>whatis<span class="w"> </span>uname
+</code></pre></div>
+
+<p><img alt="Image text" src="images/whatis.png" /></p>
+<ul>
+<li>这样就可以让 <code>whatis</code> 命令告诉我们命令用法<ul>
+<li>一般结果是英文的</li>
+<li><code>whatis</code> 会用最简单的语言形容该命令</li>
+<li><code>whatis</code> 就像水晶球一样神奇 🥳</li>
+</ul>
+</li>
+</ul>
+<h3 id="_6">其他命令</h3>
+<ul>
+<li>我们再试试用 pwd 发出灵魂之问😎</li>
+</ul>
+<div class="highlight"><pre><span></span><code>whatis<span class="w"> </span><span class="nb">pwd</span>
+</code></pre></div>
+
+<ul>
+<li>这次 <strong>whatis</strong> 的参数是 <code>pwd</code></li>
+<li><strong>whatis</strong> 可以告诉我们 <code>pwd</code> 是输出当前工作路径</li>
+</ul>
+<h3 id="cat">我们再试试 cat 😋</h3>
+<div class="highlight"><pre><span></span><code>whatis<span class="w"> </span>cat
+</code></pre></div>
+
+<ul>
+<li>使用方向键 <kbd>⬆️</kbd> <ul>
+<li>重复上一命令</li>
+</ul>
+</li>
+<li>使用 <kbd>ctrl️</kbd>+<kbd>w</kbd><ul>
+<li>退格一格单词</li>
+</ul>
+</li>
+<li>再输入 cat</li>
+<li>这样我们就得到了 <ul>
+<li><strong>whatis</strong> cat</li>
+<li>cat 是合并输出到屏幕（标准输出流）🥳</li>
+</ul>
+</li>
+</ul>
+<h3 id="_7">灵魂发问 🤪</h3>
+<ul>
+<li>这次烧脑的来了 </li>
+</ul>
+<div class="highlight"><pre><span></span><code>whatis<span class="w"> </span>whatis
+</code></pre></div>
+
+<ul>
+<li>用<b>whatis</b> 可以终极发出灵魂之问</li>
+<li>whatis你自己是干嘛的？</li>
+</ul>
+<p><img alt="图片描述" src="images/uid1190679-20210909-1631160072869.png" /></p>
+<ul>
+<li><strong>whatis</strong> 说我是显示在线手册说明的 😏</li>
+<li>但是<b>whatis</b>稍微有点简略</li>
+<li>能否更详细的查询命令呢？</li>
+<li>咱们下次再说！</li>
+</ul>
+    </div>
+</body>
+</html>
